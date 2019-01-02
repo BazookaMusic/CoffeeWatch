@@ -8,8 +8,10 @@ import { Component, OnInit} from '@angular/core';
 
 export class SearchMapComponent implements OnInit
 {
-  lat: number;
-  lng: number;
+  centerlat: number;
+  centerlng: number;
+  userlat:number= -1.0;
+  userlng:number=-1.0;
 
   constructor() { }
 
@@ -19,8 +21,11 @@ export class SearchMapComponent implements OnInit
     {
       navigator.geolocation.getCurrentPosition(position => 
       {
-        this.lat = position.coords.latitude;
-        this.lng = position.coords.longitude;
+        this.userlat = position.coords.latitude;
+        this.userlng = position.coords.longitude;
+        this.centerlat = position.coords.latitude;
+        this.centerlng = position.coords.longitude;
+
       });
     }
     else
@@ -31,7 +36,7 @@ export class SearchMapComponent implements OnInit
 
   ngOnInit()
   {
-    this.lat = 37.982038;
-    this.lng = 23.730271;
+    this.centerlat = 37.982038;
+    this.centerlng = 23.730271;
   }
 }
