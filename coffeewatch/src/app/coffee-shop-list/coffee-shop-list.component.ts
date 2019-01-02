@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import {CoffeeShop} from '../coffee-shop'
 import {Coffee} from '../coffee'
 import {Review} from '../review'
+import {CoffeeshopsService} from "../coffeeshops.service"
+
 
 @Component({
   selector: 'app-coffee-shop-list',
@@ -12,32 +14,14 @@ import {Review} from '../review'
 
 export class CoffeeShopListComponent implements OnInit {
 
-  coffeeShops: CoffeeShop[] = [];
-  coffeeShop: CoffeeShop;
-
-  coffees: Coffee[] = [];
-  coffee: Coffee;
-
+  coffeeShops:CoffeeShop[];
   reviews: Review[];
   
-  constructor() { }
+  constructor(private coffeeShopsService:CoffeeshopsService) { }
 
   ngOnInit() 
   {
-    this.coffee = new Coffee(1, "Freddo Cappuccino latte moca maciato", "../assets/cap.jpg", 2.80, 4.7, 14, this.reviews);
+    this.coffeeShops=this.coffeeShopsService.getCoffeeShops();
 
-    this.coffees.push(this.coffee);
-    this.coffees.push(this.coffee);
-    this.coffees.push(this.coffee);
-    this.coffees.push(this.coffee);
-    this.coffees.push(this.coffee);
-
-    this.coffeeShop = new CoffeeShop(1, "Mikel", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikel.gr", "1234567890", this.coffees);
-
-    this.coffeeShops[0] = this.coffeeShop; 
-    this.coffeeShops[1] = this.coffeeShop;
-    this.coffeeShops[2] = this.coffeeShop;
-    this.coffeeShops[3] = this.coffeeShop;
-    this.coffeeShops[4] = this.coffeeShop;
   }
 }
