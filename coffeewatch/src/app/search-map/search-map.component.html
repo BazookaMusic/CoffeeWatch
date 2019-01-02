@@ -1,11 +1,16 @@
-<div class="row searchMap">
-  <div class="input-group col-sm-11">
-    <input type="text" class="form-control blackBorder" placeholder="Search for...">
-    <span class="input-group-btn">
-      <button class="btn btn-outline-dark" type="button">Go!</button>
-    </span>
+<div class="appSearchMap">
+  <div class="row searchBar">
+    <div class="input-group col-sm-11">
+        <input type="text" class="form-control blackBorder" placeholder="Αναζήτηση για...">
+        <span class="input-group-btn">
+          <button class="btn searchButton" type="button">Αναζήτηση</button>
+        </span>
+      </div>
+      <a class="findMyLocation col-sm-1" (click)="getLocation()">
+        <img class="img-fluid" src="../assets/findMyLocation.png" width="40" height="40" />
+      </a>
   </div>
-  <a class="col-sm-1" href="/" aria-label="">
-    <img src="../assets/findMyLocation.png" width="40" height="40" class="img-fluid" />
-  </a>
-</div>
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13">
+    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+  </agm-map>
+  </div>

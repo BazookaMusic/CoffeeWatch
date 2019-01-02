@@ -1,0 +1,15 @@
+.table td
+{
+    vertical-align: middle;
+    border: none;
+}
+
+.table
+{
+    margin-bottom: 0;
+}
+
+.iconsCenter
+{
+    text-align:center;
+}

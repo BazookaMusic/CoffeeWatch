@@ -1,10 +1,34 @@
-.searchMap
+.appSearchMap
 {
-    margin-top: 40px;
+     margin-top: 30px;
+     margin-bottom: 25px;
+}
+
+.searchBar
+{
     margin-bottom: 20px;
+}
+
+.searchButton
+{
+    background-color: #cd6133;
+    border-color: #cd6133;
+    color: white;
+    margin-left: 2px;
+}
+
+.findMyLocation
+{
+    padding-left: 0px;
+    cursor: pointer;
 }
 
 .blackBorder
 {
     border-color: #343a40;
+}
+
+agm-map
+{
+    height: 400px;
 }

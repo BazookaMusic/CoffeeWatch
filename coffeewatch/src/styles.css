@@ -30,3 +30,8 @@ html *
 {
    font-family: "Caviar Dreams" !important;
 }
+
+body
+{
+  background-color: #ffeac5 !important;
+}

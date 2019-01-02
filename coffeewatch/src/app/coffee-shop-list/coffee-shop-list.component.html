@@ -1,0 +1,13 @@
+<div class="row">
+  <h2 class="coffeeShopListTitle col-sm-11">Κοντινές Καφετέριες</h2>
+  <a class="mr-0 mr-md-2" routerLink="/">
+    <img src="../assets/filterIcon.png" width="50" height="50" class="img-fluid" />
+  </a>
+</div>
+<div class="">
+  <ul class="">
+    <li *ngFor="let coffeeShopItem of coffeeShops">
+      <app-coffee-shop-preview [coffeeShop]="coffeeShopItem"></app-coffee-shop-preview>
+    </li>
+  </ul>
+</div>
