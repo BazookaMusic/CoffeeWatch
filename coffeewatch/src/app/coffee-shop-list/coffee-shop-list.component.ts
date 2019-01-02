@@ -24,7 +24,7 @@ export class CoffeeShopListComponent implements OnInit {
 
   ngOnInit() 
   {
-    this.coffee = new Coffee(1, "Cappuccino", "../assets/cap.jpg", 2.80, 4.7, 14, this.reviews);
+    this.coffee = new Coffee(1, "Freddo Cappuccino latte moca maciato", "../assets/cap.jpg", 2.80, 4.7, 14, this.reviews);
 
     this.coffees.push(this.coffee);
     this.coffees.push(this.coffee);

@@ -6,3 +6,17 @@
 ul {
   list-style-type: none;
 }
+
+li
+{
+    border: 2px solid #444444;
+    margin: 10px;
+    border-radius: 15px;
+}
+
+hr
+{
+    border-top: 1px solid #444444;
+    margin-top:0;
+    margin-bottom: 1.5rem;
+}

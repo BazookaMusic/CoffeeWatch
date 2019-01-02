@@ -2,11 +2,23 @@
 {
     vertical-align: middle;
     border: none;
+    padding: 0.5rem;
 }
 
 .table
 {
     margin-bottom: 0;
+}
+
+.table .table
+{
+    background-color: transparent;
+}
+
+.coffeePrice
+{
+    font-size: 30px;
+    color: red;
 }
 
 .iconsCenter
