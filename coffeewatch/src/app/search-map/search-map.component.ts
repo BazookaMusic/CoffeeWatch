@@ -28,7 +28,7 @@ export class SearchMapComponent implements OnInit
         setTimeout(() => {
           this.centerlat = position.coords.latitude;
           this.centerlng = position.coords.longitude;  
-        },50);  //force recenter
+        },50); 
        
 
       });

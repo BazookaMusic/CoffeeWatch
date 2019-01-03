@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import {CoffeeShop} from "./coffee-shop";
+import { Observable, of } from 'rxjs';
+
+
 import {Coffee} from "./coffee";
 import {Review} from "./review";
 
@@ -25,7 +28,7 @@ export class CoffeeshopsService {
   {
     
 
-    this.coffee = new Coffee(1, "Freddo Cappuccino latte moca maciato", "../assets/cap.jpg", 2.80, 4.7, 14, this.reviews);
+    this.coffee = new Coffee(1, "Freddo Cappuccino latte mocha maciato", "../assets/cap.jpg", 2.80, 4.7, 14, this.reviews);
 
     var i:number;
     for (i=0;i<5;i++)
@@ -45,7 +48,7 @@ export class CoffeeshopsService {
 
     console.log(this.coffeeShops[0].name);
 
-    return this.coffeeShops;
+    return of(this.coffeeShops);
   }
 
 }

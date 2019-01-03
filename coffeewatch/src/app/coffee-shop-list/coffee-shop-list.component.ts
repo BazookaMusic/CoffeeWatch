@@ -21,7 +21,7 @@ export class CoffeeShopListComponent implements OnInit {
 
   ngOnInit() 
   {
-    this.coffeeShops=this.coffeeShopsService.getCoffeeShops();
+    this.coffeeShopsService.getCoffeeShops().subscribe(coffeeShopsItem=>this.coffeeShops=coffeeShopsItem);
 
   }
 }
