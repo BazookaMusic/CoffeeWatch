@@ -23,15 +23,8 @@ export class CoffeeshopsService {
 
   getCoffeeShop(id: number): CoffeeShop
   {
-    let i: number;
-    for(i = 0; i < this.coffeeShops.length; i++)
-    {
-      if(this.coffeeShops[i].id == id)
-      {
-        return this.coffeeShops[i];
-      }
-    }
-    return null;
+    
+    return this.coffeeShops.find(cs => cs.id == id);
   }
 
   getCoffeeShops()
