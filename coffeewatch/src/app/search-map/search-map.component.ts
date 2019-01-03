@@ -23,8 +23,13 @@ export class SearchMapComponent implements OnInit
       {
         this.userlat = position.coords.latitude;
         this.userlng = position.coords.longitude;
-        this.centerlat = position.coords.latitude;
-        this.centerlng = position.coords.longitude;
+        this.centerlat = 0;
+        this.centerlng = 0;  
+        setTimeout(() => {
+          this.centerlat = position.coords.latitude;
+          this.centerlng = position.coords.longitude;  
+        },50);  //force recenter
+       
 
       });
     }
