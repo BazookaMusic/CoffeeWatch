@@ -1,0 +1,52 @@
+<div class="coffeeShopFull">
+  <div class="row">
+    <div class="col-sm-4">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td><img src={{coffeeShop.iconPath}} class="img-fluid" /></td>
+            <td>
+              <h2>{{coffeeShop.name}}</h2>
+            </td>
+          </tr>
+          <tr>
+            <td class="iconsCenter"><img src="../../assets/locationPointIcon.png" class="img-fluid" /></td>
+            <td>{{coffeeShop.address}}</td>
+          </tr>
+          <tr>
+            <td class="iconsCenter"><img src="../../assets/telephoneIcon.png" class="img-fluid" /></td>
+            <td>{{coffeeShop.telephone}}</td>
+          </tr>
+          <tr>
+            <td class="iconsCenter"><img src="../../assets/websiteIcon.png" class="img-fluid" /></td>
+            <td>{{coffeeShop.website}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-8 scrollable">
+      <table class="table">
+        <tbody>
+          <tr *ngFor="let coffeeItem of coffeeShop.coffees" id={{coffeeItem.id}} (click)="onClick(coffeeItem.id)">
+            <td><img src="../../assets/cap.jpg" class="img-fluid" /></td>
+            <td>
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <td>
+                      <h4>{{coffeeItem.name}}</h4>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>{{coffeeItem.rating}} ({{coffeeItem.numOfReviews}})</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <td class="coffeePrice">{{coffeeItem.price}}€</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

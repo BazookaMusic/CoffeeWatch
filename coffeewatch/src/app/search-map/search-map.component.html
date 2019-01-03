@@ -3,7 +3,7 @@
     <div class="input-group col-sm-11">
         <input type="text" class="form-control blackBorder"  placeholder="Αναζήτηση για..." #search [formControl]="searchControl">
         <span class="input-group-btn">
-          <button class="btn searchButton" type="button">Αναζήτηση</button>
+          <button class="btn searchButton" type="button" (click)="getPlace()">Αναζήτηση</button>
         </span>
       </div>
       <a class="findMyLocation col-sm-1" (click)="getLocation()">

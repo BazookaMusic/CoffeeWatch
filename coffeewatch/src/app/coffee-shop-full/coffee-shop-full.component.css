@@ -1,0 +1,47 @@
+.table td
+{
+    vertical-align: middle;
+    border: none;
+    padding: 0.45rem;
+}
+
+.table
+{
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.coffeeShopFull
+{
+    border: 2px solid #444444;
+    border-radius: 15px;
+}
+
+.table .table
+{
+    background-color: transparent;
+}
+
+.coffeePrice
+{
+    font-size: 30px;
+    color: red;
+}
+
+.iconsCenter
+{
+    text-align:center;
+}
+
+.scrollable
+{
+    height:50vh;
+    overflow-y:auto;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+tr:hover
+{
+    background-color:rgb(234, 217, 183);
+}

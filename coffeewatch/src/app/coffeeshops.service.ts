@@ -23,7 +23,6 @@ export class CoffeeshopsService {
 
   getCoffeeShop(id: number): CoffeeShop
   {
-    
     return this.coffeeShops.find(cs => cs.id == id);
   }
 
