@@ -5,6 +5,7 @@
 
 ul {
   list-style-type: none;
+  padding-left: 0;
 }
 
 li
@@ -25,4 +26,6 @@ hr
 {
     height:600px;
     overflow-y:auto;
+    max-width: 100%;
+    overflow-x: hidden;
 }

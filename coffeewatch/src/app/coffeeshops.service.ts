@@ -14,39 +14,39 @@ export class CoffeeshopsService {
   coffeeShops: CoffeeShop[] = [];
   coffeeShop: CoffeeShop;
 
-  coffees: Coffee[]=[];
+  coffees: Coffee[] = [];
   coffee: Coffee;
-  reviews:Review[]=[];
+  reviews:Review[] = [];
 
 
   constructor() { };
 
-
-
+  getCoffeeShop(id: number): CoffeeShop
+  {
+    let i: number;
+    for(i = 0; i < this.coffeeShops.length; i++)
+    {
+      if(this.coffeeShops[i].id == id)
+      {
+        return this.coffeeShops[i];
+      }
+    }
+    return null;
+  }
 
   getCoffeeShops()
   {
-    
-
     this.coffee = new Coffee(1, "Freddo Cappuccino latte mocha maciato", "../assets/cap.jpg", 2.80, 4.7, 14, this.reviews);
 
-    var i:number;
-    for (i=0;i<5;i++)
+    var i: number;
+    for(i = 0; i < 5; i++)
     {
       this.coffees.push(this.coffee);
     }
-
-    
   
-
-    this.coffeeShop = new CoffeeShop(1, "Mikel", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikel.gr", "1234567890", this.coffees);
-  
-    for (i=0;i<5;i++)
-    {
-      this.coffeeShops[i] = this.coffeeShop; 
-    }
-
-    console.log(this.coffeeShops[0].name);
+    this.coffeeShops[0] = new CoffeeShop(1, "Mikel", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikel.gr", "1234567890", this.coffees);
+    this.coffeeShops[1] = new CoffeeShop(2, "CoffeeShop2", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikel.gr", "1234567890", this.coffees);
+    this.coffeeShops[2] = new CoffeeShop(3, "CoffeeShop3", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikel.gr", "1234567890", this.coffees);
 
     return of(this.coffeeShops);
   }

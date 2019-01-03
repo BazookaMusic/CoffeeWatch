@@ -24,23 +24,31 @@
   <div class="col-sm-8">
     <table class="table">
       <tbody>
-        <tr>
+        <tr *ngFor="let i of [0, 1, 2]">
           <td><img src="../../assets/cap.jpg" class="img-fluid" /></td>
           <td>
             <table class="table">
               <tbody>
                 <tr>
-                  <td><h4>{{coffeeShop.coffees[0].name}}</h4></td>
+                  <td><h4>{{coffeeShop.coffees[i].name}}</h4></td>
                 </tr>
                 <tr>
-                  <td>{{coffeeShop.coffees[0].rating}} ({{coffeeShop.coffees[0].numOfReviews}})</td>
+                  <td>{{coffeeShop.coffees[i].rating}} ({{coffeeShop.coffees[i].numOfReviews}})</td>
                 </tr>
               </tbody>
             </table>
           </td>
-          <td class="coffeePrice">{{coffeeShop.coffees[0].price}}€</td>
+          <td class="coffeePrice">{{coffeeShop.coffees[i].price}}€</td>
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm showMore">
+    <a [routerLink]="[{ outlets: {coffeeShopView: ['coffeeShop', coffeeShop.id ] } }]" >
+      Show More
+      <img src="../../assets/rightArrowIcon.png" class="img-fluid"/>
+    </a>
   </div>
 </div>

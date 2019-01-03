@@ -7,7 +7,8 @@ import { CoffeeShop } from '../coffee-shop';
   templateUrl: './coffee-shop-preview.component.html',
   styleUrls: ['./coffee-shop-preview.component.css']
 })
-export class CoffeeShopPreviewComponent implements OnInit {
+export class CoffeeShopPreviewComponent implements OnInit
+{
 
   @Input() coffeeShop: CoffeeShop;
 

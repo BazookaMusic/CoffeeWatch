@@ -10,8 +10,8 @@ export class SearchMapComponent implements OnInit
 {
   centerlat: number;
   centerlng: number;
-  userlat:number= -1.0;
-  userlng:number=-1.0;
+  userlat:number = -1.0;
+  userlng:number = -1.0;
 
   constructor() { }
 
@@ -25,12 +25,11 @@ export class SearchMapComponent implements OnInit
         this.userlng = position.coords.longitude;
         this.centerlat = 0;
         this.centerlng = 0;  
-        setTimeout(() => {
+        setTimeout(() => 
+        {
           this.centerlat = position.coords.latitude;
           this.centerlng = position.coords.longitude;  
-        },50); 
-       
-
+        }, 50);
       });
     }
     else
