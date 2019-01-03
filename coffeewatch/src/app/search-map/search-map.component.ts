@@ -1,4 +1,8 @@
-import { Component, OnInit} from '@angular/core';
+/// <reference types="@types/googlemaps" />
+import { Component,ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import {FormsModule, ReactiveFormsModule,FormControl} from '@angular/forms';
+import { MapsAPILoader } from '@agm/core';
+
 
 @Component({
   selector: 'app-search-map',
@@ -10,10 +14,18 @@ export class SearchMapComponent implements OnInit
 {
   centerlat: number;
   centerlng: number;
+  zoom:number;
+  public searchControl: FormControl;
   userlat:number = -1.0;
   userlng:number = -1.0;
 
-  constructor() { }
+  @ViewChild("search")
+  public searchElementRef: ElementRef;
+
+  constructor(
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone
+    ) { }
 
   getLocation()
   {
@@ -25,11 +37,6 @@ export class SearchMapComponent implements OnInit
         this.userlng = position.coords.longitude;
         this.centerlat = 0;
         this.centerlng = 0;  
-        setTimeout(() => 
-        {
-          this.centerlat = position.coords.latitude;
-          this.centerlng = position.coords.longitude;  
-        }, 50);
       });
     }
     else
@@ -42,5 +49,35 @@ export class SearchMapComponent implements OnInit
   {
     this.centerlat = 37.982038;
     this.centerlng = 23.730271;
+
+    this.searchControl = new FormControl();
+
+    this.mapsAPILoader.load().then(() => {
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        types: ["address"]
+      });
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+
+          //set latitude, longitude and zoom
+          this.userlat = place.geometry.location.lat();
+          this.userlng = place.geometry.location.lng();
+          setTimeout(() => 
+          {
+            this.centerlat = this.userlat;
+            this.centerlng = this.userlng;  
+          }, 50);
+          this.zoom = 12;
+        });
+      });
+    });
+  
   }
 }

@@ -10,6 +10,7 @@ import { CoffeeShopListComponent } from './coffee-shop-list/coffee-shop-list.com
 import { CoffeeShopPreviewComponent } from './coffee-shop-preview/coffee-shop-preview.component';
 import { CoffeeShopFullComponent } from './coffee-shop-full/coffee-shop-full.component';
 import { CoffeeshopsService } from './coffeeshops.service';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,8 +25,10 @@ import { CoffeeshopsService } from './coffeeshops.service';
     BrowserModule,
     AppRoutingModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAiQq3g4B24gFkVps1sIM4TTHLSqs6XSFI'
-    })
+      apiKey: 'AIzaSyAiQq3g4B24gFkVps1sIM4TTHLSqs6XSFI',
+      libraries: ["places"]
+    }),
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
