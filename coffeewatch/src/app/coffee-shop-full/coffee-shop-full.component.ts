@@ -29,7 +29,7 @@ export class CoffeeShopFullComponent implements OnInit
   {
     const id = +this.route.snapshot.paramMap.get('id');
 
-    this.coffeeShop = this.coffeeShopsService.getCoffeeShop(id);
+    this.coffeeShopsService.getCoffeeShop(id).subscribe( cs => this.coffeeShop = cs);
   }
 
   goBack(): void 
