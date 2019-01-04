@@ -25,9 +25,9 @@
       </table>
     </div>
     <div class="col-sm-8 scrollable">
-      <table class="table">
+      <table class="table" >
         <tbody>
-          <tr *ngFor="let coffeeItem of coffeeShop.coffees" id={{coffeeItem.id}} (click)="onClick(coffeeItem.id)">
+          <tr *ngFor="let coffeeItem of coffeeShop.coffees; let coffeeIndex = index" id={{coffeeIndex}} (click)="onClick(coffeeIndex)" [ngClass]="clickedCoffees[coffeeIndex] ? 'trClicked': 'trHover'">
             <td><img src="../../assets/cap.jpg" class="img-fluid" /></td>
             <td>
               <table class="table">
@@ -47,6 +47,34 @@
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+  <div *ngIf="selectedCoffee > -1" class="coffeeDetails">
+    <div class="row">
+      <div class="col-sm-2">
+        <img src="../../assets/cap.jpg" class="img-fluid" />
+      </div>
+      <div class="col-sm-8">
+        <h4>{{coffeeShop.coffees[selectedCoffee].name}}</h4>
+      </div>
+      <div class="col-sm-1">
+        <h4 class="coffeePrice">{{coffeeShop.coffees[selectedCoffee].price}}€</h4>
+      </div>
+      <div class="col-sm-1">
+        <img src="../../assets/editIcon.png" class="img-fluid editIcon" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <ul class="nav nav-pills justify-content-center coffeeTabs">
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="#">Κριτικές</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="#">Στατιστικά</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

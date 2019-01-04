@@ -13,6 +13,8 @@ import { CoffeeshopsService } from '../coffeeshops.service';
 export class CoffeeShopFullComponent implements OnInit
 {
   coffeeShop: CoffeeShop;
+  clickedCoffees: boolean[] = [];
+  selectedCoffee: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -23,6 +25,14 @@ export class CoffeeShopFullComponent implements OnInit
   ngOnInit()
   {
     this.getCoffeeShop();
+
+    let i = 0;
+    for(; i < this.coffeeShop.coffees.length; i++)
+    {
+      this.clickedCoffees[i] = false;
+    }
+
+    this.selectedCoffee = -1;
   }
 
   getCoffeeShop(): void 
@@ -37,8 +47,21 @@ export class CoffeeShopFullComponent implements OnInit
     this.location.back();
   }
 
-  onClick(id: string)
+  onClick(coffeeIndex: number)
   {
-  
+    if(this.clickedCoffees[coffeeIndex])
+    {
+        this.clickedCoffees[coffeeIndex] = false;
+        this.selectedCoffee = -1;
+    }
+    else
+    {
+      if (this.selectedCoffee != -1)
+        this.clickedCoffees[this.selectedCoffee] = false;
+        
+      this.clickedCoffees[coffeeIndex] = true;
+      this.selectedCoffee = coffeeIndex;
+    }
+    
   }
 }

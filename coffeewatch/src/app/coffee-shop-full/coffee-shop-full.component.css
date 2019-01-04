@@ -41,7 +41,33 @@
     overflow-x: hidden;
 }
 
-tr:hover
+.trClicked
+{
+    background-color:rgb(206, 190, 158);
+}
+
+.trHover:hover
 {
     background-color:rgb(234, 217, 183);
+}
+
+.coffeeDetails
+{
+    margin: 3rem;
+}
+
+.coffeeTabs, .coffeeTabs a
+{
+    font-size: 1.5rem;
+    color: black;
+}
+
+.editIcon
+{
+    cursor: pointer;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link
+{
+    background-color: #cd6133;
+    color: white;
 }

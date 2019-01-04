@@ -26,9 +26,23 @@
   src: url("assets/fonts/CaviarDreamsBoldItalic.ttf");
 }
 
+@font-face {
+  font-family: "Crimson";
+  font-weight: normal;
+  font-style: normal;
+  src: url("assets/fonts/CrimsonRoman.otf");
+}
+
+@font-face {
+  font-family: "Crimson";
+  font-weight: bold;
+  font-style: normal;
+  src: url("assets/fonts/CrimsonBold.otf");
+}
+
 html *
 {
-   font-family: "Caviar Dreams" !important;
+   font-family: "Crimson" !important;
 }
 
 body {
