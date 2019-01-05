@@ -21,7 +21,7 @@ export class CoffeeshopsService {
   public searchLat:number;
   public searchLng:number;
   selectedCoffeeShop:number;
-
+  markers: [number,number][];
 
 
 
@@ -70,6 +70,12 @@ export class CoffeeshopsService {
   getCoffeeShops()
   {
     return of(this.coffeeShops);
+  }
+
+  getMarkers()
+  {
+    this.markers=this.coffeeShops.map((cs):[number,number] => [cs.lat,cs.lng]);
+    return of(this.markers);
   }
 
   setSearchLocation(lat:number,lng:number)
