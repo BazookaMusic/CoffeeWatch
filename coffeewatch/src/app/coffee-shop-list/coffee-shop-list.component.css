@@ -29,3 +29,14 @@ hr
     max-width: 100%;
     overflow-x: hidden;
 }
+
+
+.csClicked
+{
+    background-color:rgb(206, 190, 158);
+}
+
+.csHover:hover
+{
+    background-color:rgb(234, 217, 183);
+}

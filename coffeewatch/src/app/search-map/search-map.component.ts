@@ -2,6 +2,10 @@
 import { Component,ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import {FormsModule, ReactiveFormsModule,FormControl} from '@angular/forms';
 import { MapsAPILoader } from '@agm/core';
+import { CoffeeshopsService } from '../coffeeshops.service';
+
+import { CoffeeShop } from '../coffee-shop';
+
 
 
 @Component({
@@ -19,6 +23,10 @@ export class SearchMapComponent implements OnInit
   userlat:number = -1.0;
   userlng:number = -1.0;
 
+  coffeeShops:CoffeeShop[];
+  selectedCoffeeShop:number;
+
+
   autocomplete: google.maps.places.Autocomplete;
 
   @ViewChild("search")
@@ -26,7 +34,8 @@ export class SearchMapComponent implements OnInit
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private coffeeShopsService:CoffeeshopsService
     ) { }
 
   getLocation()
@@ -44,6 +53,7 @@ export class SearchMapComponent implements OnInit
           this.centerlng = this.userlng;
         }, 50);
       });
+      this.coffeeShopsService.setSearchLocation(this.userlat,this.userlng);
     }
     else
     {
@@ -87,6 +97,7 @@ export class SearchMapComponent implements OnInit
         this.centerlng = this.userlng;
       }, 50);
       this.zoom = 13;
+      this.coffeeShopsService.setSearchLocation(this.userlat,this.userlng); 
     });
   }
 }

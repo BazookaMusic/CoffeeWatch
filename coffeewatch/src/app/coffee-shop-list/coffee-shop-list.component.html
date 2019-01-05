@@ -7,7 +7,7 @@
 <hr />
 <div class="">
   <ul class="scrollable">
-    <li *ngFor="let coffeeShopItem of coffeeShops">
+    <li *ngFor="let coffeeShopItem of coffeeShops;let coffeeShopIndex = index" (click)="onClickCoffeeShop(coffeeShopIndex)" [ngClass]="clickedCoffeeShops[coffeeShopIndex] ? 'csClicked': 'csHover'">
       <app-coffee-shop-preview [coffeeShop]="coffeeShopItem"></app-coffee-shop-preview>
     </li>
   </ul>

@@ -8,10 +8,12 @@ export class CoffeeShop
     address: string;
     website: string;
     telephone: string;
+    lat:number;
+    lng:number;
 
     coffees: Coffee[];
 
-    constructor(id: number, name: string, iconPath: string, address: string, website: string, telephone: string, coffees: Coffee[])
+    constructor(id: number, name: string, iconPath: string, address: string, website: string, telephone: string,lat:number,lng:number, coffees: Coffee[])
     {
         this.id = id;
         this.name = name;
@@ -20,5 +22,7 @@ export class CoffeeShop
         this.website = website;
         this.telephone = telephone;
         this.coffees = coffees;
+        this.lat=lat;
+        this.lng=lng;
     }
 }
