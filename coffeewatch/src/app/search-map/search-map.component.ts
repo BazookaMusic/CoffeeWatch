@@ -38,6 +38,45 @@ export class SearchMapComponent implements OnInit
     private coffeeShopsService:CoffeeshopsService
     ) { }
 
+  
+
+  ngOnInit()
+  {
+    this.centerlat = 37.982038;
+    this.centerlng = 23.730271;
+
+    
+
+    this.loadAutocmplete();
+
+    this.watchCoffeeSelection();
+
+    
+  }
+
+  loadAutocmplete()
+  {
+    this.searchControl = new FormControl();
+    this.mapsAPILoader.load().then(() => {
+      this.autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {});
+
+      this.autocomplete.addListener("place_changed", () => 
+      {
+        this.getPlace();
+      });
+    });
+  }
+
+  watchCoffeeSelection()
+  {
+    //keep watch of coffeeShop selection by index
+    this.coffeeShopsService.getSelectedCoffeeShop().subscribe(n => 
+      {
+        this.selectedCoffeeShop=n;
+      });
+
+  }
+
   getLocation()
   {
     if (navigator.geolocation) 
@@ -59,29 +98,6 @@ export class SearchMapComponent implements OnInit
     {
       alert("Cannot return position")
     }
-  }
-
-  ngOnInit()
-  {
-    this.centerlat = 37.982038;
-    this.centerlng = 23.730271;
-
-    this.searchControl = new FormControl();
-
-    this.mapsAPILoader.load().then(() => {
-      this.autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {});
-
-      this.autocomplete.addListener("place_changed", () => 
-      {
-        this.getPlace();
-      });
-    });
-
-    //keep watch of coffeeShop selection by index
-    this.coffeeShopsService.getSelectedCoffeeShop().subscribe(n => 
-      {
-        this.selectedCoffeeShop=n;
-      });
   }
 
   getPlace()
