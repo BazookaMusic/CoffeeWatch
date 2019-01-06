@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {CoffeeShop} from "./coffee-shop";
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 
 
 import {Coffee} from "./coffee";
@@ -20,16 +20,16 @@ export class CoffeeshopsService {
   mapCoffeeShops:Observable<[CoffeeShop[],number]>; //coffeeshops, selected index
   public searchLat:number;
   public searchLng:number;
-  selectedCoffeeShop:number;
   markers: [number,number][];
+  selectedCoffeeShop$:BehaviorSubject<number>;
 
 
 
   constructor() 
   {
     this.mockData();
-    this.selectedCoffeeShop=undefined;
-    this.selectCoffeeShop(undefined);
+    this.selectedCoffeeShop$=new BehaviorSubject<number>(undefined);
+    this.selectCoffeeShop(undefined); 
   };
 
   mockData()
@@ -59,12 +59,14 @@ export class CoffeeshopsService {
 
   selectCoffeeShop(selectedIndex:number)
   {
-    this.selectedCoffeeShop=selectedIndex;
+    this.selectedCoffeeShop$.next(selectedIndex);
   }
+
+
 
   getSelectedCoffeeShop()
   {
-    return this.selectedCoffeeShop;
+    return this.selectedCoffeeShop$;
   }
 
   getCoffeeShops()

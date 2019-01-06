@@ -76,6 +76,12 @@ export class SearchMapComponent implements OnInit
         this.getPlace();
       });
     });
+
+    //keep watch of coffeeShop selection by index
+    this.coffeeShopsService.getSelectedCoffeeShop().subscribe(n => 
+      {
+        this.selectedCoffeeShop=n;
+      });
   }
 
   getPlace()
