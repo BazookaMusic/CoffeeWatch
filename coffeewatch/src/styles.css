@@ -1,48 +1,55 @@
+@import '~css-star-rating/css/star-rating';
+
 @font-face {
-  font-family: "Caviar Dreams";
+  font-family: "Caviar";
   font-weight: normal;
   font-style: normal;
   src: url("assets/fonts/CaviarDreams.ttf");
 }
 
 @font-face {
-  font-family: "Caviar Dreams";
+  font-family: "Caviar";
   font-weight: bold;
   font-style: normal;
   src: url("assets/fonts/CaviarDreamsBold.ttf");
 }
 
 @font-face {
-  font-family: "Caviar Dreams";
+  font-family: "Caviar";
   font-weight: normal;
   font-style: italic;
   src: url("assets/fonts/CaviarDreamsItalic.ttf");
 }
 
 @font-face {
-  font-family: "Caviar Dreams";
+  font-family: "Caviar";
   font-weight: bold;
   font-style: italic;
   src: url("assets/fonts/CaviarDreamsBoldItalic.ttf");
 }
 
 @font-face {
-  font-family: "Crimson";
+  font-family: "BP";
   font-weight: normal;
   font-style: normal;
-  src: url("assets/fonts/CrimsonRoman.otf");
+  src: url("assets/fonts/BP.otf");
 }
 
 @font-face {
-  font-family: "Crimson";
+  font-family: "BP";
   font-weight: bold;
   font-style: normal;
-  src: url("assets/fonts/CrimsonBold.otf");
+  src: url("assets/fonts/BPBold.otf");
+}
+
+.fancyFont
+{
+  font-family: "Caviar" !important;
 }
 
 html *
 {
-   font-family: "Crimson" !important;
+   font-family: "BP" !important;
 }
 
 body {

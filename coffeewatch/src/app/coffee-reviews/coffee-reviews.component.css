@@ -1,0 +1,19 @@
+.starRating
+{
+    pointer-events: none;
+}
+
+.ratingPercentage
+{
+    background-color: #cd6133;
+}
+
+.progressBarSize
+{
+    width: 12vw;
+}
+
+.reviewsRow
+{
+    margin-top: 15px;
+}

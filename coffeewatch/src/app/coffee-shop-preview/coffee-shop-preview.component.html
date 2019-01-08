@@ -4,7 +4,7 @@
       <tbody>
         <tr>
           <td><img src={{coffeeShop.iconPath}} class="img-fluid" /></td>
-          <td><h2>{{coffeeShop.name}}</h2></td>
+          <td class="coffeeShopName fancyFont">{{coffeeShop.name}}</td>
         </tr>
         <tr>
           <td class="iconsCenter"><img src="../../assets/locationPointIcon.png" class="img-fluid" /></td>
@@ -30,7 +30,7 @@
             <table class="table">
               <tbody>
                 <tr>
-                  <td><h4>{{coffeeShop.coffees[i].name}}</h4></td>
+                  <td class="coffeeName">{{coffeeShop.coffees[i].name}}</td>
                 </tr>
                 <tr>
                   <td>{{coffeeShop.coffees[i].rating}} ({{coffeeShop.coffees[i].numOfReviews}})</td>
@@ -46,7 +46,7 @@
 </div>
 <div class="row">
   <div class="col-sm showMore">
-    <a [routerLink]="[{ outlets: {coffeeShopView: ['coffeeShop', coffeeShop.id ] } }]" >
+    <a [routerLink]="[{ outlets: {contentView: ['coffeeShop', coffeeShop.id ] } }]" class="fancyFont">
       Show More
       <img src="../../assets/rightArrowIcon.png" class="img-fluid"/>
     </a>

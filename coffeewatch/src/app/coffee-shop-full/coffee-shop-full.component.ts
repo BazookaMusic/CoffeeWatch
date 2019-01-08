@@ -32,12 +32,12 @@ export class CoffeeShopFullComponent implements OnInit
       this.clickedCoffees[i] = false;
     }
 
-    this.selectedCoffee = -1;
+    this.selectedCoffee = undefined;
   }
 
   getCoffeeShop(): void 
   {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = +this.route.snapshot.paramMap.get('coffeeShopID');
 
     this.coffeeShopsService.getCoffeeShop(id).subscribe( cs => this.coffeeShop = cs);
   }
@@ -51,17 +51,20 @@ export class CoffeeShopFullComponent implements OnInit
   {
     if(this.clickedCoffees[coffeeIndex])
     {
-        this.clickedCoffees[coffeeIndex] = false;
-        this.selectedCoffee = -1;
+      this.clickedCoffees[coffeeIndex] = false;
+      this.selectedCoffee = undefined;
+
+      this.coffeeShopsService.selectCoffee(undefined);
     }
     else
     {
-      if (this.selectedCoffee != -1)
+      if (this.selectedCoffee != undefined)
         this.clickedCoffees[this.selectedCoffee] = false;
         
       this.clickedCoffees[coffeeIndex] = true;
       this.selectedCoffee = coffeeIndex;
+
+      this.coffeeShopsService.selectCoffee(this.coffeeShop.coffees[this.selectedCoffee].id);
     }
-    
   }
 }

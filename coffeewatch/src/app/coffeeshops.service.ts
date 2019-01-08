@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {CoffeeShop} from "./coffee-shop";
 import { Observable, of, BehaviorSubject } from 'rxjs';
 
-
 import {Coffee} from "./coffee";
 import {Review} from "./review";
 
@@ -22,20 +21,20 @@ export class CoffeeshopsService {
   public searchLng:number;
   markers: [number,number][];
   selectedCoffeeShop$:BehaviorSubject<number>;
-
-
+  selectedCoffee$:BehaviorSubject<number>;
 
   constructor() 
   {
     this.mockData();
     this.selectedCoffeeShop$=new BehaviorSubject<number>(undefined);
-    this.selectCoffeeShop(undefined); 
+    this.selectedCoffee$ = new BehaviorSubject<number>(undefined);
+    this.selectCoffeeShop(undefined);
+    this.selectCoffee(undefined);
   };
 
   mockData()
   {
     this.coffee = new Coffee(1, "Freddo Cappuccino latte mocha maciato", "../assets/cap.jpg", 2.80, 4.7, 14, this.reviews);
-    
 
     var i: number;
     for(i = 0; i < 5; i++)
@@ -46,10 +45,7 @@ export class CoffeeshopsService {
     this.coffeeShops[0] = new CoffeeShop(1, "Mikel", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikel.gr", "1234567890",37.976703, 23.726184, this.coffees);
     this.coffeeShops[1] = new CoffeeShop(2, "CoffeeShop2", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikel.gr", "1234567890", 37.976607, 23.726367,this.coffees);
     this.coffeeShops[2] = new CoffeeShop(3, "CoffeeShop3", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikel.gr", "1234567890",37.977021, 23.727494, this.coffees);
-
   }
-
-  
 
   getCoffeeShop(id: number): Observable<CoffeeShop>
   {
@@ -57,21 +53,35 @@ export class CoffeeshopsService {
     return of(this.coffeeShop);
   }
 
+  getCoffeeShops()
+  {
+    return of(this.coffeeShops);
+  }
+
+  getCoffee(id: number): Observable<Coffee>
+  {
+    this.coffee = this.coffees.find(cs => cs.id == id);
+    return of(this.coffee);
+  }
+
   selectCoffeeShop(selectedIndex:number)
   {
     this.selectedCoffeeShop$.next(selectedIndex);
   }
-
-
 
   getSelectedCoffeeShop()
   {
     return this.selectedCoffeeShop$;
   }
 
-  getCoffeeShops()
+  selectCoffee(id: number)
   {
-    return of(this.coffeeShops);
+    this.selectedCoffee$.next(id);
+  }
+
+  getSelectedCoffee()
+  {
+    return this.selectedCoffee$;
   }
 
   getMarkers()
@@ -85,6 +95,4 @@ export class CoffeeshopsService {
     this.searchLat=lat;
     this.searchLng=lng;
   }
-
-
 }

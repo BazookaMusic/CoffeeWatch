@@ -38,7 +38,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>{{coffeeItem.rating}} ({{coffeeItem.numOfReviews}})</td>
+                    <td><star-rating class="starRating" labelPosition="right" staticColor="default" [labelText]="coffeeItem.rating + ' (' + coffeeItem.numOfReviews + ' κριτικές)'" [rating]="coffeeItem.rating" [showHalfStars]="true" [readOnly]="true"></star-rating></td>
                   </tr>
                 </tbody>
               </table>
@@ -68,13 +68,16 @@
       <div class="col-sm-12">
         <ul class="nav nav-pills justify-content-center coffeeTabs">
           <li class="nav-item">
-            <a class="nav-link active" routerLink="#">Κριτικές</a>
+            <a class="nav-link active" [routerLink]="[{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'reviews' ] } }]">Κριτικές</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="#">Στατιστικά</a>
+            <a class="nav-link" [routerLink]="[{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'statistics' ] } }]">Στατιστικά</a>
           </li>
         </ul>
       </div>
+    </div>
+    <div>
+      <router-outlet name="detailsView"></router-outlet>
     </div>
   </div>
 </div>

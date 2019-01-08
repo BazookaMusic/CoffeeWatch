@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { StarRatingModule } from 'angular-star-rating';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SearchMapComponent } from './search-map/search-map.component';
@@ -11,6 +11,8 @@ import { CoffeeShopPreviewComponent } from './coffee-shop-preview/coffee-shop-pr
 import { CoffeeShopFullComponent } from './coffee-shop-full/coffee-shop-full.component';
 import { CoffeeshopsService } from './coffeeshops.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { CoffeeReviewsComponent } from './coffee-reviews/coffee-reviews.component';
+import { CoffeeStatisticsComponent } from './coffee-statistics/coffee-statistics.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     NavComponent,
     CoffeeShopListComponent,
     CoffeeShopPreviewComponent,
-    CoffeeShopFullComponent
+    CoffeeShopFullComponent,
+    CoffeeReviewsComponent,
+    CoffeeStatisticsComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
       apiKey: 'AIzaSyAiQq3g4B24gFkVps1sIM4TTHLSqs6XSFI',
       libraries: ["places"]
     }),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StarRatingModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

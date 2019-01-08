@@ -71,3 +71,8 @@
     background-color: #cd6133;
     color: white;
 }
+
+.starRating
+{
+    pointer-events: none;
+}
