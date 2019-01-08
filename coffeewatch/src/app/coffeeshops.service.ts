@@ -50,9 +50,9 @@ export class CoffeeshopsService {
       this.coffees.push(this.coffee);
     }
   
-    this.coffeeShops[0] = new CoffeeShop(1, "Mikel", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikel.gr", "1234567890",37.976703, 23.726184, this.coffees);
-    this.coffeeShops[1] = new CoffeeShop(2, "CoffeeShop2", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikel.gr", "1234567890", 37.976607, 23.726367,this.coffees);
-    this.coffeeShops[2] = new CoffeeShop(3, "CoffeeShop3", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikel.gr", "1234567890",37.977021, 23.727494, this.coffees);
+    this.coffeeShops[0] = new CoffeeShop(1, "Mikel", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikelcoffee.com", "1234567890",37.976703, 23.726184, this.coffees);
+    this.coffeeShops[1] = new CoffeeShop(2, "CoffeeShop2", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikelcoffee.com", "1234567890", 37.976607, 23.726367,this.coffees);
+    this.coffeeShops[2] = new CoffeeShop(3, "CoffeeShop3", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikelcoffee.com", "1234567890",37.977021, 23.727494, this.coffees);
   }
 
   getCoffeeShop(id: number): Observable<CoffeeShop>

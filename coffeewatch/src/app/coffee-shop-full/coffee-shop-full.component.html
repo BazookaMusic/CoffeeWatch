@@ -5,21 +5,19 @@
         <tbody>
           <tr>
             <td><img src={{coffeeShop.iconPath}} class="img-fluid" /></td>
-            <td>
-              <h2>{{coffeeShop.name}}</h2>
-            </td>
+            <td class="coffeeShopName fancyFont">{{coffeeShop.name}}</td>
           </tr>
           <tr>
             <td class="iconsCenter"><img src="../../assets/locationPointIcon.png" class="img-fluid" /></td>
-            <td>{{coffeeShop.address}}</td>
+            <td><a href="https://www.google.com/maps/search/?api=1&query={{coffeeShop.address}}" target="_blank">{{coffeeShop.address}}</a></td>
           </tr>
           <tr>
             <td class="iconsCenter"><img src="../../assets/telephoneIcon.png" class="img-fluid" /></td>
-            <td>{{coffeeShop.telephone}}</td>
+            <td><a href="tel:{{coffeeShop.telephone}}">{{coffeeShop.telephone}}</a></td>
           </tr>
           <tr>
             <td class="iconsCenter"><img src="../../assets/websiteIcon.png" class="img-fluid" /></td>
-            <td>{{coffeeShop.website}}</td>
+            <td><a href="http://{{coffeeShop.website}}" target="_blank">{{coffeeShop.website}}</a></td>
           </tr>
         </tbody>
       </table>
@@ -27,7 +25,7 @@
     <div class="col-sm-8 scrollable">
       <table class="table" >
         <tbody>
-          <a [routerLink]="activeTab === 'reviews' && selectedCoffee != undefined ? [{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'reviews' ] } }] : []">
+          <a class="undecoratedLink" [routerLink]="activeTab === 'reviews' && selectedCoffee != undefined ? [{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'reviews' ] } }] : []">
             <tr *ngFor="let coffeeItem of coffeeShop.coffees; let coffeeIndex = index" id={{coffeeIndex}} (click)="onClick(coffeeIndex)" [ngClass]="clickedCoffees[coffeeIndex] ? 'trClicked': 'trHover'">
               <td><img src="../../assets/cap.jpg" class="img-fluid" /></td>
               <td>
@@ -53,16 +51,16 @@
   </div>
   <div *ngIf="selectedCoffee > -1" class="coffeeDetails">
     <div class="row">
-      <div class="col-sm-2">
+      <div class="col-sm-2 coffeeIconCenter">
         <img src="../../assets/cap.jpg" class="img-fluid" />
       </div>
-      <div class="col-sm-8">
+      <div class="col-sm-8 verticalCenter">
         <h4>{{coffeeShop.coffees[selectedCoffee].name}}</h4>
       </div>
-      <div class="col-sm-1">
+      <div class="col-sm-1 verticalCenter">
         <h4 class="coffeePrice">{{coffeeShop.coffees[selectedCoffee].price}}€</h4>
       </div>
-      <div class="col-sm-1">
+      <div class="col-sm-1 verticalCenter">
         <img src="../../assets/editIcon.png" class="img-fluid editIcon" />
       </div>
     </div>

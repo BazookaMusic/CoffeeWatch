@@ -11,9 +11,14 @@
     cursor: pointer;
 }
 
+.coffeeShopName
+{
+    font-size: 2rem;
+}
+
 .coffeeShopFull
 {
-    border: 2px solid #444444;
+    border: 2px solid #3c3c3c;
     border-radius: 15px;
     padding: 0.5rem;
 }
@@ -26,7 +31,7 @@
 .coffeePrice
 {
     font-size: 30px;
-    color: red;
+    color: red !important;
 }
 
 .iconsCenter
@@ -60,7 +65,7 @@
 .coffeeTabs, .coffeeTabs a
 {
     font-size: 1.5rem;
-    color: black;
+    color:#3c3c3c;
 }
 
 .editIcon
@@ -70,7 +75,7 @@
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link
 {
     background-color: #cd6133;
-    color: white;
+    color: white !important;
 }
 
 .starRating
@@ -78,9 +83,20 @@
     pointer-events: none;
 }
 
-a
+.undecoratedLink
 {
-    color: black;
+    color: #3c3c3c;
     text-decoration: none;
     font-size: 23px;
+}
+
+.verticalCenter
+{
+    display: flex;
+    align-items: center;
+}
+
+.coffeeIconCenter
+{
+    text-align: center;
 }

@@ -9,17 +9,23 @@
     margin-bottom: 20px;
 }
 
+.searchBar .form-control
+{
+    display: inline-block;
+    width: 95%;
+}
+
 .searchButton
 {
     background-color: #cd6133;
     border-color: #cd6133;
-    color: white;
+    color: white !important;
     margin-left: 5px;
 }
 
 .findMyLocation
 {
-    padding-left: 0px;
+    margin: 0 5px;
     cursor: pointer;
     text-align: center;
 }

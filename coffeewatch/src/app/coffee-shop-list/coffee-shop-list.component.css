@@ -1,6 +1,27 @@
 .coffeeShopListTitle
 {
     font-weight: bold;
+    position: absolute; 
+    bottom:0;
+    margin-bottom: 0;
+}
+
+.filterIcon
+{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    flex-wrap: wrap-reverse;
+    justify-content: flex-end;
+    padding-right: 1rem;
+}
+
+.coffeeShopListTitleRow 
+{
+    position: relative;
+    height: 3vh;
 }
 
 ul {
@@ -10,7 +31,7 @@ ul {
 
 li
 {
-    border: 2px solid #444444;
+    border: 2px solid #3c3c3c;
     margin: 10px;
     border-radius: 15px;
     cursor: pointer;
@@ -18,19 +39,18 @@ li
 
 hr
 {
-    border-top: 1px solid #444444;
+    border-top: 1px solid #3c3c3c;
     margin-top:0;
     margin-bottom: 1.5rem;
 }
 
 .scrollable
 {
-    height:600px;
+    height:40vh;
     overflow-y:auto;
     max-width: 100%;
     overflow-x: hidden;
 }
-
 
 .csClicked
 {

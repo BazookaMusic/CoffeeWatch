@@ -26,7 +26,7 @@ ul {
 
 li
 {
-    border: 1px solid #444444;
+    border: 1px solid #3c3c3c;
     margin: 10px;
     border-radius: 15px;
     padding: 1.2rem;
@@ -70,6 +70,6 @@ li .row
 {
     background-color: #cd6133;
     border-color: #cd6133;
-    color: white;
+    color: white !important;
     padding: 0.5rem 1rem;
 }

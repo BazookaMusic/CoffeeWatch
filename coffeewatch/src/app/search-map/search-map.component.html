@@ -1,14 +1,7 @@
 <div class="appSearchMap">
-  <div class="row searchBar">
-    <div class="input-group col-sm-11">
-        <input type="text" class="form-control blackBorder" placeholder="Αναζήτηση για..." #search [formControl]="searchControl">
-        <span class="input-group-btn">
-          <button class="btn searchButton" type="button" (click)="getPlace()">Αναζήτηση</button>
-        </span>
-      </div>
-      <a class="findMyLocation col-sm-1" (click)="getLocation()">
-        <img class="img-fluid" src="../assets/findMyLocation.png" width="40" height="40" />
-      </a>
+  <div class=" searchBar">
+    <input type="text" class="form-control blackBorder" placeholder="Αναζήτηση για..." #search [formControl]="searchControl">
+    <a class="findMyLocation " (click)="getLocation()"><img class="img-fluid" src="../assets/findMyLocation.png" width="40" height="40" /></a>
   </div>
   <agm-map [latitude]="centerlat" [longitude]="centerlng" [zoom]="13" [usePanning]="true">
     <agm-marker *ngIf="userlat>0" [latitude]="userlat" [longitude]="userlng"></agm-marker>

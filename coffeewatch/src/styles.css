@@ -50,7 +50,9 @@
 html *
 {
    font-family: "BP" !important;
+   color: #3c3c3c !important;
 }
+
 
 body {
     background-color: #f3f1ec !important;
