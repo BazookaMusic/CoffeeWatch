@@ -27,24 +27,26 @@
     <div class="col-sm-8 scrollable">
       <table class="table" >
         <tbody>
-          <tr *ngFor="let coffeeItem of coffeeShop.coffees; let coffeeIndex = index" id={{coffeeIndex}} (click)="onClick(coffeeIndex)" [ngClass]="clickedCoffees[coffeeIndex] ? 'trClicked': 'trHover'">
-            <td><img src="../../assets/cap.jpg" class="img-fluid" /></td>
-            <td>
-              <table class="table">
-                <tbody>
-                  <tr>
-                    <td>
-                      <h4>{{coffeeItem.name}}</h4>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><star-rating class="starRating" labelPosition="right" staticColor="default" [labelText]="coffeeItem.rating + ' (' + coffeeItem.numOfReviews + ' κριτικές)'" [rating]="coffeeItem.rating" [showHalfStars]="true" [readOnly]="true"></star-rating></td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-            <td class="coffeePrice">{{coffeeItem.price}}€</td>
-          </tr>
+          <a [routerLink]="activeTab === 'reviews' && selectedCoffee != undefined ? [{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'reviews' ] } }] : []">
+            <tr *ngFor="let coffeeItem of coffeeShop.coffees; let coffeeIndex = index" id={{coffeeIndex}} (click)="onClick(coffeeIndex)" [ngClass]="clickedCoffees[coffeeIndex] ? 'trClicked': 'trHover'">
+              <td><img src="../../assets/cap.jpg" class="img-fluid" /></td>
+              <td>
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <h4>{{coffeeItem.name}}</h4>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><star-rating class="starRating" labelPosition="right" staticColor="default" [labelText]="coffeeItem.rating + ' (' + coffeeItem.numOfReviews + ' κριτικές)'" [rating]="coffeeItem.rating" [showHalfStars]="true" [readOnly]="true"></star-rating></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+              <td class="coffeePrice">{{coffeeItem.price}}€</td>
+            </tr>
+          </a>
         </tbody>
       </table>
     </div>
@@ -68,10 +70,10 @@
       <div class="col-sm-12">
         <ul class="nav nav-pills justify-content-center coffeeTabs">
           <li class="nav-item">
-            <a class="nav-link active" [routerLink]="[{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'reviews' ] } }]">Κριτικές</a>
+            <a [ngClass]="activeTab === 'reviews' ? 'nav-link active' : 'nav-link'" (click)="tabClicked('reviews')" [routerLink]="[{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'reviews' ] } }]">Αξιολογήσεις</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="[{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'statistics' ] } }]">Στατιστικά</a>
+            <a [ngClass]="activeTab === 'statistics' ? 'nav-link active' : 'nav-link'" (click)="tabClicked('statistics')" [routerLink]="[{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'statistics' ] } }]">Στατιστικά</a>
           </li>
         </ul>
       </div>

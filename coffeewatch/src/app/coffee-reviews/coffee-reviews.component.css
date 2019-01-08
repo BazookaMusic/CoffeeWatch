@@ -13,7 +13,63 @@
     width: 12vw;
 }
 
-.reviewsRow
+.reviewsRow, .reviewsRow .row
 {
-    margin-top: 15px;
+    margin-top: 1.2rem;
+}
+
+ul {
+    margin-top: 1rem;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li
+{
+    border: 1px solid #444444;
+    margin: 10px;
+    border-radius: 15px;
+    padding: 1.2rem;
+}
+
+li .row
+{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.scrollable
+{
+    /*height:500px;*/
+    overflow-y:auto;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.actions
+{
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border-top: 1px solid #e8e8e8;
+    background-color: #d15d258c;
+}
+
+.voteButtons
+{
+    padding: 0.2rem 0.5rem;
+    margin-left: 0.5rem;
+
+}
+.voteButtons:hover
+{
+    background-color: #70c6ff;
+    cursor: pointer;
+}
+
+.searchButton
+{
+    background-color: #cd6133;
+    border-color: #cd6133;
+    color: white;
+    padding: 0.5rem 1rem;
 }

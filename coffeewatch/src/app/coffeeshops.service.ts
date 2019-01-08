@@ -23,6 +23,8 @@ export class CoffeeshopsService {
   selectedCoffeeShop$:BehaviorSubject<number>;
   selectedCoffee$:BehaviorSubject<number>;
 
+  reviewText: string = "Όπως μου είπαν στο service center , το τηλέφωνο σας με τις κλείσεις και με τα μηνύματα δεν έχει πρόβλημα, τα υπόλοιπα δεν τους νοιάζει, με τα από 3 φορές που προσπαθανε...να το φταίξουν, όπως καταλάβατε έχει προβλιματα με τις εφαρμογές όπως viber, Facebook, και γενικά έχει κολλήματα, οταν παίρνεις τηλέφωνο με 600€ , δεν το περιμένεις, και πάλι όπως μας ήταν στο service , δεν είναι εγγύηση η τιμή";
+
   constructor() 
   {
     this.mockData();
@@ -34,6 +36,12 @@ export class CoffeeshopsService {
 
   mockData()
   {
+    let date = new Date();
+    this.reviews.push(new Review(1, this.reviewText, 1.5, 214, "guruOfNet", date, 987, 321));
+    this.reviews.push(new Review(1, this.reviewText, 1.5, 214, "guruOfNet", date, 987, 321));
+    this.reviews.push(new Review(1, this.reviewText, 1.5, 214, "guruOfNet", date, 987, 321));
+    this.reviews.push(new Review(1, this.reviewText, 1.5, 214, "guruOfNet", date, 987, 321));
+
     this.coffee = new Coffee(1, "Freddo Cappuccino latte mocha maciato", "../assets/cap.jpg", 2.80, 4.7, 14, this.reviews);
 
     var i: number;

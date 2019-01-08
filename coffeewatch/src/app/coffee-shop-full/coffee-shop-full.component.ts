@@ -15,6 +15,7 @@ export class CoffeeShopFullComponent implements OnInit
   coffeeShop: CoffeeShop;
   clickedCoffees: boolean[] = [];
   selectedCoffee: number;
+  activeTab: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,6 +25,8 @@ export class CoffeeShopFullComponent implements OnInit
 
   ngOnInit()
   {
+    this.activeTab = "reviews";
+
     this.getCoffeeShop();
 
     let i = 0;
@@ -33,6 +36,11 @@ export class CoffeeShopFullComponent implements OnInit
     }
 
     this.selectedCoffee = undefined;
+  }
+
+  tabClicked(tab: string): void
+  {
+    this.activeTab = tab;
   }
 
   getCoffeeShop(): void 

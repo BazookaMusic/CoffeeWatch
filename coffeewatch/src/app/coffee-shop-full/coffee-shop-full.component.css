@@ -15,6 +15,7 @@
 {
     border: 2px solid #444444;
     border-radius: 15px;
+    padding: 0.5rem;
 }
 
 .table .table
@@ -75,4 +76,11 @@
 .starRating
 {
     pointer-events: none;
+}
+
+a
+{
+    color: black;
+    text-decoration: none;
+    font-size: 23px;
 }
