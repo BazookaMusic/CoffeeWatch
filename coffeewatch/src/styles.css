@@ -55,5 +55,9 @@ html *
 
 
 body {
-    background-color: #f3f1ec !important;
+    background-color: #f1e9e1 !important;
+}
+
+*:focus {
+    outline: 0 !important;
 }

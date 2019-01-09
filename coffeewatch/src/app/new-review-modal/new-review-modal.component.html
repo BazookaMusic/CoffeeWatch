@@ -1,0 +1,35 @@
+<ng-template #newReview let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Νέα Αξιολόγηση</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!--<form>
+        <div class="">
+          <label for="dateOfBirth">Date of birth</label>
+          <div class="input-group">
+            <input id="dateOfBirth" class="" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+            </div>
+          </div>
+        </div>
+      </form>-->
+    <div class="form-group">
+      <label for="recipient-name" class="col-form-label">Βαθμολογία:</label>
+      <star-rating labelPosition="right" staticColor="default" size="large" [showHalfStars]="true"></star-rating>
+    </div>
+    <div class="form-group">
+      <label for="message-text" class="col-form-label">Αξιολόγηση:</label>
+      <textarea class="form-control" id="message-text"></textarea>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" (click)="modal.dismiss('Cross click')">Ακύρωση</button>
+    <button type="button" class="btn searchButton">Δημοσίευση</button>
+  </div>
+</ng-template>
+
+<a class="btn searchButton" (click)="open(newReview)">Προσθήκη αξιολόγησης</a>

@@ -1,4 +1,5 @@
-<div class="coffeeShopFull">
+<hr />
+<div class="coffeeShopFull shadow-sm p-3 mb-5  rounded">
   <div class="row">
     <div class="col-sm-4">
       <table class="table">
@@ -37,7 +38,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><star-rating class="starRating" labelPosition="right" staticColor="default" [labelText]="coffeeItem.rating + ' (' + coffeeItem.numOfReviews + ' κριτικές)'" [rating]="coffeeItem.rating" [showHalfStars]="true" [readOnly]="true"></star-rating></td>
+                      <td><star-rating labelPosition="right" staticColor="default" [labelText]="coffeeItem.rating + ' (' + coffeeItem.numOfReviews + ' κριτικές)'" [rating]="coffeeItem.rating" [showHalfStars]="true" [readOnly]="true"></star-rating></td>
                     </tr>
                   </tbody>
                 </table>
@@ -50,7 +51,8 @@
     </div>
   </div>
   <div *ngIf="selectedCoffee > -1" class="coffeeDetails">
-    <div class="row">
+    <hr />
+    <div class="row coffeeName">
       <div class="col-sm-2 coffeeIconCenter">
         <img src="../../assets/cap.jpg" class="img-fluid" />
       </div>
@@ -61,7 +63,7 @@
         <h4 class="coffeePrice">{{coffeeShop.coffees[selectedCoffee].price}}€</h4>
       </div>
       <div class="col-sm-1 verticalCenter">
-        <img src="../../assets/editIcon.png" class="img-fluid editIcon" />
+        <app-new-price-modal></app-new-price-modal>
       </div>
     </div>
     <div class="row">

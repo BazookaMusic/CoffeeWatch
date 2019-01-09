@@ -13,6 +13,9 @@ import { CoffeeshopsService } from './coffeeshops.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CoffeeReviewsComponent } from './coffee-reviews/coffee-reviews.component';
 import { CoffeeStatisticsComponent } from './coffee-statistics/coffee-statistics.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NewReviewModalComponent } from './new-review-modal/new-review-modal.component';
+import { NewPriceModalComponent } from './new-price-modal/new-price-modal.component';
 
 @NgModule({
   declarations: [
@@ -23,9 +26,12 @@ import { CoffeeStatisticsComponent } from './coffee-statistics/coffee-statistics
     CoffeeShopPreviewComponent,
     CoffeeShopFullComponent,
     CoffeeReviewsComponent,
-    CoffeeStatisticsComponent
+    CoffeeStatisticsComponent,
+    NewReviewModalComponent,
+    NewPriceModalComponent
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     AppRoutingModule,
     AgmCoreModule.forRoot({

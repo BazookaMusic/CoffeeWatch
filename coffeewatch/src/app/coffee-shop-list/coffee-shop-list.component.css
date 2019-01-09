@@ -31,10 +31,9 @@ ul {
 
 li
 {
-    border: 2px solid #3c3c3c;
     margin: 10px;
-    border-radius: 15px;
     cursor: pointer;
+    background-color: #f4f1ec;
 }
 
 hr

@@ -16,11 +16,16 @@
     font-size: 2rem;
 }
 
+.coffeeName
+{
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
 .coffeeShopFull
 {
-    border: 2px solid #3c3c3c;
-    border-radius: 15px;
     padding: 0.5rem;
+    background-color: #f4f1ec;
 }
 
 .table .table
@@ -68,19 +73,10 @@
     color:#3c3c3c;
 }
 
-.editIcon
-{
-    cursor: pointer;
-}
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link
 {
     background-color: #cd6133;
     color: white !important;
-}
-
-.starRating
-{
-    pointer-events: none;
 }
 
 .undecoratedLink
