@@ -5,28 +5,21 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
-    <!--<form>
-        <div class="">
-          <label for="dateOfBirth">Date of birth</label>
-          <div class="input-group">
-            <input id="dateOfBirth" class="" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
-            </div>
+  <form [formGroup]="priceForm" (ngSubmit)="onPriceSubmit();modal.dismiss('Submit')">
+    <div class="modal-body">
+        <div class="input-group">
+          
+          <div class=" mb-3">
+            <input  type="text" formControlName="price" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            <span class="input-group-addon">€</span>
           </div>
         </div>
-      </form>-->
-    <div class="form-group">
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
       </div>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" (click)="modal.dismiss('Cross click')">Ακύρωση</button>
-    <button type="button" class="btn searchButton">Δημοσίευση</button>
-  </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" (click)="modal.dismiss('cancel')">Ακύρωση</button>
+        <button type="submit"  class="btn searchButton" [disabled]="!priceForm.valid">Δημοσίευση</button>
+      </div>
+</form>
 </ng-template>
 
 <img src="../../assets/editIcon.png" class="img-fluid editIcon" (click)="open(newPrice)" />

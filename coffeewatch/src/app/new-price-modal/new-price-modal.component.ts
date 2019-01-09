@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FormGroup, FormControl, MinLengthValidator } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+
+import { Validators } from '@angular/forms';
+import { CoffeeshopsService } from '../coffeeshops.service';
+
+
+
 
 @Component({
   selector: 'app-new-price-modal',
@@ -10,8 +16,12 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 export class NewPriceModalComponent implements OnInit {
   closeResult: string;
-
-  constructor(private modalService: NgbModal) { }
+  priceForm:FormGroup;
+  price:number;
+  constructor(
+    private modalService: NgbModal,
+    private coffeeShopsService:CoffeeshopsService
+  ) { }
 
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -31,7 +41,28 @@ export class NewPriceModalComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
 
+  onPriceSubmit()
+  {
+    let price=this.priceForm.controls.price;
+
+  }
+
+i
+ 
+  
+
+
+
+  ngOnInit() 
+  {
+    this.priceForm = new FormGroup({
+      price: new FormControl('',[Validators.required,Validators.min(0)])
+    });
+    var curprice=0;
+
+    var curid= 0;
+    this.coffeeShopsService.getSelectedCoffee().subscribe(id=>curid=id);
+    this.coffeeShopsService.getCoffee(curid).subscribe(x => this.priceForm.controls.price.setValue(x.price));
   }
 }
