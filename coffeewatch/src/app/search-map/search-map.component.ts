@@ -22,6 +22,7 @@ export class SearchMapComponent implements OnInit
   public searchControl: FormControl;
   userlat:number = -1.0;
   userlng:number = -1.0;
+  markers: [number,number][];
 
   coffeeShops:CoffeeShop[];
   selectedCoffeeShop:number;
@@ -47,14 +48,17 @@ export class SearchMapComponent implements OnInit
 
     
 
-    this.loadAutocmplete();
-
+    this.loadAutocomplete();
+    this.coffeeShopsService.getCoffeeShops().subscribe(cs =>
+      {
+        if (cs)
+        this.markers = this.coffeeShopsService.getMarkers(cs)
+      }
+        );
     this.watchCoffeeSelection();
-
-    
   }
 
-  loadAutocmplete()
+  loadAutocomplete()
   {
     this.searchControl = new FormControl();
     this.mapsAPILoader.load().then(() => {
@@ -93,6 +97,7 @@ export class SearchMapComponent implements OnInit
         }, 50);
       });
       this.coffeeShopsService.setSearchLocation(this.userlat,this.userlng);
+      this.coffeeShopsService.updateCoffeeShops(this.userlat,this.userlng);
     }
     else
     {
@@ -119,7 +124,9 @@ export class SearchMapComponent implements OnInit
         this.centerlng = this.userlng;
       }, 50);
       this.zoom = 13;
-      this.coffeeShopsService.setSearchLocation(this.userlat,this.userlng); 
+      this.coffeeShopsService.setSearchLocation(this.userlat,this.userlng);
+      this.coffeeShopsService.updateCoffeeShops(this.userlat,this.userlng);
+
     });
   }
 }

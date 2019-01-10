@@ -5,5 +5,9 @@
   </div>
   <agm-map [latitude]="centerlat" [longitude]="centerlng" [zoom]="13" [usePanning]="true">
     <agm-marker *ngIf="userlat>0" [latitude]="userlat" [longitude]="userlng"></agm-marker>
+    <div  *ngIf="markers != undefined" >
+      <agm-marker *ngFor="let marker of markers"  [latitude]="marker[0]" [longitude]="marker[1]"></agm-marker>
+    </div>
+    
   </agm-map>
   </div>

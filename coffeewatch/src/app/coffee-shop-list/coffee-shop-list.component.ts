@@ -32,8 +32,12 @@ export class CoffeeShopListComponent implements OnInit {
   {
     this.coffeeShopsService.getCoffeeShops().subscribe(coffeeShopsItem => 
       {
-      this.coffeeShops = coffeeShopsItem;
-      this.refresh();
+      if (coffeeShopsItem != undefined)
+      {
+        this.coffeeShops = coffeeShopsItem;
+        this.refresh();
+      }
+      
       });
   }
 
