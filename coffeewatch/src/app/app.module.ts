@@ -32,7 +32,7 @@ import { NewCoffeeModalComponent } from './new-coffee-modal/new-coffee-modal.com
     CoffeeStatisticsComponent,
     NewReviewModalComponent,
     NewPriceModalComponent,
-    CoffeeDescriptionComponent
+    CoffeeDescriptionComponent,
     NewCoffeeModalComponent
   ],
   imports: [
