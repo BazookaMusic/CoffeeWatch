@@ -16,6 +16,7 @@ import { CoffeeStatisticsComponent } from './coffee-statistics/coffee-statistics
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NewReviewModalComponent } from './new-review-modal/new-review-modal.component';
 import { NewPriceModalComponent } from './new-price-modal/new-price-modal.component';
+import { NewCoffeeModalComponent } from './new-coffee-modal/new-coffee-modal.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NewPriceModalComponent } from './new-price-modal/new-price-modal.compon
     CoffeeReviewsComponent,
     CoffeeStatisticsComponent,
     NewReviewModalComponent,
-    NewPriceModalComponent
+    NewPriceModalComponent,
+    NewCoffeeModalComponent
   ],
   imports: [
     NgbModule,

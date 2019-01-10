@@ -1,0 +1,122 @@
+<ng-template #coffemod let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Νέος Καφές</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="coffeeForm" id="mainform" (ngSubmit)="onCoffeeSubmit();modal.dismiss('Submit')">
+            
+            
+            
+            
+            
+           
+           
+    
+    
+    
+    
+            <div class="form-group row">
+              <div class="col-sm-7">
+                <label for="name" class="col-form-label">Όνομα:</label>
+                <input type="text" size="100" formControlName="name" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"/>
+              </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-7">
+                  <label for="categories" class="col-form-label">Κατηγορία:</label>
+                  <select id="categories" formControlName="categories">
+                    <option *ngFor="let category of ['Freddo Cap','Freddo Es','Cap','Es']" [value]="category">
+                      {{category}}
+                    </option>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-4">
+                  <label for="price-sm" class="col-form-label">Μονός:</label>
+                  <input type="number" size="3"  id="price-sm" min="0" formControlName="pricesm"/>
+                </div>
+                <div class="col-sm-4">
+                  <label for="price-xl"  class="col-form-label">Τριπλός:</label>
+                  <input type="number" size="3" id="price-md" min="0" formControlName="pricemd"/>
+                </div>
+                <div class="col-sm-4">
+                  <label for="price-md"  class="col-form-label">Διπλός:</label>
+                  <input type="number" size="3" id="price-lg" min="0" formControlName="pricelg"/>
+                </div>
+            </div>
+
+          
+            <label for="desc-text" class="col-form-label">Περιγραφή:</label>
+            <textarea class="form-control" formControlName="description" maxlength={{MAXLEN}} required  placeholder="Περιγράψτε τον καφέ" id="desc-text"></textarea>
+            <p *ngIf="coffeeForm.controls.description.value.length>=MINLEN" >Απομένουν {{MAXLEN-coffeeForm.controls.description.value.length}} χαρακτήρες</p>
+            <p *ngIf="coffeeForm.controls.description.value.length < MINLEN"> Απαιτούνται ακόμα {{MINLEN-coffeeForm.controls.description.value.length}} χαρακτήρες</p>
+            <label for="extras" class="col-form-label">Προσθετά:</label>
+            <textarea class="form-control" formControlName="extras" maxlength={{MAXLEN}}  placeholder="Προσθετά χαρακτηριστικά (πχ. γάλα +0.5Ε)" id="extras"></textarea>
+            <p *ngIf="coffeeForm.controls.extras.value.length>0" >Απομένουν {{MAXLEN-coffeeForm.controls.extras.value.length}} χαρακτήρες</p>
+          </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" (click)="modal.dismiss('Cross click')">Ακύρωση</button>
+        <button type="submit" form="mainform" class="btn searchButton" [disabled]="!coffeeForm.valid">Δημοσίευση</button>
+    </div>
+  </ng-template>
+<!--
+
+<ng-template #newcoffeeModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-coffee-title">Νέος καφές</h4>
+    <button type="button" class="close" aria-label="Close" (click)="askDismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>hhhhhhhhhh</p>
+    <form [formGroup]="coffeeForm" (ngSubmit)="onCoffeeSubmit();modal.dismiss('Submit')">
+        <label for="extras" class="col-form-label">Προσθετά:</label>
+        <label for="desc-text" class="col-form-label">Περιγραφή:</label>
+        <label for="name" class="col-form-label">Όνομα:</label>
+        <label for="price-sm" class="col-form-label">Μονός:</label>
+        <label for="price-md" class="col-form-label">Διπλός:</label>
+        <label for="price-xl" class="col-form-label">Τριπλός:</label>
+        <label for="categories" class="col-form-label">Τριπλός:</label>
+
+
+
+
+
+
+        <input type="text" formControlName="name" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"/>
+        <select id="categories" formControlName="categories">
+          <option *ngFor="let category of ['Freddo Cap','Freddo Es','Cap','Es']" [value]="category">
+            {{category}}
+          </option>
+        </select>
+
+        <input type="number" id="price-sm" min="0" formControlName="pricesm"/>
+        <input type="number" id="price-md" min="0" formControlName="pricemd"/>
+        <input type="number" id="price-lg" min="0" formControlName="pricelg"/>
+
+
+        <textarea class="form-control" formControlName="description" maxlength={{MAXLEN}} required  placeholder="Περιγράψτε τον καφέ" id="desc-text"></textarea>
+        <p *ngIf="coffeeForm.controls.description.value.length>=MINLEN" >Απομένουν {{MAXLEN-coffeeForm.controls.description.value.length}} χαρακτήρες</p>
+        <p *ngIf="coffeeForm.controls.description.value.length < MINLEN"> Απαιτούνται ακόμα {{MINLEN-coffeeForm.controls.description.value.length}} χαρακτήρες</p>
+        <textarea class="form-control" formControlName="extras" maxlength={{MAXLEN}}  placeholder="Προσθετά χαρακτηριστικά (πχ. γάλα +0.5Ε)" id="extras"></textarea>
+        <p *ngIf="coffeeForm.controls.extras.value.length>0" >Απομένουν {{MAXLEN-coffeeForm.controls.extras.value.length}} χαρακτήρες</p>
+      </form>
+    
+    <div class="modal-footer">
+      
+    </div>
+  </form>
+
+</div>
+</ng-template>
+
+-->
+
+<a class="btn searchButton" (click)="open(coffemod)">Προσθήκη Καφέ</a>
