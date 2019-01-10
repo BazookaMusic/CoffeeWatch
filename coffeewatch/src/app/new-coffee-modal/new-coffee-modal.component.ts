@@ -5,29 +5,28 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Validators } from '@angular/forms';
 import { CoffeeshopsService } from '../coffeeshops.service';
 
-
-
-
-
 @Component({
   selector: 'app-new-coffee-modal',
   templateUrl: './new-coffee-modal.component.html',
   styleUrls: ['./new-coffee-modal.component.css']
 })
-export class NewCoffeeModalComponent implements OnInit {
 
+export class NewCoffeeModalComponent implements OnInit
+{
   closeResult: string;
-  coffeeForm:FormGroup;
-  price:number;
-  MAXLEN:number=150;
-  MINLEN:number=10;
+  coffeeForm: FormGroup;
+  price: number;
+  MAXLEN: number = 500;
+  MINLEN: number = 10;
+
   constructor(
     private modalService: NgbModal,
     private coffeeShopsService:CoffeeshopsService,
     private fb:FormBuilder
   ) { }
 
-  open(content) {
+  open(content)
+  {
     this.modalService.open(content, { ariaLabelledBy: 'modal-coffee-title',size: 'lg' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -35,7 +34,8 @@ export class NewCoffeeModalComponent implements OnInit {
     });
   }
 
-  private getDismissReason(reason: any): string {
+  private getDismissReason(reason: any): string
+  {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -44,14 +44,6 @@ export class NewCoffeeModalComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
-
-
-
- 
-  
-
-
 
   ngOnInit() 
   {

@@ -2,3 +2,9 @@
 {
     cursor: pointer;
 }
+
+.newPrice
+{
+    display: inline-flex;
+    width: 30%;
+}

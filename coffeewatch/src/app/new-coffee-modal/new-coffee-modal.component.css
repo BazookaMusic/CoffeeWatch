@@ -1,0 +1,14 @@
+.inlineDescr
+{
+    display: inline-flex;
+}
+
+.prices
+{
+    margin: 0.5rem 0 0 0.4rem;
+}
+
+.price
+{
+    width: 60%;
+}

@@ -6,27 +6,16 @@
     </button>
   </div>
   <div class="modal-body">
-    <!--<form>
-        <div class="">
-          <label for="dateOfBirth">Date of birth</label>
-          <div class="input-group">
-            <input id="dateOfBirth" class="" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
-            </div>
-          </div>
-        </div>
-      </form>-->
     <form [formGroup]="reviewForm" (ngSubmit)="onReviewSubmit();modal.dismiss('Submit')">
         <label for="recipient-name" class="col-form-label">Βαθμολογία:</label>
-        <star-rating-control formControlName="starsRating" [rating]="0" [showHalfStars]="true" [hoverEnabled]="true" size="large" [showHalfStars]="true"></star-rating-control>
+        <div ><star-rating-control formControlName="starsRating" label-position="right" [labelText]="sdfg" [rating]="0" [hoverEnabled]="true" size="large"></star-rating-control></div>
         <label for="message-text" class="col-form-label">Αξιολόγηση:</label>
-        <textarea class="form-control" formControlName="review" maxlength={{MAXLEN}} required  placeholder="Πώς σας φάνηκε; (1000 χαρακτήρες το πολύ)" id="message-text"></textarea>
-        <p *ngIf="reviewForm.controls.review.value.length>=MINLEN" >Απομένουν {{MAXLEN-reviewForm.controls.review.value.length}} χαρακτήρες</p>
-        <p *ngIf="reviewForm.controls.review.value.length < MINLEN"> Απαιτούνται ακόμα {{MINLEN-reviewForm.controls.review.value.length}} χαρακτήρες</p>
+        <textarea class="form-control" rows="4" formControlName="review" maxlength={{MAXLEN}} required  placeholder="Πώς σας φάνηκε; ({{MAXLEN}} χαρακτήρες το πολύ)" id="message-text"></textarea>
+        <p *ngIf="reviewForm.controls.review.value.length>=MINLEN" >Απομένουν {{MAXLEN - reviewForm.controls.review.value.length}} χαρακτήρες</p>
+        <p *ngIf="reviewForm.controls.review.value.length < MINLEN"> Απαιτούνται ακόμα {{MINLEN - reviewForm.controls.review.value.length}} χαρακτήρες</p>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" (click)="modal.dismiss('Cross click')">Ακύρωση</button>
-      <button type="submit" class="btn searchButton" [disabled]="!reviewForm.valid">Δημοσίευση</button>
+      <button type="button" class="btn btn-outline-secondary outlineSecondaryNoHover" data-dismiss="modal" (click)="modal.dismiss('Cross click')">Ακύρωση</button>
+      <button type="submit" class="btn orangeButton" [disabled]="!reviewForm.valid">Δημοσίευση</button>
     </div>
   </form>
 </div>

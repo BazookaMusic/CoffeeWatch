@@ -14,16 +14,16 @@ import { Validators } from '@angular/forms';
 
 export class NewReviewModalComponent implements OnInit
 {
-  review:Review;
+  review: Review;
   closeResult: string;
-  reviewForm:FormGroup;
-  MAXLEN:number=150;
-  MINLEN:number=10;
-
+  reviewForm: FormGroup;
+  MAXLEN: number = 500;
+  MINLEN: number = 10;
 
   constructor(private modalService: NgbModal) { }
 
-  open(content) {
+  open(content) 
+  {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -48,12 +48,9 @@ export class NewReviewModalComponent implements OnInit
     let formStars=this.reviewForm.controls.starsRating; 
     this.review=new Review(-1,formRev.value as string,formStars.value as number,undefined,undefined,new Date(),0,0);
     this.reviewSubmit(this.review);
-
   }
 
-
-  reviewSubmit(rev:Review)
-  {}
+  reviewSubmit(rev:Review){}
 
   resetForm()
   {
@@ -78,6 +75,5 @@ export class NewReviewModalComponent implements OnInit
       review: new FormControl('',[Validators.minLength(this.MINLEN),Validators.maxLength(this.MAXLEN)]),
       starsRating: new FormControl('') 
     });
-
   }
 }
