@@ -9,9 +9,16 @@
     <div class="modal-body">
         <div class="input-group">
           
-          <div class=" mb-3">
-            <input  type="text" formControlName="price" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-            <span class="input-group-addon">€</span>
+
+          <div class="form-group row">
+              <div class="col-sm-5">
+                <div class=" mb-3">
+                  <input  type="number" formControlName="price" class="form-control" aria-label="Default" required min="0" aria-describedby="inputGroup-sizing-default">
+                </div>
+              </div>
+              <div class="col-sm-5">
+                  <img width="15" height="23" src="./assets/Euro_symbol_black.png"/>
+              </div>
           </div>
         </div>
       </div>
