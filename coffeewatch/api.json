@@ -1,0 +1,73 @@
+{
+    "shops": [
+        {
+            "id":1,
+            "name": "Mikel",
+             "address":"Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", 
+             "website":"www.mikel.gr", 
+             "phone":"1234567890",
+             "lat":37.976703,
+             "lng": 23.726184,
+             "withdrawn":false,
+             "imgpath":"../assets/mikel.png"
+        },
+        {
+            "id":2,
+            "name": "CoffeeShop2",
+             "address":" Βαρβάρας 15 Υμηττός", 
+             "website":"www.cs2.gr", 
+             "phone":"12342367890",
+             "lat":37.976607,
+             "lng":  23.726367,
+             "withdrawn":false,
+             "imgpath":"../assets/mikel.png"
+        }
+        ,
+        {
+            "id":3,
+            "name": "CoffeeShop3",
+             "address":" Βαρβάρας 15 Υμηττός", 
+             "website":"www.cs3.gr", 
+             "phone":"12342367890",
+             "lat":37.977021,
+             "lng":  23.726367,
+             "withdrawn":false,
+             "imgpath":"../assets/mikel.png"
+        }
+    ]
+    ,
+    "products":[
+        {
+            "id":1,
+            "name":"Freddo Cappuccino latte mocha maciato",
+            "description":"Savoury", 
+            "category":"FREDDO CAPP",
+            "tags":[],
+            "withdrawn":false,
+            "rating":4.7
+        }
+        ,
+        {
+            "id":2,
+            "name":"Cappuccino latte mocha maciato",
+            "description":"Savoury", 
+            "category":"CAPP",
+            "tags":[],
+            "withdrawn":false,
+            "rating":4.1
+        }
+        ,
+        {
+            "id":3,
+            "name":"Freddo Espresso",
+            "description":"Savoury", 
+            "category":"FREDDO ESP",
+            "tags":[],
+            "withdrawn":false,
+            "rating":4.2
+        }
+       
+
+    ]
+   
+}

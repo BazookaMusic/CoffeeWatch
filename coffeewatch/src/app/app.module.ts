@@ -17,6 +17,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NewReviewModalComponent } from './new-review-modal/new-review-modal.component';
 import { NewPriceModalComponent } from './new-price-modal/new-price-modal.component';
 import { CoffeeDescriptionComponent } from './coffee-description/coffee-description.component';
+import { NewCoffeeModalComponent } from './new-coffee-modal/new-coffee-modal.component';
+
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { CoffeeDescriptionComponent } from './coffee-description/coffee-descript
     NewReviewModalComponent,
     NewPriceModalComponent,
     CoffeeDescriptionComponent
+    NewCoffeeModalComponent
   ],
   imports: [
     NgbModule,
