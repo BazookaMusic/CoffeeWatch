@@ -25,7 +25,7 @@ export class CoffeeShopFullComponent implements OnInit
 
   ngOnInit()
   {
-    this.activeTab = "reviews";
+    this.activeTab = "description";
 
     this.getCoffeeShop();
 

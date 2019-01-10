@@ -1,31 +1,28 @@
 <div  class="row">
-  <div class="col-sm-4">
-    <table class="table">
-      <tbody>
-        <tr>
-          <td><img src={{coffeeShop.iconPath}} class="img-fluid" /></td>
-          <td class="coffeeShopName fancyFont">{{coffeeShop.name}}</td>
-        </tr>
-        <tr>
-          <td class="iconsCenter"><img src="../../assets/locationPointIcon.png" class="img-fluid" /></td>
-          <td><a href="https://www.google.com/maps/search/?api=1&query={{coffeeShop.address}}" target="_blank">{{coffeeShop.address}}</a></td>
-        </tr>
-        <tr>
-          <td class="iconsCenter"><img src="../../assets/telephoneIcon.png" class="img-fluid" /></td>
-          <td><a href="tel:{{coffeeShop.telephone}}">{{coffeeShop.telephone}}</a></td>
-        </tr>
-        <tr>
-          <td class="iconsCenter"><img src="../../assets/websiteIcon.png" class="img-fluid" /></td>
-          <td><a href="http://{{coffeeShop.website}}" target="_blank">{{coffeeShop.website}}</a></td>
-        </tr>
-      </tbody>
+  <div class="col-sm-5">
+    <div class="row">
+      <span class="col-sm-3"><img src={{coffeeShop.iconPath}} class="img-fluid" /></span>
+      <span class="coffeeShopName fancyFont col-sm-9">{{coffeeShop.name}}</span>
+    </div>
+    <table class="table coffeeShopDetails">
+      <tr>
+        <td class="coffeeShopDetailsIcons"><img src="../../assets/locationPointIcon.png" class="img-fluid" /></td>
+        <td><a href="https://www.google.com/maps/search/?api=1&query={{coffeeShop.address}}" target="_blank">{{coffeeShop.address}}</a></td>
+      </tr>
+      <tr>
+        <td class="coffeeShopDetailsIcons"><img src="../../assets/telephoneIcon.png" class="img-fluid" /></td>
+        <td><a href="tel:{{coffeeShop.telephone}}">{{coffeeShop.telephone}}</a></td>
+      </tr>
+      <tr>
+        <td class="coffeeShopDetailsIcons"><img src="../../assets/websiteIcon.png" class="img-fluid" /></td>
+        <td><a href="http://{{coffeeShop.website}}" target="_blank">{{coffeeShop.website}}</a></td>
+      </tr>
     </table>
   </div>
-  <div class="col-sm-8">
+  <div class="col-sm-7">
     <table class="table">
       <tbody>
         <tr *ngFor="let i of [0, 1, 2]">
-          <td><img src="../../assets/cap.jpg" class="img-fluid" /></td>
           <td>
             <table class="table">
               <tbody>
@@ -33,7 +30,7 @@
                   <td class="coffeeName">{{coffeeShop.coffees[i].name}}</td>
                 </tr>
                 <tr>
-                  <td>{{coffeeShop.coffees[i].rating}} ({{coffeeShop.coffees[i].numOfReviews}})</td>
+                  <td><star-rating labelPosition="right" staticColor="default" [labelText]="coffeeShop.coffees[i].rating + ' (' + coffeeShop.coffees[i].numOfReviews + ' κριτικές)'" [rating]="coffeeShop.coffees[i].rating" [showHalfStars]="true" [readOnly]="true"></star-rating></td>
                 </tr>
               </tbody>
             </table>

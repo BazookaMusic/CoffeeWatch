@@ -33,14 +33,6 @@ li
 {
     margin: 10px;
     cursor: pointer;
-    background-color: #f4f1ec;
-}
-
-hr
-{
-    border-top: 1px solid #3c3c3c;
-    margin-top:0;
-    margin-bottom: 1.5rem;
 }
 
 .scrollable

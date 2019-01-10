@@ -42,7 +42,7 @@ export class CoffeeshopsService {
     this.reviews.push(new Review(1, this.reviewText, 1.5, 214, "guruOfNet", date, 987, 321));
     this.reviews.push(new Review(1, this.reviewText, 1.5, 214, "guruOfNet", date, 987, 321));
 
-    this.coffee = new Coffee(1, "Freddo Cappuccino latte mocha maciato", "../assets/cap.jpg", 2.80, 4.7, 14, this.reviews);
+    this.coffee = new Coffee(1, "Freddo Cappuccino latte mocha maciato", "Αποκαλύπτει το ιταλικό ταπεραμέντο του από το πρώτο δευτερόλεπτο. Πλούσια γεύση καφέ καπουτσίνο, με πυκνό ατμό, φτιαγμένο για τους εραστές της απόλαυσης.", "../assets/cap.jpg", 2.80, 4.7, 14, this.reviews);
 
     var i: number;
     for(i = 0; i < 5; i++)

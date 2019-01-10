@@ -7,7 +7,7 @@
 <hr />
 <div class="">
   <ul class="scrollable">
-    <li *ngFor="let coffeeShopItem of coffeeShops;let coffeeShopIndex = index" (click)="onClickCoffeeShop(coffeeShopIndex)" [ngClass]="'shadow-sm p-3 mb-5  rounded ' + (clickedCoffeeShops[coffeeShopIndex] ? 'csClicked': 'csHover')">
+    <li *ngFor="let coffeeShopItem of coffeeShops;let coffeeShopIndex = index" (click)="onClickCoffeeShop(coffeeShopIndex)" [ngClass]="'contentBG shadow-sm p-3 mb-5  rounded ' + (clickedCoffeeShops[coffeeShopIndex] ? 'csClicked': 'csHover')">
       <app-coffee-shop-preview [coffeeShop]="coffeeShopItem"></app-coffee-shop-preview>
     </li>
   </ul>
