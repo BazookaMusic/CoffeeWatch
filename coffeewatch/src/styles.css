@@ -1,41 +1,31 @@
 @import '~css-star-rating/css/star-rating';
 
-@font-face {
+@font-face
+{
   font-family: "Caviar";
   font-weight: normal;
   font-style: normal;
   src: url("assets/fonts/CaviarDreams.ttf");
 }
 
-@font-face {
+@font-face
+{
   font-family: "Caviar";
   font-weight: bold;
   font-style: normal;
   src: url("assets/fonts/CaviarDreamsBold.ttf");
 }
 
-@font-face {
-  font-family: "Caviar";
-  font-weight: normal;
-  font-style: italic;
-  src: url("assets/fonts/CaviarDreamsItalic.ttf");
-}
-
-@font-face {
-  font-family: "Caviar";
-  font-weight: bold;
-  font-style: italic;
-  src: url("assets/fonts/CaviarDreamsBoldItalic.ttf");
-}
-
-@font-face {
+@font-face
+{
   font-family: "BP";
   font-weight: normal;
   font-style: normal;
   src: url("assets/fonts/BP.otf");
 }
 
-@font-face {
+@font-face
+{
   font-family: "BP";
   font-weight: bold;
   font-style: normal;
@@ -53,11 +43,37 @@ html *
    color: #3c3c3c !important;
 }
 
-
-body {
-    background-color: #f1e9e1 !important;
+.bgColor
+{
+  background-color: #f1e9e1 !important;
 }
 
 *:focus {
     outline: 0 !important;
+}
+
+hr
+{
+    border-top: 1px solid #3c3c3c !important;
+    margin-top:0 !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.contentBG
+{
+  background-color: #f4f1ec !important;
+}
+
+.orangeButton
+{
+    background-color: #cd6133 !important;
+    border-color: #cd6133 !important;
+    color: white !important;
+    padding: 0.5rem 1rem !important;
+}
+
+.coffeePrice
+{
+    font-size: 2.2rem !important;
+    color: red !important;
 }

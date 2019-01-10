@@ -15,17 +15,19 @@
     background-color: transparent;
 }
 
-.coffeePrice
+.coffeeShopName
 {
-    font-size: 30px;
-    color: red !important;
+    font-size: 3rem;
+    display: inline-flex;
+    align-items: center;
+    padding-left: 0;
 }
 
-.iconsCenter
+.coffeeShopDetailsIcons
 {
     text-align:center;
+    padding: 0.7rem 0 !important;
 }
-
 .showMore
 {
     text-align: center;
@@ -38,12 +40,12 @@
     font-size: 23px;
 }
 
-.coffeeShopName
-{
-    font-size: 2rem;
-}
-
 .coffeeName
 {
     font-size: 1.5rem;
+}
+
+.coffeeShopDetails
+{
+    margin-top: 15px;
 }

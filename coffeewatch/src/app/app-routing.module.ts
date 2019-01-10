@@ -6,6 +6,7 @@ import { CoffeeShopListComponent } from './coffee-shop-list/coffee-shop-list.com
 import { SearchMapComponent } from './search-map/search-map.component';
 import { CoffeeReviewsComponent } from './coffee-reviews/coffee-reviews.component';
 import { CoffeeStatisticsComponent } from './coffee-statistics/coffee-statistics.component';
+import { CoffeeDescriptionComponent } from './coffee-description/coffee-description.component';
 
 const routes: Routes = 
 [
@@ -13,6 +14,7 @@ const routes: Routes =
     { path: 'coffeeShop/:coffeeShopID', component: CoffeeShopFullComponent, outlet: "contentView",
       children: 
       [
+          { path: 'coffee/:coffeeID/description', component: CoffeeDescriptionComponent, outlet: "detailsView" },
           { path: 'coffee/:coffeeID/reviews', component: CoffeeReviewsComponent, outlet: "detailsView" },
           { path: 'coffee/:coffeeID/statistics', component: CoffeeStatisticsComponent, outlet: "detailsView" }
       ] }

@@ -3,18 +3,30 @@
   background-color: #cd6133;
 }
 
+.siteName
+{
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.siteLogo
+{
+  max-height: 6vh;
+}
+
+.siteTitle
+{
+  margin-left: 0.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
 .navbar
 {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 10;
-}
-
-.page-title
-{
-  font-size: 2rem;
-  font-weight: bold;
-  vertical-align: center;
-  text-decoration: none;
+  height: 7vh;
 }

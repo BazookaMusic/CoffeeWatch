@@ -45,17 +45,23 @@ li .row
     margin-top: 1rem;
     padding: 0.5rem 1rem;
     border-top: 1px solid #e8e8e8;
-    background-color: #d15d258c;
+}
+
+.actionQuestion
+{
+    display: inline-flex;
+    align-items: center;
+    margin-right: 1rem;
 }
 
 .voteButtons
 {
-    padding: 0.2rem 0.5rem;
-    margin-left: 0.5rem;
-
+    padding: 0.3rem 0.6rem;
+    margin-right: 0.5rem;
 }
 .voteButtons:hover
 {
-    background-color: #70c6ff;
+    background-color: #cd6133;
+    color: white !important;
     cursor: pointer;
 }
