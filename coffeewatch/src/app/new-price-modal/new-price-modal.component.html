@@ -1,32 +1,26 @@
 <ng-template #newPrice let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Νέα Τιμή</h4>
+    <h4 class="modal-title" id="modal-basic-title">Νέα τιμή</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <form [formGroup]="priceForm" (ngSubmit)="onPriceSubmit();modal.dismiss('Submit')">
     <div class="modal-body">
-        <div class="input-group">
-          
-
-          <div class="form-group row">
-              <div class="col-sm-5">
-                <div class=" mb-3">
-                  <input  type="number" formControlName="price" class="form-control" aria-label="Default" required min="0" aria-describedby="inputGroup-sizing-default">
-                </div>
-              </div>
-              <div class="col-sm-5">
-                  <img width="15" height="23" src="./assets/Euro_symbol_black.png"/>
-              </div>
-          </div>
+      <div class="input-group">
+        <div class="form-group mb-3 newPrice">
+          <input  type="number" formControlName="price" class="form-control" min="0" step=".01" aria-label="Default" required aria-describedby="inputGroup-sizing-default">
+          <span class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">€</span>
+          </span>
         </div>
       </div>
+    </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" (click)="modal.dismiss('cancel')">Ακύρωση</button>
-        <button type="submit"  class="btn searchButton" [disabled]="!priceForm.valid">Δημοσίευση</button>
+        <button type="button" class="btn btn-outline-secondary outlineSecondaryNoHover" data-dismiss="modal" (click)="modal.dismiss('cancel')">Ακύρωση</button>
+        <button type="submit"  class="btn orangeButton" [disabled]="!priceForm.valid">Δημοσίευση</button>
       </div>
 </form>
 </ng-template>
 
-<img src="../../assets/editIcon.png" class="img-fluid editIcon" (click)="open(newPrice)" />
+<img src="../../assets/editIcon.png" class="img-fluid editIcon" title="Αλλαγή τιμής" (click)="open(newPrice)" />
