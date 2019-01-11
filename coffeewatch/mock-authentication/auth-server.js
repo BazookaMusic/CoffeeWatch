@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 
 
 const server = jsonServer.create()
-const router = jsonServer.router('../api.json')
+const router = jsonServer.router('./src/api.json')
 var CryptoJS = require("crypto-js");
 const ENCRYPT = CryptoJS.HmacSHA256;
 const KEY = "test";
@@ -71,12 +71,13 @@ server.post('/auth/login', (req, res) => {
 
 
   server.use(router)
+  server.use('/api', router);
 
   server.listen(3000, () => {
     console.log('Run Auth API Server')
   })
 
-  server.use('/api', router);
+
 
   
 
