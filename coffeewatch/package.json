@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "start-DB": "json-server --watch ./api.json",
+    "start-auth": "node ./mock-authentication/auth-server.js"
   },
   "private": true,
   "dependencies": {
@@ -26,8 +28,10 @@
     "angular-star-rating": "^4.0.0-beta.3",
     "bootstrap": "^4.2.1",
     "core-js": "^2.6.1",
+    "crypto-js": "^3.1.9-1",
     "css-star-rating": "^1.2.4",
     "jquery": "^3.3.1",
+    "jsonwebtoken": "^8.4.0",
     "popper": "^1.0.1",
     "popper.js": "^1.14.6",
     "rxjs": "~6.3.3",
