@@ -19,6 +19,9 @@ export class CoffeeshopsService {
   mapCoffeeShops:Observable<[CoffeeShop[],number]>; //coffeeshops, selected index
   public searchLat:number;
   public searchLng:number;
+
+  public searchCoordinates$: BehaviorSubject<[number, number]>;
+
   selectedCoffeeShop$:BehaviorSubject<number>;
   selectedCoffee$:BehaviorSubject<number>;
   CoffeeShops$:BehaviorSubject<CoffeeShop[]>;
@@ -34,6 +37,7 @@ export class CoffeeshopsService {
     this.selectCoffee(undefined);
     this.CoffeeShops$= new BehaviorSubject<CoffeeShop[]>(undefined);
 
+    this.searchCoordinates$ = new BehaviorSubject<[number, number]>(undefined);
   };
 
   mockData()
@@ -108,7 +112,11 @@ export class CoffeeshopsService {
 
   setSearchLocation(lat:number,lng:number)
   {
-    this.searchLat=lat;
-    this.searchLng=lng;
+    this.searchCoordinates$.next([lat, lng]);
+  }
+
+  getSearchLocation()
+  {
+    return this.searchCoordinates$;
   }
 }

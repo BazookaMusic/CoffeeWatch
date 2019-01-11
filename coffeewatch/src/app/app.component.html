@@ -1,9 +1,16 @@
 <app-nav></app-nav>
 <main class="bd-masthead" id="content" role="main">
-  <div class="container">
-    <div class="justify-content-center">
-      <app-search-map></app-search-map>
-      <router-outlet name="contentView"></router-outlet>
+  <div class="container-fluid">
+    <div class="row">
+      <app-search-bar></app-search-bar>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <router-outlet name="contentView"></router-outlet>
+      </div>
+      <div class="col-sm-6">
+        <app-search-map></app-search-map>
+      </div>
     </div>
   </div>
 </main>

@@ -18,6 +18,7 @@ import { NewReviewModalComponent } from './new-review-modal/new-review-modal.com
 import { NewPriceModalComponent } from './new-price-modal/new-price-modal.component';
 import { CoffeeDescriptionComponent } from './coffee-description/coffee-description.component';
 import { NewCoffeeModalComponent } from './new-coffee-modal/new-coffee-modal.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { NewCoffeeModalComponent } from './new-coffee-modal/new-coffee-modal.com
     NewReviewModalComponent,
     NewPriceModalComponent,
     CoffeeDescriptionComponent,
-    NewCoffeeModalComponent
+    NewCoffeeModalComponent,
+    SearchBarComponent
   ],
   imports: [
     NgbModule,

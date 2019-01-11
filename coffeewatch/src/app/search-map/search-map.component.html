@@ -1,8 +1,4 @@
 <div class="appSearchMap">
-  <div class=" searchBar">
-    <input type="text" class="form-control blackBorder" placeholder="Αναζήτηση για..." #search [formControl]="searchControl">
-    <a class="findMyLocation " (click)="getLocation()"><img class="img-fluid" src="../assets/findMyLocation.png" width="40" height="40" /></a>
-  </div>
   <agm-map [latitude]="centerlat" [longitude]="centerlng" [zoom]="13" [usePanning]="true">
     <agm-marker *ngIf="userlat>0" [latitude]="userlat" [longitude]="userlng"></agm-marker>
     <div  *ngIf="markers != undefined" >
@@ -10,4 +6,4 @@
     </div>
     
   </agm-map>
-  </div>
+</div>
