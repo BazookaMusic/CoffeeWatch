@@ -6,10 +6,19 @@
     </div>
     <div class="row">
       <div class="col-sm-6">
-        <router-outlet name="contentView"></router-outlet>
+        <app-coffee-shop-list></app-coffee-shop-list>
       </div>
       <div class="col-sm-6">
-        <app-search-map></app-search-map>
+        <div class="row">
+          <div class="col-sm-12">
+            <app-map></app-map>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <router-outlet name="coffeeShopMedium"></router-outlet>
+          </div>
+        </div>
       </div>
     </div>
   </div>

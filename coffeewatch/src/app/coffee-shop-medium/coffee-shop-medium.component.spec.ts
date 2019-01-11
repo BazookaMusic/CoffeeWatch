@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CoffeeShopPreviewComponent } from './coffee-shop-preview.component';
+import { CoffeeShopMediumComponent } from './coffee-shop-medium.component';
 
-describe('CoffeeShopPreviewComponent', () => {
-  let component: CoffeeShopPreviewComponent;
-  let fixture: ComponentFixture<CoffeeShopPreviewComponent>;
+describe('CoffeeShopMediumComponent', () => {
+  let component: CoffeeShopMediumComponent;
+  let fixture: ComponentFixture<CoffeeShopMediumComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoffeeShopPreviewComponent ]
+      declarations: [ CoffeeShopMediumComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CoffeeShopPreviewComponent);
+    fixture = TestBed.createComponent(CoffeeShopMediumComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

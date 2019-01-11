@@ -5,22 +5,22 @@ import { CoffeeshopsService } from '../coffeeshops.service';
 import { CoffeeShop } from '../coffee-shop';
 
 @Component({
-  selector: 'app-search-map',
-  templateUrl: './search-map.component.html',
-  styleUrls: ['./search-map.component.css']
+  selector: 'app-map',
+  templateUrl: './map.component.html',
+  styleUrls: ['./map.component.css']
 })
 
-export class SearchMapComponent implements OnInit
+export class MapComponent implements OnInit
 {
   centerlat: number;
   centerlng: number;
-  zoom:number;
-  userlat:number = -1.0;
-  userlng:number = -1.0;
-  markers: [number,number][];
+  zoom: number;
+  userlat: number;
+  userlng: number;
+  markers: [number, number][];
 
-  coffeeShops:CoffeeShop[];
-  selectedCoffeeShop:number;
+  coffeeShops: CoffeeShop[];
+  selectedCoffeeShop: number;
 
   autocomplete: google.maps.places.Autocomplete;
 
@@ -28,23 +28,24 @@ export class SearchMapComponent implements OnInit
 
   ngOnInit()
   {
-    this.centerlat = 37.982038;
-    this.centerlng = 23.730271;
-
     this.coffeeShopsService.getSearchLocation().subscribe(coordinates =>
       {
         if(coordinates == undefined)
         {
-          this.centerlat = 37.982038;
-          this.centerlng = 23.730271;
+          this.userlat = -1.0;
+          this.userlng = -1.0;
+          setTimeout(() => {
+            this.centerlat = 37.982038;
+            this.centerlng = 23.730271;
+          }, 50);
         }
         else
         {
+          this.userlat = coordinates[0];
+          this.userlng = coordinates[1];
           setTimeout(() => {
             this.centerlat = coordinates[0];
             this.centerlng = coordinates[1];
-            this.userlat = coordinates[0];
-            this.userlng = coordinates[1];
           }, 50);
         }
       });

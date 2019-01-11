@@ -1,8 +1,12 @@
+.rating.medium .label-value
+{
+    font-size: 1rem!important;
+}
 .table td
 {
     vertical-align: middle;
     border: none;
-    padding: 0.45rem;
+    padding: 0.3rem;
 }
 
 .table
@@ -17,7 +21,7 @@
 
 .coffeeShopName
 {
-    font-size: 3rem;
+    font-size: 2rem;
     display: inline-flex;
     align-items: center;
     padding-left: 0;
@@ -26,12 +30,11 @@
 .coffeeShopDetailsIcons
 {
     text-align:center;
-    padding: 0.7rem 0 !important;
+    padding: 0.4rem 0 !important;
 }
 .showMore
 {
     text-align: center;
-    margin-bottom: 15px;
 }
 
 .showMore a
@@ -42,10 +45,10 @@
 
 .coffeeName
 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 .coffeeShopDetails
 {
-    margin-top: 15px;
+    margin-top: 0.5rem;
 }

@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 import { StarRatingModule } from 'angular-star-rating';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SearchMapComponent } from './search-map/search-map.component';
+import { MapComponent } from './map/map.component';
 import { AgmCoreModule } from '@agm/core';
 import { NavComponent } from './nav/nav.component';
 import { CoffeeShopListComponent } from './coffee-shop-list/coffee-shop-list.component';
-import { CoffeeShopPreviewComponent } from './coffee-shop-preview/coffee-shop-preview.component';
+import { CoffeeShopSmallComponent } from './coffee-shop-small/coffee-shop-small.component';
 import { CoffeeShopFullComponent } from './coffee-shop-full/coffee-shop-full.component';
 import { CoffeeshopsService } from './coffeeshops.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -19,15 +19,16 @@ import { NewPriceModalComponent } from './new-price-modal/new-price-modal.compon
 import { CoffeeDescriptionComponent } from './coffee-description/coffee-description.component';
 import { NewCoffeeModalComponent } from './new-coffee-modal/new-coffee-modal.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import { CoffeeShopMediumComponent } from './coffee-shop-medium/coffee-shop-medium.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchMapComponent,
+    MapComponent,
     NavComponent,
     CoffeeShopListComponent,
-    CoffeeShopPreviewComponent,
+    CoffeeShopSmallComponent,
     CoffeeShopFullComponent,
     CoffeeReviewsComponent,
     CoffeeStatisticsComponent,
@@ -35,7 +36,8 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     NewPriceModalComponent,
     CoffeeDescriptionComponent,
     NewCoffeeModalComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    CoffeeShopMediumComponent
   ],
   imports: [
     NgbModule,

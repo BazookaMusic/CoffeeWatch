@@ -54,7 +54,7 @@ export class NewCoffeeModalComponent implements OnInit
      "extras":['',[Validators.maxLength(this.MAXLEN)]],
      "pricesm":['',[Validators.min(0)]],
      "pricemd":['',[Validators.min(0)]],
-     "pricelg":['',[Validators.min(0)]],
+     "pricelg":['',[Validators.min(0)]]
    });
   }
 }

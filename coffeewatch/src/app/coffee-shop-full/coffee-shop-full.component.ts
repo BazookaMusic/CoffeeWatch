@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -10,6 +10,7 @@ import { CoffeeshopsService } from '../coffeeshops.service';
   templateUrl: './coffee-shop-full.component.html',
   styleUrls: ['./coffee-shop-full.component.css']
 })
+
 export class CoffeeShopFullComponent implements OnInit
 {
   coffeeShop: CoffeeShop;

@@ -22,7 +22,7 @@
   <div class="col-sm-7">
     <table class="table">
       <tbody>
-        <tr *ngFor="let i of [0, 1, 2]">
+        <tr *ngFor="let i of [0, 1]">
           <td>
             <table class="table">
               <tbody>
@@ -43,9 +43,6 @@
 </div>
 <div class="row">
   <div class="col-sm showMore">
-    <a [routerLink]="[{ outlets: {contentView: ['coffeeShop', coffeeShop.id ] } }]" class="fancyFont">
-      Show More
-      <img src="../../assets/rightArrowIcon.png" class="img-fluid"/>
-    </a>
+    <a [routerLink]="[{ outlets: {contentView: ['coffeeShopFull', coffeeShop.id ] } }]" class="fancyFont">Show More<img src="../../assets/rightArrowIcon.png" class="img-fluid"/></a>
   </div>
 </div>

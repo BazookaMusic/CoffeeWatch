@@ -4,11 +4,13 @@
     <img src="../assets/filterIcon.png" class="img-fluid" />
   </a>
 </div>
-<hr />
+<hr *ngIf="coffeeShops != undefined" />
 <div *ngIf="coffeeShops != undefined" class="">
   <ul class="scrollable">
-    <li *ngFor="let coffeeShopItem of coffeeShops;let coffeeShopIndex = index" (click)="onClickCoffeeShop(coffeeShopIndex)" [ngClass]="' shadow-sm p-3 mb-5  rounded ' + (clickedCoffeeShops[coffeeShopIndex] ? 'csClicked': 'csHover contentBG')">
-      <app-coffee-shop-preview [coffeeShop]="coffeeShopItem"></app-coffee-shop-preview>
+    <li *ngFor="let coffeeShopItem of coffeeShops;let coffeeShopIndex = index" (click)="onClickCoffeeShop(coffeeShopIndex)" 
+    [routerLink]="clickedCoffeeShops[coffeeShopIndex] ? [{ outlets: {coffeeShopMedium: ['coffeeShopMedium', coffeeShopItem.id ] } }] : []" 
+    [ngClass]="'shadow-sm rounded contentBG ' + (clickedCoffeeShops[coffeeShopIndex] ? 'csClicked': 'csHover')">
+      <app-coffee-shop-small [coffeeShop]="coffeeShopItem"></app-coffee-shop-small>
     </li>
   </ul>
 </div>

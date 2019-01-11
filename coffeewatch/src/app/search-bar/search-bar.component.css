@@ -1,18 +1,12 @@
 .appSearchMap
 {
-     margin-top: 30px;
-     margin-bottom: 25px;
+    margin: 2vh 0;
 }
 
-.searchBar
-{
-    margin-bottom: 20px;
-}
-
-.searchBar .form-control
+.form-control
 {
     display: inline-block;
-    width: 95%;
+    width: 60%;
 }
 
 .searchButton

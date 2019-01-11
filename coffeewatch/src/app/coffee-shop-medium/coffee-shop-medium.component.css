@@ -14,36 +14,25 @@
 .coffees 
 {
     width:100%;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
 }
 
 .coffeeShopDetails
 {
-    margin-top: 15px;
+    margin-top: 0.5rem;
 }
 
 .coffeeShopName
 {
-    font-size: 3rem;
+    font-size: 2rem;
     display: inline-flex;
     align-items: center;
     padding-left: 0;
 }
 
-.coffeeName
+.coffeeShopMedium
 {
-    margin: 1rem 0;
-    font-size: 2rem;
-}
-
-.coffeeName span
-{
-    display: inline-flex;
-    align-items: center;
-}
-
-.coffeeShopFull
-{
+    margin-top: 1rem;
     padding: 0.5rem;
 }
 
@@ -60,20 +49,10 @@
 
 .scrollable
 {
-    height:50vh;
+    height:40vh;
     overflow-y:auto;
     max-width: 100%;
     overflow-x: hidden;
-}
-
-.trClicked
-{
-    background-color:rgb(206, 190, 158);
-}
-
-.trHover:hover
-{
-    background-color:rgb(234, 217, 183);
 }
 
 .coffeeDetails
@@ -87,12 +66,6 @@
     color:#3c3c3c;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link
-{
-    background-color: #cd6133;
-    color: white !important;
-}
-
 .undecoratedLink
 {
     color: #3c3c3c;
@@ -104,10 +77,4 @@
 {
     display: flex;
     align-items: center;
-}
-
-.newCoffee
-{
-    margin-top: 2rem;
-    margin-left: 1rem;
 }

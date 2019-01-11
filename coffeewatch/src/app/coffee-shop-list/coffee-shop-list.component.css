@@ -24,20 +24,22 @@
     height: 3vh;
 }
 
-ul {
+ul
+{
   list-style-type: none;
   padding-left: 0;
 }
 
 li
 {
-    margin: 10px;
+    margin: 0 0 1.5rem 0;
+    padding: 1rem 1rem 0.5rem 1rem;
     cursor: pointer;
 }
 
 .scrollable
 {
-    height:40vh;
+    height:75vh;
     overflow-y:auto;
     max-width: 100%;
     overflow-x: hidden;
@@ -45,10 +47,10 @@ li
 
 .csClicked
 {
-    background-color:rgb(206, 190, 158);
+    background-color:rgb(206, 190, 158) !important;
 }
 
 .csHover:hover
 {
-    background-color:rgb(234, 217, 183);
+    background-color:rgb(234, 217, 183) !important;
 }

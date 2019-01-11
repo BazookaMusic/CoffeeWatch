@@ -5,16 +5,14 @@ import {Coffee} from '../coffee'
 import {Review} from '../review'
 import {CoffeeshopsService} from "../coffeeshops.service"
 
-
-
 @Component({
   selector: 'app-coffee-shop-list',
   templateUrl: './coffee-shop-list.component.html',
   styleUrls: ['./coffee-shop-list.component.css']
 })
 
-export class CoffeeShopListComponent implements OnInit {
-
+export class CoffeeShopListComponent implements OnInit
+{
   coffeeShops:CoffeeShop[];
   reviews: Review[];
   clickedCoffeeShops: boolean[] = [];
@@ -24,20 +22,20 @@ export class CoffeeShopListComponent implements OnInit {
 
   ngOnInit() 
   {
-    this.getCoffeeShops();
+    this.selectedCoffeeShop = undefined;
 
+    this.getCoffeeShops();
   }
 
   getCoffeeShops()
   {
     this.coffeeShopsService.getCoffeeShops().subscribe(coffeeShopsItem => 
       {
-      if (coffeeShopsItem != undefined)
-      {
-        this.coffeeShops = coffeeShopsItem;
-        this.refresh();
-      }
-      
+        if (coffeeShopsItem != undefined)
+        {
+          this.coffeeShops = coffeeShopsItem;
+          this.refresh();
+        }
       });
   }
 
@@ -53,9 +51,7 @@ export class CoffeeShopListComponent implements OnInit {
 
     this.selectedCoffeeShop = undefined;
     this.coffeeShopsService.selectCoffeeShop(undefined);
-
   }
-
 
   onClickCoffeeShop(coffeeShopIndex: number)
   {
@@ -63,6 +59,7 @@ export class CoffeeShopListComponent implements OnInit {
     {
         this.clickedCoffeeShops[coffeeShopIndex] = false;
         this.selectedCoffeeShop = undefined;
+        this.coffeeShopsService.selectCoffeeShop(undefined);
     }
     else
     {
@@ -73,6 +70,5 @@ export class CoffeeShopListComponent implements OnInit {
       this.selectedCoffeeShop = coffeeShopIndex;
       this.coffeeShopsService.selectCoffeeShop(coffeeShopIndex);
     }
-    
   }
 }
