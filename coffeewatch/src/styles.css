@@ -78,11 +78,16 @@ hr
     color: red !important;
 }
 
+.outlineSecondaryNoHover
+{
+  padding: 0.5rem 1rem !important;
+}
+
 .outlineSecondaryNoHover:hover
 {
     color: #6c757d !important;
     border-color: #6c757d !important;
-    background-color: transparent !important;
+    background-color: #f2e9e1 !important;
 }
 
 .table .table

@@ -1,67 +1,131 @@
 <ng-template #filterSearch let-modal>
   <div class="modal-header">
-    <h4 class="modal-title">Φίλτρα Αναζήτησης</h4>
+    <h3 class="modal-title">Φίλτρα Αναζήτησης</h3>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <form [formGroup]="coffeeForm" id="mainform" (ngSubmit)="onCoffeeSubmit();modal.dismiss('Submit')">
-      <div class="form-group row">
-        <div class="col-sm-7 inlineDescr">
-          <span class="input-group-prepend">
-            <span class="input-group-text bgColor" id="basic-addon2">Όνομα:</span>
-          </span>
-          <input type="text" size="100" formControlName="name" class="form-control" aria-label="Default"
-            aria-describedby="inputGroup-sizing-default" />
-        </div>
+      <div class="form-group row label">
+        <h4>Κατηγορίες καφέ:</h4>
+        <button type="button" class="btn btn-outline-secondary outlineSecondaryNoHover checkAllButton">Επιλογή όλων</button>
+        <button type="button" class="btn btn-outline-secondary outlineSecondaryNoHover checkAllButton">Αποεπιλογή όλων</button>
       </div>
       <div class="form-group row">
-        <div class="col-sm-7 inlineDescr">
-          <span class="input-group-prepend">
-            <span class="input-group-text bgColor" id="basic-addon2">Κατηγορία:</span>
-          </span>
-          <select id="categories" formControlName="categories">
-            <option *ngFor="let category of ['Espresso','Freddo espresso','Cappuccino','Freddo cappuccino', 'Latte', 'Nes', 'Frappe', 'Φίλτρου', 'Ελληνικός']"
-              [value]="category">{{category}}</option>
-          </select>
-        </div>
+        <table class="table">
+          <tr>
+            <td>
+              <span>
+                <input class="checkBox" type="checkbox" value="" id="cat0">
+                <label class="form-check-label clickableLabel" for="cat0">Espresso</label>
+              </span>
+            </td>
+            <td>
+              <span>
+                <input class="checkBox" type="checkbox" value="" id="cat1">
+                <label class="form-check-label clickableLabel" for="cat1">Freddo espresso</label>
+              </span>
+            </td>
+            <td>
+              <span>
+                <input class="checkBox" type="checkbox" value="" id="cat2">
+                <label class="form-check-label clickableLabel" for="cat2">Cappuccino</label>
+              </span>
+            </td>
+            <td>
+              <span>
+                <input class="checkBox" type="checkbox" value="" id="cat3">
+                <label class="form-check-label clickableLabel" for="cat3">Freddo cappuccino</label>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span>
+                <input class="checkBox" type="checkbox" value="" id="cat4">
+                <label class="form-check-label clickableLabel" for="cat4">Latte</label>
+              </span>
+            </td>
+            <td>
+              <span>
+                <input class="checkBox" type="checkbox" value="" id="cat5">
+                <label class="form-check-label clickableLabel" for="cat5">Nes</label>
+              </span>
+            </td>
+            <td>
+              <span>
+                <input class="checkBox" type="checkbox" value="" id="cat6">
+                <label class="form-check-label clickableLabel" for="cat6">Frappe</label>
+              </span>
+            </td>
+            <td>
+              <span>
+                <input class="checkBox" type="checkbox" value="" id="cat7">
+                <label class="form-check-label clickableLabel" for="cat7">Φίλτρου</label>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span>
+                <input class="checkBox" type="checkbox" value="" id="cat8">
+                <label class="form-check-label clickableLabel" for="cat8">Ελληνικός</label>
+              </span>
+            </td>
+          </tr>
+        </table>
       </div>
-      <div class="row prices">
-        <h5>Τιμές:</h5>
+      <div class="form-group row label">
+        <h4>Ελάχιστη βαθμολογία:</h4>
       </div>
-      <div class="form-group row">
+      <div class="form-group row starsDiv justify-content-center">
+          <star-rating-control class="clickableStars" formControlName="starsRating" staticColor="default" label-position="right" [rating]="0" [hoverEnabled]="true" size="large"></star-rating-control>
+      </div>
+      <div class="form-group row label">
+        <h4>Τιμή:</h4>
+      </div>
+      <div class="form-group row justify-content-center">
         <span class="col-sm-4 inlineDescr">
           <span class="input-group-prepend">
-            <span class="input-group-text bgColor" id="basic-addon2">Μονός:</span>
+            <span class="input-group-text bgColor">Ελάχιστη:</span>
           </span>
-          <input class="price" type="number" step=".01" id="price-sm" min="0" formControlName="pricesm" />
+          <input class="price" type="number" step=".1" id="price-min" min="0" formControlName="priceMin" />
         </span>
         <span class="col-sm-4 inlineDescr">
           <span class="input-group-prepend">
-            <span class="input-group-text bgColor" id="basic-addon2">Διπλός:</span>
+            <span class="input-group-text bgColor">Μέγιστη:</span>
           </span>
-          <input class="price" type="number" step=".01" id="price-md" min="0" formControlName="pricemd" />
-        </span>
-        <span class="col-sm-4 inlineDescr">
-          <span class="input-group-prepend">
-            <span class="input-group-text bgColor" id="basic-addon2">Τριπλός:</span>
-          </span>
-          <input class="price" type="number" step=".01" id="price-lg" min="0" formControlName="pricelg" />
+          <input class="price" type="number" step=".1" id="price-max" min="0" formControlName="priceMax" />
         </span>
       </div>
-      <h5>Περιγραφή:</h5>
-      <textarea class="form-control" rows="4" formControlName="description" maxlength={{MAXLEN}} required placeholder="Λίγα λόγια για τον καφέ"
-        id="desc-text"></textarea>
-      <p *ngIf="coffeeForm.controls.description.value.length>=MINLEN">Απομένουν {{MAXLEN -
-        coffeeForm.controls.description.value.length}} χαρακτήρες</p>
-      <p *ngIf="coffeeForm.controls.description.value.length < MINLEN"> Απαιτούνται ακόμα {{MINLEN -
-        coffeeForm.controls.description.value.length}} χαρακτήρες</p>
-      <h5>Προσθετά:</h5>
-      <textarea class="form-control" rows="4" formControlName="extras" maxlength={{MAXLEN}} placeholder="Προσθετά χαρακτηριστικά (πχ. γάλα +0.5€)"
-        id="extras"></textarea>
-      <p *ngIf="coffeeForm.controls.extras.value.length>0">Απομένουν {{MAXLEN -
-        coffeeForm.controls.extras.value.length}} χαρακτήρες</p>
+      <div class="form-group row label">
+        <h4>Μέγιστη απόσταση καφετεριών:</h4>
+      </div>
+      <div class="row maxDistanceSlider justify-content-center">
+        <ng5-slider class="col-sm-6" [(value)]="value" [options]="options"></ng5-slider>
+      </div>
+      <div class="form-group row label">
+        <h4>Ταξινόμιση με βάση:</h4>
+      </div>
+      <div class="form-group row justify-content-center radiosDiv">
+        <span class="customCol">
+          <input class="radio" type="radio" name="sortRadios" id="priceRadio" value="sortPrice" />
+          <label class="form-check-label clickableLabel" for="priceRadio">Τιμή</label>
+        </span>
+        <span class="customCol">
+          <input class="radio" type="radio" name="sortRadios" id="distanceRadio" value="sortDistance" />
+          <label class="form-check-label clickableLabel" for="distanceRadio">Απόσταση</label>
+        </span>
+        <span class="customCol">
+          <input class="radio" type="radio" name="sortRadios" id="ratingRadio" value="sortRating" />
+          <label class="form-check-label clickableLabel" for="ratingRadio">Βαθμολογία</label>
+        </span>
+        <span class="customCol">
+          <input class="radio" type="radio" name="sortRadios" id="valueForMoneyRadio" value="sortvalueForMoney" />
+          <label class="form-check-label clickableLabel" for="valueForMoneyRadio">Value for money</label>
+        </span>
+      </div>
     </form>
   </div>
   <div class="modal-footer">

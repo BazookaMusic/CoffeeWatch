@@ -8,7 +8,7 @@
   <div class="modal-body">
     <form [formGroup]="reviewForm" (ngSubmit)="onReviewSubmit();modal.dismiss('Submit')">
         <label for="recipient-name" class="col-form-label">Βαθμολογία:</label>
-        <div ><star-rating-control formControlName="starsRating" label-position="right" [labelText]="sdfg" [rating]="0" [hoverEnabled]="true" size="large"></star-rating-control></div>
+        <div ><star-rating-control class="clickableStars" formControlName="starsRating" label-position="right" [rating]="0" [hoverEnabled]="true" size="large"></star-rating-control></div>
         <label for="message-text" class="col-form-label">Αξιολόγηση:</label>
         <textarea class="form-control" rows="4" formControlName="review" maxlength={{MAXLEN}} required  placeholder="Πώς σας φάνηκε; ({{MAXLEN}} χαρακτήρες το πολύ)" id="message-text"></textarea>
         <p *ngIf="reviewForm.controls.review.value.length>=MINLEN" >Απομένουν {{MAXLEN - reviewForm.controls.review.value.length}} χαρακτήρες</p>

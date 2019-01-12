@@ -23,6 +23,7 @@ import { CoffeeShopMediumComponent } from './coffee-shop-medium/coffee-shop-medi
 import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
 import {UserService} from "./user.service";
+import { Ng5SliderModule } from 'ng5-slider';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -53,6 +54,7 @@ import { HomePageComponent } from './home-page/home-page.component';
   ],
   imports: [
     NgbModule,
+    Ng5SliderModule,
     BrowserModule,
     AppRoutingModule,
     AgmCoreModule.forRoot({
