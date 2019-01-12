@@ -27,6 +27,9 @@ import {UserService} from "./user.service";
 export function tokenGetter() {
   return localStorage.getItem('access_token');
 }
+import { FilterSearchModalComponent } from './filter-search-modal/filter-search-modal.component';
+import { HomePageComponent } from './home-page/home-page.component';
+
 
 
 @NgModule({
@@ -44,7 +47,9 @@ export function tokenGetter() {
     CoffeeDescriptionComponent,
     NewCoffeeModalComponent,
     SearchBarComponent,
-    CoffeeShopMediumComponent
+    CoffeeShopMediumComponent,
+    FilterSearchModalComponent,
+    HomePageComponent
   ],
   imports: [
     NgbModule,

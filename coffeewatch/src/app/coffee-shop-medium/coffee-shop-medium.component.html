@@ -1,44 +1,50 @@
-<div *ngIf="hasSelectedCoffeeShop()" class="contentBG coffeeShopMedium shadow-sm p-3 mb-5  rounded">
-  <div class="row">
-    <div class="col-sm-5">
-      <div class="row">
-        <span class="col-sm-3"><img src={{coffeeShop.iconPath}} class="img-fluid" /></span>
-        <span class="coffeeShopName fancyFont col-sm-9">{{coffeeShop.name}}</span>
+<div *ngIf="coffeeShop != undefined">
+  <div class="coffeeShopListTitleRow">
+  <h2 class="coffeeShopListTitle fancyFont">Επιλεγμένη Καφετέρια</h2>
+  </div>
+  <hr />
+  <div class="contentBG coffeeShopMedium shadow-sm rounded">
+    <div class="row">
+      <div class="col-sm-5">
+        <div class="row">
+          <span class="col-sm-3"><img src={{coffeeShop.iconPath}} class="img-fluid" /></span>
+          <span class="coffeeShopName fancyFont col-sm-9">{{coffeeShop.name}}</span>
+        </div>
+        <table class="table coffeeShopDetails">
+          <tr>
+            <td class="coffeeShopDetailsIcons"><img src="../../assets/locationPointIcon.png" class="img-fluid" /></td>
+            <td><a href="https://www.google.com/maps/search/?api=1&query={{coffeeShop.address}}" target="_blank">{{coffeeShop.address}}</a></td>
+          </tr>
+          <tr>
+            <td class="coffeeShopDetailsIcons"><img src="../../assets/telephoneIcon.png" class="img-fluid" /></td>
+            <td><a href="tel:{{coffeeShop.telephone}}">{{coffeeShop.telephone}}</a></td>
+          </tr>
+          <tr>
+            <td class="coffeeShopDetailsIcons"><img src="../../assets/websiteIcon.png" class="img-fluid" /></td>
+            <td><a href="http://{{coffeeShop.website}}" target="_blank">{{coffeeShop.website}}</a></td>
+          </tr>
+        </table>
       </div>
-      <table class="table coffeeShopDetails">
-        <tr>
-          <td class="coffeeShopDetailsIcons"><img src="../../assets/locationPointIcon.png" class="img-fluid" /></td>
-          <td><a href="https://www.google.com/maps/search/?api=1&query={{coffeeShop.address}}" target="_blank">{{coffeeShop.address}}</a></td>
-        </tr>
-        <tr>
-          <td class="coffeeShopDetailsIcons"><img src="../../assets/telephoneIcon.png" class="img-fluid" /></td>
-          <td><a href="tel:{{coffeeShop.telephone}}">{{coffeeShop.telephone}}</a></td>
-        </tr>
-        <tr>
-          <td class="coffeeShopDetailsIcons"><img src="../../assets/websiteIcon.png" class="img-fluid" /></td>
-          <td><a href="http://{{coffeeShop.website}}" target="_blank">{{coffeeShop.website}}</a></td>
-        </tr>
-      </table>
-    </div>
-    <div class="col-sm-7 scrollable">
-      <table class="table">
-        <tr *ngFor="let coffeeItem of coffeeShop.coffees; let coffeeIndex = index" id={{coffeeIndex}}>
-          <td class="coffees">
-            <table class="table">
-              <tr>
-                <td class="coffees">{{coffeeItem.name}}</td>
-              </tr>
-              <tr>
-                <td class="coffees">
-                  <star-rating labelPosition="right" staticColor="default" [labelText]="coffeeItem.rating + ' (' + coffeeItem.numOfReviews + ' κριτικές)'"
-                    [rating]="coffeeItem.rating" [showHalfStars]="true" [readOnly]="true"></star-rating>
-                </td>
-              </tr>
-            </table>
-          </td>
-          <td class="coffeePrice coffees">{{coffeeItem.price}}€</td>
-        </tr>
-      </table>
+      <div class="col-sm-7 scrollable">
+        <table class="table">
+          <tr *ngFor="let coffeeItem of coffeeShop.coffees; let coffeeIndex = index" id={{coffeeIndex}}>
+            <td class="coffees">
+              <table class="table">
+                <tr>
+                  <td class="coffees">{{coffeeItem.name}}</td>
+                </tr>
+                <tr>
+                  <td class="coffees">
+                    <star-rating labelPosition="right" staticColor="default" [labelText]="coffeeItem.rating + ' (' + coffeeItem.numOfReviews + ' κριτικές)'"
+                      [rating]="coffeeItem.rating" [showHalfStars]="true" [readOnly]="true"></star-rating>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td class="coffeePrice coffees">{{coffeeItem.price}}€</td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </div>

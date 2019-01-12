@@ -1,3 +1,9 @@
+.coffeeShopMedium
+{
+    margin-top: 1rem;
+    padding: 1rem 1rem 0.5rem 1rem;
+}
+
 .table td
 {
     vertical-align: middle;
@@ -14,31 +20,21 @@
 .coffees 
 {
     width:100%;
-    font-size: 1.2rem;
+    font-size: 0.9vw;
 }
 
 .coffeeShopDetails
 {
     margin-top: 0.5rem;
+    font-size: 0.8vw;
 }
 
 .coffeeShopName
 {
-    font-size: 2rem;
+    font-size: 1.6vw;
     display: inline-flex;
     align-items: center;
     padding-left: 0;
-}
-
-.coffeeShopMedium
-{
-    margin-top: 1rem;
-    padding: 0.5rem;
-}
-
-.table .table
-{
-    background-color: transparent;
 }
 
 .coffeeShopDetailsIcons
@@ -49,32 +45,23 @@
 
 .scrollable
 {
-    height:40vh;
+    height:35vh;
     overflow-y:auto;
     max-width: 100%;
     overflow-x: hidden;
 }
 
-.coffeeDetails
+.coffeeShopListTitle
 {
-    margin: 1rem 0.5rem;
+    font-weight: bold;
+    position: absolute; 
+    bottom:0;
+    margin-bottom: 0;
 }
 
-.coffeeTabs, .coffeeTabs a
+.coffeeShopListTitleRow 
 {
-    font-size: 1.2rem;
-    color:#3c3c3c;
-}
-
-.undecoratedLink
-{
-    color: #3c3c3c;
-    text-decoration: none;
-    font-size: 23px;
-}
-
-.verticalCenter
-{
-    display: flex;
-    align-items: center;
+    position: relative;
+    height: 3vh;
+    margin-top: 2vh;
 }

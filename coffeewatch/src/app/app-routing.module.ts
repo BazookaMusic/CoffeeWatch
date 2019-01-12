@@ -7,12 +7,13 @@ import { CoffeeReviewsComponent } from './coffee-reviews/coffee-reviews.componen
 import { CoffeeStatisticsComponent } from './coffee-statistics/coffee-statistics.component';
 import { CoffeeDescriptionComponent } from './coffee-description/coffee-description.component';
 import { CoffeeShopMediumComponent } from './coffee-shop-medium/coffee-shop-medium.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 const routes: Routes = 
 [
-    { path: '', component: CoffeeShopListComponent, outlet: "contentView" },
-    { path: 'coffeeShopMedium/:coffeeShopID', component: CoffeeShopMediumComponent, outlet: "coffeeShopMedium" },
-    { path: 'coffeeShopFull/:coffeeShopID', component: CoffeeShopFullComponent, outlet: "contentView",
+    { path: 'home', component: HomePageComponent},
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: 'coffeeShopFull/:coffeeShopID', component: CoffeeShopFullComponent,
       children: 
       [
           { path: 'coffee/:coffeeID/description', component: CoffeeDescriptionComponent, outlet: "detailsView" },

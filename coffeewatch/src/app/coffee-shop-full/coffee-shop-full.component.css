@@ -1,3 +1,14 @@
+.container-fluid
+{
+    width: 60%;
+}
+
+.coffeeShopFull
+{
+    padding: 1rem 1rem 0.5rem 1rem;
+    margin: 8vh 0;
+}
+
 .table td
 {
     vertical-align: middle;
@@ -42,16 +53,6 @@
     align-items: center;
 }
 
-.coffeeShopFull
-{
-    padding: 0.5rem;
-}
-
-.table .table
-{
-    background-color: transparent;
-}
-
 .coffeeShopDetailsIcons
 {
     text-align:center;
@@ -60,7 +61,7 @@
 
 .scrollable
 {
-    height:50vh;
+    height:47vh;
     overflow-y:auto;
     max-width: 100%;
     overflow-x: hidden;

@@ -28,12 +28,19 @@ export class MapComponent implements OnInit
 
   ngOnInit()
   {
+    this.userlat = undefined;
+    this.userlng = undefined;
+    this.centerlat = 37.982038;
+    this.centerlng = 23.730271;
+
     this.coffeeShopsService.getSearchLocation().subscribe(coordinates =>
       {
         if(coordinates == undefined)
         {
-          this.userlat = -1.0;
-          this.userlng = -1.0;
+          this.userlat = undefined;
+          this.userlng = undefined;
+          this.centerlat = 37.982038;
+          this.centerlng = 23.730271;
           setTimeout(() => {
             this.centerlat = 37.982038;
             this.centerlng = 23.730271;
@@ -41,9 +48,9 @@ export class MapComponent implements OnInit
         }
         else
         {
-          this.userlat = coordinates[0];
-          this.userlng = coordinates[1];
           setTimeout(() => {
+            this.userlat = coordinates[0];
+            this.userlng = coordinates[1];
             this.centerlat = coordinates[0];
             this.centerlng = coordinates[1];
           }, 50);

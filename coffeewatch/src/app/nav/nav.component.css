@@ -15,10 +15,15 @@
   max-height: 5vh;
 }
 
+.loginIcon
+{
+  max-height: 4vh;
+}
+
 .siteTitle
 {
   margin-left: 0.5rem;
-  font-size: 2rem;
+  font-size: 1.7vw;
   font-weight: bold;
 }
 
