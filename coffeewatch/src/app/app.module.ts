@@ -20,6 +20,13 @@ import { CoffeeDescriptionComponent } from './coffee-description/coffee-descript
 import { NewCoffeeModalComponent } from './new-coffee-modal/new-coffee-modal.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { CoffeeShopMediumComponent } from './coffee-shop-medium/coffee-shop-medium.component';
+import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
+import { HttpClientModule } from '@angular/common/http';
+import {UserService} from "./user.service";
+
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
 
 
 @NgModule({
@@ -48,9 +55,17 @@ import { CoffeeShopMediumComponent } from './coffee-shop-medium/coffee-shop-medi
       libraries: ["places"]
     }),
     ReactiveFormsModule,
-    StarRatingModule.forRoot()
+    StarRatingModule.forRoot(),
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['localhost:8765'],
+        blacklistedRoutes: ['localhost:8765/login']
+      }
+    })
   ],
-  providers: [],
+  providers: [HttpClientModule, JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
