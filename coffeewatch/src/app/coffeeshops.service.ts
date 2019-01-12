@@ -59,6 +59,8 @@ export class CoffeeshopsService {
     this.coffeeShops[0] = new CoffeeShop(1, "Mikel", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikelcoffee.com", "1234567890",37.976703, 23.726184, this.coffees);
     this.coffeeShops[1] = new CoffeeShop(2, "CoffeeShop2", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikelcoffee.com", "1234567890", 37.976607, 23.726367,this.coffees);
     this.coffeeShops[2] = new CoffeeShop(3, "CoffeeShop3", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikelcoffee.com", "1234567890",37.977021, 23.727494, this.coffees);
+    this.coffeeShops[3] = new CoffeeShop(4, "CoffeeShop4", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikelcoffee.com", "1234567890", 37.977021, 23.727494, this.coffees);
+    this.coffeeShops[4] = new CoffeeShop(5, "CoffeeShop5", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikelcoffee.com", "1234567890", 37.977021, 23.727494, this.coffees);
   }
 
   getCoffeeShop(id: number): Observable<CoffeeShop>

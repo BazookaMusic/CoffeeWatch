@@ -1,73 +1,74 @@
-<hr />
-<div class="contentBG coffeeShopFull shadow-sm p-3 mb-5  rounded">
-  <div class="row">
-    <div class="col-sm-5">
-      <div class="row">
-        <span class="col-sm-3"><img src={{coffeeShop.iconPath}} class="img-fluid" /></span>
-        <span class="coffeeShopName fancyFont col-sm-9">{{coffeeShop.name}}</span>
-      </div>
-      <table class="table coffeeShopDetails">
-        <tr>
-          <td class="coffeeShopDetailsIcons"><img src="../../assets/locationPointIcon.png" class="img-fluid" /></td>
-          <td><a href="https://www.google.com/maps/search/?api=1&query={{coffeeShop.address}}" target="_blank">{{coffeeShop.address}}</a></td>
-        </tr>
-        <tr>
-          <td class="coffeeShopDetailsIcons"><img src="../../assets/telephoneIcon.png" class="img-fluid" /></td>
-          <td><a href="tel:{{coffeeShop.telephone}}">{{coffeeShop.telephone}}</a></td>
-        </tr>
-        <tr>
-          <td class="coffeeShopDetailsIcons"><img src="../../assets/websiteIcon.png" class="img-fluid" /></td>
-          <td><a href="http://{{coffeeShop.website}}" target="_blank">{{coffeeShop.website}}</a></td>
-        </tr>
-      </table>
-      <div class="row newCoffee">
-        <app-new-coffee-modal></app-new-coffee-modal>
-      </div>
-    </div>
-    <div class="col-sm-7 scrollable">
-      <table class="table">
-          <a class="undecoratedLink" [routerLink]="activeTab === 'description' && selectedCoffee != undefined ? [{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'description' ] } }] : []">
-            <tr *ngFor="let coffeeItem of coffeeShop.coffees; let coffeeIndex = index" id={{coffeeIndex}} (click)="onClick(coffeeIndex)" [ngClass]="clickedCoffees[coffeeIndex] ? 'trClicked': 'trHover'">
-              <td class="coffees">
-                <table class="table">
-                    <tr>
-                      <td class="coffees">{{coffeeItem.name}}</td>
-                    </tr>
-                    <tr>
-                      <td class="coffees"><star-rating labelPosition="right" staticColor="default" [labelText]="coffeeItem.rating + ' (' + coffeeItem.numOfReviews + ' κριτικές)'" [rating]="coffeeItem.rating" [showHalfStars]="true" [readOnly]="true"></star-rating></td>
-                    </tr>
-                </table>
-              </td>
-              <td class="coffeePrice coffees">{{coffeeItem.price}}€</td>
-            </tr>
-          </a>
-      </table>
-    </div>
-  </div>
-  <div *ngIf="selectedCoffee > -1" class="coffeeDetails">
-    <hr />
-    <div class="row coffeeName">
-      <span class="col-sm-10">{{coffeeShop.coffees[selectedCoffee].name}}</span>
-      <span class="col-sm-1 coffeePrice">{{coffeeShop.coffees[selectedCoffee].price}}€</span>
-      <span class="col-sm-1 justify-content-center"><app-new-price-modal></app-new-price-modal></span>
-    </div>
+<div class="container-fluid">
+  <div class="coffeeShopFull contentBG shadow-sm rounded">
     <div class="row">
-      <div class="col-sm-12">
-        <ul class="nav nav-pills justify-content-center coffeeTabs">
-          <li class="nav-item">
-            <a [ngClass]="'nav-link' + (activeTab === 'description' ? ' active' : '')" (click)="tabClicked('description')" [routerLink]="[{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'description' ] } }]">Περιγραφή</a>
-          </li>
-          <li class="nav-item">
-            <a [ngClass]="'nav-link' + (activeTab === 'reviews' ? ' active' : '')" (click)="tabClicked('reviews')" [routerLink]="[{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'reviews' ] } }]">Αξιολογήσεις</a>
-          </li>
-          <li class="nav-item">
-            <a [ngClass]="'nav-link' + (activeTab === 'statistics' ? ' active' : '')" (click)="tabClicked('statistics')" [routerLink]="[{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'statistics' ] } }]">Στατιστικά</a>
-          </li>
-        </ul>
+      <div class="col-sm-5">
+        <div class="row">
+          <span class="col-sm-3"><img src={{coffeeShop.iconPath}} class="img-fluid" /></span>
+          <span class="coffeeShopName fancyFont col-sm-9">{{coffeeShop.name}}</span>
+        </div>
+        <table class="table coffeeShopDetails">
+          <tr>
+            <td class="coffeeShopDetailsIcons"><img src="../../assets/locationPointIcon.png" class="img-fluid" /></td>
+            <td><a href="https://www.google.com/maps/search/?api=1&query={{coffeeShop.address}}" target="_blank">{{coffeeShop.address}}</a></td>
+          </tr>
+          <tr>
+            <td class="coffeeShopDetailsIcons"><img src="../../assets/telephoneIcon.png" class="img-fluid" /></td>
+            <td><a href="tel:{{coffeeShop.telephone}}">{{coffeeShop.telephone}}</a></td>
+          </tr>
+          <tr>
+            <td class="coffeeShopDetailsIcons"><img src="../../assets/websiteIcon.png" class="img-fluid" /></td>
+            <td><a href="http://{{coffeeShop.website}}" target="_blank">{{coffeeShop.website}}</a></td>
+          </tr>
+        </table>
+        <div class="row newCoffee">
+          <app-new-coffee-modal></app-new-coffee-modal>
+        </div>
+      </div>
+      <div class="col-sm-7 scrollable">
+        <table class="table">
+            <a class="undecoratedLink" [routerLink]="activeTab === 'description' && selectedCoffee != undefined ? [{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'description' ] } }] : []">
+              <tr *ngFor="let coffeeItem of coffeeShop.coffees; let coffeeIndex = index" id={{coffeeIndex}} (click)="onClick(coffeeIndex)" [ngClass]="clickedCoffees[coffeeIndex] ? 'trClicked': 'trHover'">
+                <td class="coffees">
+                  <table class="table">
+                      <tr>
+                        <td class="coffees">{{coffeeItem.name}}</td>
+                      </tr>
+                      <tr>
+                        <td class="coffees"><star-rating labelPosition="right" staticColor="default" [labelText]="coffeeItem.rating + ' (' + coffeeItem.numOfReviews + ' κριτικές)'" [rating]="coffeeItem.rating" [showHalfStars]="true" [readOnly]="true"></star-rating></td>
+                      </tr>
+                  </table>
+                </td>
+                <td class="coffeePrice coffees">{{coffeeItem.price}}€</td>
+              </tr>
+            </a>
+        </table>
       </div>
     </div>
-    <div>
-      <router-outlet name="detailsView"></router-outlet>
+    <div *ngIf="selectedCoffee > -1" class="coffeeDetails">
+      <hr />
+      <div class="row coffeeName">
+        <span class="col-sm-10">{{coffeeShop.coffees[selectedCoffee].name}}</span>
+        <span class="col-sm-1 coffeePrice">{{coffeeShop.coffees[selectedCoffee].price}}€</span>
+        <span class="col-sm-1 justify-content-center"><app-new-price-modal></app-new-price-modal></span>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <ul class="nav nav-pills justify-content-center coffeeTabs">
+            <li class="nav-item">
+              <a [ngClass]="'nav-link' + (activeTab === 'description' ? ' active' : '')" (click)="tabClicked('description')" [routerLink]="[{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'description' ] } }]">Περιγραφή</a>
+            </li>
+            <li class="nav-item">
+              <a [ngClass]="'nav-link' + (activeTab === 'reviews' ? ' active' : '')" (click)="tabClicked('reviews')" [routerLink]="[{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'reviews' ] } }]">Αξιολογήσεις</a>
+            </li>
+            <li class="nav-item">
+              <a [ngClass]="'nav-link' + (activeTab === 'statistics' ? ' active' : '')" (click)="tabClicked('statistics')" [routerLink]="[{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'statistics' ] } }]">Στατιστικά</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <router-outlet name="detailsView"></router-outlet>
+      </div>
     </div>
   </div>
 </div>

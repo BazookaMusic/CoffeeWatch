@@ -17,8 +17,8 @@ export class SearchBarComponent implements OnInit
   centerlat: number;
   centerlng: number;
   public searchControl: FormControl;
-  userlat: number = -1.0;
-  userlng: number = -1.0;
+  userlat: number;
+  userlng: number;
   markers: [number, number][];
 
   coffeeShops: CoffeeShop[];
@@ -37,6 +37,8 @@ export class SearchBarComponent implements OnInit
 
   ngOnInit()
   {
+    this.userlat = undefined;
+    this.userlng = undefined;
     this.centerlat = 37.982038;
     this.centerlng = 23.730271;
 
@@ -62,11 +64,12 @@ export class SearchBarComponent implements OnInit
       {
         this.userlat = position.coords.latitude;
         this.userlng = position.coords.longitude;
-        this.centerlat = this.userlat;
-        this.centerlng = this.userlng;
+        this.centerlat = position.coords.latitude;
+        this.centerlng = position.coords.longitude;
+        
+        this.coffeeShopsService.setSearchLocation(this.userlat, this.userlng);
+        this.coffeeShopsService.updateCoffeeShops(this.userlat, this.userlng);
       });
-      this.coffeeShopsService.setSearchLocation(this.userlat, this.userlng);
-      this.coffeeShopsService.updateCoffeeShops(this.userlat, this.userlng);
     }
     else {
       alert("Cannot return position")

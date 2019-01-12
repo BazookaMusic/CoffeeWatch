@@ -20,6 +20,8 @@ import { CoffeeDescriptionComponent } from './coffee-description/coffee-descript
 import { NewCoffeeModalComponent } from './new-coffee-modal/new-coffee-modal.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { CoffeeShopMediumComponent } from './coffee-shop-medium/coffee-shop-medium.component';
+import { FilterSearchModalComponent } from './filter-search-modal/filter-search-modal.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { CoffeeShopMediumComponent } from './coffee-shop-medium/coffee-shop-medi
     CoffeeDescriptionComponent,
     NewCoffeeModalComponent,
     SearchBarComponent,
-    CoffeeShopMediumComponent
+    CoffeeShopMediumComponent,
+    FilterSearchModalComponent,
+    HomePageComponent
   ],
   imports: [
     NgbModule,

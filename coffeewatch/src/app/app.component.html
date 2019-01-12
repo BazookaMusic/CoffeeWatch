@@ -1,25 +1,6 @@
 <app-nav></app-nav>
 <main class="bd-masthead" id="content" role="main">
   <div class="container-fluid">
-    <div class="row">
-      <app-search-bar></app-search-bar>
-    </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <app-coffee-shop-list></app-coffee-shop-list>
-      </div>
-      <div class="col-sm-6">
-        <div class="row">
-          <div class="col-sm-12">
-            <app-map></app-map>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <router-outlet name="coffeeShopMedium"></router-outlet>
-          </div>
-        </div>
-      </div>
-    </div>
+    <router-outlet></router-outlet>
   </div>
 </main>

@@ -68,7 +68,7 @@ export class CoffeeShopListComponent implements OnInit
         
       this.clickedCoffeeShops[coffeeShopIndex] = true;
       this.selectedCoffeeShop = coffeeShopIndex;
-      this.coffeeShopsService.selectCoffeeShop(coffeeShopIndex);
+      this.coffeeShopsService.selectCoffeeShop(this.coffeeShops[coffeeShopIndex].id);
     }
   }
 }

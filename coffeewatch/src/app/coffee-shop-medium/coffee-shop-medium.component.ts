@@ -22,19 +22,10 @@ export class CoffeeShopMediumComponent implements OnInit
 
   ngOnInit()
   {
-    this.getCoffeeShop();
-  }
-
-  getCoffeeShop(): void
-  {
-    const id = +this.route.snapshot.paramMap.get('coffeeShopID');
-
-    this.coffeeShopsService.getCoffeeShop(id).subscribe(cs => this.coffeeShop = cs);
-  }
-
-  hasSelectedCoffeeShop(): boolean
-  {
-    return this.coffeeShopsService.getSelectedCoffeeShop != undefined;
+    this.coffeeShopsService.getSelectedCoffeeShop().subscribe(id =>
+      {
+        this.coffeeShopsService.getCoffeeShop(id).subscribe(cs => this.coffeeShop = cs);
+      });
   }
 
   goBack(): void {

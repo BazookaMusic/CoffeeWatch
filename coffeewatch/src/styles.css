@@ -56,7 +56,7 @@ hr
 {
     border-top: 1px solid #3c3c3c !important;
     margin-top:0 !important;
-    margin-bottom: 1.5rem !important;
+    margin-bottom: 1.2rem !important;
 }
 
 .contentBG
@@ -74,7 +74,7 @@ hr
 
 .coffeePrice
 {
-    font-size: 1.8rem !important;
+    font-size: 1.5vw !important;
     color: red !important;
 }
 
@@ -83,4 +83,14 @@ hr
     color: #6c757d !important;
     border-color: #6c757d !important;
     background-color: transparent !important;
+}
+
+.table .table
+{
+    background-color: transparent !important;
+}
+
+h2
+{
+  font-size: 1.7vw !important;
 }

@@ -1,4 +1,4 @@
-<div class="shadow-sm appMap">
+<div *ngIf="userlat>0" class="shadow-sm appMap">
   <agm-map [latitude]="centerlat" [longitude]="centerlng" [zoom]="13" [usePanning]="true">
     <agm-marker *ngIf="userlat>0" [latitude]="userlat" [longitude]="userlng"></agm-marker>
     <div  *ngIf="markers != undefined" >
