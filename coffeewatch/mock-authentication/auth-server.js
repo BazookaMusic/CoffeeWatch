@@ -36,7 +36,8 @@ function verifyToken(token){
   }
 
 
-server.post('/auth/login', (req, res) => {
+server.post('/login', (req, res) => {
+    //res.header('Access-Control-Allow-Origin', '*')
     console.log(req.body)
     const {email, password} = req.body
     console.log(email)
@@ -49,10 +50,13 @@ server.post('/auth/login', (req, res) => {
       return
     }
     const access_token = createToken({email, password})
+    //res.header('Access-Control-Allow-Origin', '*')
     res.status(200).json({access_token})
   })
 
+
   server.use(/^(?!\/auth).*$/,  (req, res, next) => {
+   // res.header('Access-Control-Allow-Origin', '*')
     if (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer') {
       const status = 401
       const message = 'Bad authorization header'
@@ -65,6 +69,7 @@ server.post('/auth/login', (req, res) => {
     } catch (err) {
       const status = 401
       const message = 'Error: access_token is not valid'
+      //res.header('Access-Control-Allow-Origin', '*')
       res.status(status).json({status, message})
     }
   })
@@ -73,7 +78,7 @@ server.post('/auth/login', (req, res) => {
   server.use(router)
   server.use('/api', router);
 
-  server.listen(3000, () => {
+  server.listen(8765, () => {
     console.log('Run Auth API Server')
   })
 
