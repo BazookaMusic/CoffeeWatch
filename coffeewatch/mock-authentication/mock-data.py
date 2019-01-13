@@ -38,7 +38,7 @@ for i in range(1,11):
 users={"users":users,"start":0,"count":11,"status":"ALL","sort":"id"}
 
 with open("users.json","w") as f:
-    f.write(json.dumps(users))
+    f.write(json.dumps(users,ensure_ascii=False))
 
 
 
