@@ -3,6 +3,11 @@
     display: inline-flex;
 }
 
+.checkBoxHint
+{
+    padding: 0.7vh 0.8vw;
+}
+
 .table
 {
     margin-bottom: 0;

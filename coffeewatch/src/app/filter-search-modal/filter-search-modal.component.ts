@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, MinLengthValidator, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, MinLengthValidator, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Options } from 'ng5-slider';
 
@@ -14,10 +14,12 @@ import { CoffeeshopsService } from '../coffeeshops.service';
 export class FilterSearchModalComponent implements OnInit
 {
   closeResult: string;
-  coffeeForm: FormGroup;
+  filterForm: FormGroup;
   price: number;
   MAXLEN: number = 500;
   MINLEN: number = 10;
+  checkboxArray: FormControl[];
+  moreThan3: boolean;
 
   value: number = 5000;
   options: Options = {
@@ -58,15 +60,76 @@ export class FilterSearchModalComponent implements OnInit
     }
   }
 
-  ngOnInit() {
-    this.coffeeForm = this.fb.group({
-      "name": ['', [Validators.required, Validators.maxLength(100)]],
-      "categories": ['', [Validators.required]],
-      "description": ['', [Validators.required, Validators.minLength(this.MINLEN), Validators.maxLength(this.MAXLEN)]],
-      "extras": ['', [Validators.maxLength(this.MAXLEN)]],
-      "pricesm": ['', [Validators.min(0)]],
-      "pricemd": ['', [Validators.min(0)]],
-      "pricelg": ['', [Validators.min(0)]]
+  checkMoreThan3(): void
+  {
+    let counter = 0;
+    let i = 0;
+
+    this.moreThan3 = false;
+    for(; i < this.checkboxArray.length; i++)
+    {
+      if (this.checkboxArray[i].value) 
+        counter++;
+      if(counter >= 3)
+      {
+        this.moreThan3 = true;
+        break;
+      }
+    }
+    
+    if(this.moreThan3)
+    {
+      for (i = 0; i < this.checkboxArray.length; i++)
+      {
+        if (!this.checkboxArray[i].value)
+          this.checkboxArray[i].disable({emitEvent: false});
+      }
+    }
+    else
+    {
+      for (i = 0; i < this.checkboxArray.length; i++)
+      {
+        if (this.checkboxArray[i].disabled)
+          this.checkboxArray[i].enable({emitEvent: false});
+      }
+    }
+  }
+
+  ngOnInit()
+  {
+    this.moreThan3 = false;
+
+    this.checkboxArray = [
+      new FormControl(false),
+      new FormControl(false),
+      new FormControl(false),
+      new FormControl(false),
+      new FormControl(false),
+      new FormControl(false),
+      new FormControl(false),
+      new FormControl(false),
+      new FormControl(false)];
+
+    for(let i = 0; i < this.checkboxArray.length; i++)
+    {
+      this.checkboxArray[i].valueChanges.subscribe(x => this.checkMoreThan3());
+    }
+
+    this.filterForm = this.fb.group({
+      "cat0": this.checkboxArray[0],
+      "cat1": this.checkboxArray[1],
+      "cat2": this.checkboxArray[2],
+      "cat3": this.checkboxArray[3],
+      "cat4": this.checkboxArray[4],
+      "cat5": this.checkboxArray[5],
+      "cat6": this.checkboxArray[6],
+      "cat7": this.checkboxArray[7],
+      "cat8": this.checkboxArray[8],
+      "sortRadios": ['', Validators.required],
+      "priceMin": ['', [Validators.min(0)]],
+      "priceMax": ['', [Validators.min(0)]],
+      "starsRating": ['', [Validators.min(0)]]
     });
+    this.filterForm.controls
   }
 }

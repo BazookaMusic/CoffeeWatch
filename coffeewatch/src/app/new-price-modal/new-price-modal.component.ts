@@ -5,9 +5,6 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Validators } from '@angular/forms';
 import { CoffeeshopsService } from '../coffeeshops.service';
 
-
-
-
 @Component({
   selector: 'app-new-price-modal',
   templateUrl: './new-price-modal.component.html',
@@ -41,18 +38,10 @@ export class NewPriceModalComponent implements OnInit {
     }
   }
 
-
   onPriceSubmit()
   {
     let price=this.priceForm.controls.price;
-
   }
-
-i
- 
-  
-
-
 
   ngOnInit() 
   {

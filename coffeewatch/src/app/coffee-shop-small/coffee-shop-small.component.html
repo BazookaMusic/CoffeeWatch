@@ -21,7 +21,7 @@
   </div>
   <div class="col-sm-7">
     <table class="table">
-      <tr *ngFor="let i of [0, 1]">
+      <tr *ngFor="let i of [0, 1, 2]">
         <td>
           <table class="table">
             <tr>
@@ -35,10 +35,5 @@
         <td class="coffeePrice">{{coffeeShop.coffees[i].price}}€</td>
       </tr>
     </table>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm showMore">
-    <a [routerLink]="['/coffeeShopFull', coffeeShop.id]" class="fancyFont">Show More<img src="../../assets/rightArrowIcon.png" class="img-fluid"/></a>
   </div>
 </div>

@@ -6,36 +6,35 @@
     </button>
   </div>
   <div class="modal-body">
-    <form [formGroup]="coffeeForm" id="mainform" (ngSubmit)="onCoffeeSubmit();modal.dismiss('Submit')">
+    <form [formGroup]="filterForm" id="mainform" (ngSubmit)="onFilterSubmit();modal.dismiss('Submit')">
       <div class="form-group row label">
         <h4>Κατηγορίες καφέ:</h4>
-        <button type="button" class="btn btn-outline-secondary outlineSecondaryNoHover checkAllButton">Επιλογή όλων</button>
-        <button type="button" class="btn btn-outline-secondary outlineSecondaryNoHover checkAllButton">Αποεπιλογή όλων</button>
+        <label class="form-check-label checkBoxHint">(Επιλέξτε έως 3 καφέδες)</label>
       </div>
       <div class="form-group row">
         <table class="table">
           <tr>
             <td>
               <span>
-                <input class="checkBox" type="checkbox" value="" id="cat0">
+                <input class="checkBox" type="checkbox" value="" id="cat0" formControlName="cat0">
                 <label class="form-check-label clickableLabel" for="cat0">Espresso</label>
               </span>
             </td>
             <td>
               <span>
-                <input class="checkBox" type="checkbox" value="" id="cat1">
+                <input class="checkBox" type="checkbox" value="" id="cat1" formControlName="cat1">
                 <label class="form-check-label clickableLabel" for="cat1">Freddo espresso</label>
               </span>
             </td>
             <td>
               <span>
-                <input class="checkBox" type="checkbox" value="" id="cat2">
+                <input class="checkBox" type="checkbox" value="" id="cat2" formControlName="cat2">
                 <label class="form-check-label clickableLabel" for="cat2">Cappuccino</label>
               </span>
             </td>
             <td>
               <span>
-                <input class="checkBox" type="checkbox" value="" id="cat3">
+                <input class="checkBox" type="checkbox" value="" id="cat3" formControlName="cat3">
                 <label class="form-check-label clickableLabel" for="cat3">Freddo cappuccino</label>
               </span>
             </td>
@@ -43,25 +42,25 @@
           <tr>
             <td>
               <span>
-                <input class="checkBox" type="checkbox" value="" id="cat4">
+                <input class="checkBox" type="checkbox" value="" id="cat4" formControlName="cat4">
                 <label class="form-check-label clickableLabel" for="cat4">Latte</label>
               </span>
             </td>
             <td>
               <span>
-                <input class="checkBox" type="checkbox" value="" id="cat5">
+                <input class="checkBox" type="checkbox" value="" id="cat5" formControlName="cat5">
                 <label class="form-check-label clickableLabel" for="cat5">Nes</label>
               </span>
             </td>
             <td>
               <span>
-                <input class="checkBox" type="checkbox" value="" id="cat6">
+                <input class="checkBox" type="checkbox" value="" id="cat6" formControlName="cat6">
                 <label class="form-check-label clickableLabel" for="cat6">Frappe</label>
               </span>
             </td>
             <td>
               <span>
-                <input class="checkBox" type="checkbox" value="" id="cat7">
+                <input class="checkBox" type="checkbox" value="" id="cat7" formControlName="cat7">
                 <label class="form-check-label clickableLabel" for="cat7">Φίλτρου</label>
               </span>
             </td>
@@ -69,7 +68,7 @@
           <tr>
             <td>
               <span>
-                <input class="checkBox" type="checkbox" value="" id="cat8">
+                <input class="checkBox" type="checkbox" value="" id="cat8" formControlName="cat8">
                 <label class="form-check-label clickableLabel" for="cat8">Ελληνικός</label>
               </span>
             </td>
@@ -106,23 +105,23 @@
         <ng5-slider class="col-sm-6" [(value)]="value" [options]="options"></ng5-slider>
       </div>
       <div class="form-group row label">
-        <h4>Ταξινόμιση με βάση:</h4>
+        <h4>Ταξινόμηση με βάση:</h4>
       </div>
       <div class="form-group row justify-content-center radiosDiv">
         <span class="customCol">
-          <input class="radio" type="radio" name="sortRadios" id="priceRadio" value="sortPrice" />
+          <input class="radio" checked="" type="radio" name="sortRadios" formControlName="sortRadios" id="priceRadio" value="sortPrice"/>
           <label class="form-check-label clickableLabel" for="priceRadio">Τιμή</label>
         </span>
         <span class="customCol">
-          <input class="radio" type="radio" name="sortRadios" id="distanceRadio" value="sortDistance" />
+          <input class="radio" type="radio" name="sortRadios" formControlName="sortRadios" id="distanceRadio" value="sortDistance" />
           <label class="form-check-label clickableLabel" for="distanceRadio">Απόσταση</label>
         </span>
         <span class="customCol">
-          <input class="radio" type="radio" name="sortRadios" id="ratingRadio" value="sortRating" />
+          <input class="radio" type="radio" name="sortRadios" formControlName="sortRadios" id="ratingRadio" value="sortRating" />
           <label class="form-check-label clickableLabel" for="ratingRadio">Βαθμολογία</label>
         </span>
         <span class="customCol">
-          <input class="radio" type="radio" name="sortRadios" id="valueForMoneyRadio" value="sortvalueForMoney" />
+          <input class="radio" type="radio" name="sortRadios" formControlName="sortRadios" id="valueForMoneyRadio" value="sortvalueForMoney" />
           <label class="form-check-label clickableLabel" for="valueForMoneyRadio">Value for money</label>
         </span>
       </div>
@@ -130,7 +129,7 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-secondary outlineSecondaryNoHover" data-dismiss="modal" (click)="modal.dismiss('Cross click')">Ακύρωση</button>
-    <button type="submit" form="mainform" class="btn orangeButton" [disabled]="!coffeeForm.valid">Δημοσίευση</button>
+    <button type="submit" form="mainform" class="btn orangeButton" [disabled]="!filterForm.valid">Δημοσίευση</button>
   </div>
 </ng-template>
 

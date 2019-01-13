@@ -24,6 +24,12 @@
             <td><a href="http://{{coffeeShop.website}}" target="_blank">{{coffeeShop.website}}</a></td>
           </tr>
         </table>
+        <div class="row">
+          <div class="col-sm showMore">
+            <a [routerLink]="['/coffeeShopFull', coffeeShop.id]" class="fancyFont">Show More<img src="../../assets/rightArrowIcon.png"
+                class="img-fluid" /></a>
+          </div>
+        </div>
       </div>
       <div class="col-sm-7 scrollable">
         <table class="table">

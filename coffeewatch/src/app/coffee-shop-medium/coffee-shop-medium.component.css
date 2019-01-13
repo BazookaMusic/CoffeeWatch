@@ -23,6 +23,19 @@
     font-size: 0.9vw;
 }
 
+
+.showMore
+{
+    text-align: center;
+    margin-top: 1vh;
+}
+
+.showMore a
+{
+    color: black;
+    font-size: 1.2vw;
+}
+
 .coffeeShopDetails
 {
     margin-top: 0.5rem;
