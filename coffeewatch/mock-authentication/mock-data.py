@@ -35,7 +35,9 @@ def geogen(lat,lng,meters):
 users=[]
 for i in range(1,11):
     users.append({"id":i,"name":fakegr.name(),"email":("user"+str(i)+"@email.com"),"password":"27168b830c30987f0a7bb4763ca22b74da1079f7a66a296e6dce66e195f8886c"})
-users={"users":users,"start":0,"count":11,"status":"ALL","sort":"id"}
+users={"users":users}
+user_db=[{"email":user["email"],"id":user["id"]} for user in users["users"]]
+user_db={"users":user_db}
 
 with open("users.json","w") as f:
     f.write(json.dumps(users,ensure_ascii=False))
@@ -55,9 +57,9 @@ for i in range(1,TOTAL_COFFEES):
         "name": name,
         "category":name,
         "description": fakegr.paragraphs(random.randint(1,4)),
-        "price": round(random.uniform(1.0,5.0),2),
+        "price": str(round(random.uniform(1.0,5.0),2)),
         "extraData":{
-        "rating": round(random.uniform(0.0,5.0),2),
+        "rating": str(round(random.uniform(0.0,5.0),2)),
         "numOfReviews": numOfReviews,
         "reviews":[reviewidgen(0,TOTAL_REVIEWS) for i in range(0,numOfReviews)],
         }
@@ -74,22 +76,22 @@ for i in range(1,TOTAL_COFFEESHOPS):
         "withdrawn":"false",
         "name": random.choice(csnames),
         "address": fakegr.street_address(),
-        "iconPath":"./assets/coffeeShops/"+str(i)+".png",
+        "website":fakegr.uri(),
+        "telephone":fakegr.phone_number(),
+        "iconPath":"./assets/mikel.png",
         "lng":coords[1],
         "lat":coords[0],
-        "extraData":{
-            "coffeeid":[coffeeidgen(1,2*len(coffees))]
-        }
+        "coffeeids":[coffeeidgen(1,2*len(coffees))]
     })
 
 
-products={"products":products,"start":0,"count":TOTAL_COFFEES,"status":"ALL","sort":"id"}
-shops={"shops":shops,"start":0,"count":TOTAL_COFFEESHOPS,"status":"ALL","sort":"id"}
+products={"products":products}
+shops={"shops":shops}
 
-final_dict={**products,**shops}
+final_dict={**products,**shops,**user_db}
 
 
-with io.open("api.json","w",encoding="utf-8") as apidb:
+with io.open("../src/api.json","w",encoding="utf-8") as apidb:
     apidb.write(json.dumps(final_dict,ensure_ascii=False))
 
 

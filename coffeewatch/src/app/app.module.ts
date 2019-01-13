@@ -68,7 +68,7 @@ import { HomePageComponent } from './home-page/home-page.component';
       config: {
         tokenGetter: tokenGetter,
         whitelistedDomains: ['localhost:8765'],
-        blacklistedRoutes: ['localhost:8765/login']
+        blacklistedRoutes: ['']
       }
     })
   ],

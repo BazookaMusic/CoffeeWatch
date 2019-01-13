@@ -32,24 +32,30 @@ function verifyToken(token){
   
 // Check if the user exists in database
   function isAuthenticated({email, password}){
-    return userdb.users.findIndex(user => user.email === email && ENCRYPT(password,ALGO).toString() === user.password) !== -1
+    let index= userdb.users.findIndex(user => user.email === email && ENCRYPT(password,ALGO).toString() === user.password)
+    console.log(userdb.users[index])
+    if (index != -1)
+      return {'authenticated':true,'name':userdb.users[index].name}
+    else return {'authenticated':false,'name':null}
   }
 
 
 server.post('/login', (req, res) => {
     //res.header('Access-Control-Allow-Origin', '*')
-    console.log(req.body)
     const {email, password} = req.body
     console.log(email)
     console.log(password)
     console.log(ENCRYPT(password,ALGO))
-    if (isAuthenticated({email, password}) === false) {
+    auth = isAuthenticated({email, password})
+    isAuth=auth.authenticated
+    username=auth.name
+    if (isAuth === false) {
       const status = 401
       const message = 'Incorrect email or password'
       res.status(status).json({status, message})
       return
     }
-    const access_token = createToken({email, password})
+    const access_token = createToken({email, password,username})
     //res.header('Access-Control-Allow-Origin', '*')
     res.status(200).json({access_token})
   })
@@ -58,6 +64,7 @@ server.post('/login', (req, res) => {
   server.use(/^(?!\/auth).*$/,  (req, res, next) => {
    // res.header('Access-Control-Allow-Origin', '*')
     if (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer') {
+      console.log(req.headers.authorization)
       const status = 401
       const message = 'Bad authorization header'
       res.status(status).json({status, message})

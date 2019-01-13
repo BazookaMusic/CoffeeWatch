@@ -34,16 +34,24 @@ export class UserService {
 
     return this.http.post<Token>(
       this.baseAPIURL + 'login', {email: emailin, password: passwordin}, httpOptions).subscribe(
-        token => localStorage.setItem('token', token.access_token));
+        token => {
+          let decoded = this.jwtHelp.decodeToken(token.access_token);
+          this.currentUsername = decoded.username;
+          console.log('username=' + this.currentUsername);
+          localStorage.setItem('access_token', token.access_token);
+          console.log(this.isLoggedIn());
+        });
   }
 
   isLoggedIn(): boolean {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('access_token');
     console.log(token);
 
     if ( token !== null) {
-      return this.jwtHelp.isTokenExpired(token);
+      return !this.jwtHelp.isTokenExpired(token);
     }
     return false;
   }
+
+
 }
