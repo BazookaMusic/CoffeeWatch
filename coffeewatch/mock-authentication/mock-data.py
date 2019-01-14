@@ -3,6 +3,8 @@ import json
 import random
 import io
 import math
+import datetime
+
 fakegr= Faker('el_GR')
 fakeen= Faker()
 
@@ -64,8 +66,7 @@ for i in range(1,TOTAL_COFFEES):
         "price": str(round(random.uniform(1.0,5.0),2)),
         "extraData":{
         "rating": str(round(random.uniform(0.0,5.0),2)),
-        "numOfReviews": numOfReviews,
-        "reviews":[reviewidgen(0,TOTAL_REVIEWS) for i in range(0,numOfReviews)],
+        "numOfReviews": numOfReviews
         }
     })
 
@@ -85,6 +86,7 @@ for i in range(1,TOTAL_COFFEESHOPS):
         "iconPath":"./assets/mikel.png",
         "lng":coords[1],
         "lat":coords[0],
+        "description":fakegr.text(random.randint(50, 500))
     })
 
 reviews=[]
@@ -96,11 +98,13 @@ for i in range(1,TOTAL_REVIEWS):
         {
             "id": i,
             "text": fakegr.text(random.randint(11,500)),
+            "rating": random.randint(1, 5),
             "userid":userid,
             "username": username,
-            "date": fakegr.date(),
+            "date": datetime.datetime.strptime(fakegr.date(), "%Y-%m-%d").strftime("%d/%m/%Y"),
             "numOfLikes":random.randint(0,100),
-            "numOfDislikes":random.randint(0,100)
+            "numOfDislikes":random.randint(0,100),
+            "coffeeid": random.randint(1, TOTAL_COFFEES)
         }
     )
 
