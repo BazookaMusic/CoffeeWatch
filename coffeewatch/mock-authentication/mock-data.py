@@ -33,8 +33,11 @@ def geogen(lat,lng,meters):
     return (lat+y1,lng+x1)
 
 users=[]
+usernames={}
 for i in range(1,11):
-    users.append({"id":i,"name":fakegr.name(),"email":("user"+str(i)+"@email.com"),"password":"27168b830c30987f0a7bb4763ca22b74da1079f7a66a296e6dce66e195f8886c"})
+    username=fakegr.name()
+    usernames[i]=username
+    users.append({"id":i,"name":username,"email":("user"+str(i)+"@email.com"),"password":"27168b830c30987f0a7bb4763ca22b74da1079f7a66a296e6dce66e195f8886c"})
 users={"users":users}
 user_db=[{"email":user["email"],"id":user["id"]} for user in users["users"]]
 user_db={"users":user_db}
@@ -56,7 +59,8 @@ for i in range(1,TOTAL_COFFEES):
         "withdrawn":"false",
         "name": name,
         "category":name,
-        "description": fakegr.paragraphs(random.randint(1,4)),
+        "shopid":random.randint(1,TOTAL_COFFEESHOPS),
+        "description": fakegr.text(random.randint(50,1000)),
         "price": str(round(random.uniform(1.0,5.0),2)),
         "extraData":{
         "rating": str(round(random.uniform(0.0,5.0),2)),
@@ -81,14 +85,30 @@ for i in range(1,TOTAL_COFFEESHOPS):
         "iconPath":"./assets/mikel.png",
         "lng":coords[1],
         "lat":coords[0],
-        "coffeeids":[coffeeidgen(1,2*len(coffees))]
     })
 
+reviews=[]
+for i in range(1,TOTAL_REVIEWS):
+    #id,text,rating,userid,username,date,numoflikes,numofdislikes
+    userid=random.randint(1,10)
+    username= usernames[userid]
+    reviews.append(
+        {
+            "id": i,
+            "text": fakegr.text(random.randint(11,500)),
+            "userid":userid,
+            "username": username,
+            "date": fakegr.date(),
+            "numOfLikes":random.randint(0,100),
+            "numOfDislikes":random.randint(0,100)
+        }
+    )
 
 products={"products":products}
 shops={"shops":shops}
+reviews={"reviews":reviews}
 
-final_dict={**products,**shops,**user_db}
+final_dict={**products,**shops,**reviews,**user_db}
 
 
 with io.open("../src/api.json","w",encoding="utf-8") as apidb:
