@@ -41,13 +41,13 @@
                 </tr>
                 <tr>
                   <td class="coffees">
-                    <star-rating labelPosition="right" staticColor="default" [labelText]="coffeeItem.rating + ' (' + coffeeItem.numOfReviews + ' κριτικές)'"
-                      [rating]="coffeeItem.rating" [showHalfStars]="true" [readOnly]="true"></star-rating>
+                    <star-rating labelPosition="right" staticColor="default" [labelText]="coffeeItem.extraData.rating + ' (' + coffeeItem.extraData.numOfReviews + ' κριτικές)'"
+                      [rating]="coffeeItem.extraData.rating" [showHalfStars]="true" [readOnly]="true"></star-rating>
                   </td>
                 </tr>
               </table>
             </td>
-            <td class="coffeePrice coffees">{{coffeeItem.price}}€</td>
+            <td class="coffeePrice coffees">{{coffeeItem.extraData.price}}€</td>
           </tr>
         </table>
       </div>

@@ -30,6 +30,10 @@ export class CoffeeShopFullComponent implements OnInit
 
     this.getCoffeeShop();
 
+  }
+
+  reset()
+  {
     let i = 0;
     for(; i < this.coffeeShop.coffees.length; i++)
     {
@@ -48,7 +52,11 @@ export class CoffeeShopFullComponent implements OnInit
   {
     const id = +this.route.snapshot.paramMap.get('coffeeShopID');
 
-    this.coffeeShopsService.getCoffeeShop(id).subscribe( cs => this.coffeeShop = cs);
+    this.coffeeShopsService.getCoffeeShop(id).subscribe( cs => 
+      {
+        this.coffeeShop = cs;
+        this.reset();
+      });
   }
 
   goBack(): void 

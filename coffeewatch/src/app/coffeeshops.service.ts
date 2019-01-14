@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {CoffeeShop} from "./coffee-shop";
 import { Observable, of, BehaviorSubject } from 'rxjs';
+import {map, flatMap} from 'rxjs/operators';
 
 import {Coffee} from "./coffee";
 import {Review} from "./review";
@@ -69,10 +70,39 @@ export class CoffeeshopsService {
     this.coffeeShops[4] = new CoffeeShop(5, "CoffeeShop5", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikelcoffee.com", "1234567890", 37.977021, 23.727494, this.coffees);
   }
 
-  getCoffeeShop(id: number): Observable<CoffeeShop>
+  getCoffeeShop(csid: number): Observable<CoffeeShop>
   {
-    this.coffeeShop= this.coffeeShops.find(cs => cs.id == id);
-    return of(this.coffeeShop);
+    
+    if (csid != undefined)
+    {
+      this.coffeeShop = this.coffeeShops.find(cs => cs.id === csid);
+
+      
+      let headerCoffees= {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+        ,params: new HttpParams().set("shopid", csid.toString())
+      };
+
+
+      let headerShop= {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+        ,params: new HttpParams().set("id", csid.toString())
+      };
+
+
+      return this.http.get<Coffee[]>(this.baseAPIURL + 'products', headerCoffees).pipe(flatMap(coffees => 
+        {
+          
+          return this.http.get<CoffeeShop[]>(this.baseAPIURL + 'shops',headerShop)
+          .pipe(map( coffeeshops => 
+            {
+              coffeeshops[0].coffees = coffees;
+              return coffeeshops[0];
+          }))
+
+      }));
+
+    }
   }
 
   getCoffeeShops()
@@ -101,14 +131,13 @@ export class CoffeeshopsService {
               });
           });
       });
-
-    
   }
 
   getCoffee(id: number): Observable<Coffee>
   {
-    this.coffee = this.coffees.find(cs => cs.id == id);
-    return of(this.coffee);
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    const params = new HttpParams().set("id", id.toString());
+    return this.http.get<Coffee>(this.baseAPIURL + 'products', httpOptions);
   }
 
   selectCoffeeShop(selectedIndex:number)
