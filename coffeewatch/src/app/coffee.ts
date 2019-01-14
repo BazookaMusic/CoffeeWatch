@@ -9,8 +9,11 @@ export class Coffee
     description: string;
 
     price: number;
-    rating: number;
-    numOfReviews: number;
+
+    extraData: {
+        rating: number,
+        numOfReviews: number,
+    };
 
     reviews: Review[];
     
@@ -20,8 +23,8 @@ export class Coffee
         this.name = name;
         this.description = description;
         this.price = price;
-        this.rating = rating;
-        this.numOfReviews = numOfReviews;
+        this.extraData.rating = rating;
+        this.extraData.numOfReviews = numOfReviews;
         this.reviews = reviews;
     }
 }

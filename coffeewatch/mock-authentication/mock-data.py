@@ -42,7 +42,7 @@ users={"users":users}
 user_db=[{"email":user["email"],"id":user["id"]} for user in users["users"]]
 user_db={"users":user_db}
 
-with open("users.json","w") as f:
+with open("users.json","w+") as f:
     f.write(json.dumps(users,ensure_ascii=False))
 
 
@@ -111,12 +111,5 @@ reviews={"reviews":reviews}
 final_dict={**products,**shops,**reviews,**user_db}
 
 
-with io.open("../src/api.json","w",encoding="utf-8") as apidb:
+with io.open("../src/api.json","w+",encoding="utf-8") as apidb:
     apidb.write(json.dumps(final_dict,ensure_ascii=False))
-
-
-
-
-
-
-    

@@ -4,6 +4,8 @@ import { Observable, of, BehaviorSubject } from 'rxjs';
 
 import {Coffee} from "./coffee";
 import {Review} from "./review";
+import { UserService } from './user.service';
+import { HttpHeaders, HttpClient, HttpParams} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -26,11 +28,15 @@ export class CoffeeshopsService {
   selectedCoffee$:BehaviorSubject<number>;
   CoffeeShops$:BehaviorSubject<CoffeeShop[]>;
 
+  baseAPIURL = 'http://localhost:8765/';
+
   reviewText: string = "Όπως μου είπαν στο service center , το τηλέφωνο σας με τις κλείσεις και με τα μηνύματα δεν έχει πρόβλημα, τα υπόλοιπα δεν τους νοιάζει, με τα από 3 φορές που προσπαθανε...να το φταίξουν, όπως καταλάβατε έχει προβλιματα με τις εφαρμογές όπως viber, Facebook, και γενικά έχει κολλήματα, οταν παίρνεις τηλέφωνο με 600€ , δεν το περιμένεις, και πάλι όπως μας ήταν στο service , δεν είναι εγγύηση η τιμή";
 
-  constructor() 
+  constructor(private http: HttpClient, private userService: UserService) 
   {
-    this.mockData();
+    this.userService.login("user1@email.com", "AUTHENTICATED");
+
+    //this.mockData();
     this.selectedCoffeeShop$=new BehaviorSubject<number>(undefined);
     this.selectedCoffee$ = new BehaviorSubject<number>(undefined);
     this.selectCoffeeShop(undefined);
@@ -77,7 +83,26 @@ export class CoffeeshopsService {
 
   updateCoffeeShops(lat:number,lng:number)
   {
-    this.CoffeeShops$.next(this.coffeeShops);
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+
+    let counter = 0;
+    this.http.get<CoffeeShop[]>(this.baseAPIURL + 'shops', httpOptions).subscribe( coffeeShops =>
+      {
+        this.coffeeShops = coffeeShops;
+        this.coffeeShops.forEach(coffeeShop => 
+          {
+          const params = new HttpParams().set("shopid", coffeeShop.id.toString());
+            const httpOptions1 = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), params };
+            this.http.get<Coffee[]>(this.baseAPIURL + 'products', httpOptions1).subscribe(coffees =>
+              {
+                coffeeShop.coffees = coffees;
+                counter++;
+                if (counter == coffeeShops.length) this.CoffeeShops$.next(this.coffeeShops);
+              });
+          });
+      });
+
+    
   }
 
   getCoffee(id: number): Observable<Coffee>

@@ -20,16 +20,16 @@ server.use(bodyParser.json())
 const SECRET_KEY = 'MOCKBACK'
 const expiresIn = '1h'
 
-// Create a token from a payload 
+// Create a token from a payload
 function createToken(payload){
     return jwt.sign(payload, SECRET_KEY, {expiresIn})
   }
-  
-// Verify the token 
+
+// Verify the token
 function verifyToken(token){
     return  jwt.verify(token, SECRET_KEY, (err, decode) => decode !== undefined ?  decode : err)
 }
-  
+
 // Check if the user exists in database
   function isAuthenticated({email, password}){
     let index= userdb.users.findIndex(user => user.email === email && ENCRYPT(password,ALGO).toString() === user.password)
@@ -81,16 +81,9 @@ server.post('/login', (req, res) => {
     }
   })
 
-
   server.use(router)
   server.use('/api', router);
 
   server.listen(8765, () => {
     console.log('Run Auth API Server')
   })
-
-
-
-  
-
-
