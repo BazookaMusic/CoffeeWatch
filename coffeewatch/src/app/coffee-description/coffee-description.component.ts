@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Coffee } from '../coffee';
 import { CoffeeshopsService } from '../coffeeshops.service';
+import { flatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-coffee-description',
@@ -9,18 +10,12 @@ import { CoffeeshopsService } from '../coffeeshops.service';
 })
 export class CoffeeDescriptionComponent implements OnInit
 {
-  selectedCoffeeID: number;
-  selectedCoffee: Coffee;
+  description: string;
 
   constructor(private coffeeShopsService: CoffeeshopsService) { }
 
   ngOnInit()
   {
-    this.coffeeShopsService.getSelectedCoffee().subscribe(id =>
-    {
-      this.selectedCoffeeID = id;
-      this.coffeeShopsService.getCoffee(this.selectedCoffeeID).subscribe(coffee => this.selectedCoffee = coffee);
-    });
-
+    this.coffeeShopsService.getSelectedCoffee().pipe(flatMap(id => this.coffeeShopsService.getCoffeeDescription(id))).subscribe(description => this.description = description);
   }
 }

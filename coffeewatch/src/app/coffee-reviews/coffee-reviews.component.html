@@ -1,48 +1,50 @@
 <div class="row reviewsRow">
   <div class="col-sm-12">
     <div class="row">
-      <div class="col-sm-8">
-        <star-rating labelPosition="right" staticColor="default" size="large" [labelText]="selectedCoffee.rating + ' (' + selectedCoffee.numOfReviews + ' κριτικές)'" [rating]="selectedCoffee.rating" [showHalfStars]="true" [readOnly]="true"></star-rating>
+      <div *ngIf="coffee !== undefined" class="col-sm-8">
+        <star-rating labelPosition="right" staticColor="default" size="large" [labelText]="coffee.extraData.rating + ' (' + numOfReviews + ' κριτικές)'" [rating]="coffee.extraData.rating" [showHalfStars]="true" [readOnly]="true"></star-rating>
       </div>
       <div class="col-sm-4 text-right">
         <app-new-review-modal></app-new-review-modal>
       </div>
     </div>
-    <div class="row ">
-      <div class="col-sm-2">5 αστέρια</div>
-      <div class="col-sm-9"><div class="progress"><div class="progress-bar ratingPercentage" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div></div></div>
-      <div class="col-sm-1">60%</div>
-    </div>
-    <div class="row">
-      <div class="col-sm-2">4 αστέρια</div>
-      <div class="col-sm-9"><div class="progress"><div class="progress-bar ratingPercentage" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div></div></div>
-      <div class="col-sm-1">20%</div>
-    </div>
-    <div class="row">
-      <div class="col-sm-2">3 αστέρια</div>
-      <div class="col-sm-9"><div class="progress"><div class="progress-bar ratingPercentage" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div></div></div>
-      <div class="col-sm-1">10%</div>
-    </div>
-    <div class="row">
-      <div class="col-sm-2">2 αστέρια</div>
-      <div class="col-sm-9"><div class="progress"><div class="progress-bar ratingPercentage" role="progressbar" style="width: 5%" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div></div></div>
-      <div class="col-sm-1">5%</div>
-    </div>
-    <div class="row">
-      <div class="col-sm-2">1 αστέρι</div>
-      <div class="col-sm-9"><div class="progress"><div class="progress-bar ratingPercentage" role="progressbar" style="width: 5%" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div></div></div>
-      <div class="col-sm-1">5%</div>
+    <div *ngIf="reviewPercentages !== undefined && reviewPercentages[4] !== undefined">
+      <div class="row">
+        <div class="col-sm-2">5 αστέρια</div>
+        <div class="col-sm-9"><div class="progress"><div class="progress-bar ratingPercentage" role="progressbar" [style.width]='reviewPercentages[4]' aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div></div>
+        <div class="col-sm-1">{{reviewPercentages[4]}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">4 αστέρια</div>
+        <div class="col-sm-9"><div class="progress"><div class="progress-bar ratingPercentage" role="progressbar" [style.width]='reviewPercentages[3]' aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div></div>
+        <div class="col-sm-1">{{reviewPercentages[3]}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">3 αστέρια</div>
+        <div class="col-sm-9"><div class="progress"><div class="progress-bar ratingPercentage" role="progressbar" [style.width]='reviewPercentages[2]' aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div></div>
+        <div class="col-sm-1">{{reviewPercentages[2]}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">2 αστέρια</div>
+        <div class="col-sm-9"><div class="progress"><div class="progress-bar ratingPercentage" role="progressbar" [style.width]='reviewPercentages[1]' aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div></div>
+        <div class="col-sm-1">{{reviewPercentages[1]}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">1 αστέρι</div>
+        <div class="col-sm-9"><div class="progress"><div class="progress-bar ratingPercentage" role="progressbar" [style.width]='reviewPercentages[0]' aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div></div>
+        <div class="col-sm-1">{{reviewPercentages[0]}}</div>
+      </div>
     </div>
   </div>
 </div>
 <div class="row">
   <ul class="scrollable">
-    <li *ngFor="let reviewItem of selectedCoffee.reviews" class="shadow-sm p-3 mb-5  rounded">
+    <li *ngFor="let reviewItem of reviews" class="shadow-sm p-3 mb-5  rounded">
       <div class="row">
         <star-rating labelPosition="right" staticColor="default" size="middle" [labelText]="reviewItem.numOfLikes + ' στους ' + (reviewItem.numOfLikes + reviewItem.numOfDislikes) + ' χρήστες τη βρήκαν χρήσιμη'" [rating]="reviewItem.rating" [showHalfStars]="true" [readOnly]="true"></star-rating>
       </div>
       <div class="row">
-        {{reviewItem.username}} στις {{reviewItem.date.toLocaleDateString("el-GR")}}
+        {{reviewItem.username}} στις {{reviewItem.date}}
       </div>
       <div class="row">{{reviewItem.text}}</div>
       <div class="row actions bgColor">

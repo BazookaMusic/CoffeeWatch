@@ -4,6 +4,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 import { Validators } from '@angular/forms';
 import { CoffeeshopsService } from '../coffeeshops.service';
+import { flatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-price-modal',
@@ -48,10 +49,10 @@ export class NewPriceModalComponent implements OnInit {
     this.priceForm = new FormGroup({
       price: new FormControl('',[Validators.required,Validators.min(0)])
     });
-    var curprice=0;
 
-    var curid= 0;
-    this.coffeeShopsService.getSelectedCoffee().subscribe(id=>curid=id);
-    this.coffeeShopsService.getCoffee(curid).subscribe(x => this.priceForm.controls.price.setValue(x.price));
+    this.coffeeShopsService.getSelectedCoffee().pipe(flatMap(id => this.coffeeShopsService.getCoffee(id))).subscribe(coffee => 
+      {
+        if(coffee !== undefined) this.priceForm.controls.price.setValue(coffee.price)
+      });
   }
 }

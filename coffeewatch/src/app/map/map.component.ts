@@ -17,7 +17,8 @@ export class MapComponent implements OnInit
   zoom: number;
   userlat: number;
   userlng: number;
-  markers: [number, number][];
+  markers: [number, number, number][];
+  zoomLevel: number;
 
   coffeeShops: CoffeeShop[];
   selectedCoffeeShop: number;
@@ -28,6 +29,7 @@ export class MapComponent implements OnInit
 
   ngOnInit()
   {
+    this.zoomLevel = 13;
     this.userlat = undefined;
     this.userlng = undefined;
     this.centerlat = 37.982038;
@@ -61,12 +63,31 @@ export class MapComponent implements OnInit
       {
         if(cs) this.markers = this.coffeeShopsService.getMarkers(cs)
       });
-    this.watchCoffeeSelection();
+
+    this.coffeeShopsService.getSelectedCoffeeShop().subscribe(id =>
+      {
+        this.selectedCoffeeShop = id;
+        if (id !== undefined)
+        {
+          let mark = this.markers.find(marker => marker[0] === id);
+          this.centerMap(mark[1], mark[2]);
+          this.zoomLevel = 17;
+        }
+        else
+        {
+          this.centerMap(this.userlat, this.userlng);
+          this.zoomLevel = 13;
+        }
+    });
   }
 
-  watchCoffeeSelection()
+  centerMap(lat: number, lng: number)
   {
-    //keep watch of coffeeShop selection by index
-    this.coffeeShopsService.getSelectedCoffeeShop().subscribe(n => this.selectedCoffeeShop = n);
+    this.centerlat = lat;
+    this.centerlng = lng;
+    setTimeout(() => {
+      this.centerlat = lat;
+      this.centerlng = lng;
+    }, 50);
   }
 }

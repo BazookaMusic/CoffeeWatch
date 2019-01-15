@@ -37,7 +37,6 @@ export class CoffeeshopsService {
   {
     this.userService.login("user1@email.com", "AUTHENTICATED");
 
-    //this.mockData();
     this.selectedCoffeeShop$=new BehaviorSubject<number>(undefined);
     this.selectedCoffee$ = new BehaviorSubject<number>(undefined);
     this.selectCoffeeShop(undefined);
@@ -47,48 +46,19 @@ export class CoffeeshopsService {
     this.searchCoordinates$ = new BehaviorSubject<[number, number]>(undefined);
   };
 
-  mockData()
-  {
-    let date = new Date();
-    this.reviews.push(new Review(1, this.reviewText, 1.5, 214, "guruOfNet", date, 987, 321));
-    this.reviews.push(new Review(1, this.reviewText, 1.5, 214, "guruOfNet", date, 987, 321));
-    this.reviews.push(new Review(1, this.reviewText, 1.5, 214, "guruOfNet", date, 987, 321));
-    this.reviews.push(new Review(1, this.reviewText, 1.5, 214, "guruOfNet", date, 987, 321));
-
-    this.coffee = new Coffee(1, "Freddo Cappuccino latte mocha maciato", "Αποκαλύπτει το ιταλικό ταπεραμέντο του από το πρώτο δευτερόλεπτο. Πλούσια γεύση καφέ καπουτσίνο, με πυκνό ατμό, φτιαγμένο για τους εραστές της απόλαυσης.", "../assets/cap.jpg", 2.80, 4.7, 14, this.reviews);
-
-    var i: number;
-    for(i = 0; i < 5; i++)
-    {
-      this.coffees.push(this.coffee);
-    }
-  
-    this.coffeeShops[0] = new CoffeeShop(1, "Mikel", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikelcoffee.com", "1234567890",37.976703, 23.726184, this.coffees);
-    this.coffeeShops[1] = new CoffeeShop(2, "CoffeeShop2", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikelcoffee.com", "1234567890", 37.976607, 23.726367,this.coffees);
-    this.coffeeShops[2] = new CoffeeShop(3, "CoffeeShop3", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikelcoffee.com", "1234567890",37.977021, 23.727494, this.coffees);
-    this.coffeeShops[3] = new CoffeeShop(4, "CoffeeShop4", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikelcoffee.com", "1234567890", 37.977021, 23.727494, this.coffees);
-    this.coffeeShops[4] = new CoffeeShop(5, "CoffeeShop5", "../assets/mikel.png", "Αγίας Βαρβάρας 13 Υμηττός(Κορυφή)", "www.mikelcoffee.com", "1234567890", 37.977021, 23.727494, this.coffees);
-  }
-
   getCoffeeShop(csid: number): Observable<CoffeeShop>
   {
-    
     if (csid != undefined)
     {
-      this.coffeeShop = this.coffeeShops.find(cs => cs.id === csid);
-
-      
       let headerCoffees= {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         ,params: new HttpParams().set("shopid", csid.toString())
       };
 
-
       let headerShop= {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         ,params: new HttpParams().set("id", csid.toString())
       };
-
 
       return this.http.get<Coffee[]>(this.baseAPIURL + 'products', headerCoffees).pipe(flatMap(coffees => 
         {
@@ -101,8 +71,8 @@ export class CoffeeshopsService {
           }))
 
       }));
-
     }
+    return of(undefined);
   }
 
   getCoffeeShops()
@@ -135,9 +105,35 @@ export class CoffeeshopsService {
 
   getCoffee(id: number): Observable<Coffee>
   {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    const params = new HttpParams().set("id", id.toString());
-    return this.http.get<Coffee>(this.baseAPIURL + 'products', httpOptions);
+    if(id !== undefined)
+    {
+      const params = new HttpParams().set("id", id.toString());
+      const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), params: params };
+      return this.http.get<Coffee[]>(this.baseAPIURL + 'products', httpOptions).pipe(map(coffees => coffees[0]));
+    }
+    else return of(undefined);
+  }
+
+  getCoffeeDescription(id: number)
+  {
+    if (id !== undefined) 
+    {
+      const params = new HttpParams().set("id", id.toString());
+      const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), params: params };
+      return this.http.get<Coffee[]>(this.baseAPIURL + 'products', httpOptions).pipe(map(coffees => coffees[0].description));
+    }
+    else return of(undefined);
+  }
+
+  getCoffeeReviews(id: number)
+  {
+    if (id !== undefined) 
+    {
+      const params = new HttpParams().set("coffeeid", id.toString());
+      const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), params: params };
+      return this.http.get<Review[]>(this.baseAPIURL + 'reviews', httpOptions);
+    }
+    else return of(undefined);
   }
 
   selectCoffeeShop(selectedIndex:number)
@@ -162,8 +158,7 @@ export class CoffeeshopsService {
 
   getMarkers(coffeeShops:CoffeeShop[])
   {
-    return coffeeShops.map((cs):[number,number] => [cs.lat,cs.lng]);
-    
+    return coffeeShops.map((cs): [number, number,number] => [cs.id, cs.lat,cs.lng]);
   }
 
   setSearchLocation(lat:number,lng:number)

@@ -46,7 +46,11 @@ export class NewReviewModalComponent implements OnInit
   {
     let formRev=this.reviewForm.controls.review; 
     let formStars=this.reviewForm.controls.starsRating; 
-    this.review=new Review(-1,formRev.value as string,formStars.value as number,undefined,undefined,new Date(),0,0);
+    let date = new Date();
+    let y = date.getFullYear();
+    let m = date.getMonth();
+    let d = date.getDay();
+    this.review=new Review(-1, formRev.value as string, formStars.value as number, undefined, undefined, d + "/" + m + "/" + y, 0, 0);
     this.reviewSubmit(this.review);
   }
 
