@@ -1,4 +1,4 @@
-<div *ngIf="coffeeShop !== undefined" class="container-fluid">
+<div [@fastFade]='"in"' *ngIf="coffeeShop !== undefined" class="container-fluid">
   <div class="coffeeShopFull contentBG shadow-sm rounded">
     <div class="row">
       <div class="col-sm-5">
@@ -67,7 +67,7 @@
         </div>
       </div>
       <div>
-        <router-outlet name="detailsView"></router-outlet>
+        <router-outlet [@fastFade]='"in"' name="detailsView"></router-outlet>
       </div>
     </div>
   </div>

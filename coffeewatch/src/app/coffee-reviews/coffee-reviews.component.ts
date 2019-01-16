@@ -4,11 +4,30 @@ import { CoffeeshopsService } from '../coffeeshops.service';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { flatMap } from 'rxjs/operators';
 import { Review } from '../review';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-coffee-reviews',
   templateUrl: './coffee-reviews.component.html',
-  styleUrls: ['./coffee-reviews.component.css']
+  styleUrls: ['./coffee-reviews.component.css'],
+  animations: [
+    trigger('fastFade', [
+
+      // the "in" style determines the "resting" state of the element when it is visible.
+      state('in', style({opacity: 1})),
+
+      // fade in when created. this could also be written as transition('void => *')
+      transition(':enter', [
+        style({opacity: 0}),
+        animate(600)
+      ]),
+
+      // fade out when destroyed. this could also be written as transition('void => *')
+      transition(':leave',
+        animate(600, style({opacity: 0})))
+    ]),
+
+  ]
 })
 export class CoffeeReviewsComponent implements OnInit {
 

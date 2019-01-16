@@ -1,8 +1,8 @@
-<div *ngIf="coffeeShops != undefined" class="row coffeeShopListTitleRow">
+<div [@simpleFadeAnimation]="'in'" *ngIf="coffeeShops != undefined" class="row coffeeShopListTitleRow">
   <h2 class="coffeeShopListTitle col-sm-11 fancyFont">Κοντινές Καφετέριες</h2>
 </div>
-<hr *ngIf="coffeeShops != undefined" />
-<div *ngIf="coffeeShops != undefined" class="">
+<hr [@simpleFadeAnimation]="'in'" *ngIf="coffeeShops != undefined" />
+<div [@simpleFadeAnimation]="'in'" *ngIf="coffeeShops != undefined" class="">
   <ul class="scrollable">
     <li *ngFor="let coffeeShopItem of coffeeShops;let coffeeShopIndex = index" (click)="onClickCoffeeShop(coffeeShopIndex)" 
       [ngClass]="'shadow-sm rounded contentBG ' + (clickedCoffeeShops[coffeeShopIndex] ? 'csClicked': 'csHover')">

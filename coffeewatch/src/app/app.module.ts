@@ -31,6 +31,7 @@ export function tokenGetter() {
 import { FilterSearchModalComponent } from './filter-search-modal/filter-search-modal.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginScreenComponent } from './login-screen/login-screen.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -56,6 +57,7 @@ import { LoginScreenComponent } from './login-screen/login-screen.component';
   ],
   imports: [
     NgbModule,
+    BrowserAnimationsModule,
     Ng5SliderModule,
     BrowserModule,
     AppRoutingModule,
