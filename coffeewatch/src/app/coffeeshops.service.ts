@@ -35,7 +35,7 @@ export class CoffeeshopsService {
 
   constructor(private http: HttpClient, private userService: UserService) 
   {
-    this.userService.login("user1@email.com", "AUTHENTICATED");
+    //this.userService.login("user1@email.com", "AUTHENTICATED");
 
     this.selectedCoffeeShop$=new BehaviorSubject<number>(undefined);
     this.selectedCoffee$ = new BehaviorSubject<number>(undefined);

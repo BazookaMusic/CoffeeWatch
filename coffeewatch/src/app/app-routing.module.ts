@@ -8,10 +8,12 @@ import { CoffeeStatisticsComponent } from './coffee-statistics/coffee-statistics
 import { CoffeeDescriptionComponent } from './coffee-description/coffee-description.component';
 import { CoffeeShopMediumComponent } from './coffee-shop-medium/coffee-shop-medium.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { LoginScreenComponent } from './login-screen/login-screen.component';
 
 const routes: Routes = 
 [
     { path: 'home', component: HomePageComponent},
+    {path: 'login', component: LoginScreenComponent},
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'coffeeShopFull/:coffeeShopID', component: CoffeeShopFullComponent,
       children: 
