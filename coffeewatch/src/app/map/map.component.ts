@@ -69,8 +69,8 @@ export class MapComponent implements OnInit
         this.selectedCoffeeShop = id;
         if (id !== undefined)
         {
-          let mark = this.markers.find(marker => marker[0] === id);
-          this.centerMap(mark[1], mark[2]);
+          const selCoffeeShop = this.coffeeShopsService.coffeeShopDict[id];
+          this.centerMap(selCoffeeShop.lat, selCoffeeShop.lng);
           this.zoomLevel = 17;
         }
         else

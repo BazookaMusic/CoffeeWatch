@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CoffeeShop } from '../coffee-shop';
 import { CoffeeshopsService } from '../coffeeshops.service';
 import { trigger, state, transition, style, animate } from '@angular/animations';
+import { flatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-coffee-shop-medium',
@@ -43,7 +44,8 @@ export class CoffeeShopMediumComponent implements OnInit
   {
     this.coffeeShopsService.getSelectedCoffeeShop().subscribe(id =>
       {
-        this.coffeeShopsService.getCoffeeShop(id).subscribe(cs => this.coffeeShop = cs);
+        if (id != undefined) 
+          this.coffeeShop = this.coffeeShopsService.coffeeShopDict[id];
       });
   }
 

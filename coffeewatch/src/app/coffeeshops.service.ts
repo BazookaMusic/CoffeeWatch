@@ -17,6 +17,7 @@ export class CoffeeshopsService {
   coffeeShop: CoffeeShop;
 
   coffees: Coffee[] = [];
+  coffeeShopDict: {[id:number]: CoffeeShop}={};
   coffee: Coffee;
   reviews:Review[] = [];
   mapCoffeeShops:Observable<[CoffeeShop[],number]>; //coffeeshops, selected index
@@ -89,6 +90,8 @@ export class CoffeeshopsService {
     this.http.get<CoffeeShop[]>(this.baseAPIURL + 'shops', httpOptions).subscribe( coffeeShops =>
       {
         this.coffeeShops = coffeeShops;
+        this.coffeeShopDict={};
+       this.coffeeShops.forEach(cs => this.coffeeShopDict[cs.id] = cs);
         this.coffeeShops.forEach(coffeeShop => 
           {
           const params = new HttpParams().set("shopid", coffeeShop.id.toString());
