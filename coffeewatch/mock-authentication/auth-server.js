@@ -59,9 +59,10 @@ server.post('/login', (req, res) => {
     //res.header('Access-Control-Allow-Origin', '*')
     res.status(200).json({access_token})
   })
+  
 
 
-  server.use(/^(?!\/auth).*$/,  (req, res, next) => {
+  server.put('/',  (req, res, next) => {
    // res.header('Access-Control-Allow-Origin', '*')
     if (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer') {
       console.log(req.headers.authorization)
