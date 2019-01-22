@@ -2,7 +2,7 @@
   <agm-map [latitude]="centerlat" [longitude]="centerlng" [zoom]="zoomLevel" [usePanning]="true">
     <agm-marker *ngIf="userlat>0" [latitude]="userlat" [longitude]="userlng"></agm-marker>
     <div  *ngIf="markers != undefined" >
-      <agm-marker *ngFor="let marker of markers"  [latitude]="marker[1]" [longitude]="marker[2]" ></agm-marker>
+      <agm-marker *ngFor="let marker of markers" (markerClick)='markerClicked(marker)' [latitude]="marker[1]" [longitude]="marker[2]" ></agm-marker>
     </div>
     
   </agm-map>

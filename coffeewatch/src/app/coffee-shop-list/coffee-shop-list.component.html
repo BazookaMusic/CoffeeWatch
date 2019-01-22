@@ -4,8 +4,8 @@
 <hr [@simpleFadeAnimation]="'in'" *ngIf="coffeeShops != undefined" />
 <div [@simpleFadeAnimation]="'in'" *ngIf="coffeeShops != undefined" class="">
   <ul class="scrollable">
-    <li *ngFor="let coffeeShopItem of coffeeShops;let coffeeShopIndex = index" (click)="onClickCoffeeShop(coffeeShopIndex)" 
-      [ngClass]="'shadow-sm rounded contentBG ' + (clickedCoffeeShops[coffeeShopIndex] ? 'csClicked': 'csHover')">
+    <li *ngFor="let coffeeShopItem of coffeeShops;let coffeeShopIndex = index" (click)="onClickCoffeeShop(coffeeShopItem.id)" 
+      [ngClass]="'shadow-sm rounded contentBG ' + (selectedCoffeeShop != undefined && selectedCoffeeShop === coffeeShopItem.id ? 'csClicked': 'csHover')">
       <app-coffee-shop-small [coffeeShop]="coffeeShopItem"></app-coffee-shop-small>
     </li>
   </ul>

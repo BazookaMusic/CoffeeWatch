@@ -90,4 +90,11 @@ export class MapComponent implements OnInit
       this.centerlng = lng;
     }, 50);
   }
+
+  markerClicked(marker)
+  {
+    this.centerMap(marker[1],marker[0]);
+    this.zoomLevel = 18;
+    this.coffeeShopsService.selectedCoffeeShop$.next(marker[0]);
+  }
 }

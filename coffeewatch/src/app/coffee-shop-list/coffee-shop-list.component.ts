@@ -60,6 +60,7 @@ export class CoffeeShopListComponent implements OnInit
     this.selectedCoffeeShop = undefined;
 
     this.getCoffeeShops();
+    this.coffeeShopsService.getSelectedCoffeeShop().subscribe(id => this.selectedCoffeeShop = id);
   }
 
   getCoffeeShops()
@@ -76,7 +77,7 @@ export class CoffeeShopListComponent implements OnInit
 
   refresh()  //run everytime list changes
   {
-    this.selectedCoffeeShop = -1;
+    this.selectedCoffeeShop = undefined;
     this.clickedCoffeeShops=[];
     let i = 0;
     for(; i < this.coffeeShops.length; i++)
@@ -84,26 +85,18 @@ export class CoffeeShopListComponent implements OnInit
       this.clickedCoffeeShops[i] = false;
     }
 
-    this.selectedCoffeeShop = undefined;
     this.coffeeShopsService.selectCoffeeShop(undefined);
   }
 
-  onClickCoffeeShop(coffeeShopIndex: number)
+  onClickCoffeeShop(coffeeShopID: number)
   {
-    if(this.clickedCoffeeShops[coffeeShopIndex])
+    if (this.selectedCoffeeShop !== undefined && coffeeShopID === this.selectedCoffeeShop)
     {
-        this.clickedCoffeeShops[coffeeShopIndex] = false;
-        this.selectedCoffeeShop = undefined;
         this.coffeeShopsService.selectCoffeeShop(undefined);
     }
     else
     {
-      if (this.selectedCoffeeShop != undefined)
-        this.clickedCoffeeShops[this.selectedCoffeeShop] = false;
-        
-      this.clickedCoffeeShops[coffeeShopIndex] = true;
-      this.selectedCoffeeShop = coffeeShopIndex;
-      this.coffeeShopsService.selectCoffeeShop(this.coffeeShops[coffeeShopIndex].id);
+      this.coffeeShopsService.selectCoffeeShop(coffeeShopID);
     }
   }
 }
