@@ -77,14 +77,6 @@ export class CoffeeShopListComponent implements OnInit
 
   refresh()  //run everytime list changes
   {
-    this.selectedCoffeeShop = undefined;
-    this.clickedCoffeeShops=[];
-    let i = 0;
-    for(; i < this.coffeeShops.length; i++)
-    {
-      this.clickedCoffeeShops[i] = false;
-    }
-
     this.coffeeShopsService.selectCoffeeShop(undefined);
   }
 
