@@ -16,7 +16,7 @@ export class UserService
   baseAPIURL = 'http://localhost:8765/';
   constructor(private http: HttpClient, private jwtHelp: JwtHelperService) 
   {
-    this.loggedIn$ = new BehaviorSubject<boolean>(false);
+    this.loggedIn$ = new BehaviorSubject<boolean>(undefined);
    }
 
   login(emailin: string, passwordin: string)

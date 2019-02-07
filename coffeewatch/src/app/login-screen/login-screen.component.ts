@@ -4,36 +4,43 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { UserService } from '../user.service';
 import {Location} from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-screen',
   templateUrl: './login-screen.component.html',
   styleUrls: ['./login-screen.component.css']
 })
-export class LoginScreenComponent implements OnInit, OnDestroy {
+export class LoginScreenComponent implements OnInit {
   loginForm: FormGroup;
   failureText: string;
   emailText: string;
+  firstOpen: boolean;
   constructor(private userService: UserService,
-    private location: Location) { }
+    private router: Router) { }
 
 
   ngOnInit() {
+    this.firstOpen = true;
     this.loginForm = new FormGroup({
       'email': new FormControl('', [ Validators.email, Validators.required]),
       'password': new FormControl('', [ Validators.required])
       }
     );
-    this.userService.loggedInStatus().subscribe(x => console.log(x));
-  }
-
-  ngOnDestroy() {
-    if (localStorage.getItem('access_token') != null) {
-      localStorage.removeItem('access_token');
-    }
+    this.userService.loggedInStatus().subscribe(value => {
+      if (value === true) {
+        this.router.navigate(['/home']);
+      } else if (value !== undefined) {
+        console.log(value);
+        if (!this.firstOpen) {
+          this.failureText = 'Wrong e-mail password combination';
+        }
+      }
+    });
   }
 
   tryLogin() {
+    this.firstOpen = false;
     const inputs = this.loginForm.controls;
     this.emailText = undefined;
     this.failureText = undefined;
@@ -41,14 +48,6 @@ export class LoginScreenComponent implements OnInit, OnDestroy {
         this.emailText = 'Invalid e-mail address';
       } else {
       this.userService.login(inputs.email.value, inputs.password.value);
-      this.userService.loggedInStatus().subscribe(value => {
-          if (value === true) {
-            console.log(value);
-            this.location.back();
-          } else {
-            this.failureText = 'Wrong e-mail password combination';
-          }
-        });
     }
 
 

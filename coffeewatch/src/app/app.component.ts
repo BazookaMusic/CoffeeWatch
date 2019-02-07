@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   title = 'Coffee Watch';
 
   constructor(private router: Router) { }
@@ -14,5 +14,12 @@ export class AppComponent {
   ngOnInit()
   {
     this.router.navigate(['/home'])
+  }
+
+  ngOnDestroy()
+  { 
+    if (localStorage.getItem('access_token') != null) {
+      localStorage.removeItem('access_token');
+    }
   }
 }
