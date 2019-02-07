@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import {CoffeeShop} from '../coffee-shop'
-import {Coffee} from '../coffee'
-import {Review} from '../review'
-import {CoffeeshopsService} from "../coffeeshops.service"
+import {CoffeeShop} from '../coffee-shop';
+import {Coffee} from '../coffee';
+import {Review} from '../review';
+import {CoffeeshopsService} from '../coffeeshops.service';
 import {transition, trigger, state, animate, style} from '@angular/animations';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
+
 
 @Component({
   selector: 'app-coffee-shop-list',
@@ -46,49 +48,61 @@ import {transition, trigger, state, animate, style} from '@angular/animations';
   ]
 })
 
-export class CoffeeShopListComponent implements OnInit
-{
-  coffeeShops:CoffeeShop[];
+export class CoffeeShopListComponent implements OnInit {
+  coffeeShops: CoffeeShop[];
+  filteredCoffeeShops: CoffeeShop[] = [];
   reviews: Review[];
   clickedCoffeeShops: boolean[] = [];
   selectedCoffeeShop: number;
-  
-  constructor(private coffeeShopsService:CoffeeshopsService) { }
+  searchGroup: FormGroup;
+  constructor(private coffeeShopsService: CoffeeshopsService) { }
 
-  ngOnInit() 
-  {
+  ngOnInit() {
     this.selectedCoffeeShop = undefined;
+    this.searchGroup = new FormGroup({
+      searchBarCoffeeShops: new FormControl('', [ Validators.minLength(0)])
+    });
+
+    this.searchGroup.controls.searchBarCoffeeShops.valueChanges.subscribe(value => {
+        if (value.length === 0) {
+          this.filteredCoffeeShops = this.coffeeShops;
+        } else { this.filteredCoffeeShops = this.coffeeShops.filter(cs => cs.name.toLowerCase().startsWith(value.toLowerCase())); }
+      }
+      );
+
 
     this.getCoffeeShops();
     this.coffeeShopsService.getSelectedCoffeeShop().subscribe(id => this.selectedCoffeeShop = id);
   }
 
-  getCoffeeShops()
-  {
-    this.coffeeShopsService.getCoffeeShops().subscribe(coffeeShopsItem => 
-      {
-        if (coffeeShopsItem != undefined)
-        {
+  getCoffeeShops() {
+    this.coffeeShopsService.getCoffeeShops().subscribe(coffeeShopsItem => {
+        if (coffeeShopsItem !== undefined) {
           this.coffeeShops = coffeeShopsItem;
+
+          if (this.filteredCoffeeShops.length === 0) {
+            this.filteredCoffeeShops = this.coffeeShops.slice(0, this.coffeeShops.length);
+          }
           this.refresh();
         }
       });
   }
 
-  refresh()  //run everytime list changes
-  {
+  refresh() {
     this.coffeeShopsService.selectCoffeeShop(undefined);
+    this.searchGroup.controls.searchBarCoffeeShops.setValue('');
   }
 
-  onClickCoffeeShop(coffeeShopID: number)
-  {
-    if (this.selectedCoffeeShop !== undefined && coffeeShopID === this.selectedCoffeeShop)
-    {
+  onClickCoffeeShop(coffeeShopID: number) {
+    if (this.selectedCoffeeShop !== undefined && coffeeShopID === this.selectedCoffeeShop) {
         this.coffeeShopsService.selectCoffeeShop(undefined);
-    }
-    else
-    {
+    } else {
       this.coffeeShopsService.selectCoffeeShop(coffeeShopID);
     }
+  }
+
+  trackByFn(index: number,item: CoffeeShop): number
+  {
+    return item.id;
   }
 }

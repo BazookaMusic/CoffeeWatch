@@ -1,10 +1,15 @@
 <div [@simpleFadeAnimation]="'in'" *ngIf="coffeeShops != undefined" class="row coffeeShopListTitleRow">
-  <h2 class="coffeeShopListTitle col-sm-11 fancyFont">Κοντινές Καφετέριες</h2>
+    <h2 class="coffeeShopListTitle col-sm-6 fancyFont">Κοντινές Καφετέριες</h2>
+    <div class="col-sm-6">
+      <form  [formGroup]="searchGroup">
+        <input class="coffeeShopListSearchbar" type="text" formControlName="searchBarCoffeeShops" minlength="0" placeholder="Όνομα Καφετέριας"/>
+      </form>
+  </div>
 </div>
 <hr [@simpleFadeAnimation]="'in'" *ngIf="coffeeShops != undefined" />
 <div [@simpleFadeAnimation]="'in'" *ngIf="coffeeShops != undefined" class="">
   <ul class="scrollable">
-    <li *ngFor="let coffeeShopItem of coffeeShops;let coffeeShopIndex = index" (click)="onClickCoffeeShop(coffeeShopItem.id)" 
+    <li *ngFor="let coffeeShopItem of filteredCoffeeShops; trackBy: trackByFn" (click)="onClickCoffeeShop(coffeeShopItem.id)" 
       [ngClass]="'shadow-sm rounded contentBG ' + (selectedCoffeeShop != undefined && selectedCoffeeShop === coffeeShopItem.id ? 'csClicked': 'csHover')">
       <app-coffee-shop-small [coffeeShop]="coffeeShopItem"></app-coffee-shop-small>
     </li>

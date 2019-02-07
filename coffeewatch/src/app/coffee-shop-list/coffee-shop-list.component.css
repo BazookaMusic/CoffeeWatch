@@ -1,7 +1,6 @@
 .coffeeShopListTitle
 {
     font-weight: bold;
-    position: absolute; 
     bottom:0;
     margin-bottom: 0;
 }
@@ -11,6 +10,13 @@
     position: relative;
     height: 3vh;
 }
+
+
+.coffeeShopListSearchbar
+{
+    width: 80%;
+}
+
 
 ul
 {

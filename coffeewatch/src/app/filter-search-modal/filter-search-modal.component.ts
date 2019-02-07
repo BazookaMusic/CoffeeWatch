@@ -11,17 +11,16 @@ import { CoffeeshopsService } from '../coffeeshops.service';
   templateUrl: './filter-search-modal.component.html',
   styleUrls: ['./filter-search-modal.component.css']
 })
-export class FilterSearchModalComponent implements OnInit
-{
+export class FilterSearchModalComponent implements OnInit {
   closeResult: string;
   filterForm: FormGroup;
   price: number;
-  MAXLEN: number = 500;
-  MINLEN: number = 10;
+  MAXLEN = 500;
+  MINLEN = 10;
   checkboxArray: FormControl[];
   moreThan3: boolean;
 
-  value: number = 5000;
+  value = 5000;
   options: Options = {
     floor: 500,
     ceil: 20000,
@@ -60,43 +59,37 @@ export class FilterSearchModalComponent implements OnInit
     }
   }
 
-  checkMoreThan3(): void
-  {
+  checkMoreThan3(): void {
     let counter = 0;
     let i = 0;
 
     this.moreThan3 = false;
-    for(; i < this.checkboxArray.length; i++)
-    {
-      if (this.checkboxArray[i].value) 
+    for (; i < this.checkboxArray.length; i++) {
+      if (this.checkboxArray[i].value) {
         counter++;
-      if(counter >= 3)
-      {
+      }
+      if (counter >= 3) {
         this.moreThan3 = true;
         break;
       }
     }
-    
-    if(this.moreThan3)
-    {
-      for (i = 0; i < this.checkboxArray.length; i++)
-      {
-        if (!this.checkboxArray[i].value)
+
+    if (this.moreThan3) {
+      for (i = 0; i < this.checkboxArray.length; i++) {
+        if (!this.checkboxArray[i].value) {
           this.checkboxArray[i].disable({emitEvent: false});
+        }
       }
-    }
-    else
-    {
-      for (i = 0; i < this.checkboxArray.length; i++)
-      {
-        if (this.checkboxArray[i].disabled)
+    } else {
+      for (i = 0; i < this.checkboxArray.length; i++) {
+        if (this.checkboxArray[i].disabled) {
           this.checkboxArray[i].enable({emitEvent: false});
+        }
       }
     }
   }
 
-  ngOnInit()
-  {
+  ngOnInit() {
     this.moreThan3 = false;
 
     this.checkboxArray = [
@@ -110,26 +103,24 @@ export class FilterSearchModalComponent implements OnInit
       new FormControl(false),
       new FormControl(false)];
 
-    for(let i = 0; i < this.checkboxArray.length; i++)
-    {
+    for (let i = 0; i < this.checkboxArray.length; i++) {
       this.checkboxArray[i].valueChanges.subscribe(x => this.checkMoreThan3());
     }
 
     this.filterForm = this.fb.group({
-      "cat0": this.checkboxArray[0],
-      "cat1": this.checkboxArray[1],
-      "cat2": this.checkboxArray[2],
-      "cat3": this.checkboxArray[3],
-      "cat4": this.checkboxArray[4],
-      "cat5": this.checkboxArray[5],
-      "cat6": this.checkboxArray[6],
-      "cat7": this.checkboxArray[7],
-      "cat8": this.checkboxArray[8],
-      "sortRadios": ['', Validators.required],
-      "priceMin": ['', [Validators.min(0)]],
-      "priceMax": ['', [Validators.min(0)]],
-      "starsRating": ['', [Validators.min(0)]]
+      'cat0': this.checkboxArray[0],
+      'cat1': this.checkboxArray[1],
+      'cat2': this.checkboxArray[2],
+      'cat3': this.checkboxArray[3],
+      'cat4': this.checkboxArray[4],
+      'cat5': this.checkboxArray[5],
+      'cat6': this.checkboxArray[6],
+      'cat7': this.checkboxArray[7],
+      'cat8': this.checkboxArray[8],
+      'sortRadios': ['', Validators.required],
+      'priceMin': ['', [Validators.min(0)]],
+      'priceMax': ['', [Validators.min(0)]],
+      'starsRating': ['', [Validators.min(0)]]
     });
-    this.filterForm.controls
   }
 }
