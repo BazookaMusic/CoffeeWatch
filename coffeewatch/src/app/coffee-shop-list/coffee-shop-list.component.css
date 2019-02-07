@@ -1,23 +1,28 @@
 .coffeeShopListTitle
 {
     font-weight: bold;
-    bottom:0;
-    margin-bottom: 0;
+    bottom:1rem;
+    
 }
 
 .coffeeShopListTitleRow 
 {
-    position: relative;
     height: 3vh;
+    position:relative;
 }
 
 
 .coffeeShopListSearchbar
 {
     width: 80%;
+    position:absolute;
+    bottom: 0.4rem;
 }
 
-
+form
+{
+    align-self:bottom;
+}
 ul
 {
   list-style-type: none;
