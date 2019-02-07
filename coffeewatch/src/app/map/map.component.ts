@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { CoffeeshopsService } from '../coffeeshops.service';
 import { CoffeeShop } from '../coffee-shop';
+import { Marker } from '../marker';
 
 @Component({
   selector: 'app-map',
@@ -10,14 +11,13 @@ import { CoffeeShop } from '../coffee-shop';
   styleUrls: ['./map.component.css']
 })
 
-export class MapComponent implements OnInit
-{
+export class MapComponent implements OnInit {
   centerlat: number;
   centerlng: number;
   zoom: number;
   userlat: number;
   userlng: number;
-  markers: [number, number, number][];
+  markers: Marker[];
   zoomLevel: number;
 
   coffeeShops: CoffeeShop[];
@@ -25,20 +25,17 @@ export class MapComponent implements OnInit
 
   autocomplete: google.maps.places.Autocomplete;
 
-  constructor(private coffeeShopsService:CoffeeshopsService) { }
+  constructor(private coffeeShopsService: CoffeeshopsService) { }
 
-  ngOnInit()
-  {
+  ngOnInit() {
     this.zoomLevel = 13;
     this.userlat = undefined;
     this.userlng = undefined;
     this.centerlat = 37.982038;
     this.centerlng = 23.730271;
 
-    this.coffeeShopsService.getSearchLocation().subscribe(coordinates =>
-      {
-        if(coordinates == undefined)
-        {
+    this.coffeeShopsService.getSearchLocation().subscribe(coordinates => {
+        if (coordinates === undefined) {
           this.userlat = undefined;
           this.userlng = undefined;
           this.centerlat = 37.982038;
@@ -47,9 +44,7 @@ export class MapComponent implements OnInit
             this.centerlat = 37.982038;
             this.centerlng = 23.730271;
           }, 50);
-        }
-        else
-        {
+        } else {
           setTimeout(() => {
             this.userlat = coordinates[0];
             this.userlng = coordinates[1];
@@ -59,30 +54,26 @@ export class MapComponent implements OnInit
         }
       });
 
-    this.coffeeShopsService.getCoffeeShops().subscribe(cs =>
-      {
-        if(cs) this.markers = this.coffeeShopsService.getMarkers(cs)
+    this.coffeeShopsService.getCoffeeShops().subscribe(cs => {
+        if (cs) { 
+          this.markers = this.coffeeShopsService.getMarkers(cs); 
+        }
       });
 
-    this.coffeeShopsService.getSelectedCoffeeShop().subscribe(id =>
-      {
+    this.coffeeShopsService.getSelectedCoffeeShop().subscribe(id => {
         this.selectedCoffeeShop = id;
-        if (id !== undefined)
-        {
+        if (id !== undefined) {
           const selCoffeeShop = this.coffeeShopsService.coffeeShopDict[id];
           this.centerMap(selCoffeeShop.lat, selCoffeeShop.lng);
           this.zoomLevel = 17;
-        }
-        else
-        {
+        } else {
           this.centerMap(this.userlat, this.userlng);
           this.zoomLevel = 13;
         }
     });
   }
 
-  centerMap(lat: number, lng: number)
-  {
+  centerMap(lat: number, lng: number) {
     this.centerlat = lat;
     this.centerlng = lng;
     setTimeout(() => {
@@ -91,10 +82,10 @@ export class MapComponent implements OnInit
     }, 50);
   }
 
-  markerClicked(marker)
-  {
-    this.centerMap(marker[1],marker[0]);
+  markerClicked(marker) {
+    this.centerMap(marker.lat, marker.lng);
     this.zoomLevel = 18;
-    this.coffeeShopsService.selectedCoffeeShop$.next(marker[0]);
+    this.coffeeShopsService.selectedCoffeeShop$.next(marker.id);
   }
+
 }

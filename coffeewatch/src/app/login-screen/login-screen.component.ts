@@ -14,52 +14,43 @@ export class LoginScreenComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   failureText: string;
   emailText: string;
-  constructor(private userService:UserService,
+  constructor(private userService: UserService,
     private location: Location) { }
 
 
-  ngOnInit() 
-  {
-    this.loginForm= new FormGroup({
-      'email': new FormControl('', [ Validators.email,Validators.required]),
+  ngOnInit() {
+    this.loginForm = new FormGroup({
+      'email': new FormControl('', [ Validators.email, Validators.required]),
       'password': new FormControl('', [ Validators.required])
       }
     );
     this.userService.loggedInStatus().subscribe(x => console.log(x));
   }
 
-  ngOnDestroy()
-  {
-    if (localStorage.getItem('access_token') != null)
+  ngOnDestroy() {
+    if (localStorage.getItem('access_token') != null) {
       localStorage.removeItem('access_token');
+    }
   }
 
-  tryLogin()
-  {
+  tryLogin() {
     const inputs = this.loginForm.controls;
-    this.emailText= undefined;
-    this.failureText= undefined;
-    if (!inputs.email.valid)
-      {
-        this.emailText= 'Invalid e-mail address';
-      }
-    else
-    {
+    this.emailText = undefined;
+    this.failureText = undefined;
+    if (!inputs.email.valid) {
+        this.emailText = 'Invalid e-mail address';
+      } else {
       this.userService.login(inputs.email.value, inputs.password.value);
-      this.userService.loggedInStatus().subscribe(value =>
-        {
-          if (value === true) //logged in
-          {
+      this.userService.loggedInStatus().subscribe(value => {
+          if (value === true) {
             console.log(value);
             this.location.back();
-          }
-          else
-          {
-            this.failureText = "Wrong e-mail password combination";
+          } else {
+            this.failureText = 'Wrong e-mail password combination';
           }
         });
     }
-     
+
 
 
   }

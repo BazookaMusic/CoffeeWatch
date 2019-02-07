@@ -7,26 +7,30 @@ import {Coffee} from './coffee';
 import {Review} from './review';
 import { UserService } from './user.service';
 import { HttpHeaders, HttpClient, HttpParams} from '@angular/common/http';
+import { Marker, MarkerColors, LabelOptions } from './marker';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoffeeshopsService {
 
+  // cached data
   coffeeShops: CoffeeShop[] = [];
   coffeeShop: CoffeeShop;
-
   coffees: Coffee[] = [];
-  priceTiers: number[] = [];
   coffeeShopDict: {[id: number]: CoffeeShop} = {};
+
   coffee: Coffee;
   reviews: Review[] = [];
-  mapCoffeeShops: Observable<[CoffeeShop[], number]>; // coffeeshops, selected index
+
+  // 
+  priceTiers: number[] = [];
+
   public searchLat: number;
   public searchLng: number;
 
-  public searchCoordinates$: BehaviorSubject<[number, number]>;
-
+  // observables
+  searchCoordinates$: BehaviorSubject<[number, number]>;
   selectedCoffeeShop$: BehaviorSubject<number>;
   selectedCoffee$: BehaviorSubject<number>;
   CoffeeShops$: BehaviorSubject<CoffeeShop[]>;
@@ -142,10 +146,35 @@ export class CoffeeshopsService {
     return this.selectedCoffee$;
   }
 
-  getMarkers(coffeeShops: CoffeeShop[]) {
+  getMarkers(coffeeShops: CoffeeShop[], icons = 'color') {
     const thresholds = this.priceTiers;
+    const marker_icons = ['green_marker.png','yellow_marker.png','orange_marker.png','red_marker.png'];
     return coffeeShops.
-    map((cs): [number, number, number, number] => [cs.id, cs.lat, cs.lng, average(cs.coffees.map(coffee => coffee.price))]);
+    map((cs): Marker =>
+       {
+         const selection = colorMap(this.priceTiers, average(cs.coffees.map(coffee => coffee.price)));
+         const colorSel = MarkerColors[selection];
+         const options: LabelOptions = {
+            color: colorSel,
+            fontSize: '14px',
+            fontWeight: 'bold',
+            text: cs.name
+          };
+
+        const iconPath = icons === 'color' ? '../assets/images/' + marker_icons[selection] : cs.iconPath;
+
+
+        const marker = {
+          id: cs.id,
+          lat: cs.lat,
+          lng: cs.lng,
+          color: colorSel ,
+          name: cs.name,
+          icon: {url: iconPath, scaledSize: {height: 50, width: 60}},
+          labelOptions: options
+        };
+        return marker;
+    });
   }
 
   getPricePartitions(coffeeShops) {
