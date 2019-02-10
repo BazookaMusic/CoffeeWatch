@@ -59,10 +59,78 @@ server.post('/login', (req, res) => {
     //res.header('Access-Control-Allow-Origin', '*')
     res.status(200).json({access_token})
   })
+
   
 
 
-  server.put('/',  (req, res, next) => {
+  server.post('/register',  (req, res, next) => {
+    // res.header('Access-Control-Allow-Origin', '*')
+    try
+    {
+      console.log(req.body)
+      const {name, email,password} = req.body
+      if (name === undefined || email === undefined || password === undefined )
+      {
+        res.status(400).json({message:'Bad request'})
+        return
+      }
+
+      let index= userdb.users.findIndex(user => user.email === email)
+      console.log(email)
+      if (index != -1)
+      {
+        res.status(400).json({message:'User already exists'})
+      }
+      else
+      {
+        var maxID=Math.max(...userdb.users.map(user => +user.id)) + 1
+        console.log(Math.max(...userdb.users.map(user => +user.id)) + 1)
+        
+        console.log('adding '+ email)
+        const user = {'id':maxID,'name':name,'email':email,'password':ENCRYPT(password,ALGO).toString()}
+        userdb.users.push(user)
+        fs.writeFileSync('./mock-authentication/users.json', JSON.stringify(userdb),'UTF-8')
+        res.status(200).json(user)
+      }
+
+    }
+    catch(err)
+    {
+      console.log(err)
+      res.status(400).json({message:'Bad request'})
+    }
+   })
+ 
+ 
+
+
+
+  
+
+
+  server.post('*',  (req, res, next) => {
+   // res.header('Access-Control-Allow-Origin', '*')
+    if (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer') {
+      console.log(req.headers.authorization)
+      const status = 401
+      const message = 'Bad authorization header'
+      res.status(status).json({status, message})
+      return
+    }
+    try {
+       verifyToken(req.headers.authorization.split(' ')[1])
+       next()
+    } catch (err) {
+      const status = 401
+      const message = 'Error: access_token is not valid'
+      //res.header('Access-Control-Allow-Origin', '*')
+      res.status(status).json({status, message})
+    }
+  })
+
+
+
+  server.put('*',  (req, res, next) => {
    // res.header('Access-Control-Allow-Origin', '*')
     if (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer') {
       console.log(req.headers.authorization)

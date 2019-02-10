@@ -44,7 +44,7 @@ users={"users":users}
 user_db=[{"email":user["email"],"id":user["id"]} for user in users["users"]]
 user_db={"users":user_db}
 
-with open("users.json","w+") as f:
+with io.open("users.json","w+",encoding='utf-8') as f:
     f.write(json.dumps(users,ensure_ascii=False))
 
 
@@ -83,7 +83,7 @@ for i in range(1,TOTAL_COFFEESHOPS):
         "address": fakegr.street_address(),
         "website":fakegr.uri(),
         "telephone":fakegr.phone_number(),
-        "iconPath":"./assets/mikel.png",
+        "iconPath":"../assets/images/coffeeshops/{}.png".format(random.randint(0,7)),
         "lng":coords[1],
         "lat":coords[0],
         "description":fakegr.text(random.randint(50, 500))
