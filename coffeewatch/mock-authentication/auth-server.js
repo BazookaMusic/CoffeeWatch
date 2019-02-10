@@ -68,7 +68,7 @@ server.post('/login', (req, res) => {
     try
     {
       console.log(req.body)
-      const {name, email,password} = req.body
+      const {id,name, email,password} = req.body
       if (name === undefined || email === undefined || password === undefined )
       {
         res.status(400).json({message:'Bad request'})
