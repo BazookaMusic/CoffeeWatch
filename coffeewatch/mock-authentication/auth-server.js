@@ -76,10 +76,21 @@ server.post('/login', (req, res) => {
       }
 
       let index= userdb.users.findIndex(user => user.email === email)
-      console.log(email)
-      if (index != -1)
+      let index2= userdb.users.findIndex(user => user.name === name)
+      
+      if (index != -1 || index2 != -1)
       {
-        res.status(400).json({message:'User already exists'})
+        var err_mess = ''
+        if (index !== -1)
+        {
+          err_mess = 'Email already exists'
+        }
+        else if (index2 !== -1)
+        {
+          err_mess = 'User already exists'
+        }
+
+        res.status(400).json({message: err_mess})
       }
       else
       {
