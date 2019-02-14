@@ -19,7 +19,16 @@
           <div *ngIf="errorText !== ''" class="alert alert-warning">{{errorText}}</div>
           <div *ngIf="registerForm.controls.password.hasError('MatchPass')" class="alert alert-warning">Οι κωδικοί δεν ταιρίαζουν</div>
         </div>
-        <button type="submit" class="btn orangeButton" >Εγγραφή</button>
+        <div class="form-group row">
+            <div class='col-sm-4'>
+                <button type="submit" class="btn orangeButton" >Εγγραφή</button>
+            </div>
+            <div class='col-sm-4'>
+                <a [routerLink]="['/login']" >Έχω ήδη λογαριασμό</a>
+            </div>
+  
+          </div>
+        
     </form>
   </div>
 </div>

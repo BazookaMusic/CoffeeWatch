@@ -27,7 +27,7 @@ export class AppComponent implements OnDestroy {
 
   ngOnDestroy()
   { 
-    if (localStorage.getItem('access_token') != null) {
+    if (localStorage.getItem('access_token') !== null) {
       localStorage.removeItem('access_token');
     }
   }

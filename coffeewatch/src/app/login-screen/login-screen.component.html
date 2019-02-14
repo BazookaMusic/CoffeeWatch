@@ -11,7 +11,15 @@
           <input type="password"  formControlName="password" required id="password">
           <div *ngIf="failureText !== undefined" class="alert alert-warning">{{failureText}}</div>
         </div>
-        <button type="submit" class="btn orangeButton" >Σύνδεση</button>
+        <div class="form-group row">
+          <div class='col-sm-4'>
+            <button type="submit" class="btn orangeButton" >Σύνδεση</button>
+          </div>
+          <div class='col-sm-4'>
+              <a [routerLink]="['/register']" >Εγγραφή</a>
+          </div>
+
+        </div>
     </form>
   </div>
 </div>
