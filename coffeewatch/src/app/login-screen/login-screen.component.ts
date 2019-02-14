@@ -33,7 +33,7 @@ export class LoginScreenComponent implements OnInit {
       } else if (value !== undefined) {
         console.log(value);
         if (!this.firstOpen) {
-          this.failureText = 'Wrong e-mail password combination';
+          this.failureText = 'Λάθος email ή κωδικός πρόσβασης';
         }
       }
     });
@@ -45,7 +45,7 @@ export class LoginScreenComponent implements OnInit {
     this.emailText = undefined;
     this.failureText = undefined;
     if (!inputs.email.valid) {
-        this.emailText = 'Invalid e-mail address';
+        this.emailText = 'Μη έγκυρη διεύθυνση';
       } else {
       this.userService.login(inputs.email.value, inputs.password.value);
     }
