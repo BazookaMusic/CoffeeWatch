@@ -16,18 +16,19 @@ const routes: Routes =
     { path: 'home', component: HomePageComponent},
     {path: 'login', component: LoginScreenComponent},
     {path: 'register', component: RegisterScreenComponent},
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'coffeeShopFull/:coffeeShopID', component: CoffeeShopFullComponent,
-      children: 
-      [
-          { path: 'coffee/:coffeeID/description', component: CoffeeDescriptionComponent, outlet: "detailsView" },
-          { path: 'coffee/:coffeeID/reviews', component: CoffeeReviewsComponent, outlet: "detailsView" },
-          { path: 'coffee/:coffeeID/statistics', component: CoffeeStatisticsComponent, outlet: "detailsView" }
-      ] }
+    children: 
+    [
+        { path: 'coffee/:coffeeID/description', component: CoffeeDescriptionComponent, outlet: "detailsView" },
+        { path: 'coffee/:coffeeID/reviews', component: CoffeeReviewsComponent, outlet: "detailsView" },
+        { path: 'coffee/:coffeeID/statistics', component: CoffeeStatisticsComponent, outlet: "detailsView" }
+    ] },
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+   
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -40,7 +40,11 @@ export class UserService {
     const token = localStorage.getItem('access_token');
     if ( token !== null) {
        this.loggedIn$.next(!this.jwtHelp.isTokenExpired(token));
-    } else { this.loggedIn$.next(false); }
+       return !this.jwtHelp.isTokenExpired(token);
+    } else { 
+      this.loggedIn$.next(false); 
+      return false;
+    }
   }
 
   logOut() {
@@ -49,7 +53,6 @@ export class UserService {
   }
 
   registerUser(user: User) {
-    console.log('hello');
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type':  'application/json' }) };
     return this.http.post<User>(this.baseAPIURL + 'register', user, httpOptions);
   }

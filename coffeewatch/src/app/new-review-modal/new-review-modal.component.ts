@@ -5,6 +5,8 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Review } from '../review';
 import { Coffee } from '../coffee';
 import { Validators } from '@angular/forms';
+import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-review-modal',
@@ -20,15 +22,25 @@ export class NewReviewModalComponent implements OnInit
   MAXLEN: number = 500;
   MINLEN: number = 10;
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal,
+    private userService: UserService,
+    private router: Router) { }
 
   open(content) 
   {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    if(this.userService.isLoggedIn())
+    {
+      this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
+    else
+    {
+      this.router.navigate(['/login']);
+    }
+    
   }
 
   private getDismissReason(reason: any): string

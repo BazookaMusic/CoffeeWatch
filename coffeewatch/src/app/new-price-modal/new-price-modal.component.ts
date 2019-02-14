@@ -5,6 +5,8 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Validators } from '@angular/forms';
 import { CoffeeshopsService } from '../coffeeshops.service';
 import { flatMap } from 'rxjs/operators';
+import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-price-modal',
@@ -14,19 +16,28 @@ import { flatMap } from 'rxjs/operators';
 
 export class NewPriceModalComponent implements OnInit {
   closeResult: string;
-  priceForm:FormGroup;
-  price:number;
+  priceForm: FormGroup;
+  price: number;
   constructor(
     private modalService: NgbModal,
-    private coffeeShopsService:CoffeeshopsService
+    private coffeeShopsService: CoffeeshopsService,
+    private userService: UserService,
+    private router: Router
   ) { }
 
   open(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    if (this.userService.isLoggedIn()) {
+      this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
+    else
+    {
+      this.router.navigate(['/login']);
+    }
+
   }
 
   private getDismissReason(reason: any): string {
@@ -39,20 +50,17 @@ export class NewPriceModalComponent implements OnInit {
     }
   }
 
-  onPriceSubmit()
-  {
-    let price=this.priceForm.controls.price;
+  onPriceSubmit() {
+    const price = this.priceForm.controls.price;
   }
 
-  ngOnInit() 
-  {
+  ngOnInit() {
     this.priceForm = new FormGroup({
-      price: new FormControl('',[Validators.required,Validators.min(0)])
+      price: new FormControl('', [Validators.required, Validators.min(0)])
     });
 
-    this.coffeeShopsService.getSelectedCoffee().pipe(flatMap(id => this.coffeeShopsService.getCoffee(id))).subscribe(coffee => 
-      {
-        if(coffee !== undefined) this.priceForm.controls.price.setValue(coffee.price)
+    this.coffeeShopsService.getSelectedCoffee().pipe(flatMap(id => this.coffeeShopsService.getCoffee(id))).subscribe(coffee => {
+        if (coffee !== undefined) { this.priceForm.controls.price.setValue(coffee.price); }
       });
   }
 }

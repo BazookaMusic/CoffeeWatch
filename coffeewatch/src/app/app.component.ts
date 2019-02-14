@@ -1,5 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,19 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnDestroy {
   title = 'Coffee Watch';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private modalService: NgbModal) { }
 
   ngOnInit()
   {
-    this.router.navigate(['/home'])
+    this.router.navigate(['/home']);
+    this.router.events.subscribe(event =>
+      {
+        if (event instanceof NavigationEnd)
+        {
+          this.modalService.dismissAll();
+        }
+      });
   }
 
   ngOnDestroy()

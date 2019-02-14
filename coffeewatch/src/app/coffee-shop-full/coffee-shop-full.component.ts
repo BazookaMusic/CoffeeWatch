@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { CoffeeShop } from '../coffee-shop';
 import { CoffeeshopsService } from '../coffeeshops.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-coffee-shop-full',
@@ -40,7 +41,7 @@ export class CoffeeShopFullComponent implements OnInit
   constructor(
     private route: ActivatedRoute,
     private coffeeShopsService: CoffeeshopsService,
-    private location: Location
+    private location: Location,
   ) { }
 
   ngOnInit()
