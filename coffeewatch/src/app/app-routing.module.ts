@@ -9,11 +9,13 @@ import { CoffeeDescriptionComponent } from './coffee-description/coffee-descript
 import { CoffeeShopMediumComponent } from './coffee-shop-medium/coffee-shop-medium.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginScreenComponent } from './login-screen/login-screen.component';
+import { RegisterScreenComponent } from './register-screen/register-screen.component';
 
 const routes: Routes = 
 [
     { path: 'home', component: HomePageComponent},
     {path: 'login', component: LoginScreenComponent},
+    {path: 'register', component: RegisterScreenComponent},
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'coffeeShopFull/:coffeeShopID', component: CoffeeShopFullComponent,
       children: 

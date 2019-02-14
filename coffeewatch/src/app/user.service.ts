@@ -49,6 +49,7 @@ export class UserService {
   }
 
   registerUser(user: User) {
+    console.log('hello');
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type':  'application/json' }) };
     return this.http.post<User>(this.baseAPIURL + 'register', user, httpOptions);
   }

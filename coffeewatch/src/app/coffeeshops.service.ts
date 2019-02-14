@@ -37,7 +37,7 @@ export class CoffeeshopsService {
 
   baseAPIURL = 'http://localhost:8765/';
 
-  reviewText = 'Όπως μου είπαν στο service center , το τηλέφωνο σας με τις κλείσεις και με τα μηνύματα δεν έχει πρόβλημα, τα υπόλοιπα δεν τους νοιάζει, με τα από 3 φορές που προσπαθανε...να το φταίξουν, όπως καταλάβατε έχει προβλιματα με τις εφαρμογές όπως viber, Facebook, και γενικά έχει κολλήματα, οταν παίρνεις τηλέφωνο με 600€ , δεν το περιμένεις, και πάλι όπως μας ήταν στο service , δεν είναι εγγύηση η τιμή';
+  
 
   constructor(private http: HttpClient, private userService: UserService) {
     // this.userService.login("user1@email.com", "AUTHENTICATED");
