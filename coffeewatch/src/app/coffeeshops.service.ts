@@ -35,9 +35,8 @@ export class CoffeeshopsService {
   selectedCoffee$: BehaviorSubject<number>;
   CoffeeShops$: BehaviorSubject<CoffeeShop[]>;
 
-  baseAPIURL = 'http://localhost:8765/';
+  baseAPIURL = 'http://localhost:8765/observatory/api/';
 
-  
 
   constructor(private http: HttpClient, private userService: UserService) {
     // this.userService.login("user1@email.com", "AUTHENTICATED");

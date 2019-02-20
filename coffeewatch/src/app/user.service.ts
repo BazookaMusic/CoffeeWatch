@@ -14,7 +14,7 @@ export class UserService {
   currentUsername: string = undefined;
   currentUserID: number;
   loggedIN = false;
-  baseAPIURL = 'http://localhost:8765/';
+  baseAPIURL = 'http://localhost:8765/observatory/api/';
   constructor(private http: HttpClient, private jwtHelp: JwtHelperService) {
    }
 

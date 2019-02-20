@@ -40,7 +40,7 @@ function verifyToken(token){
   }
 
 
-server.post('/login', (req, res) => {
+server.post('/observatory/api/login', (req, res) => {
     //res.header('Access-Control-Allow-Origin', '*')
     const {email, password} = req.body
     console.log(email)
@@ -55,7 +55,7 @@ server.post('/login', (req, res) => {
       res.status(status).json({status, message})
       return
     }
-    const access_token = createToken({email, password,username})
+    const access_token = createToken({email,username})
     //res.header('Access-Control-Allow-Origin', '*')
     res.status(200).json({access_token})
   })
@@ -63,7 +63,7 @@ server.post('/login', (req, res) => {
   
 
 
-  server.post('/register',  (req, res, next) => {
+  server.post('/observatory/api/register',  (req, res, next) => {
     // res.header('Access-Control-Allow-Origin', '*')
     try
     {
@@ -119,7 +119,7 @@ server.post('/login', (req, res) => {
   
 
 
-  server.post('*',  (req, res, next) => {
+  server.post('/observatory/api/*',  (req, res, next) => {
    // res.header('Access-Control-Allow-Origin', '*')
     if (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer') {
       console.log(req.headers.authorization)
@@ -141,7 +141,7 @@ server.post('/login', (req, res) => {
 
 
 
-  server.put('*',  (req, res, next) => {
+  server.put('/observatory/api/*',  (req, res, next) => {
    // res.header('Access-Control-Allow-Origin', '*')
     if (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer') {
       console.log(req.headers.authorization)
@@ -162,7 +162,7 @@ server.post('/login', (req, res) => {
   })
 
   server.use(router)
-  server.use('/api', router);
+  server.use('/observatory/api', router);
 
   server.listen(8765, () => {
     console.log('Run Auth API Server')

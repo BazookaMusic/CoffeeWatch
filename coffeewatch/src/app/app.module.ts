@@ -74,7 +74,8 @@ import { RegisterScreenComponent } from './register-screen/register-screen.compo
       config: {
         tokenGetter: tokenGetter,
         whitelistedDomains: ['localhost:8765'],
-        blacklistedRoutes: ['']
+        blacklistedRoutes: [''],
+        headerName: 'X-OBSERVATORY-AUTH'
       }
     })
   ],
