@@ -29,7 +29,7 @@ export class NewCoffeeModalComponent implements OnInit {
   ) { }
 
   open(content) {
-    if (this.userService.isLoggedIn()) {
+    if (this.userService.isloggedIN()) {
       this.modalService.open(content, { ariaLabelledBy: 'modal-coffee-title', size: 'lg' }).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
       }, (reason) => {

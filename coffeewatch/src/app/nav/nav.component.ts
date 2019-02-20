@@ -7,10 +7,25 @@ import { UserService } from '../user.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
+  loggedIN = undefined;
 
-  constructor() { }
+
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+    console.log('NAV: checking login status');
+    this.loggedIN = this.userService.isloggedIN();
+  }
+
+  logout()
+  {
+    this.userService.logOut();
+    this.loggedIN = this.userService.isloggedIN();
+  }
+
+  updateLoginStatus()
+  {
+    this.loggedIN = this.userService.isloggedIN();
   }
 
 }

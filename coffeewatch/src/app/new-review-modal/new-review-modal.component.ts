@@ -14,37 +14,31 @@ import { Router } from '@angular/router';
   styleUrls: ['./new-review-modal.component.css']
 })
 
-export class NewReviewModalComponent implements OnInit
-{
+export class NewReviewModalComponent implements OnInit {
   review: Review;
   closeResult: string;
   reviewForm: FormGroup;
-  MAXLEN: number = 500;
-  MINLEN: number = 10;
+  MAXLEN = 500;
+  MINLEN = 10;
 
   constructor(private modalService: NgbModal,
     private userService: UserService,
     private router: Router) { }
 
-  open(content) 
-  {
-    if(this.userService.isLoggedIn())
-    {
+  open(content) {
+    if (this.userService.isloggedIN()) {
       this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
       }, (reason) => {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       });
-    }
-    else
-    {
+    } else {
       this.router.navigate(['/login']);
     }
-    
+
   }
 
-  private getDismissReason(reason: any): string
-  {
+  private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -54,42 +48,36 @@ export class NewReviewModalComponent implements OnInit
     }
   }
 
-  onReviewSubmit()
-  {
-    let formRev=this.reviewForm.controls.review; 
-    let formStars=this.reviewForm.controls.starsRating; 
-    let date = new Date();
-    let y = date.getFullYear();
-    let m = date.getMonth();
-    let d = date.getDay();
-    this.review=new Review(-1, formRev.value as string, formStars.value as number, undefined, undefined, d + "/" + m + "/" + y, 0, 0);
+  onReviewSubmit() {
+    const formRev = this.reviewForm.controls.review;
+    const formStars = this.reviewForm.controls.starsRating;
+    const date = new Date();
+    const y = date.getFullYear();
+    const m = date.getMonth();
+    const d = date.getDay();
+    this.review = new Review(-1, formRev.value as string, formStars.value as number, undefined, undefined, d + '/' + m + '/' + y, 0, 0);
     this.reviewSubmit(this.review);
   }
 
-  reviewSubmit(rev:Review){}
+  reviewSubmit(rev: Review) {}
 
-  resetForm()
-  {
+  resetForm() {
     this.reviewForm.controls.review.setValue('');
-    this.reviewForm.controls.starsRating.setValue('0'); 
+    this.reviewForm.controls.starsRating.setValue('0');
   }
-  askDismiss()
-  {
-    if (this.reviewForm.controls.review.value.length>0)
-    {
-      if (confirm("Δεν έχετε δημοσιεύσει την αξιολόγηση σας. Πατήστε ΟΚ για να την απορρίψετε"))
-      {
+  askDismiss() {
+    if (this.reviewForm.controls.review.value.length > 0) {
+      if (confirm('Δεν έχετε δημοσιεύσει την αξιολόγηση σας. Πατήστε ΟΚ για να την απορρίψετε')) {
         this.resetForm();
-        this.modalService.dismissAll("cross clicked");
+        this.modalService.dismissAll('cross clicked');
       }
     }
   }
 
-  ngOnInit()
-  {
+  ngOnInit() {
     this.reviewForm = new FormGroup({
-      review: new FormControl('',[Validators.minLength(this.MINLEN),Validators.maxLength(this.MAXLEN)]),
-      starsRating: new FormControl('') 
+      review: new FormControl('', [Validators.minLength(this.MINLEN), Validators.maxLength(this.MAXLEN)]),
+      starsRating: new FormControl('')
     });
   }
 }

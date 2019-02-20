@@ -27,27 +27,30 @@ export class LoginScreenComponent implements OnInit {
       'password': new FormControl('', [ Validators.required])
       }
     );
-    this.userService.loggedInStatus().subscribe(value => {
-      if (value === true) {
-        this.router.navigate(['/home']);
-      } else if (value !== undefined) {
-        console.log(value);
-        if (!this.firstOpen) {
-          this.failureText = 'Λάθος email ή κωδικός πρόσβασης';
-        }
+
+    if (this.userService.isloggedIN() === true) {
+      this.router.navigate(['/home']);
       }
-    });
   }
 
   tryLogin() {
-    this.firstOpen = false;
     const inputs = this.loginForm.controls;
     this.emailText = undefined;
     this.failureText = undefined;
     if (!inputs.email.valid) {
         this.emailText = 'Μη έγκυρη διεύθυνση';
       } else {
-      this.userService.login(inputs.email.value, inputs.password.value);
+      this.userService.login(inputs.email.value, inputs.password.value).subscribe(loggedIN =>
+        {
+          if (loggedIN === true)
+          {
+            this.router.navigate(['/home']);
+          }
+          else
+          {
+            this.failureText = 'Μη έγκυρο email ή κωδικός πρόσβασης';
+          }
+        });
     }
 
 

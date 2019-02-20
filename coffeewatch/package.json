@@ -9,7 +9,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start-DB": "json-server --watch ./api.json",
-    "start-auth": "node ./mock-authentication/auth-server.js"
+    "start-auth": "node ./mock-authentication/auth-server.js",
+    "start-all": "ng serve --watch; npm run start-auth"
   },
   "private": true,
   "dependencies": {

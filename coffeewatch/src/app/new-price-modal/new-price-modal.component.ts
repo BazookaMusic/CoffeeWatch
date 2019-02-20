@@ -18,6 +18,7 @@ export class NewPriceModalComponent implements OnInit {
   closeResult: string;
   priceForm: FormGroup;
   price: number;
+  loggedIn: boolean;
   constructor(
     private modalService: NgbModal,
     private coffeeShopsService: CoffeeshopsService,
@@ -26,7 +27,8 @@ export class NewPriceModalComponent implements OnInit {
   ) { }
 
   open(content) {
-    if (this.userService.isLoggedIn()) {
+    if (this.userService.isloggedIN())
+    {
       this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
       }, (reason) => {
@@ -37,7 +39,6 @@ export class NewPriceModalComponent implements OnInit {
     {
       this.router.navigate(['/login']);
     }
-
   }
 
   private getDismissReason(reason: any): string {
@@ -58,6 +59,7 @@ export class NewPriceModalComponent implements OnInit {
     this.priceForm = new FormGroup({
       price: new FormControl('', [Validators.required, Validators.min(0)])
     });
+
 
     this.coffeeShopsService.getSelectedCoffee().pipe(flatMap(id => this.coffeeShopsService.getCoffee(id))).subscribe(coffee => {
         if (coffee !== undefined) { this.priceForm.controls.price.setValue(coffee.price); }

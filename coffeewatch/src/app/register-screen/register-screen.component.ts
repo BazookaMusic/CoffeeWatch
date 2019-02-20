@@ -36,6 +36,9 @@ export class RegisterScreenComponent implements OnInit {
 
       }
     , this.checkMatch);
+
+    if (this.userService.isloggedIN())
+      this.router.navigate(['/home']);
   }
 
   checkMatch(AC: AbstractControl) {

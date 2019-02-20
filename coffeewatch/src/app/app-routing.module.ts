@@ -16,8 +16,8 @@ const routes: Routes =
     { path: 'home', component: HomePageComponent},
     {path: 'login', component: LoginScreenComponent},
     {path: 'register', component: RegisterScreenComponent},
-    { path: 'coffeeShopFull/:coffeeShopID', component: CoffeeShopFullComponent,
-    children: 
+    { path: 'coffeeShop/:coffeeShopID', component: CoffeeShopFullComponent,
+    children:
     [
         { path: 'coffee/:coffeeID/description', component: CoffeeDescriptionComponent, outlet: "detailsView" },
         { path: 'coffee/:coffeeID/reviews', component: CoffeeReviewsComponent, outlet: "detailsView" },

@@ -3,53 +3,65 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import { BehaviorSubject, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, flatMap } from 'rxjs/operators';
 
 
 interface Token { access_token: string; }
-export interface User {id: number, name: string; email: string; password: string; }
+export interface User {id: number; name: string; email: string; password: string; }
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  loggedIn$: BehaviorSubject<boolean>;
-  currentUsername: string;
+  currentUsername: string = undefined;
   currentUserID: number;
+  loggedIN = false;
   baseAPIURL = 'http://localhost:8765/';
   constructor(private http: HttpClient, private jwtHelp: JwtHelperService) {
-    this.loggedIn$ = new BehaviorSubject<boolean>(undefined);
    }
 
   login(emailin: string, passwordin: string) {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type':  'application/json' }) };
 
-    return this.http.post<Token>(this.baseAPIURL + 'login', {email: emailin, password: passwordin}, httpOptions).subscribe(
-      token => {
-        const decoded = this.jwtHelp.decodeToken(token.access_token);
-        this.currentUsername = decoded.username;
-        localStorage.setItem('access_token', token.access_token);
-        this.isLoggedIn();
-      }, err => this.loggedIn$.next(false));
+    return this.http.post<boolean>(this.baseAPIURL + 'login', {email: emailin, password: passwordin}, httpOptions).
+    pipe(catchError(err =>
+      {
+        console.log(err);
+        this.loggedIN = false;
+        return of(undefined);
+      }))
+    .pipe(flatMap( token => {
+      if(token !== undefined)
+        {
+          localStorage.setItem('access_token', token.access_token);
+          this.loggedIN = this.isloggedIN();
+          return of(this.loggedIN);
+        }
+      else
+      {
+        return of(false);
+      }
+      } ));
+
   }
 
-  loggedInStatus() {
-    this.isLoggedIn();
-    return this.loggedIn$;
-  }
-
-  isLoggedIn() {
+  isloggedIN() {
+    console.log('Checking login');
     const token = localStorage.getItem('access_token');
     if ( token !== null) {
-       this.loggedIn$.next(!this.jwtHelp.isTokenExpired(token));
-       return !this.jwtHelp.isTokenExpired(token);
-    } else { 
-      this.loggedIn$.next(false); 
+      const decoded = this.jwtHelp.decodeToken(token);
+      this.currentUsername = decoded.username;
+      console.log('token valid?:' + !this.jwtHelp.isTokenExpired(token));
+      this.loggedIN = !this.jwtHelp.isTokenExpired(token);
+      return !this.jwtHelp.isTokenExpired(token);
+    } else {
+      console.log('no token');
+      this.loggedIN = false;
       return false;
     }
   }
 
   logOut() {
     localStorage.removeItem('access_token');
-    this.loggedIn$.next(false);
+    this.loggedIN = false;
   }
 
   registerUser(user: User) {
