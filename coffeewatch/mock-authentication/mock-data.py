@@ -11,6 +11,8 @@ fakeen= Faker()
 TOTAL_REVIEWS=10000
 TOTAL_COFFEES=1000
 TOTAL_COFFEESHOPS=50
+TOTAL_USERS=10
+PRICES_PER_PRODUCT = 15
 
 def no_repeat(f):
     previous={}
@@ -34,9 +36,20 @@ def geogen(lat,lng,meters):
 
     return (lat+y1,lng+x1)
 
+def daterange(n):
+    dates = [fakegr.date_between_dates(datetime.date(2018,1,1), datetime.date(2019,12,31)) for i in range(0,n)]
+    dates.sort()
+    return dates
+def priceGen(n,base,delta=0.4):
+    prices = []
+    for i in range(0,n):
+        base = base + random.uniform(-delta,delta)
+        prices.append(round(base,2))
+    return prices
+
 users=[]
 usernames={}
-for i in range(1,11):
+for i in range(1,TOTAL_USERS+1):
     username=fakegr.name()
     usernames[i]=username
     users.append({"id":i,"name":username,"email":("user"+str(i)+"@email.com"),"password":"27168b830c30987f0a7bb4763ca22b74da1079f7a66a296e6dce66e195f8886c"})
@@ -51,35 +64,20 @@ with io.open("users.json","w+",encoding='utf-8') as f:
 
 coffees=['Espresso','Freddo espresso','Cappuccino','Freddo cappuccino', 'Latte', 'Nes', 'Frappe', 'Φίλτρου', 'Ελληνικός']
 
-products=[]
-for i in range(1,TOTAL_COFFEES):
-    numOfReviews=random.randint(1,100)
-    reviewidgen=no_repeat(random.randint)
-    name=random.choice(coffees)
-    products.append({
-        "id":i,
-        "withdrawn":"false",
-        "name": name,
-        "category":name,
-        "shopid":random.randint(1,TOTAL_COFFEESHOPS),
-        "description": fakegr.text(random.randint(50,1000)),
-        "price": str(round(random.uniform(1.0,5.0),2)),
-        "extraData":{
-        "rating": str(round(random.uniform(0.0,5.0),2)),
-        "numOfReviews": numOfReviews
-        }
-    })
 
 
 shops=[]
 csnames=["Mikel","CoffeeBrands","Coffee Island","Bruno","CoffeeLand","CoffeeBreak","Delicious","Τηλεσκόπιο","Φραπεδιερα","Εξαντας","Σπείρα","Mirrors"]
-for i in range(1,TOTAL_COFFEESHOPS):
+shopnames={}
+for i in range(1,TOTAL_COFFEESHOPS + 1):
     coords=geogen(37.982038,23.730271,random.randint(500,10000))
     coffeeidgen=no_repeat(random.randint)
+    name = random.choice(csnames)
+    shopnames[i] = name
     shops.append({
         "id":i,
         "withdrawn":"false",
-        "name": random.choice(csnames),
+        "name": name,
         "address": fakegr.street_address(),
         "website":fakegr.uri(),
         "telephone":fakegr.phone_number(),
@@ -88,6 +86,41 @@ for i in range(1,TOTAL_COFFEESHOPS):
         "lat":coords[0],
         "description":fakegr.text(random.randint(50, 500))
     })
+
+
+products=[]
+prices=[]
+for i in range(1,TOTAL_COFFEES + 1):
+    numOfReviews=random.randint(1,100)
+    reviewidgen=no_repeat(random.randint)
+    name=random.choice(coffees)
+    shopid = random.randint(1,TOTAL_COFFEESHOPS)
+    dates = daterange(PRICES_PER_PRODUCT)
+    rand_prices = priceGen(len(dates),random.randint(1,5))
+    products.append({
+        "id":i,
+        "withdrawn":"false",
+        "name": name,
+        "category":name,
+        "shopid": shopid,
+        "description": fakegr.text(random.randint(50,1000)),
+        "price": rand_prices[-1],
+        "extraData":{
+        "rating": str(round(random.uniform(0.0,5.0),2)),
+        "numOfReviews": numOfReviews
+        }
+    })
+    for date,price in zip(dates,rand_prices):
+        prices.append({
+            "date": date.strftime('%Y-%m-%d'),
+            "price": price,
+            "shopId": str(shopid),
+            "shopName": shopnames[shopid],
+            "productName": name,
+            "productId": str(i), 
+
+        })
+
 
 reviews=[]
 for i in range(1,TOTAL_REVIEWS):
@@ -108,11 +141,16 @@ for i in range(1,TOTAL_REVIEWS):
         }
     )
 
-products={"products":products}
-shops={"shops":shops}
-reviews={"reviews":reviews}
 
-final_dict={**products,**shops,**reviews,**user_db}
+
+
+
+products={"products": products}
+shops={"shops": shops}
+reviews={"reviews": reviews}
+prices = {"prices" : prices}
+
+final_dict={**products,**shops,**reviews,**user_db,**prices}
 
 
 with io.open("../src/api.json","w+",encoding="utf-8") as apidb:
