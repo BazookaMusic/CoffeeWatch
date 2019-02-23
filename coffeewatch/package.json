@@ -9,8 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start-DB": "json-server --watch ./api.json",
-    "start-auth": "node ./mock-authentication/auth-server.js",
-    "start-all": "ng serve --watch; npm run start-auth"
+    "start-auth": "node ./mock-authentication/auth-server.js"
   },
   "private": true,
   "dependencies": {
@@ -27,6 +26,7 @@
     "@angular/router": "~7.0.0",
     "@auth0/angular-jwt": "^2.1.0",
     "@ng-bootstrap/ng-bootstrap": "^4.0.1",
+    "@swimlane/ngx-charts": "^10.1.0",
     "@types/googlemaps": "^3.30.16",
     "angular-star-rating": "^4.0.0-beta.3",
     "bootstrap": "^4.2.1",

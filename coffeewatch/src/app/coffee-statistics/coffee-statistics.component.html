@@ -1,3 +1,54 @@
-<p>
-  coffee-statistics works!
-</p>
+<!-- The chart type goes in here -->
+<div class="row">
+  <h2> Ιστορικό Τιμών </h2>
+  <div *ngIf="history !== undefined" style="display: inline-block" class="row">
+      <ngx-charts-line-chart
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="history"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [autoScale]="autoScale"
+        [timeline]="timeline"
+        [xAxisTickFormatting]="dateTickFormatting"
+  >
+        
+
+    <ng-template #seriesTooltipTemplate let-model="model">
+        <div style="fill: #ffffff;" >
+          <div  style="color:#ffffff!important">
+            Τιμή:
+            {{model[0].value}}€
+
+            <br>
+            Ημερομηνία:
+            {{ model[0].name.toLocaleDateString('el-GR',options) }}
+    
+          </div>
+      </div>        
+    </ng-template>
+      </ngx-charts-line-chart>
+  </div>
+</div>
+
+<div class="row">
+    Στατιστικά τιμής
+</div>
+<div class="row">
+  <div *ngIf="avg !== undefined" class="col-sm-4">
+    Μέση τιμή: {{avg.toFixed(2)}}€
+  </div>
+  <div *ngIf="highest !== undefined" class="col-sm-4">
+      Υψηλότερη τιμή: {{highest.toFixed(2)}}€
+  </div>
+  <div *ngIf="lowest !== undefined" class="col-sm-4">
+      Χαμηλότερη τιμή: {{lowest.toFixed(2)}}€
+  </div>
+
+</div>

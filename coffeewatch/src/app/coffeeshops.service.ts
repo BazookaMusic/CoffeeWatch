@@ -8,6 +8,7 @@ import {Review} from './review';
 import { UserService } from './user.service';
 import { HttpHeaders, HttpClient, HttpParams} from '@angular/common/http';
 import { Marker, MarkerColors, LabelOptions } from './marker';
+import { priceData, priceSearch, Price, toPrice } from './price';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class CoffeeshopsService {
   coffee: Coffee;
   reviews: Review[] = [];
 
-  // 
+
   priceTiers: number[] = [];
 
   public searchLat: number;
@@ -50,7 +51,24 @@ export class CoffeeshopsService {
     this.searchCoordinates$ = new BehaviorSubject<[number, number]>(undefined);
   }
 
-  getCoffeeShop(csid: number): Observable<CoffeeShop> {
+  getPrices(searchParams: priceSearch) {
+    if (searchParams !== undefined) {
+      const headerPrice = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+        , params: new HttpParams()
+        .set('productId',  stringed(searchParams.productId))
+        .set('shopId', stringed(searchParams.shopId) )
+      };
+
+    return this.http.get<priceData[]>(this.baseAPIURL + 'prices', headerPrice).pipe(map(prices => prices.map(toPrice)));
+    }
+    else
+    {
+      return of(undefined);
+    }
+  }
+
+  getCoffeeShop(csid: number) : Observable < CoffeeShop > {
     if (csid !== undefined) {
       const headerCoffees = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -147,10 +165,9 @@ export class CoffeeshopsService {
 
   getMarkers(coffeeShops: CoffeeShop[], icons = 'color') {
     const thresholds = this.priceTiers;
-    const marker_icons = ['green_marker.png','yellow_marker.png','orange_marker.png','red_marker.png'];
+    const marker_icons = ['green_marker.png', 'yellow_marker.png', 'orange_marker.png', 'red_marker.png'];
     return coffeeShops.
-    map((cs): Marker =>
-       {
+    map((cs): Marker => {
          const selection = colorMap(this.priceTiers, average(cs.coffees.map(coffee => coffee.price)));
          const colorSel = MarkerColors[selection];
          const options: LabelOptions = {
@@ -196,7 +213,7 @@ export class CoffeeshopsService {
 
 }
 
-function average(values: number[]) {
+export function average(values: number[]) {
   return values.reduce(function (a, b) { return +a + (+b); }) / values.length;
 }
 
@@ -221,6 +238,16 @@ function colorMap(thresholds, value) {
           return index + 1;
         }
       }
+  }
 
 
+function stringed(attr: any): string {
+  if (attr === undefined) {
+    return '';
+  } else {
+    return attr.toString();
+  }
 }
+
+
+

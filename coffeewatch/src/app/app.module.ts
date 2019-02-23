@@ -33,6 +33,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterScreenComponent } from './register-screen/register-screen.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 
@@ -55,7 +56,7 @@ import { RegisterScreenComponent } from './register-screen/register-screen.compo
     FilterSearchModalComponent,
     HomePageComponent,
     LoginScreenComponent,
-    RegisterScreenComponent
+    RegisterScreenComponent,
   ],
   imports: [
     NgbModule,
@@ -77,7 +78,8 @@ import { RegisterScreenComponent } from './register-screen/register-screen.compo
         blacklistedRoutes: [''],
         headerName: 'X-OBSERVATORY-AUTH'
       }
-    })
+    }),
+    NgxChartsModule
   ],
   providers: [HttpClientModule, JwtHelperService],
   bootstrap: [AppComponent]
