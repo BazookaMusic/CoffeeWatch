@@ -111,7 +111,9 @@ export class CoffeeshopsService {
             this.http.get<Coffee[]>(this.baseAPIURL + 'products', httpOptions1).subscribe(coffees => {
                 coffeeShop.coffees = coffees.filter(coffeeFilter);
                 counter++;
-                if (counter === this.coffeeShops.length) {
+                if (counter === this.coffeeShops.length) 
+                {
+                  this.coffeeShops = this.coffeeShops.filter(cs => cs.coffees.length > 0); // throw away empty
                   this.priceTiers = this.getPricePartitions(this.coffeeShops);
                   this.CoffeeShops$.next(this.coffeeShops);
 
@@ -233,7 +235,7 @@ export class CoffeeshopsService {
   filterCoffee(filters: FilterObject)
   {
     return function(coffee: Coffee): boolean {
-      return (coffee.category === filters.category || filters.category === '') && (coffee.price >= filters.minPrice ) 
+      return (coffee.category === filters.category) && (coffee.price >= filters.minPrice ) 
             && (coffee.price <= filters.maxPrice) && (coffee.extraData.rating > filters.minRating);
     };
   }
@@ -241,9 +243,12 @@ export class CoffeeshopsService {
   filterCoffeeShop(filters: FilterObject, searchLat: number, searchLng: number)
   {
     return function(coffeeShop: CoffeeShop): boolean{
-      return (distanceBetween(coffeeShop.lat, coffeeShop.lng, searchLat, searchLng) < filters.maxDist);
+      return distanceBetween(coffeeShop.lat, coffeeShop.lng, searchLat, searchLng) < filters.maxDist;
     }
   }
+
+
+
 
 
 

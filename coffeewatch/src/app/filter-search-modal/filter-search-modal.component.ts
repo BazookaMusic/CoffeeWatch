@@ -111,7 +111,7 @@ export class FilterSearchModalComponent implements OnInit {
     this.value = 5000;
 
     this.checkboxArray = [
-      new FormControl(false),
+      new FormControl(true),
       new FormControl(false),
       new FormControl(false),
       new FormControl(false),

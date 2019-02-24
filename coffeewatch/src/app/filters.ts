@@ -16,7 +16,7 @@ export const defaultFilters: FilterObject = {
     maxDist: 5,
     minRating: 0,
     sort: 'price',
-    category: ''
+    category: 'Espresso'
   };
 
   export function fix(value: any, maximize: boolean = false) {
