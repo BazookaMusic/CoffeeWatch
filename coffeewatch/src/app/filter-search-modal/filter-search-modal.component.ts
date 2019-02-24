@@ -61,38 +61,35 @@ export class FilterSearchModalComponent implements OnInit {
     }
   }
 
-  checkMoreThan3(): void {
-    let counter = 0;
-    let i = 0;
+  check(indexClicked: number) {
+    this.checkboxArray.forEach((item, index) => {
+      if (indexClicked !== index) {
+        item.setValue('');
+      }
+      else
+      {
+        item.setValue(true);
+      }
+    });
+  }
 
-    this.moreThan1 = false;
-    for (; i < this.checkboxArray.length; i++) {
-      if (this.checkboxArray[i].value) {
-        counter++;
-      }
-      if (counter >= 1) {
-        this.moreThan1 = true;
-        break;
-      }
+  checkMatch(AC: AbstractControl) {
+    let found = false;
+    for (let i = 0; i <= 8; i++) {
+      found = found || AC.get('cat' + i).value !== false;
+      if (found) { break; }
     }
-
-    if (this.moreThan1) {
-      for (i = 0; i < this.checkboxArray.length; i++) {
-        if (!this.checkboxArray[i].value) {
-          this.checkboxArray[i].disable({emitEvent: false});
-        }
-      }
-    } else {
-      for (i = 0; i < this.checkboxArray.length; i++) {
-        if (this.checkboxArray[i].disabled) {
-          this.checkboxArray[i].enable({emitEvent: false});
-        }
-      }
+    if (found) {
+      console.log('nice');
+      return null;
+    }
+    else
+    {
+      return {noCategory: true};
     }
   }
 
-  makeFilterObject()
-  {
+  makeFilterObject() {
     const categories = coffeeCategories;
     const categoryIndex = this.checkboxArray.findIndex(fc => fc.value === true);
     const filters: FilterObject = {
@@ -106,13 +103,13 @@ export class FilterSearchModalComponent implements OnInit {
     return filters;
   }
 
-  onFilterSubmit()
-  {
+  onFilterSubmit() {
     const filters: FilterObject = this.makeFilterObject();
     this.coffeeShopsService.setFilters(filters);
   }
   ngOnInit() {
-    this.moreThan1= false;
+    this.moreThan1 = false;
+    this.value = 5000;
 
     this.checkboxArray = [
       new FormControl(false),
@@ -124,10 +121,6 @@ export class FilterSearchModalComponent implements OnInit {
       new FormControl(false),
       new FormControl(false),
       new FormControl(false)];
-
-    for (let i = 0; i < this.checkboxArray.length; i++) {
-      this.checkboxArray[i].valueChanges.subscribe(x => this.checkMoreThan3());
-    }
 
     this.filterForm = this.fb.group({
       'cat0': this.checkboxArray[0],
@@ -143,7 +136,7 @@ export class FilterSearchModalComponent implements OnInit {
       'priceMin': ['', [Validators.min(0)]],
       'priceMax': ['', [Validators.min(0)]],
       'starsRating': ['', [Validators.min(0)]]
-    });
+    }, {validator: this.checkMatch});
   }
 }
 

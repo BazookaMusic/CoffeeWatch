@@ -8,33 +8,32 @@
   <div class="modal-body">
     <form [formGroup]="filterForm" id="mainform" (ngSubmit)="onFilterSubmit();modal.dismiss('Submit')">
       <div class="form-group row label">
-        <h4>Κατηγορίες καφέ:</h4>
-        <label class="form-check-label checkBoxHint">(Επιλέξτε έως 3 καφέδες)</label>
+        <h4>Είδος καφέ:</h4>
       </div>
       <div class="form-group row">
         <table class="table">
           <tr>
             <td>
               <span>
-                <input class="checkBox" type="checkbox" value="" id="cat0" formControlName="cat0">
+                <input class="checkBox" type="checkbox" value="" id="cat0" formControlName="cat0" (click)='check(0)'>
                 <label class="form-check-label clickableLabel" for="cat0">Espresso</label>
               </span>
             </td>
             <td>
               <span>
-                <input class="checkBox" type="checkbox" value="" id="cat1" formControlName="cat1">
+                <input class="checkBox" type="checkbox" value="" id="cat1" formControlName="cat1" (click)='check(1)'>
                 <label class="form-check-label clickableLabel" for="cat1">Freddo espresso</label>
               </span>
             </td>
             <td>
               <span>
-                <input class="checkBox" type="checkbox" value="" id="cat2" formControlName="cat2">
+                <input class="checkBox" type="checkbox" value="" id="cat2" formControlName="cat2" (click)='check(2)'>
                 <label class="form-check-label clickableLabel" for="cat2">Cappuccino</label>
               </span>
             </td>
             <td>
               <span>
-                <input class="checkBox" type="checkbox" value="" id="cat3" formControlName="cat3">
+                <input class="checkBox" type="checkbox" value="" id="cat3" formControlName="cat3" (click)='check(3)'>
                 <label class="form-check-label clickableLabel" for="cat3">Freddo cappuccino</label>
               </span>
             </td>
@@ -42,25 +41,25 @@
           <tr>
             <td>
               <span>
-                <input class="checkBox" type="checkbox" value="" id="cat4" formControlName="cat4">
+                <input class="checkBox" type="checkbox" value="" id="cat4" formControlName="cat4" (click)='check(4)'>
                 <label class="form-check-label clickableLabel" for="cat4">Latte</label>
               </span>
             </td>
             <td>
               <span>
-                <input class="checkBox" type="checkbox" value="" id="cat5" formControlName="cat5">
+                <input class="checkBox" type="checkbox" value="" id="cat5" formControlName="cat5" (click)='check(5)'>
                 <label class="form-check-label clickableLabel" for="cat5">Nes</label>
               </span>
             </td>
             <td>
               <span>
-                <input class="checkBox" type="checkbox" value="" id="cat6" formControlName="cat6">
+                <input class="checkBox" type="checkbox" value="" id="cat6" formControlName="cat6" (click)='check(6)'>
                 <label class="form-check-label clickableLabel" for="cat6">Frappe</label>
               </span>
             </td>
             <td>
               <span>
-                <input class="checkBox" type="checkbox" value="" id="cat7" formControlName="cat7">
+                <input class="checkBox" type="checkbox" value="" id="cat7" formControlName="cat7" (click)='check(7)'>
                 <label class="form-check-label clickableLabel" for="cat7">Φίλτρου</label>
               </span>
             </td>
@@ -68,7 +67,7 @@
           <tr>
             <td>
               <span>
-                <input class="checkBox" type="checkbox" value="" id="cat8" formControlName="cat8">
+                <input class="checkBox" type="checkbox" value="" id="cat8" formControlName="cat8" (click)='check(8)'>
                 <label class="form-check-label clickableLabel" for="cat8">Ελληνικός</label>
               </span>
             </td>
