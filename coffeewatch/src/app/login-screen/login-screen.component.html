@@ -1,25 +1,17 @@
 <div class="container vertical-center d-flex align-items-center justify-content-center">
-  <div class="my-auto">
+  <div class="my-auto shadow-sm rounded contentBG loginForm">
     <form [formGroup]='loginForm' (ngSubmit)="tryLogin()">
-        <div class="form-group row">
-          <label for="email" class="col-form-label">Your e-mail:</label>
-          <input type="text" formControlName="email" required placeholder="example@email.com" id="email">
-          <div *ngIf="emailText !== undefined" class="alert alert-warning">{{emailText}}</div>
+        <div class="row formRow">
+          <span class="col-sm-4"><label for="email" class="col-form-label">Όνομα χρήστη:</label></span>
+          <span class="col-sm-8"><input type="text" class="inputField" formControlName="email" required id="email"></span>
         </div>
-        <div class="form-group row">
-          <label for="password" class="col-form-label">Your password:</label>
-          <input type="password"  formControlName="password" required id="password">
+        <div class="row formRow">
+          <span class="col-sm-4"><label for="password" class="col-form-label">Κωδικός:</label></span>
+          <span class="col-sm-8"><input type="password" class="inputField" formControlName="password" required id="password"></span>
           <div *ngIf="failureText !== undefined" class="alert alert-warning">{{failureText}}</div>
         </div>
-        <div class="form-group row">
-          <div class='col-sm-4'>
-            <button type="submit" class="btn orangeButton" >Σύνδεση</button>
-          </div>
-          <div class='col-sm-4'>
-              <a [routerLink]="['/register']" >Εγγραφή</a>
-          </div>
-
-        </div>
+        <div class="row justify-content-center"><button type="submit" class="btn orangeButton connectButton" >Σύνδεση</button></div>
+        <div class="row justify-content-center"><a [routerLink]="['/register']" >Εγγραφή</a></div>
     </form>
   </div>
 </div>

@@ -20,6 +20,24 @@
   max-height: 4vh;
 }
 
+.loginMenu
+{
+  cursor: pointer;
+}
+
+.loginDropDown
+{
+  right: 0px;
+  left: -4vw !important;
+  top: 5.5vh !important;
+}
+
+.loginDropDown a
+{
+  padding: 1.1vh 1vw;
+  font-size: 1.1vw;
+}
+
 .siteTitle
 {
   margin-left: 0.5rem;

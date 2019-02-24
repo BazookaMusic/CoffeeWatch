@@ -3,12 +3,11 @@
     <span><img src="../assets/logo.png" class="img-fluid siteLogo" /></span><span class="siteTitle fancyFont">Coffee Watch</span>
   </a>
   <ul class="navbar-nav flex-row ml-md-auto d-md-flex">
-    <li ngbDropdown class="nav-item ">
-      <a class="nav-item nav-link mr-md-2" ngbDropdownToggle (click)="updateLoginStatus()"  data-toggle="dropdown" id="loginDropDown"
-        aria-haspopup="true">
+    <li ngbDropdown class="nav-item loginMenu">
+      <a class="nav-item nav-link mr-md-2" ngbDropdownToggle (click)="updateLoginStatus()"  data-toggle="dropdown" id="loginDropDown" aria-haspopup="true">
         <img src="../assets/loginIcon.png" class="img-fluid loginIcon" />
       </a>
-      <div ngbDropdownMenu  class="dropdown-menu-right" aria-labelledby="loginDropDown">
+      <div ngbDropdownMenu  class="dropdown-menu-right loginDropDown" aria-labelledby="loginDropDown">
         <div *ngIf="loggedIN === true">{{userService.currentUsername}}</div>
         <a *ngIf="loggedIN !== true" class="dropdown-item" routerLink='/login'>Σύνδεση</a>
         <a *ngIf="loggedIN !== true" class="dropdown-item" routerLink='/register'>Εγγραφή</a>
