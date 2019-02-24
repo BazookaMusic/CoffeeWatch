@@ -14,9 +14,12 @@
 
 .coffeeShopListSearchbar
 {
-    width: 80%;
+    width: 50%;
+    padding: 0.2vw;
+    font-size: 0.8vw;
+    right: 0;
     position:absolute;
-    bottom: 0.4rem;
+    bottom: 0.7vh;
 }
 
 form

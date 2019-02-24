@@ -99,3 +99,8 @@ h2
 {
   font-size: 1.7vw !important;
 }
+
+.websiteLink
+{
+    word-break: break-all;
+}

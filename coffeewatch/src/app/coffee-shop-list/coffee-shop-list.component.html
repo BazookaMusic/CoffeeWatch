@@ -1,10 +1,10 @@
 <div [@simpleFadeAnimation]="'in'" *ngIf="coffeeShops != undefined" class="row coffeeShopListTitleRow">
     <h2 class="coffeeShopListTitle col-sm-6 fancyFont">Κοντινές Καφετέριες</h2>
-    <div class="col-sm-6">
+    
       <form  [formGroup]="searchGroup">
         <input class="coffeeShopListSearchbar" type="text" formControlName="searchBarCoffeeShops" minlength="0" placeholder="Όνομα Καφετέριας"/>
       </form>
-  </div>
+  
 </div>
 <hr [@simpleFadeAnimation]="'in'" *ngIf="coffeeShops != undefined" />
 <div [@simpleFadeAnimation]="'in'" *ngIf="coffeeShops != undefined" class="">
