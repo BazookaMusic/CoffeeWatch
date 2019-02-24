@@ -80,7 +80,6 @@ export class FilterSearchModalComponent implements OnInit {
       if (found) { break; }
     }
     if (found) {
-      console.log('nice');
       return null;
     }
     else
