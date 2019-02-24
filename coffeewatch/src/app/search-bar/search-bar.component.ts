@@ -72,7 +72,7 @@ export class SearchBarComponent implements OnInit
       });
     }
     else {
-      alert("Cannot return position")
+      alert("Cannot return position");
     }
   }
 

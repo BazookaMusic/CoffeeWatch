@@ -5,6 +5,9 @@ import { Options } from 'ng5-slider';
 
 import { Validators } from '@angular/forms';
 import { CoffeeshopsService } from '../coffeeshops.service';
+import { coffeeCategories } from '../coffee';
+import { FilterObject, fix } from '../filters';
+
 
 @Component({
   selector: 'app-filter-search-modal',
@@ -18,7 +21,7 @@ export class FilterSearchModalComponent implements OnInit {
   MAXLEN = 500;
   MINLEN = 10;
   checkboxArray: FormControl[];
-  moreThan3: boolean;
+  moreThan1: boolean;
 
   value = 5000;
   options: Options = {
@@ -26,7 +29,6 @@ export class FilterSearchModalComponent implements OnInit {
     ceil: 20000,
     showTicks: true,
     stepsArray: [
-      { value: 500, legend: '500m' },
       { value: 1000, legend: '1Km' },
       { value: 2000, legend: '2Km' },
       { value: 5000, legend: '5Km' },
@@ -63,18 +65,18 @@ export class FilterSearchModalComponent implements OnInit {
     let counter = 0;
     let i = 0;
 
-    this.moreThan3 = false;
+    this.moreThan1 = false;
     for (; i < this.checkboxArray.length; i++) {
       if (this.checkboxArray[i].value) {
         counter++;
       }
-      if (counter >= 3) {
-        this.moreThan3 = true;
+      if (counter >= 1) {
+        this.moreThan1 = true;
         break;
       }
     }
 
-    if (this.moreThan3) {
+    if (this.moreThan1) {
       for (i = 0; i < this.checkboxArray.length; i++) {
         if (!this.checkboxArray[i].value) {
           this.checkboxArray[i].disable({emitEvent: false});
@@ -89,8 +91,28 @@ export class FilterSearchModalComponent implements OnInit {
     }
   }
 
+  makeFilterObject()
+  {
+    const categories = coffeeCategories;
+    const categoryIndex = this.checkboxArray.findIndex(fc => fc.value === true);
+    const filters: FilterObject = {
+      minPrice: fix(this.filterForm.controls.priceMin.value),
+      maxPrice:  fix(this.filterForm.controls.priceMax.value, true),
+      category: categoryIndex !== -1 ? coffeeCategories[categoryIndex] : '',
+      minRating: fix(this.filterForm.controls.starsRating.value),
+      sort: this.filterForm.controls.sortRadios.value,
+      maxDist: this.value / 1000
+    };
+    return filters;
+  }
+
+  onFilterSubmit()
+  {
+    const filters: FilterObject = this.makeFilterObject();
+    this.coffeeShopsService.setFilters(filters);
+  }
   ngOnInit() {
-    this.moreThan3 = false;
+    this.moreThan1= false;
 
     this.checkboxArray = [
       new FormControl(false),
@@ -117,10 +139,11 @@ export class FilterSearchModalComponent implements OnInit {
       'cat6': this.checkboxArray[6],
       'cat7': this.checkboxArray[7],
       'cat8': this.checkboxArray[8],
-      'sortRadios': ['', Validators.required],
+      'sortRadios': ['price', Validators.required],
       'priceMin': ['', [Validators.min(0)]],
       'priceMax': ['', [Validators.min(0)]],
       'starsRating': ['', [Validators.min(0)]]
     });
   }
 }
+
