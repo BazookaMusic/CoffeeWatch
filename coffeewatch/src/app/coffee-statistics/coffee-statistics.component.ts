@@ -22,9 +22,10 @@ export class CoffeeStatisticsComponent implements OnInit {
   avg: number;
   lowest: number;
   highest: number;
+  emptyHistory: boolean;
 
   options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
-  
+
 
 
 
@@ -69,12 +70,17 @@ export class CoffeeStatisticsComponent implements OnInit {
       }
     }))
     .subscribe(prices => {
-        if (prices !== undefined) {
+        if (prices !== undefined && prices.length !== 0) {
+          this.emptyHistory = false;
           const actual_prices = prices.map(price => price.price);
           this.history = chartData(prices);
           this.avg = average(prices.map(price => price.price));
           this.highest = Math.max(...actual_prices);
           this.lowest = Math.min(...actual_prices);
+        }
+        else
+        {
+          this.emptyHistory = true;
         }
       });
 

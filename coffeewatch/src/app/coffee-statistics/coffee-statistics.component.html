@@ -1,5 +1,5 @@
 <!-- The chart type goes in here -->
-<div class="row">
+<div *ngIf="!emptyHistory" class="row">
   <h2> Ιστορικό Τιμών </h2>
   <div *ngIf="history !== undefined" style="display: inline-block" class="row">
       <ngx-charts-line-chart
@@ -51,4 +51,7 @@
       Χαμηλότερη τιμή: {{lowest.toFixed(2)}}€
   </div>
 
+</div>
+<div *ngIf="!emptyHistory" class="row">
+    <div class="alert alert-danger" role="alert">Δεν υπάρχουν καταχωρημένες τιμές ώστε να υπολογιστούν στατιστικά</div>
 </div>
