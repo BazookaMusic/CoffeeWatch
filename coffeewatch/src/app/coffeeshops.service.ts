@@ -289,7 +289,7 @@ function colorThresholds(arrSorted: number[]) {
     return undefined;
   }
   const divider = Math.floor(arrSorted.length / 4);
-  if (arrSorted.length > 4) {
+  if (arrSorted.length >= 4) {
     return [+arrSorted[divider - 1], +arrSorted[divider * 2 - 1], +arrSorted[divider * 3 - 1]  ];
   } else {
     return arrSorted;
@@ -300,11 +300,15 @@ function colorMap(thresholds, value) {
     if (thresholds.length === 0) {
       return undefined;
     }
-      for (let index = thresholds.length - 1; index >= -1; index--) {
-        if (index === -1 || value >= thresholds[index]) {
-          return index + 1;
-        }
+    else if (thresholds.length < 4)
+    {
+      return 0;
+    }
+    for (let index = thresholds.length - 1; index >= -1; index--) {
+      if (index === -1 || value >= thresholds[index]) {
+        return index + 1;
       }
+    }
   }
 
 
