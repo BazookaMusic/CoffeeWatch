@@ -7,6 +7,8 @@ import { CoffeeshopsService } from '../coffeeshops.service';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 
+import { coffeeCategories } from '../coffee';
+
 @Component({
   selector: 'app-new-coffee-modal',
   templateUrl: './new-coffee-modal.component.html',
@@ -19,6 +21,8 @@ export class NewCoffeeModalComponent implements OnInit {
   price: number;
   MAXLEN = 500;
   MINLEN = 10;
+
+  coffeeCat = coffeeCategories;
 
   constructor(
     private modalService: NgbModal,

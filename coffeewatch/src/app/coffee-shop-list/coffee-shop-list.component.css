@@ -1,8 +1,11 @@
 .coffeeShopListTitle
 {
     font-weight: bold;
-    bottom:1rem;
-    
+    width: 50%;
+    left: 0;
+    position:absolute;
+    bottom: 0.2vh;
+    margin-bottom: 0;
 }
 
 .coffeeShopListTitleRow 

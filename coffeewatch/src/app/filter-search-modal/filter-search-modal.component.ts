@@ -23,6 +23,8 @@ export class FilterSearchModalComponent implements OnInit {
   checkboxArray: FormControl[];
   moreThan1: boolean;
 
+  categories = [];
+
   value = 5000;
   options: Options = {
     floor: 500,
@@ -75,7 +77,7 @@ export class FilterSearchModalComponent implements OnInit {
 
   checkMatch(AC: AbstractControl) {
     let found = false;
-    for (let i = 0; i <= 8; i++) {
+    for (let i = 0; i < 9; i++) {
       found = found || AC.get('cat' + i).value !== false;
       if (found) { break; }
     }
@@ -89,7 +91,6 @@ export class FilterSearchModalComponent implements OnInit {
   }
 
   makeFilterObject() {
-    const categories = coffeeCategories;
     const categoryIndex = this.checkboxArray.findIndex(fc => fc.value === true);
     const filters: FilterObject = {
       minPrice: fix(this.filterForm.controls.priceMin.value),
@@ -109,6 +110,9 @@ export class FilterSearchModalComponent implements OnInit {
   ngOnInit() {
     this.moreThan1 = false;
     this.value = 5000;
+
+    this.categories = coffeeCategories;
+    console.log(this.categories.length);
 
     this.checkboxArray = [
       new FormControl(true),

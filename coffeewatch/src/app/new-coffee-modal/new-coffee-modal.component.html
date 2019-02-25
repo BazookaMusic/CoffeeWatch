@@ -21,7 +21,7 @@
                   <span class="input-group-text bgColor" id="basic-addon2">Κατηγορία:</span>
                 </span>
                 <select id="categories" formControlName="categories">
-                  <option *ngFor="let category of ['Espresso','Freddo espresso','Cappuccino','Freddo cappuccino', 'Latte', 'Nes', 'Frappe', 'Φίλτρου', 'Ελληνικός']" [value]="category">{{category}}</option>
+                  <option *ngFor="let category of coffeeCat" [value]="category">{{category}}</option>
                 </select>
               </div>
           </div>
