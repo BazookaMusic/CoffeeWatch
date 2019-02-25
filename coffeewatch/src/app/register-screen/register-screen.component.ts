@@ -22,11 +22,6 @@ export class RegisterScreenComponent implements OnInit {
   constructor(private userService: UserService,
     private router: Router) { }
 
-
-
-
-
-
   ngOnInit() {
     this.registerForm = new FormGroup({
       'username': new FormControl('', [ Validators.required]),
