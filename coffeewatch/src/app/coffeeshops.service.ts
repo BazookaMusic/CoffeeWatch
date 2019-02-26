@@ -305,7 +305,7 @@ function colorMap(thresholds, value) {
     if (thresholds.length === 0) {
       return undefined;
     }
-    else if (thresholds.length < 4)
+    else if (thresholds.length < 3)
     {
       return 0;
     }
