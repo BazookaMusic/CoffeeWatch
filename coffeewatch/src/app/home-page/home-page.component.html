@@ -2,6 +2,6 @@
   <div class="row">
     <app-search-bar></app-search-bar>
   </div>
-  <app-home-page-select-coffee></app-home-page-select-coffee>
-  <app-home-page-search-results></app-home-page-search-results>
+  <app-home-page-select-coffee *ngIf='picker_on === true'></app-home-page-select-coffee>
+  <app-home-page-search-results *ngIf='picker_on !== true'></app-home-page-search-results>
 </div>
