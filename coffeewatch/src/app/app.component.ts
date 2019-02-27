@@ -18,8 +18,6 @@ export class AppComponent implements OnDestroy {
 
   ngOnInit()
   {
-    this.csS.getPrices({productId: 1 , shopId: undefined});
-    this.router.navigate(['/home']);
 
     this.router.events.subscribe(event =>
       {
