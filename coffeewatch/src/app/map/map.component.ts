@@ -20,6 +20,8 @@ export class MapComponent implements OnInit {
   markers: Marker[];
   zoomLevel: number;
 
+  userLocationRequested: boolean;
+
   coffeeShops: CoffeeShop[];
   selectedCoffeeShop: number;
 
@@ -33,6 +35,8 @@ export class MapComponent implements OnInit {
     this.userlng = undefined;
     this.centerlat = 37.982038;
     this.centerlng = 23.730271;
+
+    this.userLocationRequested = this.coffeeShopsService.isUserLocationRequested();
 
     this.coffeeShopsService.getSearchLocation().subscribe(coordinates => {
         if (coordinates === undefined) {

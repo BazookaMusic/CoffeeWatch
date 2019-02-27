@@ -69,6 +69,7 @@ export class SearchBarComponent implements OnInit
         
         this.coffeeShopsService.setSearchLocation(this.userlat, this.userlng);
         this.coffeeShopsService.updateCoffeeShops(this.userlat, this.userlng);
+        this.coffeeShopsService.setIsUserLocationRequested(true);
       });
     }
     else {
@@ -93,6 +94,7 @@ export class SearchBarComponent implements OnInit
       this.centerlng = this.userlng;
       this.coffeeShopsService.setSearchLocation(this.userlat, this.userlng);
       this.coffeeShopsService.updateCoffeeShops(this.userlat, this.userlng);
+      this.coffeeShopsService.setIsUserLocationRequested(false);
     });
   }
 }

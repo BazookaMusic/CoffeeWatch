@@ -26,6 +26,7 @@ export class CoffeeshopsService {
   coffee: Coffee;
   reviews: Review[] = [];
 
+  userLocationRequested: boolean;
 
   priceTiers: number[] = [];
 
@@ -200,6 +201,15 @@ export class CoffeeshopsService {
     });
   }
 
+  setIsUserLocationRequested(requested: boolean)
+  {
+    this.userLocationRequested = requested;
+  }
+
+  isUserLocationRequested()
+  {
+    return this.userLocationRequested;
+  }
 
   setSearchLocation(lat: number, lng: number) {
     this.searchCoordinates$.next([lat, lng]);
