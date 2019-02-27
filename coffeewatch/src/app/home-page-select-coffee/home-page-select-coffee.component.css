@@ -1,7 +1,12 @@
 .selectCoffeeComponent
 {
-    width: 45vw;
+    width: 40vw;
     margin: auto;
+}
+
+.title
+{
+  margin: auto;
 }
 
 input[type="radio"]
@@ -47,10 +52,9 @@ label::before
 
 label img
 {
-  width: 12vw;
+  width: 10vw;
   transition-duration: 0.2s;
   transform-origin: 50% 50%;
-  z-index: -1;
 }
 
 label:hover
