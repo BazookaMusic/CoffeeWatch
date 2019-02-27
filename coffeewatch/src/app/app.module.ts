@@ -34,6 +34,8 @@ import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterScreenComponent } from './register-screen/register-screen.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { HomePageSelectCoffeeComponent } from './home-page-select-coffee/home-page-select-coffee.component';
+import { HomePageSearchResultsComponent } from './home-page-search-results/home-page-search-results.component';
 
 
 
@@ -57,6 +59,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     HomePageComponent,
     LoginScreenComponent,
     RegisterScreenComponent,
+    HomePageSelectCoffeeComponent,
+    HomePageSearchResultsComponent,
   ],
   imports: [
     NgbModule,

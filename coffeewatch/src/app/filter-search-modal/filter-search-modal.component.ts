@@ -8,13 +8,14 @@ import { CoffeeshopsService } from '../coffeeshops.service';
 import { coffeeCategories } from '../coffee';
 import { FilterObject, fix } from '../filters';
 
-
 @Component({
   selector: 'app-filter-search-modal',
   templateUrl: './filter-search-modal.component.html',
   styleUrls: ['./filter-search-modal.component.css']
 })
-export class FilterSearchModalComponent implements OnInit {
+
+export class FilterSearchModalComponent implements OnInit
+{
   closeResult: string;
   filterForm: FormGroup;
   price: number;
