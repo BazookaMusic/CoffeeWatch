@@ -22,12 +22,18 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { CoffeeShopMediumComponent } from './coffee-shop-medium/coffee-shop-medium.component';
 import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
-import {UserService} from "./user.service";
+import {UserService} from './user.service';
 import { Ng5SliderModule } from 'ng5-slider';
 
 export function tokenGetter() {
-  return localStorage.getItem('access_token');
+  const token = localStorage.getItem('access_token');
+  if (token !== null) {
+    return token;
+  } else {
+    return '';
+  }
 }
+
 import { FilterSearchModalComponent } from './filter-search-modal/filter-search-modal.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginScreenComponent } from './login-screen/login-screen.component';
@@ -70,7 +76,7 @@ import { HomePageSearchResultsComponent } from './home-page-search-results/home-
     AppRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAiQq3g4B24gFkVps1sIM4TTHLSqs6XSFI',
-      libraries: ["places"]
+      libraries: ['places']
     }),
     ReactiveFormsModule,
     StarRatingModule.forRoot(),
