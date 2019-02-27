@@ -2,3 +2,36 @@ main
 {
     margin-top: 6vh;
 }
+
+::ng-deep .star.default svg,
+::ng-deep .star-container .star svg,
+::ng-deep .rating.color-default .star-container .star svg
+{
+    fill: #cd6133 !important;
+}
+
+::ng-deep .star.default i,
+::ng-deep .star-container .star i,
+::ng-deep .rating.color-default .star-container .star i
+{
+    color: #cd6133 !important;
+}
+
+::ng-deep .star.medium,
+::ng-deep .rating.medium .star
+{
+    width: 1.1vw !important;
+    height: 1.1vw !important;
+}
+
+::ng-deep .label-value.medium,
+::ng-deep .rating.medium .label-value
+{
+    font-size: 0.8vw !important;
+    line-height: 0.8vw !important;
+}
+
+::ng-deep .rating
+{
+    justify-content: flex-end;
+}
