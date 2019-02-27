@@ -4,6 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import { BehaviorSubject, of } from 'rxjs';
 import { catchError, flatMap } from 'rxjs/operators';
+import { Router, NavigationEnd } from '@angular/router';
 
 
 interface Token { access_token: string; }
@@ -15,7 +16,21 @@ export class UserService {
   currentUserID: number;
   loggedIN = false;
   baseAPIURL = 'http://localhost:8765/observatory/api/';
-  constructor(private http: HttpClient, private jwtHelp: JwtHelperService) {
+  previousUrl = undefined;
+  currentUrl = undefined;
+
+  constructor(private http: HttpClient, private jwtHelp: JwtHelperService, router: Router) {
+    router.events
+        .subscribe(
+            event =>
+            {
+              if (event instanceof NavigationEnd)
+              {
+                this.previousUrl = this.currentUrl;
+                this.currentUrl = event.url;
+              }
+            }
+    );
    }
 
   login(emailin: string, passwordin: string) {
@@ -68,4 +83,11 @@ export class UserService {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type':  'application/json' }) };
     return this.http.post<User>(this.baseAPIURL + 'register', user, httpOptions);
   }
+
+  getPrevUrl()
+  {
+    return this.previousUrl;
+  }
+
+
 }

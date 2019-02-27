@@ -29,7 +29,12 @@ export class LoginScreenComponent implements OnInit {
     );
 
     if (this.userService.isloggedIN() === true) {
-      this.router.navigate(['/home']);
+      const prev_url = this.userService.getPrevUrl();
+      if (prev_url !== undefined) {
+        this.router.navigateByUrl(prev_url);
+      } else {
+        this.router.navigate(['/home']);
+      }
       }
   }
 
@@ -40,14 +45,15 @@ export class LoginScreenComponent implements OnInit {
     if (!inputs.email.valid) {
         this.emailText = 'Μη έγκυρη διεύθυνση';
       } else {
-      this.userService.login(inputs.email.value, inputs.password.value).subscribe(loggedIN =>
-        {
-          if (loggedIN === true)
-          {
-            this.router.navigate(['/home']);
-          }
-          else
-          {
+      this.userService.login(inputs.email.value, inputs.password.value).subscribe(loggedIN => {
+          if (loggedIN === true) {
+            const prev_url = this.userService.getPrevUrl();
+            if (prev_url !== undefined) {
+              this.router.navigateByUrl(prev_url);
+            } else {
+              this.router.navigate(['/home']);
+            }
+          } else {
             this.failureText = 'Μη έγκυρο email ή κωδικός πρόσβασης';
           }
         });
