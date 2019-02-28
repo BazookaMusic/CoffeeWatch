@@ -35,8 +35,8 @@ function verifyToken(token){
     let index= userdb.users.findIndex(user => user.email === email && ENCRYPT(password,ALGO).toString() === user.password)
     console.log(userdb.users[index])
     if (index != -1)
-      return {'authenticated':true,'name':userdb.users[index].name}
-    else return {'authenticated':false,'name':null}
+      return {'authenticated':true,'name':userdb.users[index].name,'id': userdb.users[index].id}
+    else return {'authenticated':false,'name':null, 'id': undefined}
   }
 
 
@@ -49,13 +49,14 @@ server.post('/observatory/api/login', (req, res) => {
     auth = isAuthenticated({email, password})
     isAuth=auth.authenticated
     username=auth.name
+    id = auth.id
     if (isAuth === false) {
       const status = 401
       const message = 'Incorrect email or password'
       res.status(status).json({status, message})
       return
     }
-    const access_token = createToken({email,username})
+    const access_token = createToken({email,username,id})
     //res.header('Access-Control-Allow-Origin', '*')
     res.status(200).json({access_token})
   })
@@ -120,16 +121,20 @@ server.post('/observatory/api/login', (req, res) => {
 
 
   server.post('/observatory/api/*',  (req, res, next) => {
+    for (var propname in req.headers)
+    {
+      console.log(propname)
+    }
    // res.header('Access-Control-Allow-Origin', '*')
-    if (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer') {
-      console.log(req.headers.authorization)
+    if (req.headers['x-observatory-auth'] === undefined) {
+      console.log('HEADER ' + req.headers['x-observatory-auth'])
       const status = 401
       const message = 'Bad authorization header'
       res.status(status).json({status, message})
       return
     }
     try {
-       verifyToken(req.headers.authorization.split(' ')[1])
+       verifyToken(req.headers['x-observatory-auth'])
        next()
     } catch (err) {
       const status = 401
@@ -143,15 +148,15 @@ server.post('/observatory/api/login', (req, res) => {
 
   server.put('/observatory/api/*',  (req, res, next) => {
    // res.header('Access-Control-Allow-Origin', '*')
-    if (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer') {
-      console.log(req.headers.authorization)
+    if ( req.headers['x-observatory-auth'] === undefined) {
+      console.log(req.headers['x-observatory-auth'])
       const status = 401
       const message = 'Bad authorization header'
       res.status(status).json({status, message})
       return
     }
     try {
-       verifyToken(req.headers.authorization.split(' ')[1])
+       verifyToken( req.headers['x-observatory-auth'])
        next()
     } catch (err) {
       const status = 401

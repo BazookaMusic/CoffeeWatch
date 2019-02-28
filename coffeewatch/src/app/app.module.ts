@@ -20,14 +20,15 @@ import { CoffeeDescriptionComponent } from './coffee-description/coffee-descript
 import { NewCoffeeModalComponent } from './new-coffee-modal/new-coffee-modal.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { CoffeeShopMediumComponent } from './coffee-shop-medium/coffee-shop-medium.component';
-import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
-import { HttpClientModule } from '@angular/common/http';
+import { JwtModule, JwtHelperService, JwtInterceptor } from '@auth0/angular-jwt';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {UserService} from './user.service';
 import { Ng5SliderModule } from 'ng5-slider';
 
 export function tokenGetter() {
   const token = localStorage.getItem('access_token');
   if (token !== null) {
+    console.log(token);
     return token;
   } else {
     return '';
@@ -84,14 +85,15 @@ import { HomePageSearchResultsComponent } from './home-page-search-results/home-
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: ['localhost:8765'],
+        whitelistedDomains: ['localhost:8765/observatory/api'],
         blacklistedRoutes: [''],
         headerName: 'X-OBSERVATORY-AUTH'
       }
     }),
     NgxChartsModule
   ],
-  providers: [HttpClientModule, JwtHelperService],
+  providers: [,
+    HttpClientModule, JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

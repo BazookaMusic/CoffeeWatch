@@ -58,12 +58,18 @@ export class UserService {
 
   }
 
+  tokenGet()
+  {
+    return localStorage.getItem('access_token');
+  }
+
   isloggedIN() {
     console.log('Checking login');
     const token = localStorage.getItem('access_token');
     if ( token !== null) {
       const decoded = this.jwtHelp.decodeToken(token);
       this.currentUsername = decoded.username;
+      this.currentUserID = decoded.id;
       console.log('token valid?:' + !this.jwtHelp.isTokenExpired(token));
       this.loggedIN = !this.jwtHelp.isTokenExpired(token);
       return !this.jwtHelp.isTokenExpired(token);

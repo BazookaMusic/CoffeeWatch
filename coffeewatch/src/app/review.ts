@@ -11,8 +11,10 @@ export class Review
 
     numOfLikes: number;
     numOfDislikes: number;
+    coffeeId: number;
 
-    constructor(id: number, text: string, rating: number, userID: number, username: string, date:string, numOfLikes: number, numOfDislikes: number) 
+    constructor(id: number, coffeeid: number, text: string, rating: number, 
+        userID: number, username: string, date:string, numOfLikes: number, numOfDislikes: number) 
     {
         this.id = id;
         this.text = text;
@@ -22,5 +24,6 @@ export class Review
         this.date = date;
         this.numOfLikes = numOfLikes;
         this.numOfDislikes = numOfDislikes;
+        this.coffeeId = coffeeid;
     }
 }
