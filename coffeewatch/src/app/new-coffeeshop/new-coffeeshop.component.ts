@@ -31,17 +31,8 @@ export class NewCoffeeshopComponent implements OnInit
 
   autocomplete: google.maps.places.Autocomplete;
 
-  @ViewChild("name")
-  public nameElementRef: ElementRef;
-  
   @ViewChild("address")
   public addressElementRef: ElementRef;
-
-  @ViewChild("telephone")
-  public telephoneElementRef: ElementRef;
-
-  @ViewChild("website")
-  public websiteElementRef: ElementRef;
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
@@ -71,10 +62,10 @@ export class NewCoffeeshopComponent implements OnInit
     {
       this.title = this.newCoffeeShopTitle;
 
-      this.nameElementRef.nativeElement.value = "";
-      this.addressElementRef.nativeElement.value = "";
-      this.telephoneElementRef.nativeElement.value = "";
-      this.websiteElementRef.nativeElement.value = "";
+      this.coffeeShopForm.controls.name.setValue('');
+      this.coffeeShopForm.controls.address.setValue('');
+      this.coffeeShopForm.controls.telephone.setValue('');
+      this.coffeeShopForm.controls.website.setValue('');
     }
     else
     {
@@ -96,15 +87,14 @@ export class NewCoffeeshopComponent implements OnInit
   getCoffeeShop(): void
   {
     const id = +this.route.snapshot.paramMap.get('coffeeShopID');
-    console.log(id);
     this.coffeeShopsService.getCoffeeShop(id).subscribe(cs => 
     {
       this.coffeeShop = cs;
 
-      this.nameElementRef.nativeElement.value = this.coffeeShop.name;
-      this.addressElementRef.nativeElement.value = this.coffeeShop.address;
-      this.telephoneElementRef.nativeElement.value = this.coffeeShop.telephone;
-      this.websiteElementRef.nativeElement.value = this.coffeeShop.website;
+      this.coffeeShopForm.controls.name.setValue(this.coffeeShop.name);
+      this.addressControl.setValue(this.coffeeShop.address);
+      this.coffeeShopForm.controls.telephone.setValue(this.coffeeShop.telephone);
+      this.coffeeShopForm.controls.website.setValue(this.coffeeShop.website);
     });
   }
 
