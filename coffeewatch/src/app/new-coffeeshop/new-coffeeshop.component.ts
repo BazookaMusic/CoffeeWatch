@@ -63,7 +63,6 @@ export class NewCoffeeshopComponent implements OnInit
       this.title = this.newCoffeeShopTitle;
 
       this.coffeeShopForm.controls.name.setValue('');
-      this.coffeeShopForm.controls.address.setValue('');
       this.coffeeShopForm.controls.telephone.setValue('');
       this.coffeeShopForm.controls.website.setValue('');
     }
@@ -95,7 +94,7 @@ export class NewCoffeeshopComponent implements OnInit
       this.addressControl.setValue(this.coffeeShop.address);
       this.coffeeShopForm.controls.telephone.setValue(this.coffeeShop.telephone);
       this.coffeeShopForm.controls.website.setValue(this.coffeeShop.website);
-      this.centerMap(this.coffeeShop.lat,this.coffeeShop.lng);
+      this.centerMap(this.coffeeShop.lat, this.coffeeShop.lng);
     });
   }
 
