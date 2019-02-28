@@ -107,8 +107,7 @@
     align-items: center;
 }
 
-.newCoffee
+.actionIconsRow
 {
-    margin-top: 2rem;
-    margin-left: 1rem;
+    padding: 1.5vh 0;
 }

@@ -18,6 +18,7 @@ const routes: Routes =
     {path: 'login', component: LoginScreenComponent},
     {path: 'register', component: RegisterScreenComponent},
     { path: 'newCoffeeShop', component: NewCoffeeshopComponent },
+    { path: 'editCoffeeShop/:coffeeShopID', component: NewCoffeeshopComponent },
     { path: 'coffeeShop/:coffeeShopID', component: CoffeeShopFullComponent,
     children:
     [

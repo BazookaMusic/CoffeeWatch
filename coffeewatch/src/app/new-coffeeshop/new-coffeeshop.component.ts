@@ -4,15 +4,16 @@ import { CoffeeshopsService } from '../coffeeshops.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MapsAPILoader } from '@agm/core';
 import { UserService } from '../user.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { CoffeeShop } from '../coffee-shop';
 
 @Component({
   selector: 'app-new-coffeeshop',
   templateUrl: './new-coffeeshop.component.html',
   styleUrls: ['./new-coffeeshop.component.css']
 })
-export class NewCoffeeshopComponent implements OnInit {
-
+export class NewCoffeeshopComponent implements OnInit
+{
   centerlat: number;
   centerlng: number;
   zoomLevel: number;
@@ -20,12 +21,27 @@ export class NewCoffeeshopComponent implements OnInit {
   shoplng: number;
   public addressControl: FormControl;
 
+  coffeeShop: CoffeeShop;
+
+  newCoffeeShopTitle = "Προσθήκη νέας καφετέριας";
+  editCoffeeShopTitle = "Τροποποίηση καφετέριας";
+  title: String;
+
   coffeeShopForm: FormGroup;
 
   autocomplete: google.maps.places.Autocomplete;
 
+  @ViewChild("name")
+  public nameElementRef: ElementRef;
+  
   @ViewChild("address")
-  public searchElementRef: ElementRef;
+  public addressElementRef: ElementRef;
+
+  @ViewChild("telephone")
+  public telephoneElementRef: ElementRef;
+
+  @ViewChild("website")
+  public websiteElementRef: ElementRef;
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
@@ -33,7 +49,8 @@ export class NewCoffeeshopComponent implements OnInit {
     private coffeeShopsService: CoffeeshopsService,
     private fb: FormBuilder,
     private userService: UserService,
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.shoplat = undefined;
@@ -49,14 +66,45 @@ export class NewCoffeeshopComponent implements OnInit {
     });
 
     this.loadAutocomplete();
+
+    if (this.router.url === '/newCoffeeShop')
+    {
+      this.title = this.newCoffeeShopTitle;
+
+      this.nameElementRef.nativeElement.value = "";
+      this.addressElementRef.nativeElement.value = "";
+      this.telephoneElementRef.nativeElement.value = "";
+      this.websiteElementRef.nativeElement.value = "";
+    }
+    else
+    {
+      this.title = this.editCoffeeShopTitle;
+
+      this.getCoffeeShop();
+    }
   }
 
   loadAutocomplete() {
     this.addressControl = new FormControl();
     this.mapsAPILoader.load().then(() => {
-      this.autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {});
+      this.autocomplete = new google.maps.places.Autocomplete(this.addressElementRef.nativeElement, {});
 
       this.autocomplete.addListener("place_changed", () => this.getPlace());
+    });
+  }
+
+  getCoffeeShop(): void
+  {
+    const id = +this.route.snapshot.paramMap.get('coffeeShopID');
+    console.log(id);
+    this.coffeeShopsService.getCoffeeShop(id).subscribe(cs => 
+    {
+      this.coffeeShop = cs;
+
+      this.nameElementRef.nativeElement.value = this.coffeeShop.name;
+      this.addressElementRef.nativeElement.value = this.coffeeShop.address;
+      this.telephoneElementRef.nativeElement.value = this.coffeeShop.telephone;
+      this.websiteElementRef.nativeElement.value = this.coffeeShop.website;
     });
   }
 

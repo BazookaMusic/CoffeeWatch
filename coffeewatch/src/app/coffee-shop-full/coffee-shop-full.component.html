@@ -20,7 +20,10 @@
             <td><a class="websiteLink" href="http://{{coffeeShop.website}}" target="_blank">{{coffeeShop.website}}</a></td>
           </tr>
         </table>
-        <div class="row newCoffee">
+        <div class="row justify-content-center actionIconsRow">
+          <a class="" ngbPopover="Τροποποίηση Καφετέριας" placement="bottom" triggers="mouseenter:mouseleave" routerLink="/editCoffeeShop/{{coffeeShop.id}}"><img class="img-fluid icon" src="../assets/editCoffeeShop.png" /></a>
+        </div>
+        <div class="row justify-content-center actionIconsRow">
           <app-new-coffee-modal></app-new-coffee-modal>
         </div>
       </div>

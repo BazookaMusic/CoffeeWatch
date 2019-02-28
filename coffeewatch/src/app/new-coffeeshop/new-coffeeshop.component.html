@@ -1,13 +1,13 @@
 <div class="customContainer center justify-content-center">
   <div class="my-auto shadow-sm rounded contentBG newCoffeeShop">
-    <div class="row title"><h1>Προσθήκη νέας καφετέριας</h1></div>
+    <div class="row title"><h1>{{title}}</h1></div>
     <div class="row ">
       <div class="col-sm-5">
         <form [formGroup]="coffeeShopForm" id="coffeeShopForm" (ngSubmit)="onCoffeeShopSubmit();">
           <table class="table">
             <tr>
               <td>Όνομα:</td>
-              <td><input type="text" formControlName="name" class="form-control" /></td>
+              <td><input type="text" formControlName="name" #name class="form-control" /></td>
             </tr>
             <tr>
               <td>Διεύθυνση:</td>
@@ -15,11 +15,11 @@
             </tr>
             <tr>
               <td>Τηλέφωνο:</td>
-              <td><input type="text" formControlName="telephone" class="form-control" /></td>
+              <td><input type="text" formControlName="telephone" #telephone class="form-control" /></td>
             </tr>
             <tr>
               <td>Ιστοσελίδα:</td>
-              <td><input type="text" formControlName="website" class="form-control" /></td>
+              <td><input type="text" formControlName="website" #website class="form-control" /></td>
             </tr>
             <tr>
               <td>Λογότυπο:</td>
@@ -36,7 +36,7 @@
     </div>
     <div class="row justify-content-center">
       <span class="buttonSpan"><button type="button" class="btn btn-outline-secondary outlineSecondaryNoHover button" (click)="cancel()">Ακύρωση</button></span>
-      <span class="buttonSpan"><button type="submit" class="btn orangeButton button">Προσθήκη καφετέριας</button></span>
+      <span class="buttonSpan"><button type="submit" class="btn orangeButton button">{{title}}</button></span>
     </div>
   </div>
 </div>
