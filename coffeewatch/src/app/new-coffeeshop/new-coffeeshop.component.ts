@@ -95,6 +95,7 @@ export class NewCoffeeshopComponent implements OnInit
       this.addressControl.setValue(this.coffeeShop.address);
       this.coffeeShopForm.controls.telephone.setValue(this.coffeeShop.telephone);
       this.coffeeShopForm.controls.website.setValue(this.coffeeShop.website);
+      this.centerMap(this.coffeeShop.lat,this.coffeeShop.lng);
     });
   }
 
