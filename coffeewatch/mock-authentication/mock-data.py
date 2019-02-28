@@ -136,8 +136,9 @@ for i in range(1,TOTAL_REVIEWS):
             "username": username,
             "date": datetime.datetime.strptime(fakegr.date(), "%Y-%m-%d").strftime("%d/%m/%Y"),
             "numOfLikes":random.randint(0,100),
-            "numOfDislikes":random.randint(0,100),
-            "coffeeid": random.randint(1, TOTAL_COFFEES)
+            "numOfDislikes": random.randint(0,100),
+            "coffeeId": random.randint(1, TOTAL_COFFEES),
+            "observatoryId": 'api'
         }
     )
 

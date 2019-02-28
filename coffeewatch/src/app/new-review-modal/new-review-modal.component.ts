@@ -7,6 +7,8 @@ import { Coffee } from '../coffee';
 import { Validators } from '@angular/forms';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { HttpClient } from 'selenium-webdriver/http';
+import { CoffeeshopsService } from '../coffeeshops.service';
 
 @Component({
   selector: 'app-new-review-modal',
@@ -20,10 +22,12 @@ export class NewReviewModalComponent implements OnInit {
   reviewForm: FormGroup;
   MAXLEN = 500;
   MINLEN = 10;
+  selectedId: number;
 
   constructor(private modalService: NgbModal,
     private userService: UserService,
-    private router: Router) { }
+    private router: Router,
+    private coffeeShopsService: CoffeeshopsService) { }
 
   open(content) {
     if (this.userService.isloggedIN()) {
@@ -55,11 +59,22 @@ export class NewReviewModalComponent implements OnInit {
     const y = date.getFullYear();
     const m = date.getMonth();
     const d = date.getDay();
-    this.review = new Review(-1, formRev.value as string, formStars.value as number, undefined, undefined, d + '/' + m + '/' + y, 0, 0);
-    this.reviewSubmit(this.review);
+    this.review = new Review(undefined, this.selectedId, formRev.value as string,
+       formStars.value as number,
+       this.userService.currentUserID , this.userService.currentUsername ,
+       d + '-' + m + '-' + y,
+        0, 0);
+    console.log(this.review);
+    this.coffeeShopsService.submitReview(this.review).subscribe(review => 
+      {
+        if (review !== undefined)
+        {
+          location.reload();
+        }
+      }
+      );
   }
 
-  reviewSubmit(rev: Review) {}
 
   resetForm() {
     this.reviewForm.controls.review.setValue('');
@@ -79,5 +94,7 @@ export class NewReviewModalComponent implements OnInit {
       review: new FormControl('', [Validators.minLength(this.MINLEN), Validators.maxLength(this.MAXLEN)]),
       starsRating: new FormControl('')
     });
+
+    this.coffeeShopsService.getSelectedCoffee().subscribe(id => this.selectedId = id);
   }
 }

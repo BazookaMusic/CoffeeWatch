@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {CoffeeShop} from './coffee-shop';
 import { Observable, of, BehaviorSubject } from 'rxjs';
-import {map, flatMap, reduce} from 'rxjs/operators';
+import {map, flatMap, reduce, catchError} from 'rxjs/operators';
 
 import {Coffee} from './coffee';
 import {Review} from './review';
@@ -145,7 +145,7 @@ export class CoffeeshopsService {
 
   getCoffeeReviews(id: number) {
     if (id !== undefined) {
-      const params = new HttpParams().set('coffeeid', id.toString());
+      const params = new HttpParams().set('coffeeId', id.toString());
       const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), params: params };
       return this.http.get<Review[]>(this.baseAPIURL + 'reviews', httpOptions);
     } else { return of(undefined); }
@@ -217,6 +217,19 @@ export class CoffeeshopsService {
 
   getSearchLocation() {
     return this.searchCoordinates$;
+  }
+
+  // reviews
+  submitReview(rev: Review)
+  {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json',
+     'X-OBSERVATORY-AUTH': this.userService.tokenGet()});
+    return this.http.post<Review>(this.baseAPIURL + 'reviews', rev, {'headers': headers}).pipe(catchError(err =>
+      {
+        console.log(err);
+        return of(undefined);
+      }
+     ));
   }
 
 
