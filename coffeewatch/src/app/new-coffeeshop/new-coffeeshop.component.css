@@ -8,19 +8,31 @@
     margin: 12vh auto 0;
 }
 
+.table td
+{
+    border: none;
+    padding: 1.5vh 0;
+    vertical-align: middle
+}
+
+input
+{
+    height: 4vh;
+}
+
 .newCoffeeShop
 {
     padding: 2vw;
     font-size: 1.1vw;
-    height: 80vh;
+    height: 65vh;
 }
 
 .button
 {
-    /* width: 40%;
-    height: 4.5vh; */
     margin: 5vh 0 0 0;
     font-size: 1.1vw;
+    width: 15vw;
+    height: 5vh;
 }
 
 .buttonSpan
@@ -34,23 +46,7 @@
     margin-bottom: 2vh;
 }
 
-.formRow
-{
-    margin: 2.5vh 0;
-}
-
 agm-map
 {
     height: 35vh;
-    /* width: 100%; */
-}
-
-.agm-map-container-inner
-{
-    width: 50vw;
-}
-
-.inlineDescr
-{
-    display: inline-flex;
 }

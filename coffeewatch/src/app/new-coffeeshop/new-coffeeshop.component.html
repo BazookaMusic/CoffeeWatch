@@ -2,59 +2,40 @@
   <div class="my-auto shadow-sm rounded contentBG newCoffeeShop">
     <div class="row title"><h1>Προσθήκη νέας καφετέριας</h1></div>
     <div class="row ">
-      <div class="col-sm-6">
+      <div class="col-sm-5">
         <form [formGroup]="coffeeShopForm" id="coffeeShopForm" (ngSubmit)="onCoffeeShopSubmit();">
-          <div class="formRow">
-            <div class="col-sm-7 inlineDescr">
-              <span class="input-group-prepend">
-                <span class="input-group-text bgColor" id="basic-addon2">Όνομα:</span>
-              </span>
-              <input type="text" size="100" formControlName="name" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" />
-            </div>
-          </div>
-          <div class="formRow">
-            <div class="col-sm-7 inlineDescr">
-              <span class="input-group-prepend">
-                <span class="input-group-text bgColor" id="basic-addon2">Διεύθυνση:</span>
-              </span>
-              <input type="text" class="form-control blackBorder" #address [formControl]="addressControl">
-            </div>
-          </div>
-          <div class="formRow">
-            <span class="col-sm-4 inlineDescr">
-              <span class="input-group-prepend">
-                <span class="input-group-text bgColor" id="basic-addon2">Τηλέφωνο:</span>
-              </span>
-              <input type="text" size="100" formControlName="telephone" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" />
-            </span>
-          </div>
-          <div class="formRow">
-            <span class="col-sm-4 inlineDescr">
-              <span class="input-group-prepend">
-                <span class="input-group-text bgColor" id="basic-addon2">Ιστοσελίδα:</span>
-              </span>
-              <input type="text" size="100" formControlName="website" class="form-control" aria-label="Default"
-                aria-describedby="inputGroup-sizing-default" />
-            </span>
-          </div>
-          <div class="formRow">
-            <span class="col-sm-4 inlineDescr">
-              <span class="input-group-prepend">
-                <span class="input-group-text bgColor" id="basic-addon2">Λογότυπο:</span>
-              </span>
-              <input type="file" name="coffeeShopLogo" accept="image/x-png,image/jpeg" />
-            </span>
-          </div>
+          <table class="table">
+            <tr>
+              <td>Όνομα:</td>
+              <td><input type="text" formControlName="name" class="form-control" /></td>
+            </tr>
+            <tr>
+              <td>Διεύθυνση:</td>
+              <td><input type="text" class="form-control blackBorder" #address [formControl]="addressControl"></td>
+            </tr>
+            <tr>
+              <td>Τηλέφωνο:</td>
+              <td><input type="text" formControlName="telephone" class="form-control" /></td>
+            </tr>
+            <tr>
+              <td>Ιστοσελίδα:</td>
+              <td><input type="text" formControlName="website" class="form-control" /></td>
+            </tr>
+            <tr>
+              <td>Λογότυπο:</td>
+              <td><input type="file" name="coffeeShopLogo" accept="image/x-png,image/jpeg" /></td>
+            </tr>
+          </table>
         </form>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-7">
         <agm-map [latitude]="centerlat" [longitude]="centerlng" [zoom]="zoomLevel">
           <agm-marker *ngIf="true" [iconUrl]="'../assets/images/selectedLocation.png'" [latitude]="centerlat" [longitude]="centerlng"></agm-marker>
         </agm-map>
       </div>
     </div>
     <div class="row justify-content-center">
-      <span class="buttonSpan"><a class="btn btn-outline-secondary outlineSecondaryNoHover button" (click)="cancel()">Ακύρωση</a></span>
+      <span class="buttonSpan"><button type="button" class="btn btn-outline-secondary outlineSecondaryNoHover button" (click)="cancel()">Ακύρωση</button></span>
       <span class="buttonSpan"><button type="submit" class="btn orangeButton button">Προσθήκη καφετέριας</button></span>
     </div>
   </div>
