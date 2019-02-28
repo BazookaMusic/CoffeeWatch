@@ -1,7 +1,7 @@
 <div class="container-fluid">
-  <div class="row">
+  <!-- <div class="row">
     <app-search-bar></app-search-bar>
-  </div>
-  <app-home-page-select-coffee *ngIf='picker_on === true'></app-home-page-select-coffee>
+  </div> -->
+  <app-home-page-first-search *ngIf='picker_on === true'></app-home-page-first-search>
   <app-home-page-search-results *ngIf='picker_on !== true'></app-home-page-search-results>
 </div>

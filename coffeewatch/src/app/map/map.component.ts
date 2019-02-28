@@ -36,8 +36,6 @@ export class MapComponent implements OnInit {
     this.centerlat = 37.982038;
     this.centerlng = 23.730271;
 
-    this.userLocationRequested = this.coffeeShopsService.isUserLocationRequested();
-
     this.coffeeShopsService.getSearchLocation().subscribe(coordinates => {
         if (coordinates === undefined) {
           this.userlat = undefined;

@@ -1,7 +1,7 @@
 <div *ngIf="userlat>0" class="shadow-sm appMap">
   <agm-map [latitude]="centerlat" [longitude]="centerlng" [zoom]="zoomLevel" [usePanning]="true">
-    <agm-marker *ngIf="userlat > 0 && userLocationRequested" [iconUrl]="'../assets/images/userLocation.png'" [latitude]="userlat" [longitude]="userlng"></agm-marker>
-    <agm-marker *ngIf="userlat > 0 && !userLocationRequested" [iconUrl]="'../assets/images/selectedLocation.png'" [latitude]="userlat" [longitude]="userlng"></agm-marker>
+    <agm-marker *ngIf="userlat > 0 && coffeeShopsService.isUserLocationRequested()" [iconUrl]="'../assets/images/userLocation.png'" [latitude]="userlat" [longitude]="userlng"></agm-marker>
+    <agm-marker *ngIf="userlat > 0 && !coffeeShopsService.isUserLocationRequested()" [iconUrl]="'../assets/images/selectedLocation.png'" [latitude]="userlat" [longitude]="userlng"></agm-marker>
     <div  *ngIf="markers != undefined" >
       <agm-marker *ngFor="let marker of markers" (markerClick)='markerClicked(marker)' label='' [iconUrl]='marker.icon' [latitude]="marker.lat" [longitude]="marker.lng" ></agm-marker>
     </div>

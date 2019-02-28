@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomePageSelectCoffeeComponent } from './home-page-select-coffee.component';
+import { HomePageFirstSearchComponent } from './home-page-first-search.component';
 
 describe('HomePageSelectCoffeeComponent', () => {
-  let component: HomePageSelectCoffeeComponent;
-  let fixture: ComponentFixture<HomePageSelectCoffeeComponent>;
+  let component: HomePageFirstSearchComponent;
+  let fixture: ComponentFixture<HomePageFirstSearchComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomePageSelectCoffeeComponent ]
+      declarations: [HomePageFirstSearchComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomePageSelectCoffeeComponent);
+    fixture = TestBed.createComponent(HomePageFirstSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

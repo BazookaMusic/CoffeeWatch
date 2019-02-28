@@ -1,7 +1,7 @@
 .selectCoffeeComponent
 {
-    width: 40vw;
-    margin: auto;
+    width: 35vw;
+    margin: 8vh auto 2vh;
 }
 
 .title
@@ -52,7 +52,7 @@ label::before
 
 label img
 {
-  width: 10vw;
+  width: 8vw;
   transition-duration: 0.2s;
   transform-origin: 50% 50%;
 }
@@ -79,4 +79,45 @@ label:hover
 :checked+label img
 {
   transform: scale(0.85);
+}
+
+/* SEARCH BAR CSS */
+
+.appSearchBar
+{
+    margin: 1.5vh auto 0;
+}
+
+.form-control
+{
+    display: inline-block;
+    width: 60%;
+    height: 4vh;
+}
+
+.searchButton
+{
+    background-color: #cd6133;
+    border-color: #cd6133;
+    color: white !important;
+    margin-left: 5px;
+}
+
+.findMyLocation
+{
+    margin: 0 0.4vw;
+    cursor: pointer;
+    text-align: center;
+}
+
+.findMyLocationIcon
+{
+    width: 4vh;
+    height: 4vh;
+    display: block;
+}
+
+.blackBorder
+{
+    border-color: #343a40;
 }
