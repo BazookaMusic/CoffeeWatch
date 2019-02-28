@@ -42,6 +42,7 @@ import { RegisterScreenComponent } from './register-screen/register-screen.compo
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { HomePageFirstSearchComponent } from './home-page-first-search/home-page-first-search.component';
 import { HomePageSearchResultsComponent } from './home-page-search-results/home-page-search-results.component';
+import { NewCoffeeshopComponent } from './new-coffeeshop/new-coffeeshop.component';
 
 
 
@@ -67,6 +68,7 @@ import { HomePageSearchResultsComponent } from './home-page-search-results/home-
     RegisterScreenComponent,
     HomePageFirstSearchComponent,
     HomePageSearchResultsComponent,
+    NewCoffeeshopComponent,
   ],
   imports: [
     NgbModule,
