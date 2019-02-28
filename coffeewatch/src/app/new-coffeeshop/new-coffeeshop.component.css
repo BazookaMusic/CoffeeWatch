@@ -5,12 +5,7 @@
 
 .center
 {
-    position: absolute;
-    margin: auto;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    margin: 12vh auto 0;
 }
 
 .newCoffeeShop
@@ -24,13 +19,20 @@
 {
     /* width: 40%;
     height: 4.5vh; */
-    margin: 1.5vh 0;
+    margin: 5vh 0;
+    font-size: 1.1vw;
+}
+
+.buttonSpan
+{
+    margin: auto 2vw;
     font-size: 1.1vw;
 }
 
 .title
 {
     justify-content: center;
+    margin-bottom: 2vh;
 }
 
 .formRow
