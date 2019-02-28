@@ -28,7 +28,6 @@ import { Ng5SliderModule } from 'ng5-slider';
 export function tokenGetter() {
   const token = localStorage.getItem('access_token');
   if (token !== null) {
-    console.log(token);
     return token;
   } else {
     return '';
