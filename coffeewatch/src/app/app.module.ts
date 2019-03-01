@@ -43,6 +43,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { HomePageFirstSearchComponent } from './home-page-first-search/home-page-first-search.component';
 import { HomePageSearchResultsComponent } from './home-page-search-results/home-page-search-results.component';
 import { NewCoffeeshopComponent } from './new-coffeeshop/new-coffeeshop.component';
+import { EditCoffeeComponent } from './edit-coffee/edit-coffee.component';
 
 
 
@@ -69,6 +70,7 @@ import { NewCoffeeshopComponent } from './new-coffeeshop/new-coffeeshop.componen
     HomePageFirstSearchComponent,
     HomePageSearchResultsComponent,
     NewCoffeeshopComponent,
+    EditCoffeeComponent,
   ],
   imports: [
     NgbModule,

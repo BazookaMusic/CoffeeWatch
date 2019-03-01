@@ -21,11 +21,9 @@
           </tr>
         </table>
         <div class="row justify-content-center actionIconsRow">
-          <a class="" ngbPopover="Τροποποίηση Καφετέριας" placement="bottom" triggers="mouseenter:mouseleave" routerLink="/editCoffeeShop/{{coffeeShop.id}}"><img class="img-fluid icon" src="../assets/editCoffeeShop.png" /></a>
+          <a ngbPopover="Τροποποίηση Καφετέριας" placement="top" triggers="mouseenter:mouseleave" routerLink="/editCoffeeShop/{{coffeeShop.id}}"><img class="img-fluid icon" src="../assets/editCoffeeShop.png" /></a>
         </div>
-        <div class="row justify-content-center actionIconsRow">
-          <app-new-coffee-modal></app-new-coffee-modal>
-        </div>
+        <app-new-coffee-modal></app-new-coffee-modal>
       </div>
       <div class="col-sm-7 scrollable">
         <table class="table">
@@ -50,7 +48,8 @@
     <div *ngIf="selectedCoffee > -1" class="coffeeDetails">
       <hr />
       <div class="row coffeeName">
-        <span class="col-sm-10">{{coffeeShop.coffees[selectedCoffee].name}}</span>
+        <span class="col-sm-2">{{coffeeShop.coffees[selectedCoffee].name}}</span>
+        <span class="col-sm-8 "><app-edit-coffee></app-edit-coffee></span>
         <span class="col-sm-1 coffeePrice">{{coffeeShop.coffees[selectedCoffee].price}}€</span>
         <span class="col-sm-1 justify-content-center"><app-new-price-modal></app-new-price-modal></span>
       </div>

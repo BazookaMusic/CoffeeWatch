@@ -1,0 +1,58 @@
+<ng-template #editcoffeemod let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Τροποποίηση Καφέ</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="coffeeForm" id="mainform" (ngSubmit)="onCoffeeSubmit();modal.dismiss('Submit')">
+      <div class="form-group row">
+        <div class="col-sm-7 inlineDescr">
+          <span class="input-group-prepend">
+            <span class="input-group-text bgColor" id="basic-addon2">Όνομα:</span>
+          </span>
+          <input type="text" size="100" formControlName="name" class="form-control" aria-label="Default"
+            aria-describedby="inputGroup-sizing-default" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-7 inlineDescr">
+          <span class="input-group-prepend">
+            <span class="input-group-text bgColor" id="basic-addon2">Κατηγορία:</span>
+          </span>
+          <select id="categories" formControlName="categories">
+            <option *ngFor="let category of coffeeCat" [value]="category">{{category}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <span class="col-sm-4 inlineDescr">
+          <span class="input-group-prepend">
+            <span class="input-group-text bgColor" id="basic-addon2">Τιμή:</span>
+          </span>
+          <input class="price" type="number" step=".01" id="price" min="0" formControlName="price" />
+        </span>
+      </div>
+      <h5>Περιγραφή:</h5>
+      <textarea class="form-control" rows="4" formControlName="description" maxlength={{MAXLEN}} required
+        placeholder="Λίγα λόγια για τον καφέ" id="desc-text"></textarea>
+      <p *ngIf="coffeeForm.controls.description.value.length>=MINLEN">Απομένουν
+        {{MAXLEN - coffeeForm.controls.description.value.length}} χαρακτήρες</p>
+      <p *ngIf="coffeeForm.controls.description.value.length < MINLEN"> Απαιτούνται ακόμα
+        {{MINLEN - coffeeForm.controls.description.value.length}} χαρακτήρες</p>
+      <h5>Προσθετά:</h5>
+      <textarea class="form-control" rows="4" formControlName="extras" maxlength={{MAXLEN}}
+        placeholder="Προσθετά χαρακτηριστικά (πχ. γάλα +0.5€)" id="extras"></textarea>
+      <p *ngIf="coffeeForm.controls.extras.value.length>0">Απομένουν
+        {{MAXLEN - coffeeForm.controls.extras.value.length}} χαρακτήρες</p>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary outlineSecondaryNoHover" data-dismiss="modal"
+      (click)="modal.dismiss('Cross click')">Ακύρωση</button>
+    <button type="submit" form="mainform" class="btn orangeButton" [disabled]="!coffeeForm.valid">Τροποποίηση</button>
+  </div>
+</ng-template>
+
+<a ngbPopover="Τροποποίηση Καφέ" placement="top" triggers="mouseenter:mouseleave" (click)="open(editcoffeemod)"><img class="img-fluid icon" src="../assets/editCoffee.png" /></a>
