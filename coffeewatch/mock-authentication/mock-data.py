@@ -89,6 +89,7 @@ for i in range(1,TOTAL_COFFEESHOPS + 1):
 
 products=[]
 prices=[]
+price_counter = 0
 for i in range(1,TOTAL_COFFEES + 1):
     numOfReviews=random.randint(1,100)
     reviewidgen=no_repeat(random.randint)
@@ -111,6 +112,7 @@ for i in range(1,TOTAL_COFFEES + 1):
     })
     for date,price in zip(dates,rand_prices):
         prices.append({
+            "id": price_counter,
             "date": date.strftime('%Y-%m-%d'),
             "price": price,
             "shopId": str(shopid),
@@ -119,6 +121,8 @@ for i in range(1,TOTAL_COFFEES + 1):
             "productId": str(i), 
 
         })
+        price_counter += 1
+    
 
 
 reviews=[]

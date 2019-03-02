@@ -6,6 +6,7 @@ import { CoffeeShop } from '../coffee-shop';
 import { CoffeeshopsService } from '../coffeeshops.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { UserService } from '../user.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-coffee-shop-full',
@@ -31,8 +32,7 @@ import { UserService } from '../user.service';
   ]
 })
 
-export class CoffeeShopFullComponent implements OnInit
-{
+export class CoffeeShopFullComponent implements OnInit {
   coffeeShop: CoffeeShop;
   clickedCoffees: boolean[] = [];
   selectedCoffee: number;
@@ -44,60 +44,63 @@ export class CoffeeShopFullComponent implements OnInit
     private location: Location,
   ) { }
 
-  ngOnInit()
-  {
-    this.activeTab = "description";
+  ngOnInit() {
+    this.activeTab = 'description';
 
     this.getCoffeeShop();
 
+    this.coffeeShopsService.priceChange$.subscribe(changed => {
+      if (changed)
+        {
+          console.log('a');
+          this.coffeeShopsService.getLastPrice(this.coffeeShop.coffees[this.selectedCoffee].id).subscribe(price => {
+            if (price !== undefined) {
+              console.log(price);
+              this.coffeeShop.coffees[this.selectedCoffee].price = price.price;
+             }
+          });
+      }
+  });
+
   }
 
-  reset()
-  {
+  reset() {
     let i = 0;
-    for(; i < this.coffeeShop.coffees.length; i++)
-    {
+    for (; i < this.coffeeShop.coffees.length; i++) {
       this.clickedCoffees[i] = false;
     }
 
     this.selectedCoffee = undefined;
   }
 
-  tabClicked(tab: string): void
-  {
+  tabClicked(tab: string): void {
     this.activeTab = tab;
   }
 
-  getCoffeeShop(): void 
-  {
+  getCoffeeShop(): void {
     const id = +this.route.snapshot.paramMap.get('coffeeShopID');
 
-    this.coffeeShopsService.getCoffeeShop(id).subscribe( cs => 
-      {
+    this.coffeeShopsService.getCoffeeShop(id).subscribe( cs => {
         this.coffeeShop = cs;
         this.reset();
       });
   }
 
-  goBack(): void 
-  {
+  goBack(): void {
     this.location.back();
   }
 
-  onClick(coffeeIndex: number)
-  {
-    if(this.clickedCoffees[coffeeIndex])
-    {
+  onClick(coffeeIndex: number) {
+    if (this.clickedCoffees[coffeeIndex]) {
       this.clickedCoffees[coffeeIndex] = false;
       this.selectedCoffee = undefined;
 
       this.coffeeShopsService.selectCoffee(undefined);
-    }
-    else
-    {
-      if (this.selectedCoffee != undefined)
+    } else {
+      if (this.selectedCoffee !== undefined) {
         this.clickedCoffees[this.selectedCoffee] = false;
-        
+      }
+
       this.clickedCoffees[coffeeIndex] = true;
       this.selectedCoffee = coffeeIndex;
 

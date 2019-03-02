@@ -35,7 +35,7 @@ export class CoffeeStatisticsComponent implements OnInit {
   showXAxis = true;
   showYAxis = true;
   gradient = false;
-  showLegend = true;
+  showLegend = false;
   showXAxisLabel = true;
   xAxisLabel = 'Ημερομηνία';
   showYAxisLabel = true;
@@ -60,7 +60,14 @@ export class CoffeeStatisticsComponent implements OnInit {
 
   ngOnInit() {
     this.currentCoffeeShopId = +this.route.parent.snapshot.paramMap.get('coffeeShopID');
+    this.coffeeShopsService.priceChange$.subscribe(changed =>
+      {
+        this.refreshData();
+      });
+  }
 
+  refreshData()
+  {
     this.coffeeShopsService.getSelectedCoffee()
     .pipe(flatMap(id => {
       if (id !== undefined) {
@@ -83,9 +90,6 @@ export class CoffeeStatisticsComponent implements OnInit {
           this.emptyHistory = true;
         }
       });
-
-
-
   }
 }
 

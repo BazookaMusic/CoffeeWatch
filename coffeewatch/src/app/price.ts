@@ -1,10 +1,10 @@
 export interface priceData {
     date: string;
-    price: string;
-    shopId: string;
+    price: number;
+    shopId: number;
     shopName: string;
 
-    productId: string;
+    productId: number;
     productName: string;
 }
 

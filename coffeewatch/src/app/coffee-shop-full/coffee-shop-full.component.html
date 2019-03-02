@@ -51,7 +51,7 @@
         <span class="col-sm-2">{{coffeeShop.coffees[selectedCoffee].name}}</span>
         <span class="col-sm-8 "><app-edit-coffee></app-edit-coffee></span>
         <span class="col-sm-1 coffeePrice">{{coffeeShop.coffees[selectedCoffee].price}}€</span>
-        <span class="col-sm-1 justify-content-center"><app-new-price-modal></app-new-price-modal></span>
+        <span class="col-sm-1 justify-content-center"><app-new-price-modal [coffee]='coffeeShop.coffees[selectedCoffee]' [coffeeShop]='coffeeShop'></app-new-price-modal></span>
       </div>
       <div class="row">
         <div class="col-sm-12">

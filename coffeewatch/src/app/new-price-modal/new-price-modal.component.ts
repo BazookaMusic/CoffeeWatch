@@ -1,12 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, MinLengthValidator } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 import { Validators } from '@angular/forms';
 import { CoffeeshopsService } from '../coffeeshops.service';
-import { flatMap } from 'rxjs/operators';
+import { flatMap, catchError } from 'rxjs/operators';
 import { UserService } from '../user.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { priceData } from '../price';
+import { Coffee } from '../coffee';
+import { CoffeeShop } from '../coffee-shop';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-new-price-modal',
@@ -19,24 +23,28 @@ export class NewPriceModalComponent implements OnInit {
   priceForm: FormGroup;
   price: number;
   loggedIn: boolean;
+
+  @Input() coffee: Coffee;
+  @Input() coffeeShop: CoffeeShop;
+  
+
+
   constructor(
     private modalService: NgbModal,
     private coffeeShopsService: CoffeeshopsService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   open(content) {
-    if (this.userService.isloggedIN())
-    {
+    if (this.userService.isloggedIN()) {
       this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
       }, (reason) => {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       });
-    }
-    else
-    {
+    } else {
       this.router.navigate(['/login']);
     }
   }
@@ -52,7 +60,31 @@ export class NewPriceModalComponent implements OnInit {
   }
 
   onPriceSubmit() {
-    const price = this.priceForm.controls.price;
+    const price: number = this.priceForm.controls.price.value;
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+
+    const newPrice: priceData = {
+     price: price,
+     date: `${year}-${month}-${day}`,
+     shopId: this.coffeeShop.id,
+     productId: this.coffee.id,
+     productName: this.coffee.name, shopName: this.coffeeShop.name};
+
+    this.coffeeShopsService.submitPrice(newPrice).pipe(catchError(err => {
+        alert(err.message);
+        return of(undefined);
+      })).subscribe(new_price => {
+          if (new_price !== undefined) {
+            this.coffeeShopsService.priceNeedsRefresh();
+            this.modalService.dismissAll('price updated');
+          }
+        });
+
+
   }
 
   ngOnInit() {

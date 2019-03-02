@@ -39,6 +39,7 @@ export class CoffeeshopsService {
   selectedCoffee$: BehaviorSubject<number>;
   CoffeeShops$: BehaviorSubject<CoffeeShop[]>;
   baseAPIURL = 'http://localhost:8765/observatory/api/';
+  priceChange$: BehaviorSubject<boolean>;
  
   filters: FilterObject;
 
@@ -52,6 +53,7 @@ export class CoffeeshopsService {
     this.CoffeeShops$ = new BehaviorSubject<CoffeeShop[]>(undefined);
 
     this.searchCoordinates$ = new BehaviorSubject<[number, number]>(undefined);
+    this.priceChange$ = new BehaviorSubject<boolean>(false);
     this.filters = defaultFilters;
     this.searchCoordinates$.subscribe(coords => {
       if (coords !== undefined) {this.searchLat = coords[0]; this.searchLng = coords[1];}
@@ -295,6 +297,15 @@ export class CoffeeshopsService {
 
 
   // prices
+  priceNeedsRefresh()
+  {
+    this.priceChange$.next(true);
+  }
+
+  priceWatch()
+  {
+    return this.priceChange$;
+  }
   getPrices(searchParams: priceSearch) {
     if (searchParams !== undefined) {
       const headerPrice = {
@@ -310,6 +321,29 @@ export class CoffeeshopsService {
     {
       return of(undefined);
     }
+  }
+
+  getLastPrice(id: number)
+  {
+    const headerPrice = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      , params: new HttpParams()
+      .set('productId',  stringed(id))
+      .set('_sort', 'date')
+      .set('_order', 'desc')
+      .set('_limit', '1')
+    };
+    return this.http.get<priceData[]>(this.baseAPIURL + 'prices', headerPrice)
+    .pipe(map(prices => prices.map(toPrice)[0]))
+    .pipe(catchError(err => of(undefined)));
+  }
+
+  submitPrice(price: priceData)
+  {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json',
+    'X-OBSERVATORY-AUTH': this.userService.tokenGet()});
+
+    return this.http.post<priceData>(this.baseAPIURL + 'prices', price,{headers: headers});
   }
 
   // misc
