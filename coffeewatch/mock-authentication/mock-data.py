@@ -83,8 +83,7 @@ for i in range(1,TOTAL_COFFEESHOPS + 1):
         "telephone":fakegr.phone_number(),
         "iconPath":"../assets/images/coffeeshops/{}.png".format(random.randint(0,7)),
         "lng":coords[1],
-        "lat":coords[0],
-        "description":fakegr.text(random.randint(50, 500))
+        "lat":coords[0]
     })
 
 
@@ -138,7 +137,6 @@ for i in range(1,TOTAL_REVIEWS):
             "numOfLikes":random.randint(0,100),
             "numOfDislikes": random.randint(0,100),
             "coffeeId": random.randint(1, TOTAL_COFFEES),
-            "observatoryId": 'api'
         }
     )
 

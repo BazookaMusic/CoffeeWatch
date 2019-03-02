@@ -3,23 +3,23 @@
     <div class="row title"><h1>{{title}}</h1></div>
     <div class="row ">
       <div class="col-sm-5">
-        <form [formGroup]="coffeeShopForm" id="coffeeShopForm" (ngSubmit)="onCoffeeShopSubmit();">
+        <form [formGroup]="coffeeShopForm" id="coffeeShopForm" (ngSubmit)="submitCoffeeShop();">
           <table class="table">
             <tr>
               <td>Όνομα:</td>
-              <td><input type="text" formControlName="name" #name class="form-control" /></td>
+              <td><input type="text" required formControlName="name" #name class="form-control" /></td>
             </tr>
             <tr>
               <td>Διεύθυνση:</td>
-              <td><input type="text" class="form-control blackBorder" #address [formControl]="addressControl"></td>
+              <td><input type="text" required placeholder='πχ. Ηπείρου 122, Πέραμα' class="form-control blackBorder" #address [formControl]="addressControl"></td>
             </tr>
             <tr>
               <td>Τηλέφωνο:</td>
-              <td><input type="text" formControlName="telephone" #telephone class="form-control" /></td>
+              <td><input type="text" required formControlName="telephone" #telephone class="form-control" /></td>
             </tr>
             <tr>
               <td>Ιστοσελίδα:</td>
-              <td><input type="text" formControlName="website" #website class="form-control" /></td>
+              <td><input type="text" required formControlName="website" #website class="form-control" /></td>
             </tr>
             <tr>
               <td>Λογότυπο:</td>
@@ -36,7 +36,7 @@
     </div>
     <div class="row justify-content-center">
       <span class="buttonSpan"><button type="button" class="btn btn-outline-secondary outlineSecondaryNoHover button" (click)="cancel()">Ακύρωση</button></span>
-      <span class="buttonSpan"><button type="submit" class="btn orangeButton button">{{title}}</button></span>
+      <span class="buttonSpan"><button type="submit" form='coffeeShopForm' [disabled]="!coffeeShopForm.valid || (shoplat === undefined || shoplng === undefined) || !valid_addr" class="btn orangeButton button">{{title}}</button></span>
     </div>
   </div>
 </div>

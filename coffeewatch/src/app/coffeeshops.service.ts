@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {CoffeeShop} from './coffee-shop';
+import {CoffeeShop, api_coffeeShop} from './coffee-shop';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import {map, flatMap, reduce, catchError} from 'rxjs/operators';
 
@@ -83,6 +83,23 @@ export class CoffeeshopsService {
       }));
     }
     return of(undefined);
+  }
+
+  submitCoffeeShop(cs: api_coffeeShop)
+  {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json',
+     'X-OBSERVATORY-AUTH': this.userService.tokenGet()});
+    return this.http.post<api_coffeeShop>(this.baseAPIURL + 'shops', cs as api_coffeeShop, {'headers': headers} );
+  }
+
+  modifyCoffeeShop(cs: api_coffeeShop)
+  {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json',
+     'X-OBSERVATORY-AUTH': this.userService.tokenGet()});
+
+
+    return this.http.put<api_coffeeShop>(this.baseAPIURL + 'shops/' + cs.id.toString(), 
+    cs as api_coffeeShop, {'headers': headers} );
   }
 
   getCoffeeShops() {
@@ -265,7 +282,7 @@ export class CoffeeshopsService {
 
   filterCoffeeShop(filters: FilterObject, searchLat: number, searchLng: number)
   {
-    return function(coffeeShop: CoffeeShop): boolean{
+    return function(coffeeShop: CoffeeShop): boolean {
       return distanceBetween(coffeeShop.lat, coffeeShop.lng, searchLat, searchLng) < filters.maxDist;
     }
   }

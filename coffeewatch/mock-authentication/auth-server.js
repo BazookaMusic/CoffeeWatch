@@ -166,7 +166,6 @@ server.post('/observatory/api/login', (req, res) => {
     }
   })
 
-  server.use(router)
   server.use('/observatory/api', router);
 
   server.listen(8765, () => {
