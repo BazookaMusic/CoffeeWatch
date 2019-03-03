@@ -21,7 +21,7 @@
           </tr>
         </table>
         <div class="row justify-content-center actionIconsRow">
-          <a ngbPopover="Τροποποίηση Καφετέριας" placement="top" triggers="mouseenter:mouseleave" routerLink="/editCoffeeShop/{{coffeeShop.id}}"><img class="img-fluid icon" src="../assets/editCoffeeShop.png" /></a>
+          <a ngbPopover="Τροποποίηση Καφετέριας" placement="top" triggers="mouseenter:mouseleave" (click)="editCoffeeShop(coffeeShop.id)"><img class="img-fluid icon" src="../assets/editCoffeeShop.png" /></a>
         </div>
         <app-new-coffee-modal [coffeeShop]="coffeeShop"></app-new-coffee-modal>
       </div>
@@ -39,7 +39,7 @@
                       </tr>
                   </table>
                 </td>
-                <td class="coffeePrice coffees">{{coffeeItem.price}}€</td>
+                <td class="coffeePrice coffees">{{coffeeItem.price.toFixed(2)}}€</td>
               </tr>
             </a>
         </table>
@@ -49,8 +49,9 @@
       <hr />
       <div class="row coffeeName">
         <span class="col-sm-2">{{coffeeShop.coffees[selectedCoffee].name}}</span>
-        <span class="col-sm-8 "><app-edit-coffee [coffeeShop] = 'coffeeShop'></app-edit-coffee></span>
-        <span class="col-sm-1 coffeePrice">{{coffeeShop.coffees[selectedCoffee].price}}€</span>
+        <span class="col-sm-2 "><app-edit-coffee [coffeeShop] = 'coffeeShop'></app-edit-coffee></span>
+        <span class="col-sm-6 "><a ngbPopover="Διαγραφή Καφέ" placement="top" triggers="mouseenter:mouseleave" (click)="deleteCoffee(selectedCoffee)"><img class="img-fluid icon" src="../assets/deleteCoffee.png" /></a></span>
+        <span class="col-sm-1 coffeePrice">{{coffeeShop.coffees[selectedCoffee].price.toFixed(2)}}€</span>
         <span class="col-sm-1 justify-content-center"><app-new-price-modal [coffee]='coffeeShop.coffees[selectedCoffee]' [coffeeShop]='coffeeShop'></app-new-price-modal></span>
       </div>
       <div class="row">

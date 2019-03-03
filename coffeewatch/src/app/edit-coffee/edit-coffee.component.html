@@ -35,17 +35,12 @@
         </span>
       </div>
       <h5>Περιγραφή:</h5>
-      <textarea class="form-control" rows="4" formControlName="description" maxlength={{MAXLEN}} required
+      <textarea class="form-control" rows="10" formControlName="description" maxlength={{MAXLEN}} required
         placeholder="Λίγα λόγια για τον καφέ" id="desc-text"></textarea>
       <p *ngIf="coffeeForm.controls.description.value.length>=MINLEN">Απομένουν
         {{MAXLEN - coffeeForm.controls.description.value.length}} χαρακτήρες</p>
       <p *ngIf="coffeeForm.controls.description.value.length < MINLEN"> Απαιτούνται ακόμα
         {{MINLEN - coffeeForm.controls.description.value.length}} χαρακτήρες</p>
-      <h5>Προσθετά:</h5>
-      <textarea class="form-control" rows="4" formControlName="extras" maxlength={{MAXLEN}}
-        placeholder="Προσθετά χαρακτηριστικά (πχ. γάλα +0.5€)" id="extras"></textarea>
-      <p *ngIf="coffeeForm.controls.extras.value.length>0">Απομένουν
-        {{MAXLEN - coffeeForm.controls.extras.value.length}} χαρακτήρες</p>
     </form>
   </div>
   <div class="modal-footer">
