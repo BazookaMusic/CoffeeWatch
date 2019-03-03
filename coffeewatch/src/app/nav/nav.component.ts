@@ -15,12 +15,15 @@ export class NavComponent implements OnInit, DoCheck
     private userService: UserService,
     private router: Router) { }
 
-
-  ngDoCheck()
+  createCoffeeShop()
   {
-    this.updateLoginStatus();
-  }
-
+    if (this.userService.isloggedIN()) {
+      this.router.navigate(['/newCoffeeShop/']);
+    }
+    else {
+      this.router.navigate(['/login']);
+    }
+  }  
  
   ngOnInit() {
     console.log('NAV: checking login status');

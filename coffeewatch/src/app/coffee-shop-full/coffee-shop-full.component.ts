@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { CoffeeShop } from '../coffee-shop';
@@ -42,6 +42,8 @@ export class CoffeeShopFullComponent implements OnInit {
     private route: ActivatedRoute,
     private coffeeShopsService: CoffeeshopsService,
     private location: Location,
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -85,8 +87,36 @@ export class CoffeeShopFullComponent implements OnInit {
       });
   }
 
-  goBack(): void {
+  goBack(): void
+  {
     this.location.back();
+  }
+
+  editCoffeeShop(selectedCoffeeShopID: number)
+  {
+    if (this.userService.isloggedIN())
+    {
+      this.router.navigate(['/editCoffeeShop/' + selectedCoffeeShopID]);
+    }
+    else
+    {
+      this.router.navigate(['/login']);
+    }
+  }
+
+  deleteCoffee(selectedCoffee: number)
+  {
+    if (this.userService.isloggedIN())
+    {
+      if(confirm("Είσαι σίγουρος ότι θέλεις να διαγράψεις τον καφέ;"))
+      {
+
+      }
+    }
+    else
+    {
+      this.router.navigate(['/login']);
+    }
   }
 
   onClick(coffeeIndex: number) {

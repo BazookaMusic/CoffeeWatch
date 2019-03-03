@@ -73,5 +73,7 @@ export class EditCoffeeComponent implements OnInit
         this.coffeeForm.controls.description.setValue(coffee.description);
       }
     });
+
+    this.coffeeForm.controls.categories.disable();
   }
 }
