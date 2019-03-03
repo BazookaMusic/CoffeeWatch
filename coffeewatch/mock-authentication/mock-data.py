@@ -53,6 +53,7 @@ for i in range(1,TOTAL_USERS+1):
     username=fakegr.name()
     usernames[i]=username
     users.append({"id":i,"name":username,"email":("user"+str(i)+"@email.com"),"password":"27168b830c30987f0a7bb4763ca22b74da1079f7a66a296e6dce66e195f8886c"})
+users.append({"id": TOTAL_USERS+1,"name":"guruOfNet","email":"guru@of.net","password":"1c0b5351c99d1aeb075465e2102ff64b4bc421138045268edd727b593acd6584"})
 users={"users":users}
 user_db=[{"email":user["email"],"id":user["id"]} for user in users["users"]]
 user_db={"users":user_db}

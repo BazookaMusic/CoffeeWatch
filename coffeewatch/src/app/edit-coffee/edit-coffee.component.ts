@@ -68,7 +68,7 @@ export class EditCoffeeComponent implements OnInit
       category: form.categories.value, withdrawn: false, shopid: this.coffeeShop.id,
       description: form.description.value, price: form.price.value, tags: [],
       extraData: {rating: 0, numOfReviews: 0}};
-    this.coffeeShopsService.submitCoffee(coffee, this.coffeeShop.id, this.coffeeShop.name).pipe(catchError(err =>
+    this.coffeeShopsService.editCoffee(coffee, this.coffeeShop.id, this.coffeeShop.name).pipe(catchError(err =>
       {
         alert(err);
         return of(undefined);
