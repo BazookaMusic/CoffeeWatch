@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
-export class NavComponent implements OnInit, DoCheck
+export class NavComponent implements OnInit
 {
   loggedIN = undefined;
 
