@@ -2,12 +2,31 @@ import {Review} from './review';
 export const coffeeCategories = [
     'Espresso', 'Freddo espresso', 'Cappuccino', 'Freddo cappuccino',
     'Latte', 'Nes', 'Frappe', 'Φίλτρου', 'Ελληνικός'];
+
+export interface APICoffee
+{
+    id: number;
+    category: string;
+    tags: string[];
+    name: string;
+
+    description: string;
+
+    price: number;
+
+    extraData: {
+        rating: number,
+        numOfReviews: number,
+    };
+    withdrawn: boolean;
+    shopid: number;
+
+}
 export class Coffee {
     id: number;
     category: string;
     tags: string[];
     name: string;
-    iconPath: string;
 
     description: string;
 
