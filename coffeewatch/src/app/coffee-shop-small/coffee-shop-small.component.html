@@ -9,19 +9,11 @@
         <td class="coffeeShopDetailsIcons"><img src="../../assets/locationPointIcon.png" class="img-fluid" /></td>
         <td><a href="https://www.google.com/maps/search/?api=1&query={{coffeeShop.address}}" target="_blank">{{coffeeShop.address}}</a></td>
       </tr>
-      <tr>
-        <td class="coffeeShopDetailsIcons"><img src="../../assets/telephoneIcon.png" class="img-fluid" /></td>
-        <td><a href="tel:{{coffeeShop.telephone}}">{{coffeeShop.telephone}}</a></td>
-      </tr>
-      <tr>
-        <td class="coffeeShopDetailsIcons"><img src="../../assets/websiteIcon.png" class="img-fluid" /></td>
-        <td><a class="websiteLink" href="http://{{coffeeShop.website}}" target="_blank">{{coffeeShop.website}}</a></td>
-      </tr>
     </table>
   </div>
   <div class="col-sm-7">
     <table class="table">
-      <tr *ngFor="let coffee of coffeeShop.coffees.slice(0, 3)">
+      <tr *ngFor="let coffee of coffeeShop.coffees.slice(0, 6)">
         <td>
           <table class="table">
             <tr>
@@ -35,7 +27,7 @@
             </tr>
           </table>
         </td>
-        <td class="coffeePrice">{{coffee.price}}€</td>
+        <td class="coffeePrice">{{coffee.price.toFixed(2)}}€</td>
       </tr>
     </table>
   </div>

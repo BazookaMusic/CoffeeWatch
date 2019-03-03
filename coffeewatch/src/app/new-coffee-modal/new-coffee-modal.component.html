@@ -34,7 +34,7 @@
               </span>
           </div>
           <h5>Περιγραφή:</h5>
-          <textarea class="form-control" rows="4" formControlName="description" maxlength={{MAXLEN}} required  placeholder="Λίγα λόγια για τον καφέ" id="desc-text"></textarea>
+          <textarea class="form-control" rows="10" formControlName="description" maxlength={{MAXLEN}} required  placeholder="Λίγα λόγια για τον καφέ" id="desc-text"></textarea>
           <p *ngIf="coffeeForm.controls.description.value.length>=MINLEN" >Απομένουν {{MAXLEN - coffeeForm.controls.description.value.length}} χαρακτήρες</p>
           <p *ngIf="coffeeForm.controls.description.value.length < MINLEN"> Απαιτούνται ακόμα {{MINLEN - coffeeForm.controls.description.value.length}} χαρακτήρες</p>
         </form>
