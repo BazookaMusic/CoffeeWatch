@@ -44,7 +44,7 @@ def priceGen(n,base,delta=0.4):
     prices = []
     for i in range(0,n):
         base = base + random.uniform(-delta,delta)
-        prices.append(round(base,2))
+        prices.append(abs(round(base,2)))
     return prices
 
 users=[]
@@ -114,7 +114,7 @@ for i in range(1,TOTAL_COFFEES + 1):
         prices.append({
             "id": price_counter,
             "date": date.strftime('%Y-%m-%d'),
-            "price": price,
+            "price": abs(price),
             "shopId": str(shopid),
             "shopName": shopnames[shopid],
             "productName": name,

@@ -110,7 +110,6 @@ export class CoffeeshopsService {
   }
 
   updateCoffeeShops(lat: number, lng: number) {
-    console.log('trying to update');
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     const coffeeShopFilter = this.filterCoffeeShop(this.filters, lat, lng);
     const coffeeFilter = this.filterCoffee( this.filters);
@@ -131,7 +130,7 @@ export class CoffeeshopsService {
             this.http.get<Coffee[]>(this.baseAPIURL + 'products', httpOptions1).subscribe(coffees => {
                 coffeeShop.coffees = coffees.filter(coffeeFilter);
                 counter++;
-                if (counter === this.coffeeShops.length) 
+                if (counter === this.coffeeShops.length)
                 {
                   this.coffeeShops = this.coffeeShops.filter(cs => cs.coffees.length > 0); // throw away empty
                   this.priceTiers = this.getPricePartitions(this.coffeeShops);
@@ -145,6 +144,24 @@ export class CoffeeshopsService {
   }
 
   // coffee
+
+  submitCoffee(coffeeIn: Coffee, shopId: number, shopName: string)
+  {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json',
+    'X-OBSERVATORY-AUTH': this.userService.tokenGet()});
+    return this.http.post<Coffee>(this.baseAPIURL + 'products', coffeeIn, {headers: headers}).pipe(flatMap(coffee =>
+      {
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+
+        const price: priceData = {productId: coffee.id, price: coffee.price, shopId: shopId,
+          date: `${year}-${month}-${day}`, productName: coffee.name, shopName: shopName };
+        return this.submitPrice(price);
+      }));
+
+  }
 
   getCoffee(id: number): Observable<Coffee> {
     if (id !== undefined) {
