@@ -149,7 +149,7 @@ export class CoffeeshopsService {
   {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json',
     'X-OBSERVATORY-AUTH': this.userService.tokenGet()});
-    return this.http.post<Coffee>(this.baseAPIURL + 'products', coffeeIn, {headers: headers}).pipe(flatMap(coffee =>
+    return this.http.post<APICoffee>(this.baseAPIURL + 'products', coffeeIn, {headers: headers}).pipe(flatMap(coffee =>
       {
         const date = new Date();
         const year = date.getFullYear();
@@ -167,7 +167,7 @@ export class CoffeeshopsService {
   {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json',
     'X-OBSERVATORY-AUTH': this.userService.tokenGet()});
-    return this.http.put<Coffee>(this.baseAPIURL + 'products/' + coffeeIn.id, coffeeIn, {headers: headers}).pipe(flatMap(coffee =>
+    return this.http.put<APICoffee>(this.baseAPIURL + 'products/' + coffeeIn.id, coffeeIn, {headers: headers}).pipe(flatMap(coffee =>
       {
         const date = new Date();
         const year = date.getFullYear();
