@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 import { Validators } from '@angular/forms';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: './login-screen.component.html',
   styleUrls: ['./login-screen.component.css']
 })
-export class LoginScreenComponent implements OnInit {
+export class LoginScreenComponent implements OnInit  {
   loginForm: FormGroup;
   failureText: string;
   emailText: string;

@@ -55,7 +55,6 @@ export class CoffeeShopFullComponent implements OnInit {
           console.log('a');
           this.coffeeShopsService.getLastPrice(this.coffeeShop.coffees[this.selectedCoffee].id).subscribe(price => {
             if (price !== undefined) {
-              console.log(price);
               this.coffeeShop.coffees[this.selectedCoffee].price = price.price;
              }
           });

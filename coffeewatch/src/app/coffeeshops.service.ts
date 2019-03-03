@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {CoffeeShop, api_coffeeShop} from './coffee-shop';
 import { Observable, of, BehaviorSubject } from 'rxjs';
-import {map, flatMap, reduce, catchError} from 'rxjs/operators';
+import {map, flatMap, reduce, catchError, tap} from 'rxjs/operators';
 
 import {Coffee} from './coffee';
 import {Review} from './review';
@@ -277,7 +277,7 @@ export class CoffeeshopsService {
   filterCoffee(filters: FilterObject)
   {
     return function(coffee: Coffee): boolean {
-      return (coffee.category === filters.category) && (coffee.price >= filters.minPrice ) 
+      return (coffee.category === filters.category) && (coffee.price >= filters.minPrice )
             && (coffee.price <= filters.maxPrice) && (coffee.extraData.rating > filters.minRating);
     };
   }
@@ -334,7 +334,7 @@ export class CoffeeshopsService {
       .set('_limit', '1')
     };
     return this.http.get<priceData[]>(this.baseAPIURL + 'prices', headerPrice)
-    .pipe(map(prices => prices.map(toPrice)[0]))
+    .pipe( map(prices => prices.map(toPrice)[0]))
     .pipe(catchError(err => of(undefined)));
   }
 
@@ -343,7 +343,7 @@ export class CoffeeshopsService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json',
     'X-OBSERVATORY-AUTH': this.userService.tokenGet()});
 
-    return this.http.post<priceData>(this.baseAPIURL + 'prices', price,{headers: headers});
+    return this.http.post<priceData>(this.baseAPIURL + 'prices', price, {headers: headers});
   }
 
   // misc

@@ -63,8 +63,8 @@ export class NewPriceModalComponent implements OnInit {
     const price: number = this.priceForm.controls.price.value;
     const date = new Date();
     const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
+    const month = (date.getMonth() + 1).toString().padStart(2,'0');
+    const day = date.getDate().toString().padStart(2,'0');
 
 
     const newPrice: priceData = {

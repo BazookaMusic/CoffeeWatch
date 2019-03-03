@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, DoCheck } from '@angular/core';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
-export class NavComponent implements OnInit
+export class NavComponent implements OnInit, DoCheck
 {
   loggedIN = undefined;
 
@@ -15,6 +15,13 @@ export class NavComponent implements OnInit
     private userService: UserService,
     private router: Router) { }
 
+
+  ngDoCheck()
+  {
+    this.updateLoginStatus();
+  }
+
+ 
   ngOnInit() {
     console.log('NAV: checking login status');
     this.updateLoginStatus();
