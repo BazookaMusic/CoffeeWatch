@@ -23,7 +23,7 @@
         <div class="row justify-content-center actionIconsRow">
           <a ngbPopover="Τροποποίηση Καφετέριας" placement="top" triggers="mouseenter:mouseleave" (click)="editCoffeeShop(coffeeShop.id)"><img class="img-fluid icon" src="../assets/editCoffeeShop.png" /></a>
         </div>
-        <app-new-coffee-modal></app-new-coffee-modal>
+        <app-new-coffee-modal [coffeeShop]="coffeeShop"></app-new-coffee-modal>
       </div>
       <div class="col-sm-7 scrollable">
         <table class="table">
@@ -49,7 +49,7 @@
       <hr />
       <div class="row coffeeName">
         <span class="col-sm-2">{{coffeeShop.coffees[selectedCoffee].name}}</span>
-        <span class="col-sm-2 "><app-edit-coffee></app-edit-coffee></span>
+        <span class="col-sm-2 "><app-edit-coffee [coffeeShop] = 'coffeeShop'></app-edit-coffee></span>
         <span class="col-sm-6 "><a ngbPopover="Διαγραφή Καφέ" placement="top" triggers="mouseenter:mouseleave" (click)="deleteCoffee(selectedCoffee)"><img class="img-fluid icon" src="../assets/deleteCoffee.png" /></a></span>
         <span class="col-sm-1 coffeePrice">{{coffeeShop.coffees[selectedCoffee].price.toFixed(2)}}€</span>
         <span class="col-sm-1 justify-content-center"><app-new-price-modal [coffee]='coffeeShop.coffees[selectedCoffee]' [coffeeShop]='coffeeShop'></app-new-price-modal></span>
