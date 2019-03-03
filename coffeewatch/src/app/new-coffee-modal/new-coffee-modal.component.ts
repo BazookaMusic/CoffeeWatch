@@ -19,8 +19,8 @@ export class NewCoffeeModalComponent implements OnInit {
   closeResult: string;
   coffeeForm: FormGroup;
   price: number;
-  MAXLEN = 500;
-  MINLEN = 10;
+  MAXLEN = 1000;
+  MINLEN = 50;
 
   coffeeCat = coffeeCategories;
 
@@ -60,7 +60,6 @@ export class NewCoffeeModalComponent implements OnInit {
      'name': ['', [Validators.required, Validators.maxLength(100)]],
      'categories': ['', [Validators.required]],
      'description': ['', [Validators.required, Validators.minLength(this.MINLEN), Validators.maxLength(this.MAXLEN)]],
-     'extras': ['', [Validators.maxLength(this.MAXLEN)]],
      'price': ['', [Validators.min(0)]]
    });
   }

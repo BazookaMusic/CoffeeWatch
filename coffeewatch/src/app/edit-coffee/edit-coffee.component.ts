@@ -20,8 +20,8 @@ export class EditCoffeeComponent implements OnInit
   closeResult: string;
   coffeeForm: FormGroup;
   price: number;
-  MAXLEN = 500;
-  MINLEN = 10;
+  MAXLEN = 1000;
+  MINLEN = 50;
 
   coffeeCat = coffeeCategories;
 
@@ -61,7 +61,6 @@ export class EditCoffeeComponent implements OnInit
       'name': ['', [Validators.required, Validators.maxLength(100)]],
       'categories': ['', [Validators.required]],
       'description': ['', [Validators.required, Validators.minLength(this.MINLEN), Validators.maxLength(this.MAXLEN)]],
-      'extras': ['', [Validators.maxLength(this.MAXLEN)]],
       'price': ['', [Validators.min(0)]]
     });
 
@@ -72,7 +71,6 @@ export class EditCoffeeComponent implements OnInit
         this.coffeeForm.controls.categories.setValue(coffee.category);
         this.coffeeForm.controls.price.setValue(coffee.price);
         this.coffeeForm.controls.description.setValue(coffee.description);
-        this.coffeeForm.controls.extras.setValue(coffee.extraData);
       }
     });
   }
