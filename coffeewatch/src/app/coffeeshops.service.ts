@@ -3,7 +3,7 @@ import {CoffeeShop, api_coffeeShop} from './coffee-shop';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import {map, flatMap, reduce, catchError, tap} from 'rxjs/operators';
 
-import {Coffee} from './coffee';
+import {Coffee, APICoffee} from './coffee';
 import {Review} from './review';
 import { UserService } from './user.service';
 import { HttpHeaders, HttpClient, HttpParams} from '@angular/common/http';
@@ -145,7 +145,7 @@ export class CoffeeshopsService {
 
   // coffee
 
-  submitCoffee(coffeeIn: Coffee, shopId: number, shopName: string)
+  submitCoffee(coffeeIn: APICoffee, shopId: number, shopName: string)
   {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json',
     'X-OBSERVATORY-AUTH': this.userService.tokenGet()});
@@ -161,6 +161,23 @@ export class CoffeeshopsService {
         return this.submitPrice(price);
       }));
 
+  }
+
+  editCoffee(coffeeIn: APICoffee, shopId: number, shopName: string)
+  {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json',
+    'X-OBSERVATORY-AUTH': this.userService.tokenGet()});
+    return this.http.put<Coffee>(this.baseAPIURL + 'products/' + coffeeIn.id, coffeeIn, {headers: headers}).pipe(flatMap(coffee =>
+      {
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+
+        const price: priceData = {productId: coffee.id, price: coffee.price, shopId: shopId,
+          date: `${year}-${month}-${day}`, productName: coffee.name, shopName: shopName };
+        return this.submitPrice(price);
+      }));
   }
 
   getCoffee(id: number): Observable<Coffee> {
