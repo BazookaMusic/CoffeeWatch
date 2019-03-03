@@ -47,6 +47,19 @@ export class FilterSearchModalComponent implements OnInit
   ) { }
 
   open(content) {
+    const filters = this.coffeeShopsService.getFilters();
+    const checkbox = coffeeCategories.findIndex(cat => cat === filters.category);
+    for (let i = 0; i < this.checkboxArray.length; i++)
+    {
+      if (i === checkbox)
+      {
+        this.checkboxArray[i].setValue(true);
+      }
+      else
+      {
+        this.checkboxArray[i].setValue(false);
+      }
+    }
     this.modalService.open(content, { ariaLabelledBy: 'modal-coffee-title', size: 'lg' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -113,7 +126,6 @@ export class FilterSearchModalComponent implements OnInit
     this.value = 5000;
 
     this.categories = coffeeCategories;
-    console.log(this.categories.length);
 
     this.checkboxArray = [
       new FormControl(true),
