@@ -22,6 +22,7 @@ export class CoffeeshopsService {
   coffeeShop: CoffeeShop;
   coffees: Coffee[] = [];
   coffeeShopDict: {[id: number]: CoffeeShop} = {};
+  coffeePrices: {[id: number]: number} = {};
 
   coffee: Coffee;
   reviews: Review[] = [];
@@ -109,41 +110,65 @@ export class CoffeeshopsService {
     return this.CoffeeShops$;
   }
 
-  updateCoffeeShops(lat: number, lng: number) {
+  updateCoffeeShops(lat:number , lng:number) {
+
+
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     const coffeeShopFilter = this.filterCoffeeShop(this.filters, lat, lng);
     const coffeeFilter = this.filterCoffee( this.filters);
 
-    let counter = 0;
-    this.http.get<CoffeeShop[]>(this.baseAPIURL + 'shops', httpOptions).subscribe( coffeeShops => {
-        this.coffeeShops = coffeeShops.filter(coffeeShopFilter);
-        if (this.coffeeShops.length === 0)
-        {
-          this.CoffeeShops$.next(this.coffeeShops);
-          return;
-        }
-        this.coffeeShopDict = {};
-        this.coffeeShops.forEach(cs => this.coffeeShopDict[cs.id] = cs);
-        this.coffeeShops.forEach(coffeeShop => {
-          const params = new HttpParams().set('shopid', coffeeShop.id.toString());
-            const httpOptions1 = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), params };
-            this.http.get<Coffee[]>(this.baseAPIURL + 'products', httpOptions1).subscribe(coffees => {
-                coffeeShop.coffees = coffees.filter(coffeeFilter);
-                counter++;
-                if (counter === this.coffeeShops.length)
-                {
-                  this.coffeeShops = this.coffeeShops.filter(cs => cs.coffees.length > 0); // throw away empty
-                  this.priceTiers = this.getPricePartitions(this.coffeeShops);
-                  this.CoffeeShops$.next(this.coffeeShops);
 
-                }
-              });
-          });
+    let counter = 0;
+    this.getLatestPrices().subscribe(_  =>
+      {
+        this.http.get<CoffeeShop[]>(this.baseAPIURL + 'shops', httpOptions).subscribe( coffeeShops => {
+          this.coffeeShops = coffeeShops.filter(coffeeShopFilter);
+          if (this.coffeeShops.length === 0)
+          {
+            this.CoffeeShops$.next(this.coffeeShops);
+            return;
+          }
+          this.coffeeShopDict = {};
+          this.coffeeShops.forEach(cs => this.coffeeShopDict[cs.id] = cs);
+          this.coffeeShops.forEach(coffeeShop => {
+            const params = new HttpParams().set('shopid', coffeeShop.id.toString());
+              const httpOptions1 = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), params };
+              this.http.get<Coffee[]>(this.baseAPIURL + 'products', httpOptions1).pipe(flatMap(coffees =>
+                {
+                  coffees.forEach(coffee => coffee.price = this.coffeePrices[coffee.id]);
+                  coffees.forEach(coffee => this.getCoffeeReviews(coffee.id).subscribe(reviews =>
+                    {
+                      coffee.extraData.rating = +average(reviews.map(aReview => aReview.rating)).toFixed(2);
+                    }
+                   ));
+
+
+                  return of(coffees);
+                }))
+                .subscribe(coffees => {
+                  coffeeShop.coffees = coffees.filter(coffeeFilter);
+                  counter++;
+                  if (counter === this.coffeeShops.length)
+                  {
+                    this.coffeeShops = this.coffeeShops.filter(cs => cs.coffees.length > 0); // throw away empty
+                    this.priceTiers = this.getPricePartitions(this.coffeeShops);
+                    this.CoffeeShops$.next(this.coffeeShops);
+                  }
+                });
+            });
+        });
 
       });
   }
 
   // coffee
+
+  deleteCoffee(id: number)
+  {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json',
+    'X-OBSERVATORY-AUTH': this.userService.tokenGet()});
+    return this.http.delete(this.baseAPIURL + 'products/' + id,  {headers: headers});
+  }
 
   submitCoffee(coffeeIn: APICoffee, shopId: number, shopName: string)
   {
@@ -331,6 +356,69 @@ export class CoffeeshopsService {
 
 
   // prices
+  updateCoffeeShopPrices(coffeeShop: CoffeeShop)
+  {
+    const addedCoffees: {[id: number]: number} = {};
+    const filters = this.filters;
+
+    const params = new HttpParams()
+    .set('shopId', coffeeShop.id.toString())
+    .set('_sort', 'date')
+    .set('_order', 'desc');
+
+    const headerPrice = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      , params
+    };
+
+    return this.http.get<priceData[]>(this.baseAPIURL + '/prices', headerPrice).pipe(map( prices =>
+      {
+        for (const price of prices)
+        {
+          if (addedCoffees[price.productId] === undefined)
+          {
+           addedCoffees[price.productId] = price.price;
+          }
+        }
+
+        coffeeShop.coffees.forEach(coffee => coffee.price = addedCoffees[coffee.id]);
+      }
+    ));
+
+  }
+  getLatestPrices()
+  {
+    const addedCoffees: {[id: number]: number} = {};
+    const filters = this.filters;
+
+    const params = new HttpParams()
+    .set('_sort', 'date')
+    .set('_order', 'desc');
+
+    const headerPrice = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      , params
+    };
+
+    return this.http.get<priceData[]>(this.baseAPIURL + '/prices', headerPrice).pipe(map( prices =>
+      {
+        for (const price of prices)
+        {
+          if (addedCoffees[price.productId] === undefined)
+          {
+           addedCoffees[price.productId] = price.price;
+          }
+        }
+
+        this.coffeePrices = addedCoffees;
+
+        return of(true);
+      }
+    ));
+
+
+  }
+
   priceNeedsRefresh()
   {
     this.priceChange$.next(true);

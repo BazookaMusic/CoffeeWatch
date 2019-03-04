@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Coffee } from '../coffee';
-import { CoffeeshopsService } from '../coffeeshops.service';
+import { CoffeeshopsService, average } from '../coffeeshops.service';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { flatMap } from 'rxjs/operators';
 import { Review } from '../review';
@@ -37,6 +37,7 @@ export class CoffeeReviewsComponent implements OnInit {
   numOfReviews: number;
   counters: number[];
   reviewPercentages: string[];
+  avgRating: number;
 
   public newReviewControl: FormControl;
 
@@ -48,7 +49,7 @@ export class CoffeeReviewsComponent implements OnInit {
 
     this.coffeeShopsService.getSelectedCoffee().pipe(flatMap(id => this.coffeeShopsService.getCoffee(id))).subscribe(coffee => 
       {
-        if(coffee !== undefined) this.coffee = coffee;
+        if (coffee !== undefined) this.coffee = coffee;
       });
     this.coffeeShopsService.getSelectedCoffee().pipe(flatMap(id => this.coffeeShopsService.getCoffeeReviews(id))).subscribe(reviews => 
       {
@@ -56,6 +57,8 @@ export class CoffeeReviewsComponent implements OnInit {
         {
           this.reviews = reviews;
           this.setReviewsStatistics();
+          this.avgRating = +average(this.reviews.map(review => review.rating)).toFixed(2);
+          this.numOfReviews = this.reviews.length;
         }
       });
   }
