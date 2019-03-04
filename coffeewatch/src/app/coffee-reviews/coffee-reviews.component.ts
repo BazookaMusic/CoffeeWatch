@@ -51,6 +51,20 @@ export class CoffeeReviewsComponent implements OnInit {
       {
         if (coffee !== undefined) this.coffee = coffee;
       });
+    this.refresh();
+
+    this.coffeeShopsService.reviewChange$.subscribe(change =>
+      {
+        if (change)
+        {
+          this.refresh();
+        }
+      });
+  }
+
+  refresh()
+  {
+    
     this.coffeeShopsService.getSelectedCoffee().pipe(flatMap(id => this.coffeeShopsService.getCoffeeReviews(id))).subscribe(reviews => 
       {
         if (reviews !== undefined)

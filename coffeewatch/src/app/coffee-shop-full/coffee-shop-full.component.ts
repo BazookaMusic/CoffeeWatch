@@ -8,6 +8,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { UserService } from '../user.service';
 import { map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { Coffee } from '../coffee';
 
 @Component({
   selector: 'app-coffee-shop-full',
@@ -52,6 +53,14 @@ export class CoffeeShopFullComponent implements OnInit {
 
     this.getCoffeeShop();
 
+    this.coffeeShopsService.shopChange$.subscribe(changed =>
+      {
+        if (changed)
+        {
+          this.getCoffeeShop();
+        }
+      })
+
     this.coffeeShopsService.priceChange$.subscribe(changed => {
       if (changed) {
         this.coffeeShopsService.updateCoffeeShopPrices(this.coffeeShop);
@@ -61,22 +70,47 @@ export class CoffeeShopFullComponent implements OnInit {
              }
           });
       }
-  });
+    });
+
+    this.coffeeShopsService.reviewChange$.subscribe(id_changed =>
+      {
+        if (id_changed !== undefined)
+        {
+          if (id_changed === this.coffeeShop.coffees[this.selectedCoffee].id)
+          {
+            this.updateReviews(this.coffeeShop.coffees[this.selectedCoffee]);
+          }
+          else
+          {
+            for (let coffee of this.coffeeShop.coffees)
+            {
+              if (coffee.id === id_changed)
+              {
+                this.updateReviews(coffee);
+              }
+            }
+          }
+        }
+      })
+
+
 
   }
 
   refresh()
   {
     this.coffeeShopsService.updateCoffeeShopPrices(this.coffeeShop);
-    this.coffeeShop.coffees.forEach(coffee =>
-      {
-        this.coffeeShopsService.getCoffeeReviews(coffee.id).
-        subscribe(reviews => 
+    this.coffeeShop.coffees.forEach(coffee => this.updateReviews(coffee));
+  }
+  
+  updateReviews(coffee: Coffee)
+  {
+    this.coffeeShopsService.getCoffeeReviews(coffee.id).
+        subscribe(reviews =>
           {
             coffee.extraData.rating = +average(reviews.map(review => review.rating)).toFixed(2);
             coffee.extraData.numOfReviews = reviews.length;
           });
-      });
   }
 
   reset() {
@@ -120,7 +154,10 @@ export class CoffeeShopFullComponent implements OnInit {
 
         this.coffeeShopsService
         .deleteCoffee(this.coffeeShop.coffees[this.selectedCoffee].id)
-        .subscribe(res => console.log(res));
+        .subscribe(res =>
+          {
+            this.coffeeShopsService.coffeeShopNeedsRefresh();
+          });
 
       }
     } else {

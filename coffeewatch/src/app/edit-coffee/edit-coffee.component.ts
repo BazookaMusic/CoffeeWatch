@@ -61,7 +61,6 @@ export class EditCoffeeComponent implements OnInit
     }
   }
 
-  
   private onCoffeeSubmit()
   {
     const form = this.coffeeForm.controls;
@@ -73,7 +72,12 @@ export class EditCoffeeComponent implements OnInit
       {
         alert(err);
         return of(undefined);
-      })).subscribe(price => console.log(price));
+      })).subscribe(price => 
+        {
+          if (price !== undefined) {
+            this.coffeeShopsService.coffeeShopNeedsRefresh();
+            }
+        });
   }
 
   ngOnInit() {
