@@ -1,0 +1,31 @@
+.table td
+{
+    vertical-align: middle;
+    border: none;
+    padding: 0.3rem;
+}
+
+.table
+{
+    margin-bottom: 0;
+}
+
+.coffeeShopName
+{
+    font-size: 1.6vw;
+    display: inline-flex;
+    align-items: center;
+    padding-left: 0;
+}
+
+.coffeeShopDetails
+{
+    margin-top: 0.5rem;
+    font-size: 0.8vw;
+}
+
+.coffeeShopDetailsIcons
+{
+    text-align:center;
+    padding: 0.4rem 0 !important;
+}

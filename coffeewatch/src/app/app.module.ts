@@ -44,6 +44,8 @@ import { HomePageFirstSearchComponent } from './home-page-first-search/home-page
 import { HomePageSearchResultsComponent } from './home-page-search-results/home-page-search-results.component';
 import { NewCoffeeshopComponent } from './new-coffeeshop/new-coffeeshop.component';
 import { EditCoffeeComponent } from './edit-coffee/edit-coffee.component';
+import { SearchCoffeeShopComponent } from './search-coffee-shop/search-coffee-shop.component';
+import { CoffeeShopTinyComponent } from './coffee-shop-tiny/coffee-shop-tiny.component';
 
 
 
@@ -71,6 +73,8 @@ import { EditCoffeeComponent } from './edit-coffee/edit-coffee.component';
     HomePageSearchResultsComponent,
     NewCoffeeshopComponent,
     EditCoffeeComponent,
+    SearchCoffeeShopComponent,
+    CoffeeShopTinyComponent,
   ],
   imports: [
     NgbModule,

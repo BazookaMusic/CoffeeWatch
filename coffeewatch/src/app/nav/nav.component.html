@@ -3,12 +3,12 @@
     <span><img src="../assets/logo.png" class="img-fluid siteLogo" /></span><span class="siteTitle fancyFont">Coffee Watch</span>
   </a>
   <ul class="navbar-nav flex-row ml-md-auto d-md-flex">
-<li *ngIf="url != '/newCoffeeShop'" class="nav-item">
-     <a class="nav-item nav-link mr-md-2" ngbPopover="Προσθήκη Καφετέριας" placement="bottom" triggers="mouseenter:mouseleave" (click)="createCoffeeShop()"><img class="img-fluid icon" src="../assets/newCoffeeShop.png" /></a>
-</li>
-<li *ngIf="url === '/newCoffeeShop'" class="nav-item">
-  <a class="nav-item nav-link mr-md-2" ngbPopover="Αναζήτηση καφετέριας" placement="bottom" triggers="mouseenter:mouseleave"><img class="img-fluid icon" src="../assets/searchCoffeeShop.png" /></a>
-</li>
+  <li *ngIf="url != '/newCoffeeShop'" class="nav-item">
+       <a class="nav-item nav-link mr-md-2" ngbPopover="Προσθήκη Καφετέριας" placement="bottom" triggers="mouseenter:mouseleave" (click)="createCoffeeShop()"><img class="img-fluid icon" src="../assets/newCoffeeShop.png" /></a>
+  </li>
+  <li *ngIf="url === '/newCoffeeShop'" class="nav-item">
+    <a class="nav-item nav-link mr-md-2" ngbPopover="Αναζήτηση καφετέριας" placement="bottom" triggers="mouseenter:mouseleave"><img class="img-fluid icon" src="../assets/searchCoffeeShop.png" /></a>
+  </li>
     <li ngbDropdown class="nav-item loginMenu">
       <a class="nav-item nav-link mr-md-2" ngbPopover="Έλεγχος λογαριασμού" placement="bottom" triggers="mouseenter:mouseleave" ngbDropdownToggle (click)="updateLoginStatus()"  data-toggle="dropdown" id="loginDropDown" aria-haspopup="true"><img src="../assets/loginIcon.png" class="img-fluid icon" /></a>
       <div ngbDropdownMenu  class="dropdown-menu-right loginDropDown" aria-labelledby="loginDropDown">

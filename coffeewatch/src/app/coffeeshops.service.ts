@@ -217,7 +217,6 @@ export class CoffeeshopsService {
           date: `${year}-${month}-${day}`, productName: coffee.name, shopName: shopName };
         return this.submitPrice(price);
       }));
-
   }
 
   editCoffee(coffeeIn: APICoffee, shopId: number, shopName: string) {
@@ -233,6 +232,17 @@ export class CoffeeshopsService {
           date: `${year}-${month}-${day}`, productName: coffee.name, shopName: shopName };
         return this.submitPrice(price);
       }));
+  }
+
+  getFilteredCoffeeShops(name_like: string): Observable<CoffeeShop[]>
+  {
+    if (name_like !== undefined)
+    {
+      const params = new HttpParams().set('name_like', name_like);
+      const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), params: params };
+      return this.http.get<CoffeeShop[]>(this.baseAPIURL + 'shops', httpOptions);
+    }
+    else { return of(undefined); }
   }
 
   getCoffee(id: number): Observable<Coffee> {

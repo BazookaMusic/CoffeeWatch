@@ -19,12 +19,21 @@ export class NavComponent implements OnInit
   createCoffeeShop()
   {
     if (this.userService.isloggedIN()) {
-      this.router.navigate(['/newCoffeeShop/']);
+      this.router.navigate(['/newCoffeeShop']);
     }
     else {
       this.router.navigate(['/login']);
     }
-  }  
+  }
+
+  searchCoffeeShop() {
+    if (this.userService.isloggedIN()) {
+      this.router.navigate(['/searchCoffeeShop']);
+    }
+    else {
+      this.router.navigate(['/login']);
+    }
+  }
  
   ngOnInit() {
     console.log('NAV: checking login status');
