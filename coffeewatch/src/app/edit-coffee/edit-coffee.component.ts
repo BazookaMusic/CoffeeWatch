@@ -7,7 +7,7 @@ import { CoffeeshopsService } from '../coffeeshops.service';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 
-import { coffeeCategories, APICoffee } from '../coffee';
+import { coffeeCategories, APICoffee, Coffee } from '../coffee';
 import { flatMap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { CoffeeShop } from '../coffee-shop';
@@ -22,6 +22,7 @@ export class EditCoffeeComponent implements OnInit
   closeResult: string;
   coffeeForm: FormGroup;
   price: number;
+  coffee: Coffee;
   
   @Input() coffeeShop: CoffeeShop;
   MAXLEN = 1000;
@@ -60,19 +61,23 @@ export class EditCoffeeComponent implements OnInit
     }
   }
 
-  
   private onCoffeeSubmit()
   {
     const form = this.coffeeForm.controls;
-    const coffee: APICoffee = {id: undefined, name: form.name.value,
+    const coffee: APICoffee = {id: this.coffee.id, name: form.name.value,
       category: form.categories.value, withdrawn: false, shopid: this.coffeeShop.id,
       description: form.description.value, price: form.price.value, tags: [],
-      extraData: {rating: 0, numOfReviews: 0}};
+      extraData: {rating: this.coffee.extraData.rating, numOfReviews: this.coffee.extraData.numOfReviews}};
     this.coffeeShopsService.editCoffee(coffee, this.coffeeShop.id, this.coffeeShop.name).pipe(catchError(err =>
       {
         alert(err);
         return of(undefined);
-      })).subscribe(price => console.log(price));
+      })).subscribe(price => 
+        {
+          if (price !== undefined) {
+            this.coffeeShopsService.coffeeShopNeedsRefresh();
+            }
+        });
   }
 
   ngOnInit() {
@@ -86,6 +91,7 @@ export class EditCoffeeComponent implements OnInit
     this.coffeeShopsService.getSelectedCoffee().pipe(flatMap(id => this.coffeeShopsService.getCoffee(id))).subscribe(coffee => {
       if (coffee !== undefined) 
       {
+        this.coffee = coffee;
         this.coffeeForm.controls.name.setValue(coffee.name);
         this.coffeeForm.controls.categories.setValue(coffee.category);
         this.coffeeForm.controls.price.setValue(coffee.price);

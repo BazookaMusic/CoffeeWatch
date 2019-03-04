@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class NavComponent implements OnInit
 {
   loggedIN = undefined;
+  url: string;
 
   constructor(
     private userService: UserService,
@@ -36,6 +37,8 @@ export class NavComponent implements OnInit
  
   ngOnInit() {
     console.log('NAV: checking login status');
+    this.url = this.router.url;
+
     this.updateLoginStatus();
   }
 

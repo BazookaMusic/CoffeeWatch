@@ -65,11 +65,11 @@ export class NewReviewModalComponent implements OnInit {
        d + '-' + m + '-' + y,
         0, 0);
     console.log(this.review);
-    this.coffeeShopsService.submitReview(this.review).subscribe(review => 
+    this.coffeeShopsService.submitReview(this.review).subscribe(review =>
       {
         if (review !== undefined)
         {
-          location.reload();
+          this.coffeeShopsService.reviewsNeedRefresh(this.selectedId);
         }
       }
       );

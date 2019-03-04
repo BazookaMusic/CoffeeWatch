@@ -37,9 +37,11 @@ def geogen(lat,lng,meters):
     return (lat+y1,lng+x1)
 
 def daterange(n):
-    dates = [fakegr.date_between_dates(datetime.date(2018,1,1), datetime.date(2019,12,31)) for i in range(0,n)]
+    dates = [fakegr.date_between_dates(datetime.date(2018,1,1), datetime.date(2019,3,3)) for i in range(0,n)]
     dates.sort()
     return dates
+
+
 def priceGen(n,base,delta=0.4):
     prices = []
     for i in range(0,n):

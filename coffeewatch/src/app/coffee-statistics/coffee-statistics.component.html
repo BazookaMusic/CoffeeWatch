@@ -33,6 +33,9 @@
           </div>
       </div>        
     </ng-template>
+    <ng-template  #tooltipTemplate let-model="model">
+      <div  style="color:#ffffff!important; ;">{{model.value}}€</div>        
+    </ng-template>
       </ngx-charts-line-chart>
   </div>
 </div>

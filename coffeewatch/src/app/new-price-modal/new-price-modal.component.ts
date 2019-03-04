@@ -74,6 +74,8 @@ export class NewPriceModalComponent implements OnInit {
      productId: this.coffee.id,
      productName: this.coffee.name, shopName: this.coffeeShop.name};
 
+     console.log(newPrice);
+
     this.coffeeShopsService.submitPrice(newPrice).pipe(catchError(err => {
         alert(err.message);
         return of(undefined);

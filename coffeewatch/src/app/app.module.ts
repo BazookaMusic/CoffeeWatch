@@ -99,7 +99,7 @@ import { CoffeeShopTinyComponent } from './coffee-shop-tiny/coffee-shop-tiny.com
     }),
     NgxChartsModule
   ],
-  providers: [,
+  providers: [
     HttpClientModule, JwtHelperService],
   bootstrap: [AppComponent]
 })
