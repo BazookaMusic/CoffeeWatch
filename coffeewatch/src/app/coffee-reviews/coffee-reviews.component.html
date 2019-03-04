@@ -9,7 +9,7 @@
           <app-new-review-modal></app-new-review-modal>
         </div>
       </div>
-      <div *ngIf="reviewPercentages !== undefined && reviewPercentages[4] !== undefined">
+      <div *ngIf="reviewPercentages !== undefined && reviewPercentages[4] !== undefined && numOfReviews > 0">
         <div class="row">
           <div class="col-sm-2">5 αστέρια</div>
           <div class="col-sm-9"><div class="progress"><div class="progress-bar ratingPercentage" role="progressbar" [style.width]='reviewPercentages[4]' aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div></div>
