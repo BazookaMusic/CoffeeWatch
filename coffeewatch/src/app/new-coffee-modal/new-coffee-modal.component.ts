@@ -60,18 +60,21 @@ export class NewCoffeeModalComponent implements OnInit {
     }
   }
 
-  private onCoffeeSubmit()
-  {
+  private onCoffeeSubmit() {
     const form = this.coffeeForm.controls;
     const coffee: APICoffee = {id: undefined, name: form.name.value,
       category: form.categories.value, withdrawn: false, shopid: this.coffeeShop.id,
       description: form.description.value, price: form.price.value, tags: [],
       extraData: {rating: 0, numOfReviews: 0}};
-    this.coffeeShopsService.submitCoffee(coffee, this.coffeeShop.id, this.coffeeShop.name).pipe(catchError(err =>
-      {
+    this.coffeeShopsService.submitCoffee(coffee, this.coffeeShop.id, this.coffeeShop.name).pipe(catchError(err => {
         alert(err);
         return of(undefined);
-      })).subscribe(price => console.log(price));
+      })).subscribe(price => {
+          if (price !== undefined) {
+          this.coffeeShopsService.coffeeShopNeedsRefresh();
+          }
+        }
+        );
   }
 
   ngOnInit() {

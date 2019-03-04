@@ -27,6 +27,7 @@ export class Coffee {
     category: string;
     tags: string[];
     name: string;
+    shopid: number;
 
     description: string;
 

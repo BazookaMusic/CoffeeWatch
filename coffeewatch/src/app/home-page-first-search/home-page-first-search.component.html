@@ -1,5 +1,5 @@
 <div class="row selectCoffeeComponent">
-  <div class="row title"><h1>1. Επίλεξε έναν καφέ</h1></div>
+  <div class="row title"><h1>Επίλεξτε έναν καφέ</h1></div>
   <div class="grid">
     <span class="cell">
       <input type="radio" name="coffeesGroup" id="cat0" checked (click)='select(0)'/>
@@ -39,8 +39,8 @@
     </span>
   </div>
 </div>
-<div class="row title justify-content-center"><h1>2. Επίλεξε τοποθεσία</h1></div>
+<div class="row title justify-content-center"><h1>Επίλεξτε τοποθεσία</h1></div>
 <div class="row appSearchBar justify-content-center">
-  <input type="text" class="form-control blackBorder" placeholder="Αναζήτηση για..." #search [formControl]="searchControl">
+  <input type="text" class="form-control blackBorder" placeholder="Σε ποιά τοποθεσία; πχ. Μοναστηράκι" #search [formControl]="searchControl">
   <a class="findMyLocation" ngbPopover="Εύρεση της τοποθεσίας μου" triggers="mouseenter:mouseleave" (click)="getLocation()"><img class="img-fluid findMyLocationIcon" src="../assets/findMyLocation.png" /></a>
 </div>

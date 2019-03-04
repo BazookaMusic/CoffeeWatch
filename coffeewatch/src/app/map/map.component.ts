@@ -67,7 +67,10 @@ export class MapComponent implements OnInit {
         if (id !== undefined) {
           const selCoffeeShop = this.coffeeShopsService.coffeeShopDict[id];
           this.centerMap(selCoffeeShop.lat, selCoffeeShop.lng);
-          this.zoomLevel = 17;
+          this.zoomLevel = 0;
+          setTimeout(() => {
+           this.zoomLevel = 17;
+          }, 50);
         } else {
           this.centerMap(this.userlat, this.userlng);
           this.zoomLevel = 13;
@@ -76,8 +79,8 @@ export class MapComponent implements OnInit {
   }
 
   centerMap(lat: number, lng: number) {
-    this.centerlat = lat;
-    this.centerlng = lng;
+    this.centerlat = 0;
+    this.centerlng = 0;
     setTimeout(() => {
       this.centerlat = lat;
       this.centerlng = lng;
@@ -86,7 +89,11 @@ export class MapComponent implements OnInit {
 
   markerClicked(marker) {
     this.centerMap(marker.lat, marker.lng);
-    this.zoomLevel = 18;
+    this.zoomLevel = 0;
+    for (let i=0; i<3; i++)
+      setTimeout(() => {
+        this.zoomLevel = 17;
+      }, 50);
     this.coffeeShopsService.selectedCoffeeShop$.next(marker.id);
   }
 

@@ -163,11 +163,15 @@ export class NewCoffeeshopComponent implements OnInit {
   }
 
   centerMap(lat: number, lng: number) {
-    this.centerlat = lat;
-    this.centerlng = lng;
+    this.centerlat = 0;
+    this.centerlng = 0;
+    this.shoplat = lat;
+    this.shoplng = lng;
     setTimeout(() => {
       this.centerlat = lat;
       this.centerlng = lng;
+      this.shoplat = lat;
+      this.shoplng = lng;
     }, 50);
   }
 

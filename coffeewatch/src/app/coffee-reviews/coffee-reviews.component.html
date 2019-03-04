@@ -3,7 +3,7 @@
     <div class="col-sm-12">
       <div class="row">
         <div *ngIf="coffee !== undefined" class="col-sm-8">
-          <star-rating labelPosition="right" staticColor="default" size="large" [labelText]="coffee.extraData.rating + ' (' + numOfReviews + ' κριτικές)'" [rating]="coffee.extraData.rating" [showHalfStars]="true" [readOnly]="true"></star-rating>
+          <star-rating labelPosition="right" staticColor="default" size="large" [labelText]="avgRating + ' (' + numOfReviews + ' κριτικές)'" [rating]="avgRating" [showHalfStars]="true" [readOnly]="true"></star-rating>
         </div>
         <div class="col-sm-4 text-right">
           <app-new-review-modal></app-new-review-modal>
