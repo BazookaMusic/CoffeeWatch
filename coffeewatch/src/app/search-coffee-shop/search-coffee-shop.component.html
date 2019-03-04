@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="row appSearchBar">
+    <form class="searchForm" [formGroup]="searchGroup"><input class="form-control blackBorder" type="text" formControlName="searchCoffeeShops" minlength="0" placeholder="Αναζήτηση καφετέριας"/></form>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <div [@simpleFadeAnimation]="'in'" *ngIf="coffeeShops != undefined" class="row coffeeShopListTitleRow">
+    <h2 class="coffeeShopListTitle fancyFont">Καφετέριες</h2>
+</div>
+<hr [@simpleFadeAnimation]="'in'" *ngIf="coffeeShops != undefined" />
+<div [@simpleFadeAnimation]="'in'" *ngIf="coffeeShops != undefined" class="">
+  <ul class="scrollable">
+    <li *ngFor="let coffeeShopItem of filteredCoffeeShops; trackBy: trackByFn" (click)="onClickCoffeeShop(coffeeShopItem.id)" 
+      [ngClass]="'shadow-sm rounded contentBG ' + (selectedCoffeeShop != undefined && selectedCoffeeShop === coffeeShopItem.id ? 'csClicked': 'csHover')">
+      <app-coffee-shop-tiny [coffeeShop]="coffeeShopItem"></app-coffee-shop-tiny>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class="col-sm-6">
+    <div class="row">
+      <div class="col-sm-12">
+        <app-map></app-map>
+      </div>
+    </div>
+  </div>
+</div>

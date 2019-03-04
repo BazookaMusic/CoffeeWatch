@@ -1,0 +1,31 @@
+.appSearchBar
+{
+    margin: 2.5vh auto 3.5vh;
+    width: 100%;
+}
+
+.searchForm
+{
+    width: 100%;
+    text-align: center;
+}
+
+.form-control
+{
+    display: inline-block;
+    width: 60%;
+    height: 4vh;
+}
+
+.searchButton
+{
+    background-color: #cd6133;
+    border-color: #cd6133;
+    color: white !important;
+    margin-left: 5px;
+}
+
+.blackBorder
+{
+    border-color: #343a40;
+}

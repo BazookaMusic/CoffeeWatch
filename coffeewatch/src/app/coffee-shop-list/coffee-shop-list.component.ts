@@ -6,7 +6,7 @@ import {Review} from '../review';
 import {CoffeeshopsService} from '../coffeeshops.service';
 import {transition, trigger, state, animate, style} from '@angular/animations';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-coffee-shop-list',
@@ -44,7 +44,6 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
       transition(':leave',
         animate(600, style({opacity: 0})))
     ]),
-
   ]
 })
 
@@ -55,7 +54,9 @@ export class CoffeeShopListComponent implements OnInit {
   clickedCoffeeShops: boolean[] = [];
   selectedCoffeeShop: number;
   searchGroup: FormGroup;
-  constructor(private coffeeShopsService: CoffeeshopsService) { }
+
+  constructor(private coffeeShopsService: CoffeeshopsService,
+    private router: Router) { }
 
   ngOnInit() {
     this.selectedCoffeeShop = undefined;
@@ -67,15 +68,14 @@ export class CoffeeShopListComponent implements OnInit {
         if (value.length === 0) {
           this.filteredCoffeeShops = this.coffeeShops;
         } else { this.filteredCoffeeShops = this.coffeeShops.filter(cs => cs.name.toLowerCase().startsWith(value.toLowerCase())); }
-      }
-      );
-
+      });
 
     this.getCoffeeShops();
     this.coffeeShopsService.getSelectedCoffeeShop().subscribe(id => this.selectedCoffeeShop = id);
   }
 
-  getCoffeeShops() {
+  getCoffeeShops()
+  {
     this.coffeeShopsService.getCoffeeShops().subscribe(coffeeShopsItem => {
         if (coffeeShopsItem !== undefined) {
           this.coffeeShops = coffeeShopsItem;
@@ -88,7 +88,8 @@ export class CoffeeShopListComponent implements OnInit {
       });
   }
 
-  refresh() {
+  refresh()
+  {
     this.coffeeShopsService.selectCoffeeShop(undefined);
     this.searchGroup.controls.searchBarCoffeeShops.setValue('');
   }

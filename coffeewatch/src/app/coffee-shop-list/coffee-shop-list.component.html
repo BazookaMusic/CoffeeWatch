@@ -1,8 +1,6 @@
 <div [@simpleFadeAnimation]="'in'" *ngIf="coffeeShops != undefined" class="row coffeeShopListTitleRow">
-    <h2 class="coffeeShopListTitle fancyFont">Κοντινές Καφετέριες</h2>
-    <form  [formGroup]="searchGroup">
-      <input class="coffeeShopListSearchbar" type="text" formControlName="searchBarCoffeeShops" minlength="0" placeholder="Όνομα Καφετέριας"/>
-    </form>
+    <h2 class="coffeeShopListTitle fancyFont">Κοντινές καφετέριες</h2>
+    <form [formGroup]="searchGroup"><input class="coffeeShopListSearchbar" type="text" formControlName="searchBarCoffeeShops" minlength="0" placeholder="Όνομα καφετέριας"/></form>
 </div>
 <hr [@simpleFadeAnimation]="'in'" *ngIf="coffeeShops != undefined" />
 <div [@simpleFadeAnimation]="'in'" *ngIf="coffeeShops != undefined" class="">

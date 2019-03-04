@@ -11,12 +11,14 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { RegisterScreenComponent } from './register-screen/register-screen.component';
 import { NewCoffeeshopComponent } from './new-coffeeshop/new-coffeeshop.component';
+import { SearchCoffeeShopComponent } from './search-coffee-shop/search-coffee-shop.component';
 
 const routes: Routes = 
 [
     { path: 'home', component: HomePageComponent},
     {path: 'login', component: LoginScreenComponent},
     {path: 'register', component: RegisterScreenComponent},
+    { path: 'searchCoffeeShop', component: SearchCoffeeShopComponent },
     { path: 'newCoffeeShop', component: NewCoffeeshopComponent },
     { path: 'editCoffeeShop/:coffeeShopID', component: NewCoffeeshopComponent },
     { path: 'coffeeShop/:coffeeShopID', component: CoffeeShopFullComponent,

@@ -3,8 +3,8 @@
     <span><img src="../assets/logo.png" class="img-fluid siteLogo" /></span><span class="siteTitle fancyFont">Coffee Watch</span>
   </a>
   <ul class="navbar-nav flex-row ml-md-auto d-md-flex">
-    <li class="nav-item">
-      <a class="nav-item nav-link mr-md-2" ngbPopover="Αναζήτηση καφετέριας" placement="bottom" triggers="mouseenter:mouseleave"><img class="img-fluid icon" src="../assets/searchCoffeeShop.png" /></a>
+    <li *ngIf="router.url != '/searchCoffeeShop'" class="nav-item">
+      <a class="nav-item nav-link mr-md-2" ngbPopover="Αναζήτηση καφετέριας" placement="bottom" triggers="mouseenter:mouseleave" (click)="searchCoffeeShop()"><img class="img-fluid icon" src="../assets/searchCoffeeShop.png" /></a>
     </li>
     <li *ngIf="router.url != '/newCoffeeShop'" class="nav-item">
       <a class="nav-item nav-link mr-md-2" ngbPopover="Προσθήκη καφετέριας" placement="bottom" triggers="mouseenter:mouseleave" (click)="createCoffeeShop()"><img class="img-fluid icon" src="../assets/newCoffeeShop.png" /></a>
