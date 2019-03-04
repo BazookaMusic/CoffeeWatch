@@ -18,12 +18,12 @@ import { transition, trigger, state, animate, style } from '@angular/animations'
       // fade in when created. this could also be written as transition('void => *')
       transition(':enter', [
         style({ opacity: 0 }),
-        animate(1000)
+        animate(400)
       ]),
 
       // fade out when destroyed. this could also be written as transition('void => *')
       transition(':leave',
-        animate(600, style({ opacity: 0 })))
+        animate(400, style({ opacity: 0 })))
     ]),
     trigger('fastFade', [
 
@@ -33,20 +33,25 @@ import { transition, trigger, state, animate, style } from '@angular/animations'
       // fade in when created. this could also be written as transition('void => *')
       transition(':enter', [
         style({ opacity: 0 }),
-        animate(600)
+        animate(400)
       ]),
 
       // fade out when destroyed. this could also be written as transition('void => *')
       transition(':leave',
-        animate(600, style({ opacity: 0 })))
+        animate(400, style({ opacity: 0 })))
     ]),
   ]
 })
 
 export class SearchCoffeeShopComponent implements OnInit
 {
+  centerlat: number;
+  centerlng: number;
+  zoomLevel: number;
+  shoplat: number;
+  shoplng: number;
+
   searchGroup: FormGroup;
-  coffeeShops: CoffeeShop[];
   filteredCoffeeShops: CoffeeShop[] = [];
   selectedCoffeeShop: number;
 
@@ -54,46 +59,76 @@ export class SearchCoffeeShopComponent implements OnInit
 
   ngOnInit()
   {
+    this.shoplat = undefined;
+    this.shoplng = undefined;
+    this.zoomLevel = 13;
+    this.centerlat = 37.982038;
+    this.centerlng = 23.730271;
+
     this.searchGroup = new FormGroup({
       searchCoffeeShops: new FormControl('', [Validators.minLength(0)])
     });
 
     this.searchGroup.controls.searchCoffeeShops.valueChanges.subscribe(value => {
-      if (value.length === 0) {
-        this.filteredCoffeeShops = this.coffeeShops;
+      if (value.length === 0)
+      {
+        this.filteredCoffeeShops = [];
       }
       else
       {
-        this.filteredCoffeeShops = this.coffeeShops.filter(cs => cs.name.toLowerCase().startsWith(value.toLowerCase()));
-      }
-    });
-  }
-
-  getCoffeeShops()
-  {
-    this.coffeeShopsService.getCoffeeShops().subscribe(coffeeShopsItem => {
-      if (coffeeShopsItem !== undefined) {
-        this.coffeeShops = coffeeShopsItem;
-
-        if (this.filteredCoffeeShops.length === 0) {
-          this.filteredCoffeeShops = this.coffeeShops.slice(0, this.coffeeShops.length);
-        }
-        this.refresh();
+        this.coffeeShopsService.getFilteredCoffeeShops(value).subscribe(coffeeShops =>
+          {
+            this.filteredCoffeeShops = coffeeShops;
+            this.refresh();
+          });
       }
     });
   }
 
   refresh()
   {
-    this.coffeeShopsService.selectCoffeeShop(undefined);
-    this.searchGroup.controls.searchCoffeeShops.setValue('');
+    this.selectedCoffeeShop = undefined;
+
+    this.shoplat = undefined;
+    this.shoplng = undefined;
+    this.zoomMap(false);
   }
 
-  onClickCoffeeShop(coffeeShopID: number) {
-    if (this.selectedCoffeeShop !== undefined && coffeeShopID === this.selectedCoffeeShop) {
-      this.coffeeShopsService.selectCoffeeShop(undefined);
-    } else {
-      this.coffeeShopsService.selectCoffeeShop(coffeeShopID);
+  centerMap(lat: number, lng: number) {
+    this.centerlat = 0;
+    this.centerlng = 0;
+    setTimeout(() => {
+      this.centerlat = lat;
+      this.centerlng = lng;
+    }, 50);
+  }
+
+  zoomMap(zoom: boolean) {
+    this.zoomLevel = 0;
+    setTimeout(() => {
+      if(zoom) this.zoomLevel = 18;
+      else this.zoomLevel = 13;
+    }, 50);
+  }
+
+  onClickCoffeeShop(coffeeShop: CoffeeShop)
+  {
+    if (this.selectedCoffeeShop !== undefined && coffeeShop.id === this.selectedCoffeeShop)
+    {
+      this.selectedCoffeeShop = undefined;
+
+      this.shoplat = undefined;
+      this.shoplng = undefined;
+      this.zoomMap(false);
+    }
+    else
+    {
+      this.selectedCoffeeShop = coffeeShop.id;
+
+      this.shoplat = coffeeShop.lat;
+      this.shoplng = coffeeShop.lng;
+      this.centerMap(coffeeShop.lat, coffeeShop.lng);
+      this.zoomMap(true);
     }
   }
 
