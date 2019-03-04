@@ -30,7 +30,7 @@
       </div>
       <div class="col-sm-7">
         <agm-map [latitude]="centerlat" [longitude]="centerlng" [zoom]="zoomLevel">
-          <agm-marker *ngIf="true" [iconUrl]="'../assets/images/selectedLocation.png'" [latitude]="centerlat" [longitude]="centerlng"></agm-marker>
+          <agm-marker *ngIf="shoplat !== undefined && shoplng !== undefined" [iconUrl]="'../assets/images/selectedLocation.png'" [latitude]="shoplat" [longitude]="shoplng"></agm-marker>
         </agm-map>
       </div>
     </div>
