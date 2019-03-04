@@ -63,8 +63,7 @@ h4
 
 .customCol
 {
-    flex: 0 0 22%;
-    max-width: 22%;
+    margin: 0.3vw;
 }
 
 .clickableLabel

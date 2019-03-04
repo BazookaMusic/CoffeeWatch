@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --prod --ssl true --ssl-key C:\\Users\\Sotiris\\Documents\\projects\\teamnameplaceholder\\coffeewatch\\ssl\\localhost.key  --ssl-cert C:\\Users\\Sotiris\\Documents\\projects\\teamnameplaceholder\\coffeewatch\\ssl\\localhost.crt",
+    "start": "ng serve --prod --ssl true --ssl-key /Users/john/Documents/GitHub/teamnameplaceholder/coffeewatch/ssl/localhost.key  --ssl-cert /Users/john/Documents/GitHub/teamnameplaceholder/coffeewatch/ssl/localhost.crt",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

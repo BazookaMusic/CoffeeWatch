@@ -3,6 +3,9 @@
     <form [formGroup]="searchGroup"><input class="coffeeShopListSearchbar" type="text" formControlName="searchBarCoffeeShops" minlength="0" placeholder="Όνομα καφετέριας"/></form>
 </div>
 <hr [@simpleFadeAnimation]="'in'" *ngIf="coffeeShops != undefined" />
+<div *ngIf="filteredCoffeeShops.length === 0" [@simpleFadeAnimation]="'in'">
+  <span class="noCoffeeShops">Δε βρέθηκαν καφετέριες</span>
+</div>
 <div [@simpleFadeAnimation]="'in'" *ngIf="coffeeShops != undefined" class="">
   <ul class="scrollable">
     <li *ngFor="let coffeeShopItem of filteredCoffeeShops; trackBy: trackByFn" (click)="onClickCoffeeShop(coffeeShopItem.id)" 
