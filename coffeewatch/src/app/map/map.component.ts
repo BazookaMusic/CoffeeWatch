@@ -88,7 +88,6 @@ export class MapComponent implements OnInit {
   }
 
   markerClicked(marker) {
-    console.log(marker.lat,marker.lng);
     this.centerMap(marker.lat, marker.lng);
     this.zoomLevel = 0;
     for (let i=0; i<3; i++)

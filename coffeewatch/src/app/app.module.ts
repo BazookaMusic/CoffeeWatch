@@ -95,7 +95,7 @@ import { EditCoffeeComponent } from './edit-coffee/edit-coffee.component';
     }),
     NgxChartsModule
   ],
-  providers: [,
+  providers: [
     HttpClientModule, JwtHelperService],
   bootstrap: [AppComponent]
 })
