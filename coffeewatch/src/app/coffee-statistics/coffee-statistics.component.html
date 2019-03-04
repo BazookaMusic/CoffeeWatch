@@ -1,7 +1,6 @@
-<!-- The chart type goes in here -->
 <div *ngIf="!emptyHistory" class="row">
-  <h2> Ιστορικό Τιμών </h2>
-  <div *ngIf="history !== undefined" style="display: inline-block" class="row">
+  <div class="row titleRow"><h2>Ιστορικό Τιμών</h2></div>
+  <div *ngIf="history !== undefined" class="row historyChart">
       <ngx-charts-line-chart
         [view]="view"
         [scheme]="colorScheme"
@@ -16,45 +15,22 @@
         [yAxisLabel]="yAxisLabel"
         [autoScale]="autoScale"
         [timeline]="timeline"
-        [xAxisTickFormatting]="dateTickFormatting"
-  >
-        
-
-    <ng-template #seriesTooltipTemplate let-model="model">
-        <div style="fill: #ffffff;" >
-          <div  style="color:#ffffff!important">
-            Τιμή:
-            {{model[0].value}}€
-
-            <br>
-            Ημερομηνία:
-            {{ model[0].name.toLocaleDateString('el-GR',options) }}
-    
-          </div>
-      </div>        
-    </ng-template>
-    <ng-template  #tooltipTemplate let-model="model">
-      <div  style="color:#ffffff!important; ;">{{model.value}}€</div>        
-    </ng-template>
+        [xAxisTickFormatting]="dateTickFormatting">
+        <ng-template #seriesTooltipTemplate let-model="model">
+            <div style="fill: #ffffff;" >
+              <div style="color:#ffffff!important">Τιμή:{{model[0].value}}€<br>Ημερομηνία:{{ model[0].name.toLocaleDateString('el-GR',options) }}</div>
+            </div>
+          </ng-template>
+          <ng-template  #tooltipTemplate let-model="model">
+            <div style="color:#ffffff!important; ;">{{model.value}}€</div>        
+          </ng-template>
       </ngx-charts-line-chart>
   </div>
 </div>
-
-<div class="row">
-    Στατιστικά τιμής
+<div class="row titleRow"><h2>Στατιστικά τιμής</h2></div>
+<div class="row statisticsRow">
+  <div *ngIf="avg !== undefined" class="col-sm-4">Μέση τιμή: {{avg.toFixed(2)}}€</div>
+  <div *ngIf="highest !== undefined" class="col-sm-4">Υψηλότερη τιμή: {{highest.toFixed(2)}}€</div>
+  <div *ngIf="lowest !== undefined" class="col-sm-4">Χαμηλότερη τιμή: {{lowest.toFixed(2)}}€</div>
 </div>
-<div class="row">
-  <div *ngIf="avg !== undefined" class="col-sm-4">
-    Μέση τιμή: {{avg.toFixed(2)}}€
-  </div>
-  <div *ngIf="highest !== undefined" class="col-sm-4">
-      Υψηλότερη τιμή: {{highest.toFixed(2)}}€
-  </div>
-  <div *ngIf="lowest !== undefined" class="col-sm-4">
-      Χαμηλότερη τιμή: {{lowest.toFixed(2)}}€
-  </div>
-
-</div>
-<div *ngIf="emptyHistory" class="row">
-    <div class="alert alert-danger" role="alert">Δεν υπάρχουν καταχωρημένες τιμές ώστε να υπολογιστούν στατιστικά</div>
-</div>
+<div *ngIf="emptyHistory" class="row"><div class="alert alert-danger" role="alert">Δεν υπάρχουν καταχωρημένες τιμές ώστε να υπολογιστούν στατιστικά</div></div>
