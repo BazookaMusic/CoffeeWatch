@@ -155,15 +155,15 @@ export class CoffeeshopsService {
   }
 
   ifFinishedBroadcast(counter)
-  {
+  {console.log(counter, this.coffeeShops.length);
     if (counter === this.coffeeShops.length) {
       this.sortCoffeeShops();
+      console.log(this.coffeeShops);
       this.CoffeeShops$.next(this.coffeeShops);
     }
 
   }
   updateCoffeeShops(lat: number , lng: number) {
-
 
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     const coffeeShopFilter = this.filterCoffeeShop(this.filters, lat, lng);
@@ -187,6 +187,8 @@ export class CoffeeshopsService {
             this.http.get<Coffee[]>(this.baseAPIURL + 'products', httpOptions1).subscribe(coffees => {
                   if (coffees.length === 0)
                   {
+                    coffeeShop.coffees = coffees;
+                    counter++;
                     this.ifFinishedBroadcast(counter);
                   }
                   coffees.forEach(coffee => coffee.price = this.coffeePrices[coffee.id]);
@@ -194,7 +196,7 @@ export class CoffeeshopsService {
                       coffee.extraData.rating = +average(reviews.map(aReview => aReview.rating)).toFixed(2);
                       counter_reviews++;
                       if (counter_reviews === coffees.length)
-                      {
+                      { console.log('asdf');
                         counter++;
                         coffeeShop.coffees = coffees.filter(coffeeFilter);
                         this.ifFinishedBroadcast(counter);
