@@ -35,7 +35,7 @@
                         <td class="coffees">{{coffeeItem.name}}</td>
                       </tr>
                       <tr>
-                        <td class="coffees"><star-rating labelPosition="right" staticColor="default" [labelText]="coffeeItem.extraData.rating + ' (' + coffeeItem.extraData.numOfReviews + ' κριτικές)'" [rating]="coffeeItem.extraData.rating" [showHalfStars]="true" [readOnly]="true"></star-rating></td>
+                        <td class="coffees"><star-rating labelPosition="right" staticColor="default" [labelText]="coffeeItem.extraData.rating + ' (' + coffeeItem.extraData.numOfReviews + ' κριτικές'" [rating]="coffeeItem.extraData.rating" [showHalfStars]="true" [readOnly]="true"></star-rating></td>
                       </tr>
                   </table>
                 </td>
@@ -61,7 +61,7 @@
               <a [ngClass]="'nav-link' + (activeTab === 'description' ? ' active' : '')" (click)="tabClicked('description')" [routerLink]="[{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'description' ] } }]">Περιγραφή</a>
             </li>
             <li class="nav-item">
-              <a [ngClass]="'nav-link' + (activeTab === 'reviews' ? ' active' : '')" (click)="tabClicked('reviews')" [routerLink]="[{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'reviews' ] } }]">Αξιολογήσεις</a>
+              <a [ngClass]="'nav-link' + (activeTab === 'reviews' ? ' active' : '')" (click)="tabClicked('reviews')" [routerLink]="[{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'reviews' ] } }]">Κριτικές</a>
             </li>
             <li class="nav-item">
               <a [ngClass]="'nav-link' + (activeTab === 'statistics' ? ' active' : '')" (click)="tabClicked('statistics')" [routerLink]="[{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'statistics' ] } }]">Στατιστικά</a>

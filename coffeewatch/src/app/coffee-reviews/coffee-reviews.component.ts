@@ -39,6 +39,8 @@ export class CoffeeReviewsComponent implements OnInit {
   reviewPercentages: string[];
   avgRating: number;
 
+  reviewsString: String;
+
   public newReviewControl: FormControl;
 
   constructor(private coffeeShopsService: CoffeeshopsService) { }
@@ -73,6 +75,9 @@ export class CoffeeReviewsComponent implements OnInit {
           this.setReviewsStatistics();
           this.avgRating = +average(this.reviews.map(review => review.rating)).toFixed(2);
           this.numOfReviews = this.reviews.length;
+
+          if (this.numOfReviews === 1) this.reviewsString = 'κριτική';
+          else this.reviewsString = 'κριτικές';
         }
       });
   }

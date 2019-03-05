@@ -23,14 +23,13 @@ import { Coffee } from '../coffee';
       // fade in when created. this could also be written as transition('void => *')
       transition(':enter', [
         style({opacity: 0}),
-        animate(600)
+        animate(400)
       ]),
 
       // fade out when destroyed. this could also be written as transition('void => *')
       transition(':leave',
-        animate(600, style({opacity: 0})))
+        animate(400, style({opacity: 0})))
     ]),
-
   ]
 })
 
@@ -92,9 +91,6 @@ export class CoffeeShopFullComponent implements OnInit {
           }
         }
       })
-
-
-
   }
 
   refresh()
