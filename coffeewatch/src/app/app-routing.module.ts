@@ -7,15 +7,17 @@ import { CoffeeReviewsComponent } from './coffee-reviews/coffee-reviews.componen
 import { CoffeeStatisticsComponent } from './coffee-statistics/coffee-statistics.component';
 import { CoffeeDescriptionComponent } from './coffee-description/coffee-description.component';
 import { CoffeeShopMediumComponent } from './coffee-shop-medium/coffee-shop-medium.component';
-import { HomePageComponent } from './home-page/home-page.component';
 import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { RegisterScreenComponent } from './register-screen/register-screen.component';
 import { NewCoffeeshopComponent } from './new-coffeeshop/new-coffeeshop.component';
 import { SearchCoffeeShopComponent } from './search-coffee-shop/search-coffee-shop.component';
+import { HomePageFirstSearchComponent } from './home-page-first-search/home-page-first-search.component';
+import { HomePageSearchResultsComponent } from './home-page-search-results/home-page-search-results.component';
 
 const routes: Routes = 
 [
-    { path: 'home', component: HomePageComponent},
+    { path: 'home', component: HomePageFirstSearchComponent},
+    { path: 'searchResults', component: HomePageSearchResultsComponent },
     {path: 'login', component: LoginScreenComponent},
     {path: 'register', component: RegisterScreenComponent},
     { path: 'searchCoffeeShop', component: SearchCoffeeShopComponent },

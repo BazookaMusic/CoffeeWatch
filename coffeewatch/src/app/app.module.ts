@@ -35,7 +35,6 @@ export function tokenGetter() {
 }
 
 import { FilterSearchModalComponent } from './filter-search-modal/filter-search-modal.component';
-import { HomePageComponent } from './home-page/home-page.component';
 import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterScreenComponent } from './register-screen/register-screen.component';
@@ -66,7 +65,6 @@ import { CoffeeShopTinyComponent } from './coffee-shop-tiny/coffee-shop-tiny.com
     SearchBarComponent,
     CoffeeShopMediumComponent,
     FilterSearchModalComponent,
-    HomePageComponent,
     LoginScreenComponent,
     RegisterScreenComponent,
     HomePageFirstSearchComponent,

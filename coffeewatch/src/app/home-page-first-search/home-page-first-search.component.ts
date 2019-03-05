@@ -6,6 +6,7 @@ import { CoffeeshopsService } from '../coffeeshops.service';
 
 import { CoffeeShop } from '../coffee-shop';
 import { coffeeCategories } from '../coffee';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page-first-search',
@@ -36,7 +37,8 @@ export class HomePageFirstSearchComponent implements OnInit
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private coffeeShopsService: CoffeeshopsService
+    private coffeeShopsService: CoffeeshopsService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -68,6 +70,10 @@ export class HomePageFirstSearchComponent implements OnInit
         this.coffeeShopsService.setSearchLocation(this.userlat, this.userlng);
         this.coffeeShopsService.updateCoffeeShops(this.userlat, this.userlng);
         this.coffeeShopsService.setIsUserLocationRequested(true);
+
+        setTimeout(() => {
+          this.router.navigateByUrl("/searchResults");
+        }, 500);
       });
     }
     else {
@@ -91,6 +97,10 @@ export class HomePageFirstSearchComponent implements OnInit
       this.coffeeShopsService.setSearchLocation(this.userlat, this.userlng);
       this.coffeeShopsService.updateCoffeeShops(this.userlat, this.userlng);
       this.coffeeShopsService.setIsUserLocationRequested(false);
+
+      setTimeout(() => {
+        this.router.navigateByUrl("/searchResults");
+      }, 500);
     });
   }
   
@@ -100,6 +110,5 @@ export class HomePageFirstSearchComponent implements OnInit
     const filters = this.coffeeShopsService.getFilters();
     filters.category = coffeeCategories[index];
     this.coffeeShopsService.setFilters(filters);
-    console.log(filters);
   }
 }

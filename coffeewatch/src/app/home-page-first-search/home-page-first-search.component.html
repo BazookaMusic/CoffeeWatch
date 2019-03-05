@@ -1,46 +1,48 @@
-<div class="row selectCoffeeComponent">
-  <div class="row title"><h1>Επίλεξτε έναν καφέ</h1></div>
-  <div class="grid">
-    <span class="cell">
-      <input type="radio" name="coffeesGroup" id="cat0" checked (click)='select(0)'/>
-      <label class="shadow-sm rounded contentBG" for="cat0"><img src="../assets/images/coffees/espresso.png"/></label>
-    </span>
-    <span class="cell">
-      <input type="radio" name="coffeesGroup" id="cat1" (click)='select(1)' />
-      <label class="shadow-sm rounded contentBG" for="cat1"><img src="../assets/images/coffees/freddo espresso.png" /></label>
-    </span>
-    <span class="cell">
-      <input type="radio" name="coffeesGroup" id="cat2" (click)='select(2)'/>
-      <label class="shadow-sm rounded contentBG" for="cat2"><img src="../assets/images/coffees/cappuccino.png" /></label>
-    </span>
-    <span class="cell">
-      <input type="radio" name="coffeesGroup" id="cat3" (click)='select(3)'/>
-      <label class="shadow-sm rounded contentBG" for="cat3"><img src="../assets/images/coffees/freddo cappuccino.png" /></label>
-    </span>
-    <span class="cell">
-      <input type="radio" name="coffeesGroup" id="cat4" (click)='select(4)'/>
-      <label class="shadow-sm rounded contentBG" for="cat4"><img src="../assets/images/coffees/latte.png" /></label>
-    </span>
-    <span class="cell">
-      <input type="radio" name="coffeesGroup" id="cat5" (click)='select(5)'/>
-      <label class="shadow-sm rounded contentBG" for="cat5"><img src="../assets/images/coffees/nes.png" /></label>
-    </span>
-    <span class="cell">
-      <input type="radio" name="coffeesGroup" id="cat6" (click)='select(6)'/>
-      <label class="shadow-sm rounded contentBG" for="cat6"><img src="../assets/images/coffees/frappe.png" /></label>
-    </span>
-    <span class="cell">
-      <input type="radio" name="coffeesGroup" id="cat7" (click)='select(7)'/>
-      <label class="shadow-sm rounded contentBG" for="cat7"><img src="../assets/images/coffees/filter.png" /></label>
-    </span>
-    <span class="cell">
-      <input type="radio" name="coffeesGroup" id="cat8" (click)='select(8)'/>
-      <label class="shadow-sm rounded contentBG" for="cat8"><img src="../assets/images/coffees/greek.png" /></label>
-    </span>
+<div class="container-fluid">
+  <div class="row selectCoffeeComponent">
+    <div class="row title"><h1>Επίλεξτε έναν καφέ</h1></div>
+    <div class="grid">
+      <span class="cell">
+        <input type="radio" name="coffeesGroup" id="cat0" checked (click)='select(0)'/>
+        <label class="shadow-sm rounded contentBG" for="cat0"><img src="../assets/images/coffees/espresso.png"/></label>
+      </span>
+      <span class="cell">
+        <input type="radio" name="coffeesGroup" id="cat1" (click)='select(1)' />
+        <label class="shadow-sm rounded contentBG" for="cat1"><img src="../assets/images/coffees/freddo espresso.png" /></label>
+      </span>
+      <span class="cell">
+        <input type="radio" name="coffeesGroup" id="cat2" (click)='select(2)'/>
+        <label class="shadow-sm rounded contentBG" for="cat2"><img src="../assets/images/coffees/cappuccino.png" /></label>
+      </span>
+      <span class="cell">
+        <input type="radio" name="coffeesGroup" id="cat3" (click)='select(3)'/>
+        <label class="shadow-sm rounded contentBG" for="cat3"><img src="../assets/images/coffees/freddo cappuccino.png" /></label>
+      </span>
+      <span class="cell">
+        <input type="radio" name="coffeesGroup" id="cat4" (click)='select(4)'/>
+        <label class="shadow-sm rounded contentBG" for="cat4"><img src="../assets/images/coffees/latte.png" /></label>
+      </span>
+      <span class="cell">
+        <input type="radio" name="coffeesGroup" id="cat5" (click)='select(5)'/>
+        <label class="shadow-sm rounded contentBG" for="cat5"><img src="../assets/images/coffees/nes.png" /></label>
+      </span>
+      <span class="cell">
+        <input type="radio" name="coffeesGroup" id="cat6" (click)='select(6)'/>
+        <label class="shadow-sm rounded contentBG" for="cat6"><img src="../assets/images/coffees/frappe.png" /></label>
+      </span>
+      <span class="cell">
+        <input type="radio" name="coffeesGroup" id="cat7" (click)='select(7)'/>
+        <label class="shadow-sm rounded contentBG" for="cat7"><img src="../assets/images/coffees/filter.png" /></label>
+      </span>
+      <span class="cell">
+        <input type="radio" name="coffeesGroup" id="cat8" (click)='select(8)'/>
+        <label class="shadow-sm rounded contentBG" for="cat8"><img src="../assets/images/coffees/greek.png" /></label>
+      </span>
+    </div>
   </div>
-</div>
-<div class="row title justify-content-center"><h1>Επίλεξτε τοποθεσία</h1></div>
-<div class="row appSearchBar justify-content-center">
-  <input type="text" class="form-control blackBorder" placeholder="Σε ποιά τοποθεσία; πχ. Μοναστηράκι" #search [formControl]="searchControl">
-  <a class="findMyLocation" ngbPopover="Εύρεση της τοποθεσίας μου" triggers="mouseenter:mouseleave" (click)="getLocation()"><img class="img-fluid findMyLocationIcon" src="../assets/findMyLocation.png" /></a>
+  <div class="row title justify-content-center"><h1>Επίλεξτε τοποθεσία</h1></div>
+  <div class="row appSearchBar justify-content-center">
+    <input type="text" class="form-control blackBorder" placeholder="Σε ποιά τοποθεσία; πχ. Μοναστηράκι" #search [formControl]="searchControl">
+    <a class="findMyLocation" ngbPopover="Εύρεση της τοποθεσίας μου" triggers="mouseenter:mouseleave" (click)="getLocation()"><img class="img-fluid findMyLocationIcon" src="../assets/findMyLocation.png" /></a>
+  </div>
 </div>

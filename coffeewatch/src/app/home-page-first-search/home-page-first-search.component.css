@@ -4,6 +4,11 @@
     margin: 8vh auto 2vh;
 }
 
+.container-fluid
+{
+    width: 95%;
+}
+
 .title
 {
   margin: auto;
