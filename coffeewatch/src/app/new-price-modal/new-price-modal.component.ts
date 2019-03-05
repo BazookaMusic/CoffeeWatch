@@ -80,6 +80,7 @@ export class NewPriceModalComponent implements OnInit {
         alert(err.message);
         return of(undefined);
       })).subscribe(new_price => {
+          console.log(new_price);
           if (new_price !== undefined) {
             this.coffeeShopsService.priceNeedsRefresh();
             this.modalService.dismissAll('price updated');

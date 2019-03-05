@@ -112,6 +112,56 @@ export class CoffeeshopsService {
     return this.CoffeeShops$;
   }
 
+  sortCoffeeShops()
+  {
+    this.coffeeShops = this.coffeeShops.filter(cs => cs.coffees.length > 0); // throw away empty
+    
+    this.priceTiers = this.getPricePartitions(this.coffeeShops);
+    const searchLat = this.searchLat;
+    const searchLng = this.searchLng;
+    switch (this.filters.sort) {
+      case 'price':
+        this.coffeeShops.sort(function (a,b)
+        {
+          return Math.min(...a.coffees.map(coffee_ => coffee_.price)) -
+            Math.min(...b.coffees.map(coffee_ => coffee_.price));
+        });
+        break;
+      case 'rating':
+        this.coffeeShops.sort(function (a,b)
+        {
+          return average(a.coffees.map(coffee_ => coffee_.price)) -
+            average(b.coffees.map(coffee_ => coffee_.price));
+        });
+      break;
+      case 'vfm':
+      this.coffeeShops.sort(function (a,b)
+        {
+          return average(a.coffees.map(coffee_ => coffee_.price / coffee_.extraData.rating)) -
+            average(b.coffees.map(coffee_ => coffee_.price / coffee_.extraData.rating));
+        });
+      break;
+      case 'dist':
+      this.coffeeShops.sort(function (a,b)
+        {
+          return distanceBetween(a.lat, a.lng, searchLat, searchLng) -
+          distanceBetween(b.lat, b.lng, searchLat, searchLng);
+        });
+      break;
+      default:
+        break;
+    }
+
+  }
+
+  ifFinishedBroadcast(counter)
+  {
+    if (counter === this.coffeeShops.length) {
+      this.sortCoffeeShops();
+      this.CoffeeShops$.next(this.coffeeShops);
+    }
+
+  }
   updateCoffeeShops(lat: number , lng: number) {
 
 
@@ -131,60 +181,26 @@ export class CoffeeshopsService {
           this.coffeeShopDict = {};
           this.coffeeShops.forEach(cs => this.coffeeShopDict[cs.id] = cs);
           this.coffeeShops.forEach(coffeeShop => {
+            let counter_reviews = 0;
             const params = new HttpParams().set('shopid', coffeeShop.id.toString()).set('category', this.filters.category);
-              const httpOptions1 = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), params };
-              this.http.get<Coffee[]>(this.baseAPIURL + 'products', httpOptions1).pipe(flatMap(coffees => {
+            const httpOptions1 = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), params };
+            this.http.get<Coffee[]>(this.baseAPIURL + 'products', httpOptions1).subscribe(coffees => {
+                  if (coffees.length === 0)
+                  {
+                    this.ifFinishedBroadcast(counter);
+                  }
                   coffees.forEach(coffee => coffee.price = this.coffeePrices[coffee.id]);
                   coffees.forEach(coffee => this.getCoffeeReviews(coffee.id).subscribe(reviews => {
                       coffee.extraData.rating = +average(reviews.map(aReview => aReview.rating)).toFixed(2);
+                      counter_reviews++;
+                      if (counter_reviews === coffees.length)
+                      {
+                        counter++;
+                        coffeeShop.coffees = coffees.filter(coffeeFilter);
+                        this.ifFinishedBroadcast(counter);
+                      }
                     }
                    ));
-
-
-                  return of(coffees);
-                }))
-                .subscribe(coffees => {
-                  coffeeShop.coffees = coffees.filter(coffeeFilter);
-                  counter++;
-                  if (counter === this.coffeeShops.length) {
-                    this.coffeeShops = this.coffeeShops.filter(cs => cs.coffees.length > 0); // throw away empty
-                    this.priceTiers = this.getPricePartitions(this.coffeeShops);
-                    const searchLat = this.searchLat;
-                    const searchLng = this.searchLng;
-                    switch (this.filters.sort) {
-                      case 'price':
-                        this.coffeeShops.sort(function (a,b)
-                        {
-                          return Math.min(...a.coffees.map(coffee => coffee.price)) -
-                            Math.min(...b.coffees.map(coffee => coffee.price));
-                        });
-                        break;
-                      case 'rating':
-                        this.coffeeShops.sort(function (a,b)
-                        {
-                          return average(a.coffees.map(coffee => coffee.price)) -
-                            average(b.coffees.map(coffee => coffee.price));
-                        });
-                      break;
-                      case 'vfm':
-                      this.coffeeShops.sort(function (a,b)
-                        {
-                          return average(a.coffees.map(coffee => coffee.price / coffee.extraData.rating)) -
-                            average(b.coffees.map(coffee => coffee.price / coffee.extraData.rating));
-                        });
-                      break;
-                      case 'dist':
-                      this.coffeeShops.sort(function (a,b)
-                        {
-                          return distanceBetween(a.lat, a.lng, searchLat, searchLng) -
-                          distanceBetween(b.lat, b.lng, searchLat, searchLng);
-                        });
-                      break;
-                      default:
-                        break;
-                    }
-                    this.CoffeeShops$.next(this.coffeeShops);
-                  }
                 });
             });
         });
@@ -487,7 +503,26 @@ export class CoffeeshopsService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json',
     'X-OBSERVATORY-AUTH': this.userService.tokenGet()});
 
-    return this.http.post<priceData>(this.baseAPIURL + 'prices', price, {headers: headers});
+    const headerPrice = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      , params: new HttpParams()
+      .set('productId', price.productId.toString())
+      .set('date', price.date)
+    };
+
+    return this.http.get<any[]>(this.baseAPIURL + 'prices', headerPrice).pipe(flatMap(prices =>
+      {
+        console.log(prices);
+        if (prices.length > 0)
+        {
+          const id = prices[0].id;
+          return this.http.delete(this.baseAPIURL + 'prices/' + id, {headers: headers});
+        }
+        else
+        {
+          return of(undefined);
+        }
+      })).pipe(flatMap(res => this.http.post<priceData>(this.baseAPIURL + 'prices', price, {headers: headers}) ));
   }
 
   // misc
