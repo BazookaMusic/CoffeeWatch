@@ -1,0 +1,27 @@
+<div class="container center d-flex justify-content-center">
+  <div class="my-auto shadow-sm rounded contentBG registerForm">
+    <div class="row justify-content-center"><h1>Εγγραφή</h1></div>
+    <form [formGroup]='registerForm' (ngSubmit)="tryRegister()">
+        <div class="row formRow">
+          <span class="col-sm-4"><label for="username" class="col-form-label">Όνομα χρήστη:</label></span>
+          <span class="col-sm-8"><input type="text" class="inputField" formControlName="username" required id="username"></span>
+        </div>
+        <div class="row formRow">
+          <span class="col-sm-4"><label for="email" class="col-form-label">E-mail:</label></span>
+          <span class="col-sm-8"><input type="text" class="inputField" formControlName="email" required id="email"></span>
+        </div>
+        <div class="row formRow">
+          <span class="col-sm-4"><label for="password" class="col-form-label">Κωδικός πρόσβασης:</label></span>
+          <span class="col-sm-8"><input type="password" class="inputField" formControlName="password" required id="password"></span>
+        </div>
+        <div class="row formRow">
+          <span class="col-sm-4"><label for="confirm-password" class="col-form-label">Επιβεβαίωση κωδικού πρόσβασης:</label></span>
+          <span class="col-sm-8"><input type="password" class="inputField" formControlName="confirmPassword" required id="confirm-password"></span>
+        </div>
+        <div class="row justify-content-center alert alert-warning" *ngIf="errorText !== ''">{{errorText}}</div>
+        <div class="row justify-content-center alert alert-warning" *ngIf="registerForm.controls.password.hasError('MatchPass')">Οι κωδικοί δεν ταιρίαζουν</div>
+        <div class="row justify-content-center"><button type="submit" class="btn orangeButton registerButton">Εγγραφή</button></div>
+        <div class="row justify-content-center"><a [routerLink]="['/login']" >Έχω ήδη λογαριασμό</a></div>
+    </form>
+  </div>
+</div>

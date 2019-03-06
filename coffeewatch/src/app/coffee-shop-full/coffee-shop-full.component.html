@@ -1,0 +1,77 @@
+<div [@fastFade]='"in"' *ngIf="coffeeShop !== undefined" class="container-fluid">
+  <div class="coffeeShopFull contentBG shadow-sm rounded">
+    <div class="row">
+      <div class="col-sm-5">
+        <div class="row">
+          <span class="col-sm-3"><img src={{coffeeShop.iconPath}} class="img-fluid" /></span>
+          <span class="coffeeShopName fancyFont col-sm-9">{{coffeeShop.name}}</span>
+        </div>
+        <table class="table coffeeShopDetails">
+          <tr>
+            <td class="coffeeShopDetailsIcons"><img src="../../assets/locationPointIcon.png" class="img-fluid" /></td>
+            <td><a href="https://www.google.com/maps/search/?api=1&query={{coffeeShop.address}}" target="_blank">{{coffeeShop.address}}</a></td>
+          </tr>
+          <tr>
+            <td class="coffeeShopDetailsIcons"><img src="../../assets/telephoneIcon.png" class="img-fluid" /></td>
+            <td><a href="tel:{{coffeeShop.telephone}}">{{coffeeShop.telephone}}</a></td>
+          </tr>
+          <tr>
+            <td class="coffeeShopDetailsIcons"><img src="../../assets/websiteIcon.png" class="img-fluid" /></td>
+            <td><a class="websiteLink" href="http://{{coffeeShop.website}}" target="_blank">{{coffeeShop.website}}</a></td>
+          </tr>
+        </table>
+        <div class="row justify-content-center actionIconsRow">
+          <a ngbPopover="Τροποποίηση καφετέριας" placement="top" triggers="mouseenter:mouseleave" (click)="editCoffeeShop(coffeeShop.id)"><img class="img-fluid icon" src="../assets/editCoffeeShop.png" /></a>
+        </div>
+        <app-new-coffee-modal [coffeeShop]="coffeeShop"></app-new-coffee-modal>
+      </div>
+      <div class="col-sm-7 scrollable">
+        <table class="table">
+            <a class="undecoratedLink" [routerLink]="activeTab === 'description' && selectedCoffee != undefined ? [{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'description' ] } }] : []">
+              <tr *ngFor="let coffeeItem of coffeeShop.coffees; let coffeeIndex = index" id={{coffeeIndex}} (click)="onClick(coffeeIndex)" [ngClass]="clickedCoffees[coffeeIndex] ? 'trClicked': 'trHover'">
+                <td class="coffees">
+                  <table class="table">
+                      <tr>
+                        <td class="coffees">{{coffeeItem.name}}</td>
+                      </tr>
+                      <tr>
+                        <td class="coffees"><star-rating labelPosition="right" staticColor="default" [labelText]="coffeeItem.extraData.rating + ' (' + coffeeItem.extraData.numOfReviews + ' κριτικές)'" [rating]="coffeeItem.extraData.rating" [showHalfStars]="true" [readOnly]="true"></star-rating></td>
+                      </tr>
+                  </table>
+                </td>
+                <td class="coffeePrice coffees">{{coffeeItem.price.toFixed(2)}}€</td>
+              </tr>
+            </a>
+        </table>
+      </div>
+    </div>
+    <div *ngIf="selectedCoffee > -1" class="coffeeDetails">
+      <hr />
+      <div class="row coffeeName">
+        <span class="col-sm-8 break-word">{{coffeeShop.coffees[selectedCoffee].name}}</span>
+        <span class="col-sm-1 coffeePrice">{{coffeeShop.coffees[selectedCoffee].price.toFixed(2)}}€</span>
+        <span class="col-sm-1 justify-content-center"><app-new-price-modal [coffee]='coffeeShop.coffees[selectedCoffee]' [coffeeShop]='coffeeShop'></app-new-price-modal></span>
+        <span class="col-sm-1"><app-edit-coffee [coffeeShop] = 'coffeeShop'></app-edit-coffee></span>
+        <span class="col-sm-1"><a ngbPopover="Διαγραφή καφέ" placement="top" triggers="mouseenter:mouseleave" (click)="deleteCoffee(selectedCoffee)"><img class="img-fluid icon" src="../assets/deleteCoffee.png" /></a></span>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <ul class="nav nav-pills justify-content-center coffeeTabs">
+            <li class="nav-item">
+              <a [ngClass]="'nav-link' + (activeTab === 'description' ? ' active' : '')" (click)="tabClicked('description')" [routerLink]="[{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'description' ] } }]">Περιγραφή</a>
+            </li>
+            <li class="nav-item">
+              <a [ngClass]="'nav-link' + (activeTab === 'reviews' ? ' active' : '')" (click)="tabClicked('reviews')" [routerLink]="[{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'reviews' ] } }]">Κριτικές</a>
+            </li>
+            <li class="nav-item">
+              <a [ngClass]="'nav-link' + (activeTab === 'statistics' ? ' active' : '')" (click)="tabClicked('statistics')" [routerLink]="[{ outlets: {detailsView: ['coffee', coffeeShop.coffees[selectedCoffee].id, 'statistics' ] } }]">Στατιστικά</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <router-outlet [@fastFade]='"in"' name="detailsView"></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

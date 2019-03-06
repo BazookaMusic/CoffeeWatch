@@ -1,0 +1,137 @@
+<ng-template #filterSearch let-modal>
+  <div class="modal-header">
+    <h3 class="modal-title">Φίλτρα Αναζήτησης</h3>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="filterForm" id="mainform" (ngSubmit)="onFilterSubmit();modal.dismiss('Submit')">
+      <div class="form-group row label">
+        <h4>Είδος καφέ:</h4>
+      </div>
+      <div class="form-group row">
+        <table class="table">
+          <tr>
+            <td>
+              <span>
+                <input class="checkBox" type="checkbox" value="" id="cat0" formControlName="cat0" (click)='check(0)'>
+                <label class="form-check-label clickableLabel" for="cat0">{{categories[0]}}</label>
+              </span>
+            </td>
+            <td>
+              <span>
+                <input class="checkBox" type="checkbox" value="" id="cat1" formControlName="cat1" (click)='check(1)'>
+                <label class="form-check-label clickableLabel" for="cat1">{{categories[1]}}</label>
+              </span>
+            </td>
+            <td>
+              <span>
+                <input class="checkBox" type="checkbox" value="" id="cat2" formControlName="cat2" (click)='check(2)'>
+                <label class="form-check-label clickableLabel" for="cat2">{{categories[2]}}</label>
+              </span>
+            </td>
+            <td>
+              <span>
+                <input class="checkBox" type="checkbox" value="" id="cat3" formControlName="cat3" (click)='check(3)'>
+                <label class="form-check-label clickableLabel" for="cat3">{{categories[3]}}</label>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span>
+                <input class="checkBox" type="checkbox" value="" id="cat4" formControlName="cat4" (click)='check(4)'>
+                <label class="form-check-label clickableLabel" for="cat4">{{categories[4]}}</label>
+              </span>
+            </td>
+            <td>
+              <span>
+                <input class="checkBox" type="checkbox" value="" id="cat5" formControlName="cat5" (click)='check(5)'>
+                <label class="form-check-label clickableLabel" for="cat5">{{categories[5]}}</label>
+              </span>
+            </td>
+            <td>
+              <span>
+                <input class="checkBox" type="checkbox" value="" id="cat6" formControlName="cat6" (click)='check(6)'>
+                <label class="form-check-label clickableLabel" for="cat6">{{categories[6]}}</label>
+              </span>
+            </td>
+            <td>
+              <span>
+                <input class="checkBox" type="checkbox" value="" id="cat7" formControlName="cat7" (click)='check(7)'>
+                <label class="form-check-label clickableLabel" for="cat7">{{categories[7]}}</label>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span>
+                <input class="checkBox" type="checkbox" value="" id="cat8" formControlName="cat8" (click)='check(8)'>
+                <label class="form-check-label clickableLabel" for="cat8">{{categories[8]}}</label>
+              </span>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="form-group row label">
+        <h4>Ελάχιστη βαθμολογία:</h4>
+      </div>
+      <div class="form-group row starsDiv justify-content-center">
+          <star-rating-control class="clickableStars" formControlName="starsRating" staticColor="default" label-position="right" [rating]="0" [hoverEnabled]="true" size="large"></star-rating-control>
+      </div>
+      <div class="form-group row label">
+        <h4>Τιμή:</h4>
+      </div>
+      <div class="form-group row justify-content-center">
+        <span class="col-sm-4 inlineDescr">
+          <span class="input-group-prepend">
+            <span class="input-group-text bgColor">Ελάχιστη:</span>
+          </span>
+          <input class="price" type="number" step=".1" id="price-min" min="0" formControlName="priceMin" />
+        </span>
+        <span class="col-sm-4 inlineDescr">
+          <span class="input-group-prepend">
+            <span class="input-group-text bgColor">Μέγιστη:</span>
+          </span>
+          <input class="price" type="number" step=".1" id="price-max" min="0" formControlName="priceMax" />
+        </span>
+      </div>
+      <div class="form-group row label">
+        <h4>Μέγιστη απόσταση καφετεριών:</h4>
+      </div>
+      <div class="row maxDistanceSlider justify-content-center">
+        <ng5-slider class="col-sm-6" [(value)]="value" [options]="options"></ng5-slider>
+      </div>
+      <div class="form-group row label">
+        <h4>Ταξινόμηση με βάση:</h4>
+      </div>
+      <div class="form-group row justify-content-center radiosDiv">
+        <span class="customCol">
+          <input class="radio" checked="" type="radio" name="sortRadios" formControlName="sortRadios" id="priceRadio" value="price"/>
+          <label class="form-check-label clickableLabel" for="priceRadio">Τιμή Φθηνότερου Καφέ</label>
+        </span>
+        <span class="customCol">
+          <input class="radio" type="radio" name="sortRadios" formControlName="sortRadios" id="distanceRadio" value="dist" />
+          <label class="form-check-label clickableLabel" for="distanceRadio">Απόσταση Καταστήματος</label>
+        </span>
+        <span class="customCol">
+          <input class="radio" type="radio" name="sortRadios" formControlName="sortRadios" id="ratingRadio" value="rating" />
+          <label class="form-check-label clickableLabel" for="ratingRadio">Μέση Βαθμολογία</label>
+        </span>
+        <span class="customCol">
+          <input class="radio" type="radio" name="sortRadios" formControlName="sortRadios" id="valueForMoneyRadio" value="vfm" />
+          <label class="form-check-label clickableLabel" for="valueForMoneyRadio">Τιμή/Βαθμολογία</label>
+        </span>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary outlineSecondaryNoHover" data-dismiss="modal" (click)="modal.dismiss('Cross click')">Ακύρωση</button>
+    <button type="submit" form="mainform" class="btn orangeButton" [disabled]="!filterForm.valid">Φιλτράρισμα</button>
+  </div>
+</ng-template>
+
+<a class="filterSearch" (click)="open(filterSearch)" ngbPopover="Φίλτρα αναζήτησης" triggers="mouseenter:mouseleave">
+  <img src="../assets/filterIcon.png" class="img-fluid filterSearchIcon" />
+</a>

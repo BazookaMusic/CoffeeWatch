@@ -1,0 +1,5 @@
+<div class="row appSearchBar justify-content-center">
+    <input type="text" class="form-control blackBorder" placeholder="Αναζήτηση για..." #search [formControl]="searchControl">
+    <a class="findMyLocation" ngbPopover="Εύρεση της τοποθεσίας μου" triggers="mouseenter:mouseleave" (click)="getLocation()"><img class="img-fluid findMyLocationIcon" src="../assets/findMyLocation.png" /></a>
+    <app-filter-search-modal></app-filter-search-modal>
+</div>

@@ -1,0 +1,106 @@
+@import '~css-star-rating/css/star-rating';
+
+@font-face
+{
+  font-family: "Caviar";
+  font-weight: normal;
+  font-style: normal;
+  src: url("assets/fonts/CaviarDreams.ttf");
+}
+
+@font-face
+{
+  font-family: "Caviar";
+  font-weight: bold;
+  font-style: normal;
+  src: url("assets/fonts/CaviarDreamsBold.ttf");
+}
+
+@font-face
+{
+  font-family: "BP";
+  font-weight: normal;
+  font-style: normal;
+  src: url("assets/fonts/BP.otf");
+}
+
+@font-face
+{
+  font-family: "BP";
+  font-weight: bold;
+  font-style: normal;
+  src: url("assets/fonts/BPBold.otf");
+}
+
+.fancyFont
+{
+  font-family: "Caviar" !important;
+}
+
+html *
+{
+   font-family: "BP" !important;
+   color: #3c3c3c !important;
+}
+
+.bgColor
+{
+  background-color: #f1e9e1 !important;
+}
+
+*:focus {
+    outline: 0 !important;
+}
+
+hr
+{
+    border-top: 1px solid #3c3c3c !important;
+    margin-top:0 !important;
+    margin-bottom: 1.2rem !important;
+}
+
+.contentBG
+{
+  background-color: #f4f1ec !important;
+}
+
+.orangeButton
+{
+    background-color: #cd6133 !important;
+    border-color: #cd6133 !important;
+    color: white !important;
+    padding: 0.5rem 1rem !important;
+}
+
+.coffeePrice
+{
+    font-size: 1.5vw !important;
+    color: red !important;
+}
+
+.outlineSecondaryNoHover
+{
+  padding: 0.5rem 1rem !important;
+}
+
+.outlineSecondaryNoHover:hover
+{
+    color: #6c757d !important;
+    border-color: #6c757d !important;
+    background-color: #f2e9e1 !important;
+}
+
+.table .table
+{
+    background-color: transparent !important;
+}
+
+h2
+{
+  font-size: 1.7vw !important;
+}
+
+.websiteLink
+{
+    word-break: break-all;
+}

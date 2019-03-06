@@ -1,0 +1,22 @@
+html
+{
+    color: #ffffff !important;
+}
+
+.titleRow
+{
+    width: 100%;
+    justify-content: center;
+    margin: 1.5vh 0;
+}
+
+.historyChart
+{
+    margin: auto;
+}
+
+.statisticsRow
+{
+    text-align: center;
+    font-size: 1vw;
+}

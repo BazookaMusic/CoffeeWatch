@@ -1,0 +1,125 @@
+.container-fluid
+{
+    width: 60%;
+}
+
+.coffeeShopFull
+{
+    padding: 1rem 1rem 0.5rem 1rem;
+    margin: 8vh 0;
+}
+
+.table td
+{
+    vertical-align: middle;
+    border: none;
+    padding: 0.45rem;
+}
+
+.table
+{
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.coffees 
+{
+    width:100%;
+    font-size: 1.4rem;
+}
+
+a
+{
+    cursor: pointer;
+}
+
+.coffeeShopDetails
+{
+    margin-top: 15px;
+}
+
+.coffeeShopName
+{
+    font-size: 3rem;
+    display: inline-flex;
+    align-items: center;
+    padding-left: 0;
+}
+
+.coffeeName
+{
+    margin: 1rem 0;
+    font-size: 2rem;
+
+    display: flex;
+    align-items: flex-end;
+}
+
+.coffeeName span
+{
+    display: inline-flex;
+    align-items: center;
+}
+
+.coffeeShopDetailsIcons
+{
+    text-align:center;
+    padding: 0.7rem 0 !important;
+}
+
+.scrollable
+{
+    height:47vh;
+    overflow-y:auto;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.trClicked
+{
+    background-color:rgb(206, 190, 158);
+}
+
+.trHover:hover
+{
+    background-color:rgb(234, 217, 183);
+}
+
+.coffeeDetails
+{
+    margin: 1rem 0.5rem;
+}
+
+.coffeeTabs, .coffeeTabs a
+{
+    font-size: 1.2rem;
+    color:#3c3c3c;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link
+{
+    background-color: #cd6133;
+    color: white !important;
+}
+
+.undecoratedLink
+{
+    color: #3c3c3c;
+    text-decoration: none;
+    font-size: 23px;
+}
+
+.verticalCenter
+{
+    display: flex;
+    align-items: center;
+}
+
+.actionIconsRow
+{
+    padding: 1.5vh 0;
+}
+
+.break-word {
+    overflow-wrap: anywhere;
+  }

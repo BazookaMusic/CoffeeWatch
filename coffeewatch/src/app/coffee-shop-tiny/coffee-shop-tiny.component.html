@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-sm-5">
+    <div class="row">
+      <span class="col-sm-3"><img src={{coffeeShop.iconPath}} class="img-fluid" /></span>
+      <span class="coffeeShopName fancyFont col-sm-9">{{coffeeShop.name}}</span>
+    </div>
+  </div>
+  <div class="col-sm-7">
+    <table class="table coffeeShopDetails">
+      <tr>
+        <td class="coffeeShopDetailsIcons"><img src="../../assets/locationPointIcon.png" class="img-fluid" /></td>
+        <td><a href="https://www.google.com/maps/search/?api=1&query={{coffeeShop.address}}" target="_blank">{{coffeeShop.address}}</a></td>
+      </tr>
+      <tr>
+        <td class="coffeeShopDetailsIcons"><img src="../../assets/telephoneIcon.png" class="img-fluid" /></td>
+        <td><a href="tel:{{coffeeShop.telephone}}">{{coffeeShop.telephone}}</a></td>
+      </tr>
+      <tr>
+        <td class="coffeeShopDetailsIcons"><img src="../../assets/websiteIcon.png" class="img-fluid" /></td>
+        <td><a class="websiteLink" href="http://{{coffeeShop.website}}" target="_blank">{{coffeeShop.website}}</a></td>
+      </tr>
+    </table>
+  </div>
+</div>

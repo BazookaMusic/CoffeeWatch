@@ -1,0 +1,135 @@
+.inlineDescr
+{
+    display: inline-flex;
+}
+
+.checkBoxHint
+{
+    padding: 0.7vh 0.8vw;
+}
+
+.table
+{
+    margin-bottom: 0;
+}
+
+.form-group
+{
+    margin-bottom: 1.1vh;
+}
+
+.label
+{
+    margin: 0.5rem 0 0 0.4rem;
+}
+
+.starsDiv
+{
+    margin-left: 0.1vw;
+}
+
+.clickableStars
+{
+    cursor: pointer;
+}
+
+.checkAllButton
+{
+    margin: 0 0 0 1vw;
+}
+
+h4
+{
+    margin-bottom: 0;
+    line-height: 1.7;
+}
+
+.radiosDiv
+{
+    margin: 1vh 0;
+}
+
+.checkBox
+{
+    margin: 0.5vh;
+    cursor: pointer;
+}
+
+.radio
+{
+    margin: 0.5vh;
+    cursor: pointer;
+}
+
+.customCol
+{
+    margin: 0.3vw;
+}
+
+.clickableLabel
+{
+    cursor: pointer;
+}
+
+td
+{
+    border-top: none;
+}
+
+.price
+{
+    width: 60%;
+}
+
+.filterSearch
+{
+    cursor: pointer;
+}
+
+.filterSearchIcon
+{
+    width: 4vh;
+    height: 4vh;
+    display: block;
+}
+
+/*----------------------------------------*/
+.maxDistanceSlider
+{
+    margin-bottom: 4vh;
+}
+
+::ng-deep .maxDistanceSlider .ng5-slider .ng5-slider-floor,
+::ng-deep .maxDistanceSlider .ng5-slider .ng5-slider-ceil,
+::ng-deep .maxDistanceSlider .ng5-slider .ng5-slider-model-value
+{
+    visibility: hidden !important;
+}
+
+::ng-deep .maxDistanceSlider .ng5-slider .ng5-slider-pointer
+{
+    width: 1.2vw;
+    height: 1.2vw;
+    top: -0.4vw;
+    background-color: #cd6133;
+}
+
+::ng-deep .maxDistanceSlider .ng5-slider .ng5-slider-bar
+{
+    background: #f1e9e1;
+    height: 0.6vh;
+    cursor: pointer;
+}
+
+::ng-deep .maxDistanceSlider .ng5-slider .ng5-slider-tick
+{
+    width: 0.15vw;
+    height: 1.2vh;
+    border-radius: 0;
+    background: #cd6133;
+}
+
+::ng-deep .maxDistanceSlider .ng5-slider .ng5-slider-pointer:after
+{
+    display: none;
+}

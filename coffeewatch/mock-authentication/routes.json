@@ -1,0 +1,3 @@
+{
+    "/observatory/api/*" : "/$1"
+}

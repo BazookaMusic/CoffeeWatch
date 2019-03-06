@@ -1,0 +1,52 @@
+.customContainer
+{
+    width: 80%;
+}
+
+.center
+{
+    margin: 12vh auto 0;
+}
+
+.table td
+{
+    border: none;
+    padding: 1.5vh 0;
+    vertical-align: middle
+}
+
+input
+{
+    height: 4vh;
+}
+
+.newCoffeeShop
+{
+    padding: 2vw;
+    font-size: 1.1vw;
+    height: 65vh;
+}
+
+.button
+{
+    margin: 5vh 0 0 0;
+    font-size: 1.1vw;
+    width: 18vw;
+    height: 5vh;
+}
+
+.buttonSpan
+{
+    margin: auto 2vw;
+}
+
+.title
+{
+    justify-content: center;
+    margin-bottom: 2vh;
+}
+
+agm-map
+{
+    height: 35vh;
+}

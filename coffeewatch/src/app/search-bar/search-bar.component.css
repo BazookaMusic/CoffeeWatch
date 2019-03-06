@@ -1,0 +1,38 @@
+.appSearchBar
+{
+    margin: 2.5vh auto 3.5vh;
+}
+
+.form-control
+{
+    display: inline-block;
+    width: 60%;
+    height: 4vh;
+}
+
+.searchButton
+{
+    background-color: #cd6133;
+    border-color: #cd6133;
+    color: white !important;
+    margin-left: 5px;
+}
+
+.findMyLocation
+{
+    margin: 0 0.4vw;
+    cursor: pointer;
+    text-align: center;
+}
+
+.findMyLocationIcon
+{
+    width: 4vh;
+    height: 4vh;
+    display: block;
+}
+
+.blackBorder
+{
+    border-color: #343a40;
+}

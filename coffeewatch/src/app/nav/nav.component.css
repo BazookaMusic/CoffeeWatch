@@ -1,0 +1,55 @@
+.bd-navbar
+{
+  background-color: #cd6133;
+}
+
+.siteName
+{
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.siteLogo
+{
+  max-height: 5vh;
+}
+
+.icon
+{
+  max-height: 4.4vh;
+}
+
+li
+{
+  cursor: pointer;
+}
+
+.loginDropDown
+{
+  right: 0px;
+  left: -4vw !important;
+  top: 5.5vh !important;
+}
+
+.loginDropDown a, .loginDropDown div
+{
+  padding: 1.1vh 1vw;
+  font-size: 1.1vw;
+}
+
+.siteTitle
+{
+  margin-left: 0.5rem;
+  font-size: 1.7vw;
+  font-weight: bold;
+}
+
+.navbar
+{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  height: 6vh;
+}

@@ -1,0 +1,58 @@
+API REFERENCE
+
+base-url = https://localhost:8765/observatory/api
+
+Στη βαση βαλτε shopid στα products με index!!!
+
+ΔΕΙΤΕ REFERENCE ΓΙΑ ΛΕΠΤΟΜΕΡΕΙΕΣ ΣΕ ΑΥΤΑ
+
+/products: σαιδης (ΠΡΟΣΕΞΤΕ metadata)
+
+{metadata
+{
+            "id": 1,
+            "withdrawn": "false",
+            "name": "Φίλτρου",
+            "category": "Φίλτρου",
+            "description": 
+                "Πιο χαρακτηριστικό παραδώσεις εγώ μερικούς συνεχώς. Ρουτίνα υψηλότερη ας περιβάλλον αυτήν μην. Εκτελείται ζητήσεις κάνε παίξουν στη εργαζόμενων συγγραφείς εκτός.",
+                "Ακούσει τι προσοχή ας καλύτερο φίλος ότι. Κανόνα προσπαθούν πως χρησιμοποιώντας εταιρείες συνάδελφος περισσότερες. Χειρότερα σου δύο αναφέρονται έξι. Δημιουργήσεις όσο από τρέξει την χρόνου επιδιόρθωση βάζοντας."
+            ,
+            "tags":[],
+            "extraData": {
+                "price": "1.95",   //σε καθε αλλαγη τιμης να αλλάζετε και αυτο (κρατήστε το στα products)
+                "rating": "3.93",  // avg των reviews του
+                "numOfReviews": 30, // count των reviews του
+                }
+
+    }
+}
+/shops: σαϊδης για τα tests και ΧΡΕΙΑΖΟΜΑΣΤΕ παραλλαγη του για startPage
+/prices: σαϊδης
+/reviews/coffeeid : τα reviews ενος καφε με id coffeeid  //post για νεο review να γυρναει πίσω το review
+
+
+
+-------------------------------------- ΔΙΚΑ ΜΑΣ ΠΟΛΥ ΣΗΜΑΝΤΙΚΑ---------------------------------------------------------
+/nearbyCoffeeShops: 
+MONO GET ME 200 OK RESPONSE
+400 BAD REQUEST ΑΛΛΟΥ
+parameters: geoLat,geoLng,geoDist,sort
+γυρναει για μια περιοχη κοντινα SHOPS που έχουν έχουν απόσταση μέχρι geodist (km) απο τις συντεταγμενες
+sort: {price (average των καφέδων καθε μαγαζιου - το έχω και client side οπότε αν δε προλάβετε κλαιν), dist, rating, price/rating }
+output 
+{
+    shop1,
+    shop2,shop3
+}
+
+/coffees:
+MONO GET ME 200 OK RESPONSE
+400 BAD REQUEST ΑΛΛΟΥ
+parameters: shopid,category,minprice,maxprice,min_rating 
+Αναζητα καφεδες μιας καφετεριας με id=shopid
+θα γυρναει αποτέλεσμα products φιλτραρισμενα με βαση τις παραμετρους
+{
+    product1,
+    product2 κτλπ
+}

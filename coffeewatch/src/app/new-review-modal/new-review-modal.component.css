@@ -1,0 +1,9 @@
+.rating
+{
+    justify-content: center !important;
+}
+
+.clickableStars
+{
+    cursor: pointer;
+}

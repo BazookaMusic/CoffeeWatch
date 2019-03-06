@@ -1,0 +1,19 @@
+.inlineDescr
+{
+    display: inline-flex;
+}
+
+.price
+{
+    width: 60%;
+}
+
+a
+{
+    cursor: pointer;
+}
+
+.actionIconsRow
+{
+    padding: 1.5vh 0;
+}

@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <div class="row appSearchBar">
+    <div class="title"><h1>Αναζήτηση καφετεριών</h1></div>
+    <div class="searchBar">
+      <form class="searchForm" [formGroup]="searchGroup"><input class="form-control blackBorder" type="text" formControlName="searchCoffeeShops" minlength="0" placeholder="Όνομα καφετέριας..."/></form>
+    </div>
+  </div>
+  <div class="row">
+    <div *ngIf="searchGroup.controls.searchCoffeeShops.value.length !== 0" class="col-sm-6">
+      <div [@simpleFadeAnimation]="'in'" class="row coffeeShopListTitleRow"><h2 class="coffeeShopListTitle fancyFont">Αποτελέσματα αναζήτησης</h2></div>
+      <hr [@simpleFadeAnimation]="'in'" />
+      <div *ngIf="filteredCoffeeShops.length === 0" [@simpleFadeAnimation]="'in'">
+        <span class="noCoffeeShops">Δε βρέθηκαν καφετέριες</span>
+      </div>
+      <div *ngIf="filteredCoffeeShops.length !== 0" [@simpleFadeAnimation]="'in'" class="">
+        <ul class="scrollable">
+          <li *ngFor="let coffeeShopItem of filteredCoffeeShops; trackBy: trackByFn" (click)="onClickCoffeeShop(coffeeShopItem)" 
+            [ngClass]="'shadow-sm rounded contentBG ' + (selectedCoffeeShop != undefined && selectedCoffeeShop === coffeeShopItem.id ? 'csClicked': 'csHover')">
+            <app-coffee-shop-tiny [coffeeShop]="coffeeShopItem"></app-coffee-shop-tiny>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="row mapRow">
+        <div *ngIf="searchGroup.controls.searchCoffeeShops.value.length !== 0" class="col-sm-12">
+          <agm-map [latitude]="centerlat" [longitude]="centerlng" [zoom]="zoomLevel">
+          <agm-marker *ngIf="shoplat !== undefined && shoplng !== undefined" [iconUrl]="'../assets/images/selectedLocation.png'" [latitude]="shoplat" [longitude]="shoplng"></agm-marker>
+        </agm-map>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
