@@ -81,7 +81,7 @@ import { CoffeeShopTinyComponent } from './coffee-shop-tiny/coffee-shop-tiny.com
     BrowserModule,
     AppRoutingModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAiQq3g4B24gFkVps1sIM4TTHLSqs6XSFI',
+      apiKey: 'REDACTED',
       libraries: ['places']
     }),
     ReactiveFormsModule,

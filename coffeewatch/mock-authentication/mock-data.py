@@ -78,7 +78,6 @@ for i in range(1,TOTAL_COFFEESHOPS + 1):
     name = random.choice(csnames)
     shopnames[i] = name
     shops.append({
-        "id":i,
         "withdrawn":"false",
         "name": name,
         "address": fakegr.street_address(),
@@ -86,7 +85,9 @@ for i in range(1,TOTAL_COFFEESHOPS + 1):
         "telephone":fakegr.phone_number(),
         "iconPath":"../assets/images/coffeeshops/{}.png".format(random.randint(0,7)),
         "lng":coords[1],
-        "lat":coords[0]
+        "lat":coords[0],
+        tags:[]
+
     })
 
 
@@ -101,17 +102,12 @@ for i in range(1,TOTAL_COFFEES + 1):
     dates = daterange(PRICES_PER_PRODUCT)
     rand_prices = priceGen(len(dates),random.randint(1,5))
     products.append({
-        "id":i,
         "withdrawn":"false",
         "name": name,
         "category":name,
         "shopid": shopid,
         "description": fakegr.text(random.randint(50,1000)),
-        "price": rand_prices[-1],
-        "extraData":{
-        "rating": str(round(random.uniform(0.0,5.0),2)),
-        "numOfReviews": numOfReviews
-        }
+        "tags": []
     })
     for date,price in zip(dates,rand_prices):
         prices.append({
@@ -159,5 +155,5 @@ prices = {"prices" : prices}
 final_dict={**products,**shops,**reviews,**user_db,**prices}
 
 
-with io.open("../src/api.json","w+",encoding="utf-8") as apidb:
+with io.open("./api.json","w+",encoding="utf-8") as apidb:
     apidb.write(json.dumps(final_dict,ensure_ascii=False))

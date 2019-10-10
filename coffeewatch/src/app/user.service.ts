@@ -19,13 +19,13 @@ export class UserService {
   previousUrl = undefined;
   currentUrl = undefined;
 
+  // keep track of navigation history
   constructor(private http: HttpClient, private jwtHelp: JwtHelperService, router: Router) {
     router.events
         .subscribe(
             event =>
             {
-              if (event instanceof NavigationEnd)
-              {
+              if (event instanceof NavigationEnd) {
                 this.previousUrl = this.currentUrl;
                 this.currentUrl = event.url;
               }
@@ -33,6 +33,9 @@ export class UserService {
     );
    }
 
+  // logs in user
+  // returns of(true) on success
+  // and undefined on failure
   login(emailin: string, passwordin: string) {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type':  'application/json' }) };
 
@@ -44,33 +47,32 @@ export class UserService {
         return of(undefined);
       }))
     .pipe(flatMap( token => {
-      if(token !== undefined)
-        {
+      if (token !== undefined)
+      {
           localStorage.setItem('access_token', token.access_token);
           this.loggedIN = this.isloggedIN();
           return of(this.loggedIN);
-        }
-      else
-      {
+      } else {
         return of(false);
       }
-      } ));
+      }));
 
   }
 
+  // access to jwt token
   tokenGet()
   {
     return localStorage.getItem('access_token');
   }
 
+  // check login status
   isloggedIN() {
-    //console.log('Checking login');
     const token = localStorage.getItem('access_token');
     if ( token !== null) {
       const decoded = this.jwtHelp.decodeToken(token);
       this.currentUsername = decoded.username;
       this.currentUserID = decoded.id;
-    //console.log('token valid?:' + !this.jwtHelp.isTokenExpired(token));
+
       this.loggedIN = !this.jwtHelp.isTokenExpired(token);
       return !this.jwtHelp.isTokenExpired(token);
     } else {
@@ -80,16 +82,19 @@ export class UserService {
     }
   }
 
+  // logout user
   logOut() {
     localStorage.removeItem('access_token');
     this.loggedIN = false;
   }
 
+  // register user
   registerUser(user: User) {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type':  'application/json' }) };
     return this.http.post<User>(this.baseAPIURL + 'register', user, httpOptions);
   }
 
+  // get previous url to navigate
   getPrevUrl()
   {
     return this.previousUrl;

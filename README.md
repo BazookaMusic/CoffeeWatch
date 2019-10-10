@@ -1,11 +1,4 @@
-Γιώργος Ξυπόλιτος 03113629
+# CoffeeWatch Project for Software Engineering Course 2018-2019
 
-Σωτήρης Δραγώνας 03114187
-
-Γιάννης Ζαρόγιαννης 03114186
-
-Στέφανος-Ευστράτιος Πετρίδης 03113418
-
-Δήμητρα Γιαννοπούλου 03104613
-
-Διαμαντή Φωτίου 03002721
+Frontend and mock backend by Sotiris Dragonas and John Zaro
+Details in coffeewatch directory.

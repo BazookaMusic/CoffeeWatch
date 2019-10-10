@@ -98,7 +98,6 @@ export class CoffeeShopFullComponent implements OnInit {
     this.coffeeShopsService.updateCoffeeShopPrices(this.coffeeShop);
     this.coffeeShop.coffees.forEach(coffee => this.updateReviews(coffee));
   }
-  
   updateReviews(coffee: Coffee)
   {
     this.coffeeShopsService.getCoffeeReviews(coffee.id).

@@ -108,42 +108,41 @@ export class CoffeeshopsService {
   }
 
   getCoffeeShops() {
-    // this.updateCoffeeShops(undefined,undefined);
     return this.CoffeeShops$;
   }
 
-  sortCoffeeShops()
-  {
+  sortCoffeeShops() {
     this.coffeeShops = this.coffeeShops.filter(cs => cs.coffees.length > 0); // throw away empty
-    
+
+    // generate price tiers for coloring of coffeeshop labels
     this.priceTiers = this.getPricePartitions(this.coffeeShops);
+
+    // user locations
     const searchLat = this.searchLat;
     const searchLng = this.searchLng;
+
+    // which filter was chosen
     switch (this.filters.sort) {
       case 'price':
-        this.coffeeShops.sort(function (a,b)
-        {
+        this.coffeeShops.sort(function (a,b) {
           return Math.min(...a.coffees.map(coffee_ => coffee_.price)) -
             Math.min(...b.coffees.map(coffee_ => coffee_.price));
         });
         break;
       case 'rating':
-        this.coffeeShops.sort(function (a,b)
-        {
-          return average(a.coffees.map(coffee_ => coffee_.price)) -
-            average(b.coffees.map(coffee_ => coffee_.price));
+        this.coffeeShops.sort(function (a,b) {
+          return average(a.coffees.map(coffee_ => coffee_.extraData.rating)) -
+            average(b.coffees.map(coffee_ => coffee_.extraData.rating));
         });
       break;
       case 'vfm':
-      this.coffeeShops.sort(function (a,b)
-        {
+      this.coffeeShops.sort(function (a,b) {    // sort by price / rating
           return average(a.coffees.map(coffee_ => coffee_.price / coffee_.extraData.rating)) -
             average(b.coffees.map(coffee_ => coffee_.price / coffee_.extraData.rating));
         });
       break;
       case 'dist':
-      this.coffeeShops.sort(function (a,b)
-        {
+      this.coffeeShops.sort(function (a,b) { // sort by distance to user
           return distanceBetween(a.lat, a.lng, searchLat, searchLng) -
           distanceBetween(b.lat, b.lng, searchLat, searchLng);
         });
@@ -154,40 +153,47 @@ export class CoffeeshopsService {
 
   }
 
-  ifFinishedBroadcast(counter)
-  {console.log(counter, this.coffeeShops.length);
+  // wait for loading of coffees to coffeeshops
+  // before publishing coffesshop list
+  ifFinishedBroadcast(counter) {
     if (counter === this.coffeeShops.length) {
       this.sortCoffeeShops();
-      console.log(this.coffeeShops);
       this.CoffeeShops$.next(this.coffeeShops);
     }
 
   }
+
+
+  // get coffeeshops and coffees, apply filters and publish them
   updateCoffeeShops(lat: number , lng: number) {
 
+
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+
     const coffeeShopFilter = this.filterCoffeeShop(this.filters, lat, lng);
+
     const coffeeFilter = this.filterCoffee( this.filters);
 
 
-    let counter = 0;
+    let counter = 0;  // counts how many shops are loaded completely (all coffees loaded)
     this.getLatestPrices().subscribe(_  => {
         this.http.get<CoffeeShop[]>(this.baseAPIURL + 'shops', httpOptions).subscribe( coffeeShops => {
           this.coffeeShops = coffeeShops.filter(coffeeShopFilter);
+          // no coffeeshops match filters
           if (this.coffeeShops.length === 0) {
             this.CoffeeShops$.next(this.coffeeShops);
             return;
           }
+          // make a map for O(1) access
           this.coffeeShopDict = {};
           this.coffeeShops.forEach(cs => this.coffeeShopDict[cs.id] = cs);
+          // load coffees, prices and reviews
           this.coffeeShops.forEach(coffeeShop => {
             let counter_reviews = 0;
             const params = new HttpParams().set('shopid', coffeeShop.id.toString()).set('category', this.filters.category);
             const httpOptions1 = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), params };
             this.http.get<Coffee[]>(this.baseAPIURL + 'products', httpOptions1).subscribe(coffees => {
-                  if (coffees.length === 0)
-                  {
-                    coffeeShop.coffees = coffees;
+                  if (coffees.length === 0) {
                     counter++;
                     this.ifFinishedBroadcast(counter);
                   }
@@ -196,7 +202,7 @@ export class CoffeeshopsService {
                       coffee.extraData.rating = +average(reviews.map(aReview => aReview.rating)).toFixed(2);
                       counter_reviews++;
                       if (counter_reviews === coffees.length)
-                      { console.log('asdf');
+                      {
                         counter++;
                         coffeeShop.coffees = coffees.filter(coffeeFilter);
                         this.ifFinishedBroadcast(counter);
@@ -210,12 +216,14 @@ export class CoffeeshopsService {
       });
   }
 
+  // need to refresh coffeeshop
   coffeeShopNeedsRefresh() {
     this.shopChange$.next(true);
   }
 
   // coffee
 
+  // CRUD
   deleteCoffee(id: number) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json',
     'X-OBSERVATORY-AUTH': this.userService.tokenGet()});
@@ -254,8 +262,8 @@ export class CoffeeshopsService {
 
   getFilteredCoffeeShops(name_like: string): Observable<CoffeeShop[]>
   {
-    if (name_like !== undefined)
-    {
+    // filter coffeeshops by name using LIKE query
+    if (name_like !== undefined) {
       const params = new HttpParams().set('name_like', name_like);
       const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), params: params };
       return this.http.get<CoffeeShop[]>(this.baseAPIURL + 'shops', httpOptions);
@@ -263,6 +271,7 @@ export class CoffeeshopsService {
     else { return of(undefined); }
   }
 
+  // get by id
   getCoffee(id: number): Observable<Coffee> {
     if (id !== undefined) {
       const params = new HttpParams().set('id', id.toString());
@@ -286,15 +295,17 @@ export class CoffeeshopsService {
       return this.http.get<Review[]>(this.baseAPIURL + 'reviews', httpOptions);
     } else { return of(undefined); }
   }
-
-  reviewsNeedRefresh(productId: number)
-  {
+  
+  // signal review change
+  reviewsNeedRefresh(productId: number) {
     this.reviewChange$.next(productId);
   }
 
 
   // selections
 
+  // monitor selected coffeeshop
+  // publishes selected index
   selectCoffeeShop(selectedIndex: number) {
     this.selectedCoffeeShop$.next(selectedIndex);
   }
@@ -303,6 +314,7 @@ export class CoffeeshopsService {
     return this.selectedCoffeeShop$;
   }
 
+  // same for coffee
   selectCoffee(id: number) {
     this.selectedCoffee$.next(id);
   }
@@ -312,7 +324,7 @@ export class CoffeeshopsService {
   }
 
   // map functions
-
+  // get markers for coffeeshops and color them by price tier
   getMarkers(coffeeShops: CoffeeShop[], icons = 'color') {
     const thresholds = this.priceTiers;
     const marker_icons = ['green_marker.png', 'yellow_marker.png', 'orange_marker.png', 'red_marker.png'];
@@ -545,6 +557,10 @@ export function average(values: number[]) {
   return values.reduce(function (a, b) { return +a + (+b); }, 0) / values.length;
 }
 
+// find prices which will be the thresholds
+// for choosing the marker color. Actually
+// splits the sorted prices in 4 parts and 
+// returns the prices which act as dividers
 function colorThresholds(arrSorted: number[]) {
   if (arrSorted.length === 0) {
     return undefined;
@@ -557,6 +573,7 @@ function colorThresholds(arrSorted: number[]) {
   }
 }
 
+// map price to color using thresholds
 function colorMap(thresholds, value) {
     if (thresholds.length === 0) {
       return undefined;
@@ -570,7 +587,8 @@ function colorMap(thresholds, value) {
     }
   }
 
-
+// turn anything to string and
+// undefined to empty string
 function stringed(attr: any): string {
   if (attr === undefined) {
     return '';
